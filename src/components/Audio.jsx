@@ -15,8 +15,13 @@ class AudioElement extends Component {
   startAudioPlayback() {
     this.audio.currentTime = this.props.startTime
     setTimeout(this.stopAudioPlayback, this.props.duration * 1000)
-    this.audio.play()
-    this.playing = true
+
+    try {
+      this.audio.play()
+      this.playing = true
+    } catch(error) {
+      // User needs to click before audio can be played
+    }
   }
   
   stopAudioPlayback() {
@@ -35,7 +40,7 @@ class AudioElement extends Component {
   render() {
     return (
       <button onClick={this.togglePlayback}>
-        {this.playing ? 'Pause' : 'Play'}
+        Play
       </button>
     );
   }

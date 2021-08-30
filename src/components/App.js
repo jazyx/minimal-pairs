@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import './App.css';
 import AudioElement from './Audio'
 
-const pairs = require('./json/pairs.json')
+const pairs = require('../json/pairs.json')
 const AUDIO_URL = "/pairs.mp3"
 
 class App extends Component{
