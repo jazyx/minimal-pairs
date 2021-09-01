@@ -28,6 +28,7 @@ class App extends Component{
           <p className="spelling">chick</p>
         </div> 
       </div>
+
       <div className="phonemes">
         <div className="phoneme-1">
           <div className="card-small">
@@ -35,8 +36,8 @@ class App extends Component{
             <p className="phonetic">/bɪʧ/</p>
             <p className="spelling">bitch</p>
           </div>
+          <div className="pocket"></div>
           <button className="play-phoneme">ɪ</button>
-          <button className="select">✓</button>
         </div>
         <div className="phoneme-2">
           <div className="card-small">
@@ -44,9 +45,10 @@ class App extends Component{
             <p className="phonetic">/biːʧ/</p>
             <p className="spelling">beach</p>
           </div>
+          <div className="pocket"></div>
           <button className="play-phoneme">iː</button>
-          <button className="select">✓</button>
         </div>
+        <p className="rule">Tap or drag to here</p>
       </div>
     </main>
   }

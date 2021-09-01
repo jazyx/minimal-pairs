@@ -2,6 +2,21 @@
   font-size: 10vmin;
   --corner: 0.25rem;
   --bgColor: #000;
+  --edge: 0.01rem;
+  --edgeColor: #fff;
+  --seamColor: #fff8;
+  --pocketTop: 8vmin;
+  --pocketSize: calc(50vmin - var(--pocketTop));
+  --pocketColor: rgba(0,0,0,0.85);
+  --buttonOffset: calc(5 * var(--edge));
+  --buttonTop: calc(var(--pocketTop) + var(--buttonOffset));
+  --buttonSize: 20vmin;
+  --buttonFont: 15vmin;
+  --font: 'Times New Roman', Times, serif;
+  --bgOpacity: 0.33;
+  --phonetic: rgba(0,0,0,var(--bgOpacity));
+  --spelling: rgba(255,255,255,var(--bgOpacity));
+  --ruleColor: #666;
 }
 
 #root {
@@ -10,12 +25,13 @@
   align-items: center;
   height: 100vh;
   background-color: var(--bgColor);
-
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font);
+  font-size: 7.5vmin;
+  text-align: center;
 }
 
-
 main {
+  position: relative;
   width: 100vw;
   height: 100vh;
   max-height: 200vw;
@@ -23,169 +39,136 @@ main {
   /* background-color: #333; */
 }
 
-img {
-  width: 100%;
+div {
+  box-sizing: border-box;
 }
+
 .pairs {
   position: relative;
-  width: 100vmin;
   height: 100vmin;
-  /* background-color: #666; */
+  margin-top: 25vmin;
+  /* background-color: #600; */
+}
+
+.phonemes {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  height: 50vmin;
+  width: 100vmin;
+  /* background-color: #003; */
 }
 
 [class|=card] {
-  position: absolute;
-  height: 50vw;
+  border: var(--edge) solid var(--edgeColor);
+  border-radius: var(--corner);
+  height: 25vmin;
+  box-sizing: border-box;
 }
 
-.pairs div {
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  background-color: var(--bgColor);
-  border: 0.05rem solid white;
+[class|=card] p {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+}
+
+p.phonetic {
+  top: 0;
+  color: #fff;
+  background-color: var(--phonetic);
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
+  font-style: italic;
+}
+
+p.spelling {
+  bottom: 0;
+  background-color: var(--spelling);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+}
+
+img {
+  top: 0;
+  left: 0;
+  width: 100%;
   border-radius: var(--corner);
 }
 
-.pairs img.illustration,
+img.illustration,
 .pairs p {
-  opacity: 0;
-}
-
-/* .phonemes img, */
-.phonemes p {
   opacity: 0;
 }
 
 img.icon {
   position: absolute;
   width: 50%;
-  margin: 25%;
+  top: 25%;
+  left: 25%;
   /* opacity: 0; */
 }
 
-img {
-  border-radius: var(--corner);
-}
-
-.card-decoy {
-  transform: rotateZ(15deg)
-}
-
-[class|=card] p {
+.pairs [class|=card] {
   position: absolute;
-  width: 100%;
-  left: 0;
-  margin: 0;
-  text-align: center;
+  left: 25vmin;
+  top: 25vmin;
+  width: 50vmin;
+  height: 50vmin;
+  background-color: var(--bgColor);
 }
 
-.phonetic {
-  top: 0;
-  color: white;
-  background-color: rgba(0,0,0,0.33);
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  border-top-left-radius: var(--corner);
-  border-top-right-radius: var(--corner);
+.pairs div.card-decoy {
+  transform: rotate(15deg)
 }
 
-[class|=card] p.spelling {
+.pocket {
+  position: absolute;
   bottom: 0;
-  background-color: rgba(255,255,255,0.33);
-  border-bottom-left-radius: var(--corner);
-  border-bottom-right-radius: var(--corner);
+  height: var(--pocketSize);
+  width: 100%;
+  background-color: var(--pocketColor);
+  border: var(--edge) dashed var(--seamColor);
+  border-top-style: solid;
 }
 
-.phonemes {
-  display: flex;
-  position: relative;
-  height: 100vmin;
+.phonemes [class|=card]{
+  /* border: none; */
 }
 
 .phonemes > div {
   position: relative;
-  width: 50%;
+  width: 50vmin;
 }
 
-.phonemes p {
-  font-size: 5vmin;
+.phonemes img {
+  /* display: none; */
 }
 
 button {
   position: absolute;
-  width: 50%;
-  height: 25%;
-  margin: 0 auto;
-  font-size: 20vmin;
-  font-family: 'Times New Roman', Times, serif;
+  top: var(--buttonTop);
+  left: var(--buttonOffset);
+  width: var(--buttonSize);
+  height: var(--buttonSize);
+  font-size: var(--buttonFont);
+  background-color: #18181888;
+  color: white;
+  border-radius: var(--corner);
+  border-color: #444;
+  font-family: var(--font);
   font-style: italic;
 }
 
 .phoneme-2 button {
-  right: 0;
+  left: auto;
+  right: var(--buttonOffset);
 }
 
-button.play-phoneme {
-  right: calc(12.5vw);
-  bottom: 25%;
-  border-radius: var(--corner);
-  color: black;
-}
-
-button.select {
-  bottom: 0;
-  right: 2vw;
-  color: #999;
-  background-color: #666;
-  border-radius: var(--corner);
-}
-
-.phoneme-2 button.select {
-  left: 2vw;
-  right: auto;
-}
-
-@media (min-aspect-ratio: 1/2 ) {
-  :root {
-    font-size: 5vh;
-  }
-  .pairs {
-    background-color: black;
-    height: 50vh;
-    width: 50vh;
-    margin: 0 auto;
-  }
-
-  [class|=card] p {
-    font-size: 5vh;
-  }
-
-  .phonemes p {
-    font-size: 2.5vh;
-  }
-
-  .phonemes {
-    height: 50vh;
-  }
-
-  .phonemes [class|=card] {
-    width: 25vh;
-    height: 25vh;
-    /* margin: 0 calc(25vw - 12.5vh); */
-  }
-
-  .phoneme-2 > div{
-    margin: 0 calc(50vw - 25vh);
-  }
-
-  button {
-    font-size: 10vh;
-    width: 12.5vh;
-  }
-  
-  button.play-phoneme {
-    right: calc(25vw - 6.25vh);
-  }
+p.rule {
+  position: absolute;
+  top: var(--buttonTop);
+  width: 100%;
+  margin: 0;
+  color: var(--ruleColor);
+  font-size: 0.75em;
 }
