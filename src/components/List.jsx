@@ -72,3 +72,16 @@ class App extends Component{
 }
 
 export default App;
+
+
+// .App {
+//   text-align: center;
+// }
+
+// .word-list {
+//   font-size: 1.5rem;
+// }
+
+// .word-list li:hover {
+//   background-color: salmon;;
+// }

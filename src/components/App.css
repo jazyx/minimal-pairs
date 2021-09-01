@@ -1,11 +1,191 @@
-.App {
+:root {
+  font-size: 10vmin;
+  --corner: 0.25rem;
+  --bgColor: #000;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bgColor);
+
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+main {
+  width: 100vw;
+  height: 100vh;
+  max-height: 200vw;
+  overflow: hidden;
+  /* background-color: #333; */
+}
+
+img {
+  width: 100%;
+}
+.pairs {
+  position: relative;
+  width: 100vmin;
+  height: 100vmin;
+  /* background-color: #666; */
+}
+
+[class|=card] {
+  position: absolute;
+  height: 50vw;
+}
+
+.pairs div {
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background-color: var(--bgColor);
+  border: 0.05rem solid white;
+  border-radius: var(--corner);
+}
+
+.pairs img.illustration,
+.pairs p {
+  opacity: 0;
+}
+
+/* .phonemes img, */
+.phonemes p {
+  opacity: 0;
+}
+
+img.icon {
+  position: absolute;
+  width: 50%;
+  margin: 25%;
+  /* opacity: 0; */
+}
+
+img {
+  border-radius: var(--corner);
+}
+
+.card-decoy {
+  transform: rotateZ(15deg)
+}
+
+[class|=card] p {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  margin: 0;
   text-align: center;
 }
 
-.word-list {
-  font-size: 1.5rem;
+.phonetic {
+  top: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.33);
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
 }
 
-.word-list li:hover {
-  background-color: salmon;;
+[class|=card] p.spelling {
+  bottom: 0;
+  background-color: rgba(255,255,255,0.33);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+}
+
+.phonemes {
+  display: flex;
+  position: relative;
+  height: 100vmin;
+}
+
+.phonemes > div {
+  position: relative;
+  width: 50%;
+}
+
+.phonemes p {
+  font-size: 5vmin;
+}
+
+button {
+  position: absolute;
+  width: 50%;
+  height: 25%;
+  margin: 0 auto;
+  font-size: 20vmin;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
+.phoneme-2 button {
+  right: 0;
+}
+
+button.play-phoneme {
+  right: calc(12.5vw);
+  bottom: 25%;
+  border-radius: var(--corner);
+  color: black;
+}
+
+button.select {
+  bottom: 0;
+  right: 2vw;
+  color: #999;
+  background-color: #666;
+  border-radius: var(--corner);
+}
+
+.phoneme-2 button.select {
+  left: 2vw;
+  right: auto;
+}
+
+@media (min-aspect-ratio: 1/2 ) {
+  :root {
+    font-size: 5vh;
+  }
+  .pairs {
+    background-color: black;
+    height: 50vh;
+    width: 50vh;
+    margin: 0 auto;
+  }
+
+  [class|=card] p {
+    font-size: 5vh;
+  }
+
+  .phonemes p {
+    font-size: 2.5vh;
+  }
+
+  .phonemes {
+    height: 50vh;
+  }
+
+  .phonemes [class|=card] {
+    width: 25vh;
+    height: 25vh;
+    /* margin: 0 calc(25vw - 12.5vh); */
+  }
+
+  .phoneme-2 > div{
+    margin: 0 calc(50vw - 25vh);
+  }
+
+  button {
+    font-size: 10vh;
+    width: 12.5vh;
+  }
+  
+  button.play-phoneme {
+    right: calc(25vw - 6.25vh);
+  }
 }
