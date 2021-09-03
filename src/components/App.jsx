@@ -13,22 +13,7 @@ class App extends Component{
   }
 
   render() {
-    return <main>
-      <div className="pairs">
-        <div className="card-decoy">
-            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="/img/i/cheek.jpg" alt="cheek" />
-          <p className="phonetic">/ʧɪk/</p>
-          <p className="spelling">cheek</p>
-        </div>   
-        <div className="card-cue">
-            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="/img/ɪ/chick.jpg" alt="chick" />
-          <p className="phonetic">/ʧɪk/</p>
-          <p className="spelling">chick</p>
-        </div> 
-      </div>
-
+    return <main className="split">
       <div className="phonemes">
         <div className="phoneme-1">
           <div className="card-small">
@@ -49,6 +34,21 @@ class App extends Component{
           <button className="play-phoneme">iː</button>
         </div>
         <p className="rule">Tap or drag to here</p>
+      </div>
+
+      <div className="pairs">
+        <div className="card-decoy">
+            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
+            <img className="illustration" src="/img/i/cheek.jpg" alt="cheek" />
+          <p className="phonetic">/ʧɪk/</p>
+          <p className="spelling">cheek</p>
+        </div>   
+        <div className="card-cue">
+            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
+            <img className="illustration" src="/img/ɪ/chick.jpg" alt="chick" />
+          <p className="phonetic">/ʧɪk/</p>
+          <p className="spelling">chick</p>
+        </div> 
       </div>
     </main>
   }
