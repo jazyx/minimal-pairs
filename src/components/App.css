@@ -220,7 +220,7 @@ p.rule {
 
   main.left-handed .pairs {
     left: var(--unit);
-    background-color: #300;
+    /* background-color: #300; */
   }
 
   .pairs [class|=card] {

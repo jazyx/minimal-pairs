@@ -13,11 +13,11 @@ class App extends Component{
   }
 
   render() {
-    return <main className="left-handed">
+    return <main className="split">
       <div className="phonemes">
         <div className="phoneme-1">
           <div className="card-small">
-            <img src="/img/ɪ/bitch.jpg" alt="bitch" />
+            <img src="img/ɪ/bitch.jpg" alt="bitch" />
             <p className="phonetic">/bɪʧ/</p>
             <p className="spelling">bitch</p>
           </div>
@@ -26,7 +26,7 @@ class App extends Component{
         </div>
         <div className="phoneme-2">
           <div className="card-small">
-            <img src="/img/i/beach.jpg" alt="beach" />
+            <img src="img/i/beach.jpg" alt="beach" />
             <p className="phonetic">/biːʧ/</p>
             <p className="spelling">beach</p>
           </div>
@@ -38,14 +38,14 @@ class App extends Component{
 
       <div className="pairs">
         <div className="card-decoy">
-            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="/img/i/cheek.jpg" alt="cheek" />
+            <img className="icon" src="img/icons/sound.svg" alt="icon" />
+            <img className="illustration" src="img/i/cheek.jpg" alt="cheek" />
           <p className="phonetic">/ʧɪk/</p>
           <p className="spelling">cheek</p>
         </div>
         <div className="card-cue">
-            <img className="icon" src="/img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="/img/ɪ/chick.jpg" alt="chick" />
+            <img className="icon" src="img/icons/sound.svg" alt="icon" />
+            <img className="illustration" src="img/ɪ/chick.jpg" alt="chick" />
           <p className="phonetic">/ʧɪk/</p>
           <p className="spelling">chick</p>
         </div>
