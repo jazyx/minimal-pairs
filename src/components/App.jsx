@@ -13,7 +13,7 @@ class App extends Component{
   }
 
   render() {
-    return <main className="split">
+    return <main className="left-handed">
       <div className="phonemes">
         <div className="phoneme-1">
           <div className="card-small">
@@ -42,13 +42,13 @@ class App extends Component{
             <img className="illustration" src="/img/i/cheek.jpg" alt="cheek" />
           <p className="phonetic">/ʧɪk/</p>
           <p className="spelling">cheek</p>
-        </div>   
+        </div>
         <div className="card-cue">
             <img className="icon" src="/img/icons/sound.svg" alt="icon" />
             <img className="illustration" src="/img/ɪ/chick.jpg" alt="chick" />
           <p className="phonetic">/ʧɪk/</p>
           <p className="spelling">chick</p>
-        </div> 
+        </div>
       </div>
     </main>
   }

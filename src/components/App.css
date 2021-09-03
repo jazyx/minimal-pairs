@@ -218,6 +218,11 @@ p.rule {
     height: 100vh;
   }
 
+  main.left-handed .pairs {
+    left: var(--unit);
+    background-color: #300;
+  }
+
   .pairs [class|=card] {
     top: var(--crossMargin);
     left: var(--mainMargin);
@@ -234,14 +239,23 @@ p.rule {
     height: 100vh;
   }
 
+  main.left-handed .phonemes {
+    left: 0;
+    right: auto;
+  }
+
   .phonemes > div {
     width: var(--unit);
     height: 50vh;
   }
-  
+
   p.phonetic {
     transform-origin: var(--origin) var(--origin);
     transform: rotateZ(270deg) ;
+  }
+
+  main.left-handed p.phonetic {
+    transform: rotateZ(90deg) ;
   }
 
   .pocket {
@@ -253,17 +267,27 @@ p.rule {
     border-left-style: solid;
   }
 
+  main.left-handed .pocket {
+    left: 0;
+    right: auto;
+  }
+
   .phonemes button {
     top: auto;
     left: var(--buttonInset);
     bottom: var(--buttonSpread);
   }
 
+  main.left-handed .phonemes button{
+    left: auto;
+    right: var(--buttonInset);
+  }
+
   .phoneme-2 [class|=card] {
     bottom: 0;
     right: auto;
   }
-  
+
   .phoneme-2 button {
     right: auto;
     top: var(--buttonSpread);
@@ -272,6 +296,11 @@ p.rule {
   p.rule {
     left: var(--pocketOffset);
     width: var(--pocketSize);
+  }
+
+  main.left-handed p.rule {
+    left: auto;
+    right: var(--pocketOffset);
   }
 }
 
@@ -315,7 +344,7 @@ p.rule {
     width: 50vw;
     height: var(--unit);
   }
-  
+
   main.split p.phonetic {
     transform-origin: var(--origin) var(--origin);
     transform: rotateZ(0) ;
@@ -340,7 +369,7 @@ p.rule {
     bottom: auto;
     right: 0;
   }
-  
+
   main.split .phoneme-2 button {
     left: auto;
     right: var(--buttonOffset);
