@@ -4,32 +4,96 @@ import './App.css';
 import AudioElement from './Audio'
 import Card from './Card'
 
-const pairs = require('../json/pairs.json')
+import { getCards } from '../api/pairs.js'
 const AUDIO_URL = "/pairs.mp3"
 
 class App extends Component{
+  useFirstCard = true
+
   constructor(props) {
     super(props)
+    this.state = getCards()
+    // { "phonemes": [
+    //     "ɪ",
+    //     "iː"
+    //   ],
+    //   "word1": {
+    //     "spelling": "ship",
+    //     "phonetic": "/∫ɪp/",
+    //     "image": "img/ship.jpg",
+    //     "audio": [
+    //       0,
+    //       1
+    //     ]
+    //   },
+    //   "word2": {
+    //     "spelling": "sheep",
+    //     "phonetic": "/∫iːp/",
+    //     "image": "img/sheep.jpg",
+    //     "audio": [
+    //       0,
+    //       1
+    //     ]
+    //   }
+    // }
+  }
+
+  getCards() {
+    const useFirstCard = Math.floor(Math.random() * 2 )
+
+    let cards
+    if (useFirstCard) {
+      cards = [ this.state.word1, this.state.word2 ]
+    } else {
+      cards = [ this.state.word2, this.state.word1 ]
+    }
+
+    let roles = ["decoy", "cue"].map((role, index) => {
+      const card = cards[index]
+
+      return (
+        <Card 
+          card={card}
+          role={role}
+        />
+      )
+    })
+
+    return roles
   }
 
   render() {
+
+    const [ card1, card2 ]  = this.getCards()
     return <main className="split">
       <div className="phonemes">
         <div className="phoneme-1">
-          <div className="card-small">
-            <img src="img/ɪ/bitch.jpg" alt="bitch" />
-            <p className="phonetic">/bɪʧ/</p>
-            <p className="spelling">bitch</p>
-          </div>
+          <ul>
+            {/* OLDER CARDS CAN GO HERE */}
+            <li>
+              <div className="card">
+                <img src="img/ɪ/bitch.jpg" alt="bitch" />
+                <p className="phonetic">/bɪʧ/</p>
+                <p className="spelling">bitch</p>
+              </div>
+            </li>
+          </ul>
+          {/* POCKET */}
           <div className="pocket"></div>
           <button className="play-phoneme">ɪ</button>
         </div>
         <div className="phoneme-2">
-          <div className="card-small">
-            <img src="img/i/beach.jpg" alt="beach" />
-            <p className="phonetic">/biːʧ/</p>
-            <p className="spelling">beach</p>
-          </div>
+          <ul>
+            {/* OLDER CARDS CAN GO HERE */}
+            <li>
+              <div className="card">
+                <img src="img/i/beach.jpg" alt="beach" />
+                <p className="phonetic">/biːʧ/</p>
+                <p className="spelling">beach</p>
+              </div>
+            </li>
+          </ul>
+          {/* POCKET */}
           <div className="pocket"></div>
           <button className="play-phoneme">iː</button>
         </div>
@@ -37,18 +101,8 @@ class App extends Component{
       </div>
 
       <div className="pairs">
-        <div className="card-decoy">
-            <img className="icon" src="img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="img/i/cheek.jpg" alt="cheek" />
-          <p className="phonetic">/ʧɪk/</p>
-          <p className="spelling">cheek</p>
-        </div>
-        <div className="card-cue">
-            <img className="icon" src="img/icons/sound.svg" alt="icon" />
-            <img className="illustration" src="img/ɪ/chick.jpg" alt="chick" />
-          <p className="phonetic">/ʧɪk/</p>
-          <p className="spelling">chick</p>
-        </div>
+        {card1}
+        {card2}
       </div>
     </main>
   }

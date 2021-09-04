@@ -3,39 +3,27 @@
  */
 
 
-import React, { Component } from 'react';
-import styled from 'styled-components'
+import React from 'react';
 
 
-const StyledCard = styled.div`
-  background-color: #fee;
-  width: 90vmin;
-  height: 90vmin;
-  margin: 0 auto;
-  border: 1px solid outset;
-`
-
-
-class Card extends Component {
-  constructor(props) {
-    super(props)
-
-    this.method = this.method.bind(this)
-  }
-
-
-  method() {
-
-  }
-
-
-  render() {
-    return (
-      <StyledCard
-        
-      />
-    )
-  }
+const Card = (props) => {
+  const { spelling, phonetic, image } = props.card
+  const className = "card"
+                  + ( props.role
+                    ? ` ${props.role}`
+                    : ""
+                    )
+  return (
+    <div
+      className={className}
+      onMouseDown={props.onMouseDown}
+    >
+      <img className="icon" src="img/icons/sound.svg" alt="play icon" />
+      <img className="illustration" src={image} alt={spelling}/>
+      <p className="phonetic">{phonetic}</p>
+      <p className="spelling">{spelling}</p>
+    </div>
+  )
 }
 
 

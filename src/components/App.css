@@ -84,7 +84,7 @@ div {
 
 /* CARD */
 
-[class|=card] {
+.card {
   position: absolute;
   border: var(--edge) solid var(--edgeColor);
   border-radius: var(--corner);
@@ -93,7 +93,7 @@ div {
   box-sizing: border-box;
 }
 
-[class|=card] p {
+.card p {
   position: absolute;
   margin: 0;
   width: var(--unit);
@@ -122,9 +122,9 @@ p.spelling {
   border-bottom-right-radius: var(--corner);
 }
 
-img.illustration,
+.pairs img.illustration,
 .pairs p {
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 img.icon {
@@ -132,18 +132,18 @@ img.icon {
   width: 50%;
   top: 25%;
   left: 25%;
-  /* opacity: 0; */
+  opacity: 0;
 }
 
 /* CUES */
 
-.pairs [class|=card] {
+.pairs .card {
   left: var(--crossMargin);
   top: var(--mainMargin);
   background-color: var(--bgColor);
 }
 
-.pairs div.card-decoy {
+.pairs div.decoy {
   transform: rotate(15deg)
 }
 
@@ -164,6 +164,13 @@ img.icon {
   width: 50vw;
 }
 
+ul {
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
 button {
   position: absolute;
   top: var(--buttonInset);
@@ -181,7 +188,7 @@ button {
 
 /* LEFT/BOTTOM POCKET */
 
-.phoneme-2 [class|=card] {
+.phoneme-2 .card {
   left: auto;
   right: 0;
 }
@@ -223,7 +230,7 @@ p.rule {
     /* background-color: #300; */
   }
 
-  .pairs [class|=card] {
+  .pairs .card {
     top: var(--crossMargin);
     left: var(--mainMargin);
     background-color: var(--bgColor);
@@ -283,7 +290,7 @@ p.rule {
     right: var(--buttonInset);
   }
 
-  .phoneme-2 [class|=card] {
+  .phoneme-2 .card {
     bottom: 0;
     right: auto;
   }
@@ -324,7 +331,7 @@ p.rule {
     background-color: var(--bgColor);
   }
 
-  main.split .pairs [class|=card] {
+  main.split .pairs .card {
     top: var(--splitTop);
     left: var(--crossMargin);
     background-color: var(--bgColor);
@@ -365,7 +372,7 @@ p.rule {
     bottom: var(--buttonSpread);
   }
 
-  main.split .phoneme-2 [class|=card] {
+  main.split .phoneme-2 .card {
     bottom: auto;
     right: 0;
   }

@@ -1,0 +1,380 @@
+{
+  "cart": {
+    "word": "cart",
+    "vowel": "ɑ",
+    "timing": 24.035,
+    "image": "",
+    "pairs": [
+      "cat",
+      "cot",
+      "caught",
+      "court",
+      "cut"
+    ]
+  },
+  "bet": {
+    "word": "bet",
+    "vowel": "ɛ",
+    "timing": 10.775,
+    "image": "",
+    "pairs": [
+      "beat",
+      "beet",
+      "bat",
+      "bit"
+    ]
+  },
+  "cup": {
+    "word": "cup",
+    "vowel": "ʌ",
+    "timing": 46.623,
+    "image": "",
+    "pairs": [
+      "coop",
+      "cap",
+      "carp",
+      "cop"
+    ]
+  },
+  "cut": {
+    "word": "cut",
+    "vowel": "ʌ",
+    "timing": 48.096,
+    "image": "",
+    "pairs": [
+      "coot",
+      "cat",
+      "cart",
+      "cot"
+    ]
+  },
+  "cot": {
+    "word": "cot",
+    "vowel": "ɒ",
+    "timing": 43.63,
+    "image": "",
+    "pairs": [
+      "cart",
+      "caught",
+      "court",
+      "cut"
+    ]
+  },
+  "bed": {
+    "word": "bed",
+    "vowel": "ɛ",
+    "timing": 9.111,
+    "image": "",
+    "pairs": [
+      "bead",
+      "bad",
+      "bid"
+    ]
+  },
+  "cheek": {
+    "word": "cheek",
+    "vowel": "i",
+    "timing": 30.703,
+    "image": "",
+    "pairs": [
+      "check",
+      "cheque",
+      "chick"
+    ]
+  },
+  "hell": {
+    "word": "hell",
+    "vowel": "ɛ",
+    "timing": 68.335,
+    "image": "",
+    "pairs": [
+      "heal",
+      "heel",
+      "hill"
+    ]
+  },
+  "lead": {
+    "word": "lead",
+    "vowel": "i",
+    "timing": 83.61,
+    "image": "",
+    "pairs": [
+      "lead",
+      "led",
+      "lid"
+    ]
+  },
+  "peck": {
+    "word": "peck",
+    "vowel": "ɛ",
+    "timing": 110.063,
+    "image": "",
+    "pairs": [
+      "peak",
+      "pack",
+      "pick"
+    ]
+  },
+  "chick": {
+    "word": "chick",
+    "vowel": "ɪ",
+    "timing": 32.487,
+    "image": "",
+    "pairs": [
+      "cheek",
+      "check",
+      "cheque"
+    ]
+  },
+  "pick": {
+    "word": "pick",
+    "vowel": "ɪ",
+    "timing": 112.815,
+    "image": "",
+    "pairs": [
+      "peak",
+      "peek",
+      "peck"
+    ]
+  },
+  "bad": {
+    "word": "bad",
+    "vowel": "æ",
+    "timing": 2.303,
+    "image": "",
+    "pairs": [
+      "bard",
+      "bed",
+      "bud"
+    ]
+  },
+  "bard": {
+    "word": "bard",
+    "vowel": "ɑ",
+    "timing": 3.644,
+    "image": "",
+    "pairs": [
+      "bad",
+      "board",
+      "bored"
+    ]
+  },
+  "carp": {
+    "word": "carp",
+    "vowel": "ɑ",
+    "timing": 21.292,
+    "image": "",
+    "pairs": [
+      "cap",
+      "cop",
+      "cup"
+    ]
+  },
+  "mark": {
+    "word": "mark",
+    "vowel": "ɑ",
+    "timing": 94.208,
+    "image": "",
+    "pairs": [
+      "mac",
+      "mock",
+      "muck"
+    ]
+  },
+  "pack": {
+    "word": "pack",
+    "vowel": "æ",
+    "timing": 103.297,
+    "image": "",
+    "pairs": [
+      "park",
+      "peck",
+      "puck"
+    ]
+  },
+  "park": {
+    "word": "park",
+    "vowel": "ɑ",
+    "timing": 104.691,
+    "image": "",
+    "pairs": [
+      "pack",
+      "pork",
+      "puck"
+    ]
+  },
+  "pat": {
+    "word": "pat",
+    "vowel": "æ",
+    "timing": 107.325,
+    "image": "",
+    "pairs": [
+      "part",
+      "pet",
+      "putt"
+    ]
+  },
+  "part": {
+    "word": "part",
+    "vowel": "ɑ",
+    "timing": 106.08,
+    "image": "",
+    "pairs": [
+      "pat",
+      "pot",
+      "port"
+    ]
+  },
+  "muck": {
+    "word": "muck",
+    "vowel": "ʌ",
+    "timing": 100.152,
+    "image": "",
+    "pairs": [
+      "mac",
+      "mark",
+      "mock"
+    ]
+  },
+  "pot": {
+    "word": "pot",
+    "vowel": "ɒ",
+    "timing": 118.886,
+    "image": "",
+    "pairs": [
+      "part",
+      "port",
+      "putt"
+    ]
+  },
+  "bead": {
+    "word": "bead",
+    "vowel": "i",
+    "timing": 6.247,
+    "image": "",
+    "pairs": [
+      "bed",
+      "bid"
+    ]
+  },
+  "beat": {
+    "word": "beat",
+    "vowel": "i",
+    "timing": 7.597,
+    "image": "",
+    "pairs": [
+      "bet",
+      "bit"
+    ]
+  },
+  "check": {
+    "word": "check",
+    "vowel": "ɛ",
+    "timing": 29.124,
+    "image": "",
+    "pairs": [
+      "cheek",
+      "chick"
+    ]
+  },
+  "cheque": {
+    "word": "cheque",
+    "vowel": "ɛ",
+    "timing": 29.124,
+    "image": "",
+    "pairs": [
+      "cheek",
+      "chick"
+    ]
+  },
+  "each": {
+    "word": "each",
+    "vowel": "i",
+    "timing": 49.658,
+    "image": "",
+    "pairs": [
+      "etch",
+      "itch"
+    ]
+  },
+  "etch": {
+    "word": "etch",
+    "vowel": "ɛ",
+    "timing": 52.475,
+    "image": "",
+    "pairs": [
+      "each",
+      "itch"
+    ]
+  },
+  "eat": {
+    "word": "eat",
+    "vowel": "i",
+    "timing": 51.131,
+    "image": "",
+    "pairs": [
+      "ate",
+      "it"
+    ]
+  },
+  "ate": {
+    "word": "ate",
+    "vowel": "ɛ",
+    "timing": 1.173,
+    "image": "",
+    "pairs": [
+      "eat",
+      "it"
+    ]
+  },
+  "feel": {
+    "word": "feel",
+    "vowel": "i",
+    "timing": 53.748,
+    "image": "",
+    "pairs": [
+      "fell",
+      "fill"
+    ]
+  },
+  "fell": {
+    "word": "fell",
+    "vowel": "ɛ",
+    "timing": 56.621,
+    "image": "",
+    "pairs": [
+      "feel",
+      "fill"
+    ]
+  },
+  "heel": {
+    "word": "heel",
+    "vowel": "i",
+    "timing": 67,
+    "image": "",
+    "pairs": [
+      "hell",
+      "hill"
+    ]
+  },
+  "litre": {
+    "word": "litre",
+    "vowel": "i",
+    "timing": 89.882,
+    "image": "",
+    "pairs": [
+      "letter",
+      "litter"
+    ]
+  },
+  "letter": {
+    "word": "letter",
+    "vowel": "ɛ",
+    "timing": 86.799,
+    "image": "",
+    "pairs": [
+      "litre",
+      "litter"
+    ]
+  }
+}
