@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import './App.css';
 import AudioElement from './Audio'
 import Card from './Card'
+import Pocket from './Pocket'
 
 import { getCards } from '../api/pairs.js'
 const AUDIO_URL = "/pairs.mp3"
@@ -55,6 +56,7 @@ class App extends Component{
         <Card 
           card={card}
           role={role}
+          taboo={true}
         />
       )
     })
@@ -62,9 +64,17 @@ class App extends Component{
     return roles
   }
 
-  render() {
 
+  getPockets() {
+    // cards, index, phoneme, audio, playAudio
+    return [0, 1]
+  }
+
+
+  render() {
     const [ card1, card2 ]  = this.getCards()
+    const [ pocket1, pocket2 ] = this.getPockets()
+
     return <main className="split">
       <div className="phonemes">
         <div className="phoneme-1">

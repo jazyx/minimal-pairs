@@ -72,4 +72,4 @@ function _getWordData(phoneme, word) {
   return data
 }
 
-setPhonemePair("random")
+setPhonemePair("ɑʌ")

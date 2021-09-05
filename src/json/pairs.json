@@ -1,93 +1,170 @@
 { 
   "words": {
-    "ɪ": {
-      "bitch": {
+    "ɑ": {
+      "ɑ": {
+        "audio": [0.0, 1.0]
+      }
+    , "barn": {
+        "spelling": "barn"
+      , "phonetic": "/bɑ(r)n/"
+      , "image": "img/ɑ/barn.jpg"
+      , "audio": [1.0, 2.350]
+      }
+    , "heart": {
+        "spelling": "heart"
+      , "phonetic": "/hɑ(r)t/"
+      , "image": "img/ɑ/heart.jpg"
+      , "audio": [2.350, 3.650]
+      }
+    , "marsh": {
+        "spelling": "marsh"
+      , "phonetic": "/mɑ(r)∫/"
+      , "image": "img/ɑ/marsh.jpg"
+      , "audio": [3.650, 5.0]
+      }
+    , "park": {
+        "spelling": "park"
+      , "phonetic": "/pɑ(r)k/"
+      , "image": "img/ɑ/park.jpg"
+      , "audio": [5.0, 6.350]
+      }
+    , "staff": {
+        "spelling": "staff"
+      , "phonetic": "/stɑf/"
+      , "image": "img/ɑ/staff.jpg"
+      , "audio": [6.350, 7.80]
+      }
+    }
+  , "iː": {
+      "iː": {
+        "audio": [7.80, 9.0]
+      }
+      , 
+      "beach": {
+        "spelling": "beach"
+      , "phonetic": "/biːʧ/"
+      , "image": "img/i/beach.jpg"
+      , "audio": [9.0, 10.250]
+      }
+    , "cheek": {
+        "spelling": "cheek"
+      , "phonetic": "/ʧiːk/"
+      , "image": "img/i/cheek.jpg"
+      , "audio": [10.250, 11.550]
+      }
+    , "feast": {
+        "spelling": "feast"
+      , "phonetic": "/fiːst/"
+      , "image": "img/i/feast.jpg"
+      , "audio": [11.550, 12.850]
+      }
+    , "peeler": {
+        "spelling": "peeler"
+      , "phonetic": "/piːlə(r)/"
+      , "image": "img/i/peeler.jpg"
+      , "audio": [12.850, 14.10]
+      }
+    , "sheep": {
+        "spelling": "sheep"
+      , "phonetic": "/∫iːp/"
+      , "image": "img/i/sheep.jpg"
+      , "audio": [14.10, 15.450]
+      }
+    , "sheet": {
+        "spelling": "sheet"
+      , "phonetic": "/∫iːt/"
+      , "image": "img/i/sheet.jpg"
+      , "audio": [15.450, 16.650]
+      }
+    , "teat": {
+        "spelling": "teat"
+      , "phonetic": "/tiːt/"
+      , "image": "img/i/teat.jpg"
+      , "audio": [16.650, 17.70]
+      }
+    }
+  , "ɪ": {
+      "ɪ": {
+        "audio": [17.70, 18.650]
+      }
+    , "bitch": {
         "spelling": "bitch"
       , "phonetic": "/bɪʧ/"
       , "image": "img/ɪ/bitch.jpg"
       , "image_": "img/ɪ/bitch_.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [18.650, 19.90]
       }
     , "chick": {
         "spelling": "chick"
       , "phonetic": "/ʧɪk/"
       , "image": "img/ɪ/chick.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [19.90, 20.950]
       }
     , "fist": {
         "spelling": "fist"
       , "phonetic": "/fɪst/"
       , "image": "img/ɪ/fist.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [20.950, 22.20]
       }
     , "pillar": {
         "spelling": "pillar"
       , "phonetic": "/pɪlə(r)/"
       , "image": "img/ɪ/pillar.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [22.20, 23.350]
       }
     , "ship": {
         "spelling": "ship"
       , "phonetic": "/∫ɪp/"
       , "image": "img/ɪ/ship.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [23.350, 24.50]
       }
     , "shit": {
         "spelling": "shit"
       , "phonetic": "/∫ɪt/"
-      , "image": "img/ɪ/shit_.jpg"
-      , "audio": [0.000, 1.000]
+      , "image": "img/ɪ/shit_.png"
+      , "audio": [24.50, 25.70]
       }
     , "tit": {
         "spelling": "tit"
       , "phonetic": "/tɪt/"
       , "image": "img/ɪ/tit.jpg"
       , "image_": "img/ɪ/tit_.jpg"
-      , "audio": [0.000, 1.000]
+      , "audio": [25.70, 26.80]
       }
     }
-  , "iː": {
-      "beach": {
-        "spelling": "beach"
-      , "phonetic": "/biːʧ/"
-      , "image": "img/i/beach.jpg"
-      , "audio": [0.000, 1.000]
+  , "ʌ": {
+      "ʌ": {
+        "audio": [26.80, 27.70]
       }
-    , "cheek": {
-        "spelling": "cheek"
-      , "phonetic": "/ʧiːk/"
-      , "image": "img/i/cheek.jpg"
-      , "audio": [0.000, 1.000]
+    , "bun": {
+        "spelling": "bun"
+      , "phonetic": "/bʌn/"
+      , "image": "img/ʌ/bun.jpg"
+      , "audio": [27.70, 28.950]
       }
-    , "feast": {
-        "spelling": "feast"
-      , "phonetic": "/fiːst/"
-      , "image": "img/i/feast.jpg"
-      , "audio": [0.000, 1.000]
+    , "hut": {
+        "spelling": "hut"
+      , "phonetic": "/hʌt/"
+      , "image": "img/ʌ/hut.jpg"
+      , "audio": [28.950, 30.10]
       }
-    , "peeler": {
-        "spelling": "peeler"
-      , "phonetic": "/piːlə(r)/"
-      , "image": "img/i/peeler.jpg"
-      , "audio": [0.000, 1.000]
+    , "mush": {
+        "spelling": "mush"
+      , "phonetic": "/mʌ∫/"
+      , "image": "img/ʌ/mush.jpg"
+      , "audio": [30.10, 31.150]
       }
-    , "sheep": {
-        "spelling": "sheep"
-      , "phonetic": "/∫iːp/"
-      , "image": "img/i/sheep.jpg"
-      , "audio": [0.000, 1.000]
+    , "puck": {
+        "spelling": "puck"
+      , "phonetic": "/pʌk/"
+      , "image": "img/ʌ/puck.jpg"
+      , "audio": [31.150, 32.50]
       }
-    , "sheet": {
-        "spelling": "sheet"
-      , "phonetic": "/∫iːt/"
-      , "image": "img/i/sheet.jpg"
-      , "audio": [0.000, 1.000]
-      }
-    , "teat": {
-        "spelling": "teat"
-      , "phonetic": "/tiːt/"
-      , "image": "img/i/teat.jpg"
-      , "audio": [0.000, 1.000]
+    , "stuff": {
+        "spelling": "stuff"
+      , "phonetic": "/stʌf/"
+      , "image": "img/ʌ/stuff.jpg"
+      , "audio": [32.250, 33.40]
       }
     }
   }
@@ -101,6 +178,14 @@
     , "ship": "sheep"
     , "shit": "sheet"
     , "tit": "teat"
+    }
+    , "ɑʌ": {
+      "ɑ": "ʌ"
+    , "barn": "bun"
+    , "heart": "hut"
+    , "marsh": "mush"
+    , "park": "puck"
+    , "staff": "stuff"
     }
   }
 }
