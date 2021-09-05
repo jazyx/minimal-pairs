@@ -19,7 +19,7 @@
   --buttonInset: calc(var(--pocketOffset) + var(--buttonOffset));
   --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
   --buttonSize: calc(0.4 * var(--unit));
-  --buttonFont: calc(0.3 * var(--unit));
+  --buttonFont: calc(0.25 * var(--unit));
   --ruleTop: var(--buttonInset);
 
   --r: 0;
@@ -27,7 +27,7 @@
   --b: 0;
   --a: 0.85;
   --bgColor: rgb(var(--r), var(--g), var(--b));
-  --btnColor: #1118;
+  --btnColor: #3338;
   --btnBorder: #444;
   --edgeColor: #fff;
   --seamColor: #fff8;

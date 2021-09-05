@@ -5,7 +5,7 @@ import AudioElement from './Audio'
 import Card from './Card'
 import Pocket from './Pocket'
 
-import { getCards } from '../api/pairs.js'
+import { getCards } from '../api/pairs'
 const AUDIO_URL = "/pairs.mp3"
 
 class App extends Component{
@@ -13,10 +13,14 @@ class App extends Component{
 
   constructor(props) {
     super(props)
-    this.state = getCards()
+
+    this.playAudio = this.playAudio.bind(this)
+    this.state = getCards() // imported from pairs.js
+
+    console.log("this.state:", this.state)
     // { "phonemes": [
-    //     "ɪ",
-    //     "iː"
+    //     { phoneme: "ɪ", audio: [0, 1]
+    //   , { phoneme: "iː", audio: [10, 11]
     //   ],
     //   "word1": {
     //     "spelling": "ship",
@@ -35,8 +39,16 @@ class App extends Component{
     //       0,
     //       1
     //     ]
+    //   },
+    //   "played" {
+    //     "ɪ": [<card>, ...],
+    //     "iː": [<card>, ...]
     //   }
     // }
+  }
+
+  playAudio(audio) {
+    console.log("playAudio:", audio)
   }
 
   getCards() {
@@ -67,7 +79,21 @@ class App extends Component{
 
   getPockets() {
     // cards, index, phoneme, audio, playAudio
-    return [0, 1]
+    const pockets = this.state.phonemes.map((phonemeData, index) => {
+      const { phoneme, audio } = phonemeData
+      const played = this.state.played[phoneme]
+      const playAudio = this.playAudio
+
+      return <Pocket
+        phoneme={phoneme}
+        index={index}
+        audio={audio}
+        playAudio={this.playAudio}
+        played={played}
+      />
+    })
+
+    return pockets
   }
 
 
@@ -77,36 +103,8 @@ class App extends Component{
 
     return <main className="split">
       <div className="phonemes">
-        <div className="phoneme-1">
-          <ul>
-            {/* OLDER CARDS CAN GO HERE */}
-            <li>
-              <div className="card">
-                <img src="img/ɪ/bitch.jpg" alt="bitch" />
-                <p className="phonetic">/bɪʧ/</p>
-                <p className="spelling">bitch</p>
-              </div>
-            </li>
-          </ul>
-          {/* POCKET */}
-          <div className="pocket"></div>
-          <button className="play-phoneme">ɪ</button>
-        </div>
-        <div className="phoneme-2">
-          <ul>
-            {/* OLDER CARDS CAN GO HERE */}
-            <li>
-              <div className="card">
-                <img src="img/i/beach.jpg" alt="beach" />
-                <p className="phonetic">/biːʧ/</p>
-                <p className="spelling">beach</p>
-              </div>
-            </li>
-          </ul>
-          {/* POCKET */}
-          <div className="pocket"></div>
-          <button className="play-phoneme">iː</button>
-        </div>
+        {pocket1}
+        {pocket2}
         <p className="rule">Tap or drag to here</p>
       </div>
 

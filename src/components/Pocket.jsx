@@ -7,7 +7,7 @@ import { getCards } from '../api/pairs'
 import Card from './Card'
 
 const Pocket = (props) => {
-  const { cards, index, phoneme, audio, playAudio } = props
+  const { phoneme, index, audio, playAudio, played } = props
 
 
   const getCard = ( card, index ) => {
@@ -20,7 +20,7 @@ const Pocket = (props) => {
 
 
   const getCardList = () => {
-    const listOfCards = cards.map(getCard)
+    const listOfCards = played.map(getCard)
     return (
       <ul>
         {listOfCards}
@@ -30,7 +30,7 @@ const Pocket = (props) => {
 
 
   const cardList = getCardList()
-  const className = `phoneme-${index}`
+  const className = `phoneme-${index + 1}`
 
 
   return (
@@ -41,10 +41,28 @@ const Pocket = (props) => {
         className="play-phoneme"
         onClick={() => playAudio(audio)}
       >
-        {phoneme}
+        /{phoneme}/
       </button>
     </div>
   )
 }
 
 export default Pocket
+
+
+
+// <div className="phoneme-1">
+//   <ul>
+//     {/* OLDER CARDS CAN GO HERE */}
+//     <li>
+//       <div className="card">
+//         <img src="img/ɪ/bitch.jpg" alt="bitch" />
+//         <p className="phonetic">/bɪʧ/</p>
+//         <p className="spelling">bitch</p>
+//       </div>
+//     </li>
+//   </ul>
+//   {/* POCKET */}
+//   <div className="pocket"></div>
+//   <button className="play-phoneme">ɪ</button>
+// </div> */}
