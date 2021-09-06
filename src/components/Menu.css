@@ -1,10 +1,15 @@
 #menu {
+  /* Icon */
   --fillColor: #fff;
   --strokeColor: #000;
-  --menuColor: rgba(170, 17, 17, 0.9);
   --iconSize: calc(0.2 * var(--unit));
-  --menuSize: 40vw;
-  --closedMenu: -40vw;
+  --iconOpacity: 0.25;
+  --iconHover: 0.625;
+  /* Menu */
+  --menuColor: rgba(17, 17, 17, 0.9);
+  --menuBorder: 1px solid #333;
+  --menuSize: 10rem;
+  --closedMenu: calc(-1 * var(--menuSize));
   --openIcon: calc(var(--menuSize) - var(--iconSize));
 
   position: absolute;
@@ -23,7 +28,7 @@
   height: var(--iconSize);
   fill: var(--fillColor);
   stroke: var(--strokeColor);
-  opacity: 0.5;
+  opacity: var(--iconOpacity);
   top: 0;
   left: 0;
   transition: left .3s linear, right .3s linear, opacity .1s;
@@ -33,7 +38,10 @@
 }
 
 #menu svg:hover {
-  opacity: 0.75;
+  opacity: var(--iconHover);
+  transition: left .3s linear, right .3s linear, opacity .0s;
+  transition-property: left, right, opacity;
+  transition-delay: 0s, 0s, .0s;
 }
 
 #menu #items.open ~ svg{
@@ -44,10 +52,10 @@
 
 #menu #items {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-around; */
+  /* align-items: center; */
   box-sizing: border-box;
   top: 0;
   left: var(--closedMenu);
@@ -57,14 +65,32 @@
   padding-top: var(--iconSize);
   padding-bottom: 0;
   background-color: var(--menuColor);
+  border-right: var(--menuBorder);
 
   transition: left .40s linear, right .40s linear;
 }
 
 #menu #items.open {
-  background-color: blue;
   left: 0;
-  box-shadow: 0 0 3vw 0 rgba(255,255,255,0.75)
+  box-shadow: 0 0 3vw 0 rgba(0,0,0,0.99);
+  box-shadow: 0 0 3vw 0 rgba(255,255,255,0.250)
+}
+
+#menu #items li {
+  border: 0.05rem outset #888;
+  border-radius: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0.75rem 0;
+  color: #888;
+}
+
+#menu #items li:hover {
+  background-color: var(--bgColor);
+  color: #fff;
+}
+
+#menu #items li:active {
+  border-style: inset;
 }
 
 /* LEFT-HANDED / LEFT-HANDED / LEFT-HANDED LEFT-HANDED / LEFT-HANDED */
@@ -83,6 +109,7 @@ main.left-handed #menu svg {
 
 main.left-handed #menu #items {
   right: var(--closedMenu);
+  border-left: var(--menuBorder);
 }
 
 

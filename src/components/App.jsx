@@ -1,18 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import './App.css';
-import Activity from './Activity'
-import Menu from './Menu'
+import "./App.css";
+import Views from "../api/views";
+import Menu from "./Menu";
 
-class App extends Component{
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.selectFromMenu = this.selectFromMenu.bind(this);
+
+    this.state = { view: "Activity" };
+  }
+
+  selectFromMenu(view) {
+    this.setState({ view })
+  }
 
   render() {
+    const View = Views[this.state.view];
+
     return (
       <main className="split left--handed">
-        <Activity />
-        <Menu />
+        <View />
+        <Menu selectFromMenu={this.selectFromMenu} />
       </main>
-    )    
+    );
   }
 }
 

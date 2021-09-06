@@ -23,21 +23,29 @@
 import React, { Component } from 'react';
 import './Menu.css';
 import Icon from './MenuIcon'
+import MenuItems from './MenuItems'
 
 
 const CLOSE_MENU_DELAY = 1000
 
 
 const Items = (props) => {
-  // console.log("Items props:", props)
-  return <div
+  const { closeMenu, selectFromMenu, pane, className } = props
+
+  const itemSelected = (item) => {
+    closeMenu()
+    selectFromMenu(item)
+  }
+
+  return <ul
     id="items"
-    {...props}
-    ref={props.pane}
-    open={props.menu_open}
+    className={className}
+    ref={pane}
   >
-    Menu content goes here
-  </div>
+    <MenuItems
+      itemSelected={itemSelected}
+    />
+  </ul>
 }
 
 
@@ -112,6 +120,7 @@ class Menu extends Component {
         id="menu"
       >
         <Items
+          {...this.props}
           className={itemClass}
           pane={this.pane}
           closeMenu={this.closeMenu}

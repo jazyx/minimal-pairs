@@ -5,6 +5,7 @@
   --b: 0;
   --a: 0.85;
   --bgColor: rgb(var(--r), var(--g), var(--b));
+  --color: #fff;
 
   /* Customize unit size for cards, as standard dimension  */
   --mainAxis: 100vh;
@@ -22,6 +23,7 @@
   align-items: center;
   height: 100vh;
   background-color: var(--bgColor);
+  color: var(--color);
   font-family: var(--font);
   text-align: center;
 }
@@ -48,4 +50,11 @@ div {
     --mainAxis: 100vw;
     --crossAxis: 100vh;
   }
+}
+
+.unselectable {
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
