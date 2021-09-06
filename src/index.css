@@ -1,13 +1,51 @@
+:root {
+  /* Customize background colour */
+  --r: 0;
+  --g: 0;
+  --b: 0;
+  --a: 0.85;
+  --bgColor: rgb(var(--r), var(--g), var(--b));
+
+  /* Customize unit size for cards, as standard dimension  */
+  --mainAxis: 100vh;
+  --crossAxis: 100vw;
+  --unit: min(var(--crossAxis) / 2, var(--mainAxis) / 2.25);
+
+  /* Fonts */
+  --font: 'Times New Roman', Times, serif;
+  font-size: calc(0.125 * var(--unit));
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bgColor);
+  font-family: var(--font);
+  text-align: center;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  :root {
+    --mainAxis: 100vw;
+    --crossAxis: 100vh;
+  }
 }

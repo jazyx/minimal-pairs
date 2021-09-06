@@ -1,0 +1,95 @@
+#menu {
+  --fillColor: #fff;
+  --strokeColor: #000;
+  --menuColor: rgba(170, 17, 17, 0.9);
+  --iconSize: calc(0.2 * var(--unit));
+  --menuSize: 40vw;
+  --closedMenu: -40vw;
+  --openIcon: calc(var(--menuSize) - var(--iconSize));
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1;
+
+  color: white;
+  text-align: left;
+}
+
+#menu svg {
+  position: absolute;
+  width: var(--iconSize);
+  height: var(--iconSize);
+  fill: var(--fillColor);
+  stroke: var(--strokeColor);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  transition: left .3s linear, right .3s linear, opacity .1s;
+  transition-property: left, right, opacity;
+  transition-delay: 0s, 0s, .3s;
+  cursor: pointer;
+}
+
+#menu svg:hover {
+  opacity: 0.75;
+}
+
+#menu #items.open ~ svg{
+  opacity: 1;
+  left: var(--openIcon);
+  transition-delay: .1s, .1s, 0s;
+}
+
+#menu #items {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  top: 0;
+  left: var(--closedMenu);
+  height: 100vh;
+  width: var(--menuSize);
+  padding: 2vmin;
+  padding-top: var(--iconSize);
+  padding-bottom: 0;
+  background-color: var(--menuColor);
+
+  transition: left .40s linear, right .40s linear;
+}
+
+#menu #items.open {
+  background-color: blue;
+  left: 0;
+  box-shadow: 0 0 3vw 0 rgba(255,255,255,0.75)
+}
+
+/* LEFT-HANDED / LEFT-HANDED / LEFT-HANDED LEFT-HANDED / LEFT-HANDED */
+
+
+main.left-handed #menu,
+main.left-handed #menu #items,
+main.left-handed #menu #items ~ svg {
+  left: auto;
+}
+
+main.left-handed #menu,
+main.left-handed #menu svg {
+  right: 0;
+}
+
+main.left-handed #menu #items {
+  right: var(--closedMenu);
+}
+
+
+main.left-handed #menu #items.open {
+  right: 0;
+}
+
+main.left-handed #menu #items.open ~ svg {
+  right: var(--openIcon);
+}

@@ -1,36 +1,36 @@
 { 
   "words": {
-    "ɑ": {
-      "ɑ": {
+    "ɑː": {
+      "ɑː": {
         "audio": [0.0, 1.0]
       }
     , "barn": {
         "spelling": "barn"
-      , "phonetic": "/bɑ(r)n/"
+      , "phonetic": "/bɑːn/"
       , "image": "img/ɑ/barn.jpg"
       , "audio": [1.0, 2.350]
       }
     , "heart": {
         "spelling": "heart"
-      , "phonetic": "/hɑ(r)t/"
+      , "phonetic": "/hɑːt/"
       , "image": "img/ɑ/heart.jpg"
       , "audio": [2.350, 3.650]
       }
     , "marsh": {
         "spelling": "marsh"
-      , "phonetic": "/mɑ(r)∫/"
+      , "phonetic": "/mɑː∫/"
       , "image": "img/ɑ/marsh.jpg"
       , "audio": [3.650, 5.0]
       }
     , "park": {
         "spelling": "park"
-      , "phonetic": "/pɑ(r)k/"
+      , "phonetic": "/pɑːk/"
       , "image": "img/ɑ/park.jpg"
       , "audio": [5.0, 6.350]
       }
     , "staff": {
         "spelling": "staff"
-      , "phonetic": "/stɑf/"
+      , "phonetic": "/stɑːf/"
       , "image": "img/ɑ/staff.jpg"
       , "audio": [6.350, 7.80]
       }
@@ -60,7 +60,7 @@
       }
     , "peeler": {
         "spelling": "peeler"
-      , "phonetic": "/piːlə(r)/"
+      , "phonetic": "/piːləː/"
       , "image": "img/i/peeler.jpg"
       , "audio": [12.850, 14.10]
       }
@@ -108,7 +108,7 @@
       }
     , "pillar": {
         "spelling": "pillar"
-      , "phonetic": "/pɪlə(r)/"
+      , "phonetic": "/pɪləː/"
       , "image": "img/ɪ/pillar.jpg"
       , "audio": [22.20, 23.350]
       }
@@ -180,7 +180,7 @@
     , "tit": "teat"
     }
   , "ɑʌ": {
-      "ɑ": "ʌ"
+      "ɑː": "ʌ"
     , "barn": "bun"
     , "heart": "hut"
     , "marsh": "mush"

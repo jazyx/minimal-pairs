@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Minimal Pairs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A minimal pair is a set of two words whose sounds differ by only one phoneme. For example: "stuff" and "staff".
 
-## Available Scripts
+Learners of a foreign language often have difficulty hearing minor differences which are important in their target language but not in their native language.
 
-In the project directory, you can run:
+This app trains you to recognize the differences.
 
-### `yarn start`
+## Activity
+You will see two pockets, each displaying a button for one of two different phonemes (say `/ʌ/` and `/ɑ/`, the vowels in "stuff" and "staff"). You can press these buttons to hear the phoneme.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You will also see a card with a Play Audio icon on it, and hear a word. This word will be one of a minimal pair that uses one or other of the phonemes shown on the pockets. Your task is to tap on the appropriate pocket (or drag the card to the pocket). When you do this, the card will turn over to display the word, an image illustrating the word, and its phonetic transcription.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Correct answer
+If you chose the correct phoneme/pocket, the card will then slide inside the pocket.
 
-### `yarn test`
+Under the first card, a second card will be shown, twisted a little so that you can see its corners. Before you make your choice, you can press the first card to hear the cue word repeated, or you can press one of the corners of the second card to hear the other word in the minimal pair.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After you have made your choice, the second card will turn over in place, and its word will play. It will then slide into the other pocket.
 
-### `yarn build`
+### Incorrect answer
+If you chose the wrong phoneme/pocket, you will see a different animation. The first card will slide across the screen to the side associated with its pocket, and the second card will turn over and move to the other side of the screen. A button with the word Done will appear. You can now press either card, or the buttons on the pockets, to compare the sounds. When you are finished, you can press the Done button, and both cards will slide into the pockets.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Previously played cards
+The last card that you played will be visible inside the semi-transparent pocket. The part that shows the phonetic transcription will be fully visible and interactive. If you press-and-release a card, it will slide out of its pocket and its word will play. Then it will slide back in again.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you press-and-hold a card, all the cards in both pockets will be spread across the screen in two parallel lines. The most recent card will appear on top. Other cards may be overlapped.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clicking on the topmost card will play its word. Clicking on any other card will bring that card and its minimal pair in front of the others. These will now be the topmost cards, and a second click will play the word.
 
-### `yarn eject`
+Clicking anywhere but on a card will gather the cards up and slide them back into the pockets.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Menu
+A hamburger menu button will open a menu where you can choose:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Preferences
+  + Interface language
+  + Target language
+  + Allow taboo words and images
+  + Layout in landscape mode (right-handed, left-handed, split)
+* Index of minimal pairs to practise in your target language. Your progress for each minimal pair will be shown.
+* About us (contact the developers)

@@ -1,0 +1,355 @@
+
+:root {
+  --origin: calc(var(--unit) / 2);
+
+  --corner: 0.25rem;
+  --edge: 0.01rem;
+
+  --pairSpace: calc(var(--mainAxis) - var(--unit));
+  --mainMargin: calc(0.5 * (var(--pairSpace) - var(--unit)));
+  --crossMargin: calc(0.5 * (var(--crossAxis) - var(--unit)));
+
+  --pocketOffset: calc(0.125 * var(--unit));
+  --pocketSize: calc(var(--unit) - var(--pocketOffset));
+
+  --ruleHeight: 0px;
+  --buttonOffset: calc(5 * var(--edge));
+  --buttonInset: calc(var(--pocketOffset) + var(--buttonOffset));
+  --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
+  --buttonSize: calc(0.4 * var(--unit));
+  --buttonFont: calc(0.225 * var(--unit));
+  --ruleTop: var(--buttonInset);
+
+  --btnColor: #3338;
+  --btnBorder: #444;
+  --edgeColor: #fff;
+  --seamColor: #fff8;
+
+  --pocketColor: rgba(var(--r), var(--g), var(--b), var(--a));
+
+  --bgOpacity: 0.33;
+  --phonetic: rgba(0,0,0,var(--bgOpacity));
+  --spelling: rgba(255,255,255,var(--bgOpacity));
+  --ruleColor: #666;
+}
+/* SECTIONS */
+
+.pairs {
+  position: relative;
+  height: var(--pairSpace);
+  /* background-color: #600; */
+}
+
+.phonemes {
+  position: absolute;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  height: var(--unit);
+  width: 100vw;
+  /* background-color: #006; */
+}
+
+/* CARD */
+
+.card {
+  position: absolute;
+  border: var(--edge) solid var(--edgeColor);
+  border-radius: var(--corner);
+  height: var(--unit);
+  width: var(--unit);
+  box-sizing: border-box;
+}
+
+.card p {
+  position: absolute;
+  margin: 0;
+  width: var(--unit);
+}
+
+img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: var(--corner);
+}
+
+p.phonetic {
+  top: 0;
+  color: #fff;
+  background-color: var(--phonetic);
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
+  font-style: italic;
+}
+
+p.spelling {
+  bottom: 0;
+  background-color: var(--spelling);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+}
+
+.pairs img.illustration,
+.pairs p {
+  /* opacity: 0; */
+}
+
+img.icon {
+  position: absolute;
+  width: 50%;
+  top: 25%;
+  left: 25%;
+  opacity: 0;
+}
+
+/* CUES */
+
+.pairs .card {
+  left: var(--crossMargin);
+  top: var(--mainMargin);
+  background-color: var(--bgColor);
+}
+
+.pairs div.decoy {
+  transform: rotate(15deg)
+}
+
+/* POCKETS */
+
+.pocket {
+  position: absolute;
+  bottom: 0;
+  height: var(--pocketSize);
+  width: 100%;
+  background-color: var(--pocketColor);
+  border: var(--edge) dashed var(--seamColor);
+  border-top-style: solid;
+}
+
+.phonemes > div {
+  position: relative;
+  width: 50vw;
+}
+
+ul {
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+button {
+  position: absolute;
+  top: var(--buttonInset);
+  left: var(--buttonOffset);
+  width: var(--buttonSize);
+  height: var(--buttonSize);
+  font-size: var(--buttonFont);
+  border-radius: var(--corner);
+  background-color: var(--btnColor);
+  border-color: var(--btnBorder);
+  color: white;
+  font-family: var(--font);
+  font-style: italic;
+}
+
+/* LEFT/BOTTOM POCKET */
+
+.phoneme-2 .card {
+  left: auto;
+  right: 0;
+}
+
+.phoneme-2 button {
+  left: auto;
+  right: var(--buttonOffset);
+}
+
+/* INSTRUCTIONS */
+
+p.rule {
+  position: absolute;
+  top: var(--ruleTop);
+  width: 100%;
+  margin: 0;
+  color: var(--ruleColor);
+  font-size: 1rem;
+}
+
+
+/* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
+
+@media (min-aspect-ratio: 1/1) {
+  :root {
+    --ruleHeight: 1.2rem;
+    --ruleTop: calc(50vh - var(--ruleHeight));
+  }
+
+  .pairs {
+    width: var(--pairSpace);
+    height: 100vh;
+  }
+
+  main.left-handed .pairs {
+    left: var(--unit);
+    /* background-color: #300; */
+  }
+
+  .pairs .card {
+    top: var(--crossMargin);
+    left: var(--mainMargin);
+    background-color: var(--bgColor);
+  }
+
+  .phonemes {
+    flex-direction: column;
+    left: auto;
+    bottom: auto;
+    top: 0;
+    right: 0;
+    width: var(--unit);
+    height: 100vh;
+  }
+
+  main.left-handed .phonemes {
+    left: 0;
+    right: auto;
+  }
+
+  .phonemes > div {
+    width: var(--unit);
+    height: 50vh;
+  }
+
+  p.phonetic {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg) ;
+  }
+
+  main.left-handed p.phonetic {
+    transform: rotateZ(90deg) ;
+  }
+
+  .pocket {
+    bottom: auto;
+    right: 0;
+    width: var(--pocketSize);
+    height: 100%;
+    border: var(--edge) dashed var(--seamColor);
+    border-left-style: solid;
+  }
+
+  main.left-handed .pocket {
+    left: 0;
+    right: auto;
+  }
+
+  .phonemes button {
+    top: auto;
+    left: var(--buttonInset);
+    bottom: var(--buttonSpread);
+  }
+
+  main.left-handed .phonemes button{
+    left: auto;
+    right: var(--buttonInset);
+  }
+
+  .phoneme-2 .card {
+    bottom: 0;
+    right: auto;
+  }
+
+  .phoneme-2 button {
+    right: auto;
+    top: var(--buttonSpread);
+  }
+
+  p.rule {
+    left: var(--pocketOffset);
+    width: var(--pocketSize);
+  }
+
+  main.left-handed p.rule {
+    left: auto;
+    right: var(--pocketOffset);
+  }
+}
+
+
+/* SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT */
+
+@media (min-aspect-ratio: 16/9) {
+  :root {
+    --splitHeight: 66.667vh;
+    --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
+    --splitWidth: calc(2 * var(--unit));
+    --splitLeft: calc(50vw - var(--unit));
+  }
+
+  main.split .pairs {
+    width: var(--splitWidth);
+    left: var(--splitLeft);
+    height: var(--splitHeight);
+    clip-path: circle(50%);
+
+    background-color: var(--bgColor);
+  }
+
+  main.split .pairs .card {
+    top: var(--splitTop);
+    left: var(--crossMargin);
+    background-color: var(--bgColor);
+  }
+
+  main.split .phonemes {
+    flex-direction: row;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    right: auto;
+    width: 100vw;
+    height: var(--unit);
+  }
+
+  main.split .phonemes > div {
+    width: 50vw;
+    height: var(--unit);
+  }
+
+  main.split p.phonetic {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(0) ;
+  }
+
+  main.split .pocket {
+    bottom: 0;
+    right: auto;
+    width: 100%;
+    height: var(--pocketSize);
+    border: var(--edge) dashed var(--seamColor);
+    border-top-style: solid;
+  }
+
+  main.split .phonemes button {
+    left: var(--buttonOffset);
+    top: var(--buttonInset);
+    bottom: var(--buttonSpread);
+  }
+
+  main.split .phoneme-2 .card {
+    bottom: auto;
+    right: 0;
+  }
+
+  main.split .phoneme-2 button {
+    left: auto;
+    right: var(--buttonOffset);
+  }
+
+  main.split p.rule {
+    left: 0;
+    width: 100vw;
+  }
+}

@@ -34,7 +34,10 @@ const Pocket = (props) => {
 
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      key={className}
+    >
       {cardList}
       <div className="pocket"></div>
       <button 
