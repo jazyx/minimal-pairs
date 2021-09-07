@@ -1,23 +1,23 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
+import { AudioContext } from './AudioContext'
 
 import './Activity.css';
-import AudioElement from './Audio'
 import Card from './Card'
 import Pocket from './Pocket'
 
 import { getCards } from '../api/pairs'
-const AUDIO_URL = "/pairs.mp3"
 
-class App extends Component{
-  useFirstCard = true
+const Activity = (props) => {  
+  const audio = useContext(AudioContext)
 
-  constructor(props) {
-    super(props)
+  const {
+    phonemes
+  , word1
+  , word2
+  , played: playedCards
+  } = getCards() // imported from pairs.js
 
-    this.playAudio = this.playAudio.bind(this)
-    this.state = getCards() // imported from pairs.js
-
-    // console.log("this.state:", this.state)
+    // console.log("state:", state)
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1]
     //   , { phoneme: "iː", audio: [10, 11]
@@ -45,20 +45,15 @@ class App extends Component{
     //     "iː": [<card>, ...]
     //   }
     // }
-  }
 
-  playAudio(audio) {
-    console.log("playAudio:", audio)
-  }
-
-  getCards() {
+  const createCards = () => {
     const useFirstCard = Math.floor(Math.random() * 2 )
 
     let cards
     if (useFirstCard) {
-      cards = [ this.state.word1, this.state.word2 ]
+      cards = [ word1, word2 ]
     } else {
-      cards = [ this.state.word2, this.state.word1 ]
+      cards = [ word2, word1 ]
     }
 
     let roles = ["decoy", "cue"].map((role, index) => {
@@ -76,19 +71,16 @@ class App extends Component{
     return roles
   }
 
-
-  getPockets() {
+  const createPockets = () => {
     // cards, index, phoneme, audio, playAudio
-    const pockets = this.state.phonemes.map((phonemeData, index) => {
-      const { phoneme, audio } = phonemeData
-      const played = this.state.played[phoneme]
-      const playAudio = this.playAudio
+    const pockets = phonemes.map((phonemeData, index) => {
+      const { phoneme, clip } = phonemeData
+      const played = playedCards[phoneme]
 
       return <Pocket
         phoneme={phoneme}
         index={index}
-        audio={audio}
-        playAudio={this.playAudio}
+        clip={clip}
         played={played}
       />
     })
@@ -96,26 +88,25 @@ class App extends Component{
     return pockets
   }
 
+  const [ card1, card2 ] = createCards()
+  const [ pocket1, pocket2 ] = createPockets()
+  const clip = card1.props.card.clip // HACK
+  audio.playClip(clip) // audio won't play if no click
 
-  render() {
-    const [ card1, card2 ]  = this.getCards()
-    const [ pocket1, pocket2 ] = this.getPockets()
+  return (
+    <>
+      <div className="phonemes">
+        {pocket1}
+        {pocket2}
+        <p className="rule">Tap or drag to here</p>
+      </div>
 
-    return (
-      <>
-        <div className="phonemes">
-          {pocket1}
-          {pocket2}
-          <p className="rule">Tap or drag to here</p>
-        </div>
-
-        <div className="pairs">
-          {card1}
-          {card2}
-        </div>
-      </>
-    )
-  }
+      <div className="pairs">
+        {card1}
+        {card2}
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default Activity;

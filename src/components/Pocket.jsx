@@ -2,12 +2,14 @@
  * /src/components/Pocket.jsx
  */
 
+import React, { useContext } from 'react'
+import { AudioContext } from './AudioContext'
 
 import Card from './Card'
 
 const Pocket = (props) => {
-  const { phoneme, index, audio, playAudio, played } = props
-
+  const audio = useContext(AudioContext)
+  const { phoneme, index, clip, played } = props
 
   const getCard = ( card, index ) => {
     return (
@@ -18,7 +20,6 @@ const Pocket = (props) => {
     )
   }
 
-
   const getCardList = () => {
     const listOfCards = played.map(getCard)
     return (
@@ -28,10 +29,8 @@ const Pocket = (props) => {
     )
   }
 
-
   const cardList = getCardList()
   const className = `phoneme-${index + 1}`
-
 
   return (
     <div
@@ -42,7 +41,7 @@ const Pocket = (props) => {
       <div className="pocket"></div>
       <button 
         className="play-phoneme"
-        onClick={() => playAudio(audio)}
+        onClick={() => audio.playClip(clip)}
       >
         /{phoneme}/
       </button>

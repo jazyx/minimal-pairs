@@ -3,23 +3,31 @@
  */
 
 
-import React from 'react';
+import React, { useContext } from 'react'
+import { AudioContext } from './AudioContext'
 
 
 const Card = (props) => {
-  const { spelling, phonetic, image, image_ } = props.card
+  const {
+    spelling
+  , phonetic
+  , clip
+  , image
+  , image_
+  } = props.card
   const className = "card"
                   + ( props.role
                     ? ` ${props.role}`
                     : ""
                     )
   const src = props.taboo ? (image_ || image) : image
+  const audio = useContext(AudioContext)
 
   return (
     <div
       className={className}
       key={spelling}
-      onMouseDown={props.onMouseDown}
+      onMouseDown={() => audio.playClip(clip)}
     >
       <img className="icon" src="img/icons/sound.svg" alt="play icon" />
       <img className="illustration" src={src} alt={spelling}/>

@@ -92,7 +92,7 @@ function _getWordData(phoneme, word) {
 function _getPhonemeData(phoneme) {
   const data = {...pairs.words[phoneme][phoneme]}
   data.phoneme = phoneme
-  // { audio: [ <startTime>, <endTime> ]
+  // { clip: [ <startTime>, <endTime> ]
   // , phoneme: <x>
   // }
   return data

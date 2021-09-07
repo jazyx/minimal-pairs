@@ -1,55 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { AudioProvider } from "./AudioContext"
 
-import "./App.css";
 import Views from "../api/views";
 import Menu from "./Menu";
-import Audio from "./Audio";
 
-const AUDIO_URL = "audio/pairs.mp3"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.selectFromMenu = this.selectFromMenu.bind(this);
-    this.playAudio = this.playAudio.bind(this)
+const App = (props) => {
+  const [ view, setView ] = useState("Activity")
 
-    this.state = { 
-      view: "Activity"
-    , url: AUDIO_URL
-    , clip: [0, 1]
-    };
-  }
-
-  selectFromMenu(view) {
-    if (!view) {
-      view = "Activity"
+  const selectFromMenu = (newView) => {
+    if (!newView) {
+      newView = "Activity"
     }
 
-    this.setState({ view })
+    setView(newView)
   }
 
-  playAudio(clip) {
-    this.setState({ clip })
-  }
+  const View = Views[view];
 
-  render() {
-    const View = Views[this.state.view];
-
-    return (
+  return (
+    <AudioProvider>
       <main className="split left--handed">
         <View
-          startActivity={this.selectFromMenu}
+          startActivity={selectFromMenu}
         />
         <Menu
-          selectFromMenu={this.selectFromMenu}
-        />
-        <Audio
-          url={this.state.url}
-          clip={this.state.clip}
+          selectFromMenu={selectFromMenu}
         />
       </main>
-    );
-  }
+    </AudioProvider>
+  );
 }
 
 export default App;
