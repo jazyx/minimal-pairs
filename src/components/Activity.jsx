@@ -17,7 +17,7 @@ class App extends Component{
     this.playAudio = this.playAudio.bind(this)
     this.state = getCards() // imported from pairs.js
 
-    console.log("this.state:", this.state)
+    // console.log("this.state:", this.state)
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1]
     //   , { phoneme: "iː", audio: [10, 11]
@@ -68,7 +68,7 @@ class App extends Component{
         <Card 
           card={card}
           role={role}
-          taboo={true}
+          taboo={false}
         />
       )
     })

@@ -3,7 +3,6 @@
  */
 
 
-import { getCards } from '../api/pairs'
 import Card from './Card'
 
 const Pocket = (props) => {
@@ -12,7 +11,8 @@ const Pocket = (props) => {
 
   const getCard = ( card, index ) => {
     return (
-      <Card 
+      <Card
+        key={index}
         card={card}
       />
     )

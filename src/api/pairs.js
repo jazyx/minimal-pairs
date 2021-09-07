@@ -8,7 +8,7 @@ const pairs = require('../json/pairs.json')
 // console.log("initializing pairs.js:")
 // console.log("pairs:", pairs)
  
-const phonemePairs = Object.keys(pairs.pairs)
+export const phonemePairs = Object.keys(pairs.pairs)
 let taboo = false
 
 let currentPair    // "ɪi" <<< one of the entries in phonemePairs
@@ -23,10 +23,6 @@ let played         // { "/x/": [ <card>, ... ]
 let word1, word2   // "bitch", "beach"
 
 
-
-export function getPhonemePairs() {
-  return phonemePairs
-}
 
 export function setPhonemePair(pair) {
   if (currentPair === pair) {
@@ -46,6 +42,7 @@ export function setPhonemePair(pair) {
 
   currentPair = pair
 }
+
 
 export function getCards() {
   const [ phoneme1, phoneme2 ] = phonemeSymbols
@@ -72,6 +69,7 @@ export function getCards() {
   return output
 }
 
+
 function _setPairListAndPhonemeSymbols(pairMap) {
   pairList = Object.entries(pairMap)
   // [[<ɪ>, <æ>], [<this>, <that>], [<tit>, <tat>], ...]
@@ -82,6 +80,7 @@ function _setPairListAndPhonemeSymbols(pairMap) {
   // console.log("pairList:", pairList)
   // console.log("phonemeSymbols:", phonemeSymbols)
 }
+
 
 function _getWordData(phoneme, word) {
   const data = pairs.words[phoneme][word]

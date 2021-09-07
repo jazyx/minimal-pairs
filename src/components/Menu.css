@@ -1,4 +1,5 @@
-#menu {
+#menu,
+#index {
   /* Icon */
   --fillColor: #fff;
   --strokeColor: #000;
@@ -11,7 +12,9 @@
   --menuSize: 10rem;
   --closedMenu: calc(-1 * var(--menuSize));
   --openIcon: calc(var(--menuSize) - var(--iconSize));
+}
 
+#menu {
   position: absolute;
   top: 0;
   left: 0;
@@ -76,21 +79,30 @@
   box-shadow: 0 0 3vw 0 rgba(255,255,255,0.250)
 }
 
-#menu #items li {
+ul#index {
+  margin-top: var(--iconSize);
+}
+
+
+#menu #items li,
+#index li {
   border: 0.05rem outset #888;
   border-radius: 0.2rem;
   padding: 0.25rem 0.5rem;
   margin: 0.75rem 0;
   color: #888;
+  cursor: pointer;
 }
 
-#menu #items li:hover {
+#menu #items li:hover,
+#index li:hover {
   background-color: var(--bgColor);
   color: #fff;
 }
 
-#menu #items li:active {
-  border-style: inset;
+#menu #items li:active,
+#index li:active {
+    border-style: inset;
 }
 
 /* LEFT-HANDED / LEFT-HANDED / LEFT-HANDED LEFT-HANDED / LEFT-HANDED */

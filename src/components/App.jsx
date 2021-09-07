@@ -13,6 +13,10 @@ class App extends Component {
   }
 
   selectFromMenu(view) {
+    if (!view) {
+      view = "Activity"
+    }
+
     this.setState({ view })
   }
 
@@ -21,7 +25,7 @@ class App extends Component {
 
     return (
       <main className="split left--handed">
-        <View />
+        <View startActivity={this.selectFromMenu}/>
         <Menu selectFromMenu={this.selectFromMenu} />
       </main>
     );

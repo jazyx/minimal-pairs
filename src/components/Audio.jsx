@@ -1,3 +1,10 @@
+/**
+ * /src/components/Audio.jsx
+ * 
+ * This script creates a React component for an Audio
+ * element. 
+ */
+
 import React, {Component} from 'react'
 
 

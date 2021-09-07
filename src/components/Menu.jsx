@@ -63,11 +63,15 @@ class Menu extends Component {
     this.state = { open: true }
 
     this.openMenu()
-    const timeOut = setTimeout(this.closeMenu, CLOSE_MENU_DELAY)
+    setTimeout(this.closeMenu, CLOSE_MENU_DELAY)
   }
 
 
   openMenu(event) {
+    if (this.ignoreOpen) {
+      return
+    }
+    
     if (event) {
       this.toggleMenu(true)
     }
@@ -97,7 +101,7 @@ class Menu extends Component {
       // close was on the Icon
 
       this.ignoreOpen = true
-      const timeOut = setTimeout(() => this.ignoreOpen = false, 100)
+      setTimeout(() => this.ignoreOpen = false, 100)
       // console.log("Menu closeMenu timeout", timeOut)
 
       const listener = this.closeMenu
