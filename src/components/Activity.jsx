@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { AudioContext } from './AudioContext'
 
 import './Activity.css';
@@ -7,10 +7,13 @@ import Pocket from './Pocket'
 
 import { getCards } from '../api/pairs'
 
+const REVIEW_DELAY = 2000;
+
 const Activity = (props) => {
   const audio = useContext(AudioContext)
   const cueRef = useRef()
   const decoyRef = useRef()
+  const [counter, setCounter] = useState(0)
   let useFirstCard
 
   const {
@@ -95,12 +98,18 @@ const Activity = (props) => {
   }
 
 
+  const showNextCard = () => {
+    const cueSpace = cueRef.current
+    cueSpace.className = "space"
+    setCounter(counter + 1)
+  }
+
+
   const playRightSequence = (phoneme) => {
     const cueSpace = cueRef.current
     cueSpace.classList.add("correct", phoneme)
-    // cueSpace.style = "background-color: red"
-    console.log("phoneme:", phoneme)
-    console.log("card:", cueRef.current)
+
+    setTimeout(showNextCard, REVIEW_DELAY)
   }
 
 
@@ -114,6 +123,7 @@ const Activity = (props) => {
     if (target.className !== "pocket") {
       return
     }
+
     const phoneme = target.closest("[class|=phoneme").className
     const correct = useFirstCard === (phoneme ==="phoneme-1")
     if (correct) {

@@ -2,12 +2,12 @@
  * /src/api/pairs.js
  */
 
-import { shuffle } from '../tools/utilities'
+import { shuffle, removeFrom } from '../tools/utilities'
 const pairs = require('../json/pairs.json')
 
 // console.log("initializing pairs.js:")
 // console.log("pairs:", pairs)
- 
+
 export const phonemePairs = Object.keys(pairs.pairs)
 let taboo = false
 
@@ -34,7 +34,7 @@ export function setPhonemePair(pair) {
   if (index < 0) {
     pair = phonemePairs[0]
   }
- 
+
   _setPairListAndPhonemeSymbols(pairs.pairs[pair])
   lastIndex = pairList.length - 1
   currentIndex = 0
@@ -46,19 +46,24 @@ export function setPhonemePair(pair) {
 
 export function getCards() {
   const [ phoneme1, phoneme2 ] = phonemeSymbols
-  
-  if (word1) {
-    played[phoneme1].unshift(word1)
-    played[phoneme2].unshift(word2)
+
+  if (word1 && played[phoneme1].indexOf(word1) < 0 ) {
+    played[phoneme1].push(word1)
+    played[phoneme2].push(word2)
   }
+
+  console.log("played:", played[phoneme1].map(card => card.spelling))
 
   // Grab the first card and (for now) move it to the end
   const cards = pairList.shift()
   pairList.push(cards)
 
   word1 = _getWordData(phoneme1, cards[0])
-  word2 = _getWordData(phoneme2, cards[1]) 
-  
+  word2 = _getWordData(phoneme2, cards[1])
+
+  removeFrom(played[phoneme1], word1)
+  removeFrom(played[phoneme2], word2)
+
   const output = {
     phonemes
   , word1
