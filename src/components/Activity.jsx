@@ -90,7 +90,7 @@ const Activity = (props) => {
 
   const [ card1, card2 ] = createCards()
   const [ pocket1, pocket2 ] = createPockets()
-  const clip = card1.props.card.clip // HACK
+  const clip = card2.props.card.clip // HACK
   audio.playClip(clip) // audio won't play if no click
 
   return (
