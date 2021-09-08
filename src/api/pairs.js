@@ -52,8 +52,6 @@ export function getCards() {
     played[phoneme2].push(word2)
   }
 
-  console.log("played:", played[phoneme1].map(card => card.spelling))
-
   // Grab the first card and (for now) move it to the end
   const cards = pairList.shift()
   pairList.push(cards)

@@ -17,7 +17,7 @@
   --buttonInset: calc(var(--pocketOffset) + var(--buttonOffset));
   --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
   --buttonSize: calc(0.4 * var(--unit));
-  --buttonFont: calc(0.225 * var(--unit));
+  --buttonFont: calc(0.2 * var(--unit));
   --ruleTop: var(--buttonInset);
 
   --btnColor: #3338;
@@ -98,8 +98,16 @@ img {
   border-radius: var(--corner);
 }
 
-p.phonetic {
+p.spelling {
   top: 0;
+  background-color: var(--spelling);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+  color: #000;
+}
+
+p.phonetic {
+  bottom: 0;
   color: #fff;
   background-color: var(--phonetic);
   border-top-left-radius: var(--corner);
@@ -107,12 +115,14 @@ p.phonetic {
   font-style: italic;
 }
 
-p.spelling {
+main.show-phonetic p.phonetic {
+  top: 0;
+  bottom: auto;
+}
+
+main.show-phonetic p.spelling {
+  top: auto;
   bottom: 0;
-  background-color: var(--spelling);
-  border-bottom-left-radius: var(--corner);
-  border-bottom-right-radius: var(--corner);
-  color: #000;
 }
 
 img.back {
@@ -213,7 +223,6 @@ p.rule {
   left: 0;
 }
 
-
 .space.correct.phoneme-2 {
   left: auto;
   right: 0;
@@ -230,6 +239,7 @@ p.rule {
   :root {
     --ruleHeight: 1.2rem;
     --ruleTop: calc(50vh - var(--ruleHeight));
+    --originIPA: calc(var(--buttonFont) - var(--origin))
   }
 
   .pairs {
@@ -268,13 +278,26 @@ p.rule {
     height: 50vh;
   }
 
-  p.phonetic {
+  p.spelling {
     transform-origin: var(--origin) var(--origin);
-    transform: rotateZ(270deg) ;
+    transform: rotateZ(270deg);
   }
 
-  main.left-handed p.phonetic {
+  main.left-handed p.spelling {
     transform: rotateZ(90deg) ;
+  }
+  
+  main.show-phonetic p.spelling {
+    transform: rotateZ(0deg);
+  }
+
+  main.show-phonetic p.phonetic {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg);
+  }
+
+  main.show-phonetic.left-handed p.phonetic {
+    transform: rotateZ(90deg);
   }
 
   .pocket {
@@ -380,9 +403,25 @@ p.rule {
     height: var(--unit);
   }
 
-  main.split p.phonetic {
-    transform-origin: var(--origin) var(--origin);
+  main.split p.spelling {
     transform: rotateZ(0) ;
+  }
+
+  p.spelling {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg);
+  }
+
+  main.split.show-phonetic p.spelling {
+    transform: rotateZ(0deg);
+    top: auto;
+    bottom: 0;
+  }
+
+  main.split.show-phonetic p.phonetic {
+    transform: rotateZ(0deg);
+    bottom: auto;
+    top: 0;
   }
 
   main.split .pocket {
