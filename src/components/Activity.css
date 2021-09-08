@@ -203,7 +203,6 @@ p.rule {
   pointer-events: none;
 }
 
-
 /* ANSWERING */
 
 .space.correct {
@@ -224,6 +223,7 @@ p.rule {
   transform: rotateY(0deg);
 }
 
+
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
 
 @media (min-aspect-ratio: 1/1) {
@@ -242,7 +242,7 @@ p.rule {
     /* background-color: #300; */
   }
 
-  .pairs .card {
+  .pairs .space {
     top: var(--crossMargin);
     left: var(--mainMargin);
     background-color: var(--bgColor);
@@ -302,7 +302,7 @@ p.rule {
     right: var(--buttonInset);
   }
 
-  .phoneme-2 .card {
+  .phoneme-2 .space {
     bottom: 0;
     right: auto;
   }
@@ -321,6 +321,20 @@ p.rule {
     left: auto;
     right: var(--pocketOffset);
   }
+
+  /* ANSWERING */
+  
+  .space.correct.phoneme-1 {
+    left: var(--pairSpace);
+    top: 0;
+  }
+  
+  .space.correct.phoneme-2 {
+    top: auto;
+    right: auto;
+    left: var(--pairSpace);
+    bottom: 0;
+  }
 }
 
 
@@ -330,22 +344,26 @@ p.rule {
   :root {
     --splitHeight: 66.667vh;
     --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
-    --splitWidth: calc(2 * var(--unit));
-    --splitLeft: calc(50vw - var(--unit));
+    --splitWidth: calc(1.2 * var(--unit));
+    --splitLeft: calc((100vw - var(--splitWidth)) / 2);
+    --spaceLeft: calc((var(--splitWidth) - var(--unit)) / 2);
+    --side: calc((var(--splitWidth) - var(--mainAxis)) / 2);;
+    --bottom: calc(var(--splitHeight) - var(--crossAxis));
   }
 
   main.split .pairs {
     width: var(--splitWidth);
     left: var(--splitLeft);
     height: var(--splitHeight);
-    clip-path: circle(50%);
+    /* clip-path: circle(50%); */
 
     background-color: var(--bgColor);
+    /* background-color: red; */
   }
 
-  main.split .pairs .card {
+  main.split .pairs .space {
     top: var(--splitTop);
-    left: var(--crossMargin);
+    left: var(--spaceLeft);
     background-color: var(--bgColor);
   }
 
@@ -384,7 +402,7 @@ p.rule {
     bottom: var(--buttonSpread);
   }
 
-  main.split .phoneme-2 .card {
+  main.split .phoneme-2 .space {
     bottom: auto;
     right: 0;
   }
@@ -397,5 +415,21 @@ p.rule {
   main.split p.rule {
     left: 0;
     width: 100vw;
+  }
+
+  /* ANSWERING */
+  
+  main.split .space.correct {
+    bottom: var(--bottom);
+    top: auto;
+  }
+  
+  main.split .space.correct.phoneme-1 {
+    left: var(--side);
+  }
+  
+  main.split .space.correct.phoneme-2 {
+    right: var(--side);
+    left: auto;
   }
 }
