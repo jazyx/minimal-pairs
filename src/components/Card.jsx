@@ -15,24 +15,28 @@ const Card = (props) => {
   , image
   , image_
   } = props.card
-  const className = "card"
+  const className = "card "
                   + ( props.role
-                    ? ` ${props.role}`
+                    ? `${props.role} flipped`
                     : ""
                     )
   const src = props.taboo ? (image_ || image) : image
   const audio = useContext(AudioContext)
 
   return (
-    <div
-      className={className}
-      key={spelling}
-      onMouseDown={() => audio.playClip(clip)}
-    >
-      <img className="icon" src="img/icons/sound.svg" alt="play icon" />
-      <img className="illustration" src={src} alt={spelling}/>
-      <p className="phonetic">{phonetic}</p>
-      <p className="spelling">{spelling}</p>
+    <div className="space">
+      <div
+        className={className}
+        key={spelling}
+        onMouseDown={() => audio.playClip(clip)}
+      >
+        <img className="back" src="img/icons/sound.svg" alt="play icon" />
+        <div className="front">
+          <img src={src} alt={spelling}/>
+          <p className="phonetic">{phonetic}</p>
+          <p className="spelling">{spelling}</p>
+        </div>
+      </div>
     </div>
   )
 }

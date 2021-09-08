@@ -52,13 +52,42 @@
 
 /* CARD */
 
-.card {
+.space {
   position: absolute;
+  width: var(--unit);
+  height: var(--unit);
+  perspective: var(--mainAxis);
+}
+
+.card {
+  position: relative;
   border: var(--edge) solid var(--edgeColor);
   border-radius: var(--corner);
-  height: var(--unit);
-  width: var(--unit);
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
+
+  transition: transform .5s;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.front,
+.front img,
+.front p,
+.back {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  transform: rotateY(180deg)
 }
 
 .card p {
@@ -81,6 +110,7 @@ p.phonetic {
   border-top-left-radius: var(--corner);
   border-top-right-radius: var(--corner);
   font-style: italic;
+
 }
 
 p.spelling {
@@ -90,17 +120,13 @@ p.spelling {
   border-bottom-right-radius: var(--corner);
 }
 
-.pairs img.illustration,
-.pairs p {
-  /* opacity: 0; */
-}
-
-img.icon {
+img.back {
   position: absolute;
   width: 50%;
+  height: 50%;
   top: 25%;
   left: 25%;
-  opacity: 0;
+  transform: rotateY(180deg)
 }
 
 /* CUES */
@@ -113,6 +139,10 @@ img.icon {
 
 .pairs div.decoy {
   transform: rotate(15deg)
+}
+
+.pairs div.decoy.flipped {
+  transform: rotate(15deg) rotateY(180deg)
 }
 
 /* POCKETS */
