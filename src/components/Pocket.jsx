@@ -9,7 +9,7 @@ import Card from './Card'
 
 const Pocket = (props) => {
   const audio = useContext(AudioContext)
-  const { phoneme, index, clip, played } = props
+  const { phoneme, index, url, clip, played } = props
 
   const getCard = ( card, index ) => {
     return (
@@ -41,7 +41,7 @@ const Pocket = (props) => {
       <div className="pocket"></div>
       <button
         className="play-phoneme"
-        onClick={() => audio.playClip(clip)}
+        onClick={() => audio.playClip(url, clip)}
       >
         /{phoneme}/
       </button>
@@ -50,21 +50,3 @@ const Pocket = (props) => {
 }
 
 export default Pocket
-
-
-
-// <div className="phoneme-1">
-//   <ul>
-//     {/* OLDER CARDS CAN GO HERE */}
-//     <li>
-//       <div className="card">
-//         <img src="img/ɪ/bitch.jpg" alt="bitch" />
-//         <p className="phonetic">/bɪʧ/</p>
-//         <p className="spelling">bitch</p>
-//       </div>
-//     </li>
-//   </ul>
-//   {/* POCKET */}
-//   <div className="pocket"></div>
-//   <button className="play-phoneme">ɪ</button>
-// </div> */}

@@ -12,6 +12,7 @@ const Card = (props) => {
     spelling
   , phonetic
   , clip
+  , url
   , image
   , image_
   } = props.card
@@ -31,7 +32,7 @@ const Card = (props) => {
       <div
         className={className}
         key={spelling}
-        onMouseDown={() => audio.playClip(clip)}
+        onMouseDown={() => audio.playClip(url, clip)}
       >
         <img className="back" src="img/icons/sound.svg" alt="play icon" />
         <div className="front">

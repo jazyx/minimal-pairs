@@ -9,7 +9,7 @@
   --mainMargin: calc(0.5 * (var(--pairSpace) - var(--unit)));
   --crossMargin: calc(0.5 * (var(--crossAxis) - var(--unit)));
 
-  --pocketOffset: calc(0.125 * var(--unit));
+  --pocketOffset: calc(0.14 * var(--unit));
   --pocketSize: calc(var(--unit) - var(--pocketOffset));
 
   --ruleHeight: 0px;

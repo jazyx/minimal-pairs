@@ -83,12 +83,13 @@ const Activity = (props) => {
   const createPockets = () => {
     // cards, index, phoneme, audio, playAudio
     const pockets = phonemes.map((phonemeData, index) => {
-      const { phoneme, clip } = phonemeData
+      const { phoneme, url, clip } = phonemeData
       const played = playedCards[phoneme]
 
       return <Pocket
         phoneme={phoneme}
         index={index}
+        url={url}
         clip={clip}
         played={played}
       />
@@ -136,8 +137,8 @@ const Activity = (props) => {
 
   const [ decoy, cue ] = createCards()
   const [ pocket1, pocket2 ] = createPockets()
-  const clip = cue.props.card.clip // HACK
-  audio.playClip(clip) // audio won't play if no document interaction
+  const { url, clip } = cue.props.card // HACK
+  audio.playClip(url, clip) // audio won't play if no document interaction
 
 
   return (
