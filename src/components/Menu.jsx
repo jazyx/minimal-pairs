@@ -71,7 +71,7 @@ class Menu extends Component {
     if (this.ignoreOpen) {
       return
     }
-    
+
     if (event) {
       this.toggleMenu(true)
     }

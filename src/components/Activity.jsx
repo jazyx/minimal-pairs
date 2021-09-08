@@ -7,7 +7,7 @@ import Pocket from './Pocket'
 
 import { getCards } from '../api/pairs'
 
-const Activity = (props) => {  
+const Activity = (props) => {
   const audio = useContext(AudioContext)
   const cueRef = useRef()
   const decoyRef = useRef()
@@ -64,7 +64,7 @@ const Activity = (props) => {
       const ref = (role === "cue") ? cueRef : decoyRef
 
       return (
-        <Card 
+        <Card
           card={card}
           role={role}
           taboo={false}

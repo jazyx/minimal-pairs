@@ -35,7 +35,7 @@ export const AudioProvider = ({ children }) => {
   }
 
   const playClip = (clip) => {
-    // TODO: Fade out current audio playback before 
+    // TODO: Fade out current audio playback before
     // starting to play new clip.
     _startAudioPlayback(clip)
   }

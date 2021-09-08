@@ -39,7 +39,7 @@ const Pocket = (props) => {
     >
       {cardList}
       <div className="pocket"></div>
-      <button 
+      <button
         className="play-phoneme"
         onClick={() => audio.playClip(clip)}
       >

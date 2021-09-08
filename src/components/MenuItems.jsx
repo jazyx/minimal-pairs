@@ -53,4 +53,4 @@ const MenuItems = ({ itemSelected }) => {
 }
 
 
-export default MenuItems 
+export default MenuItems

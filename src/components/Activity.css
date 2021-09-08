@@ -323,12 +323,12 @@ p.rule {
   }
 
   /* ANSWERING */
-  
+
   .space.correct.phoneme-1 {
     left: var(--pairSpace);
     top: 0;
   }
-  
+
   .space.correct.phoneme-2 {
     top: auto;
     right: auto;
@@ -355,10 +355,8 @@ p.rule {
     width: var(--splitWidth);
     left: var(--splitLeft);
     height: var(--splitHeight);
-    /* clip-path: circle(50%); */
 
     background-color: var(--bgColor);
-    /* background-color: red; */
   }
 
   main.split .pairs .space {
@@ -418,16 +416,16 @@ p.rule {
   }
 
   /* ANSWERING */
-  
+
   main.split .space.correct {
     bottom: var(--bottom);
     top: auto;
   }
-  
+
   main.split .space.correct.phoneme-1 {
     left: var(--side);
   }
-  
+
   main.split .space.correct.phoneme-2 {
     right: var(--side);
     left: auto;
