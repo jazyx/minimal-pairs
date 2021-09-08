@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/minimal-pairs/static/css/main.b74d267f.chunk.css",
-    "main.js": "/minimal-pairs/static/js/main.edab6b5c.chunk.js",
-    "main.js.map": "/minimal-pairs/static/js/main.edab6b5c.chunk.js.map",
+    "main.css": "/minimal-pairs/static/css/main.75a8929b.chunk.css",
+    "main.js": "/minimal-pairs/static/js/main.9ae5bf7b.chunk.js",
+    "main.js.map": "/minimal-pairs/static/js/main.9ae5bf7b.chunk.js.map",
     "runtime-main.js": "/minimal-pairs/static/js/runtime-main.4d698659.js",
     "runtime-main.js.map": "/minimal-pairs/static/js/runtime-main.4d698659.js.map",
     "static/js/2.2f1b2552.chunk.js": "/minimal-pairs/static/js/2.2f1b2552.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.9ef76bd2.chunk.js": "/minimal-pairs/static/js/3.9ef76bd2.chunk.js",
     "static/js/3.9ef76bd2.chunk.js.map": "/minimal-pairs/static/js/3.9ef76bd2.chunk.js.map",
     "index.html": "/minimal-pairs/index.html",
-    "static/css/main.b74d267f.chunk.css.map": "/minimal-pairs/static/css/main.b74d267f.chunk.css.map",
+    "static/css/main.75a8929b.chunk.css.map": "/minimal-pairs/static/css/main.75a8929b.chunk.css.map",
     "static/js/2.2f1b2552.chunk.js.LICENSE.txt": "/minimal-pairs/static/js/2.2f1b2552.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4d698659.js",
     "static/js/2.2f1b2552.chunk.js",
-    "static/css/main.b74d267f.chunk.css",
-    "static/js/main.edab6b5c.chunk.js"
+    "static/css/main.75a8929b.chunk.css",
+    "static/js/main.9ae5bf7b.chunk.js"
   ]
 }
