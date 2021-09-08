@@ -38,6 +38,8 @@ main {
   position: relative;
   width: 100vw;
   height: 100vh;
+  max-width: 200vh;
+  max-height: 200vw;
   overflow: hidden;
 }
 

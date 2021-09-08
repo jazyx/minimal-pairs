@@ -376,7 +376,7 @@ p.rule {
     --splitHeight: 66.667vh;
     --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
     --splitWidth: calc(1.2 * var(--unit));
-    --splitLeft: calc((100vw - var(--splitWidth)) / 2);
+    --splitLeft: calc((100% - var(--splitWidth)) / 2);
     --spaceLeft: calc((var(--splitWidth) - var(--unit)) / 2);
     --side: calc((var(--splitWidth) - var(--mainAxis)) / 2);;
     --bottom: calc(var(--splitHeight) - var(--crossAxis));
@@ -402,7 +402,7 @@ p.rule {
     bottom: 0;
     top: auto;
     right: auto;
-    width: 100vw;
+    width: 100%;
     height: var(--unit);
   }
 
@@ -459,7 +459,7 @@ p.rule {
 
   main.split p.rule {
     left: 0;
-    width: 100vw;
+    width: 100%;
   }
 
   /* ANSWERING */
