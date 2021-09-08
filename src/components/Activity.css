@@ -101,8 +101,8 @@ img {
 p.spelling {
   top: 0;
   background-color: var(--spelling);
-  border-bottom-left-radius: var(--corner);
-  border-bottom-right-radius: var(--corner);
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
   color: #000;
 }
 
@@ -110,19 +110,27 @@ p.phonetic {
   bottom: 0;
   color: #fff;
   background-color: var(--phonetic);
-  border-top-left-radius: var(--corner);
-  border-top-right-radius: var(--corner);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
   font-style: italic;
 }
 
 main.show-phonetic p.phonetic {
   top: 0;
   bottom: auto;
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 main.show-phonetic p.spelling {
   top: auto;
   bottom: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
 }
 
 img.back {
