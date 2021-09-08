@@ -46,6 +46,9 @@ export function setPhonemePair(pair) {
   _setPairListAndPhonemeSymbols(pairs.pairs[pair])
   lastIndex = pairList.length - 1
   currentIndex = 0
+
+  // Ensure that the pockets start empty
+  word1 = word2 = undefined
   played = { [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] }
 
   currentPair = pair
