@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { AudioContext } from './AudioContext'
 
 import './Activity.css';
@@ -9,6 +9,9 @@ import { getCards } from '../api/pairs'
 
 const Activity = (props) => {  
   const audio = useContext(AudioContext)
+  const cueRef = useRef()
+  const decoyRef = useRef()
+  let useFirstCard
 
   const {
     phonemes
@@ -17,7 +20,6 @@ const Activity = (props) => {
   , played: playedCards
   } = getCards() // imported from pairs.js
 
-    // console.log("state:", state)
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1]
     //   , { phoneme: "iː", audio: [10, 11]
@@ -46,30 +48,34 @@ const Activity = (props) => {
     //   }
     // }
 
+
   const createCards = () => {
-    const useFirstCard = Math.floor(Math.random() * 2 )
+    useFirstCard = !!Math.floor(Math.random() * 2 )
 
     let cards
     if (useFirstCard) {
-      cards = [ word1, word2 ]
-    } else {
       cards = [ word2, word1 ]
+    } else {
+      cards = [ word1, word2 ]
     }
 
     let roles = ["decoy", "cue"].map((role, index) => {
       const card = cards[index]
+      const ref = (role === "cue") ? cueRef : decoyRef
 
       return (
         <Card 
           card={card}
           role={role}
           taboo={false}
+          refer={ref}
         />
       )
     })
 
     return roles
   }
+
 
   const createPockets = () => {
     // cards, index, phoneme, audio, playAudio
@@ -88,22 +94,56 @@ const Activity = (props) => {
     return pockets
   }
 
-  const [ card1, card2 ] = createCards()
+
+  const playRightSequence = (phoneme) => {
+    const cueSpace = cueRef.current
+    cueSpace.classList.add("correct", phoneme)
+    // cueSpace.style = "background-color: red"
+    console.log("phoneme:", phoneme)
+    console.log("card:", cueRef.current)
+  }
+
+
+  const showWrong = () => {
+    console.log("wrong")
+  }
+
+
+  const checkAnswer = event => {
+    const target = event.target
+    if (target.className !== "pocket") {
+      return
+    }
+    const phoneme = target.closest("[class|=phoneme").className
+    const correct = useFirstCard === (phoneme ==="phoneme-1")
+    if (correct) {
+      playRightSequence(phoneme)
+    } else {
+      showWrong()
+    }
+  }
+
+
+  const [ decoy, cue ] = createCards()
   const [ pocket1, pocket2 ] = createPockets()
-  const clip = card2.props.card.clip // HACK
-  audio.playClip(clip) // audio won't play if no click
+  const clip = cue.props.card.clip // HACK
+  audio.playClip(clip) // audio won't play if no document interaction
+
 
   return (
     <>
-      <div className="phonemes">
+      <div
+        className="phonemes"
+        onClick={checkAnswer}
+      >
         {pocket1}
         {pocket2}
         <p className="rule">Tap or drag to here</p>
       </div>
 
       <div className="pairs">
-        {card1}
-        {card2}
+        {decoy}
+        {cue}
       </div>
     </>
   )

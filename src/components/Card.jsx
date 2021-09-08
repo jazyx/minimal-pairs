@@ -24,7 +24,10 @@ const Card = (props) => {
   const audio = useContext(AudioContext)
 
   return (
-    <div className="space">
+    <div
+      className="space"
+      ref={props.refer}
+    >
       <div
         className={className}
         key={spelling}

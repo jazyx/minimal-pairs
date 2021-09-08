@@ -60,7 +60,6 @@
 }
 
 .card {
-  position: relative;
   border: var(--edge) solid var(--edgeColor);
   border-radius: var(--corner);
   height: 100%;
@@ -71,17 +70,13 @@
   transform-style: preserve-3d;
 }
 
-.front,
-.back {
+.card > * {
   position: absolute;
   height: 100%;
   width: 100%;
 }
 
-.front,
-.front img,
-.front p,
-.back {
+.card * {
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
@@ -110,7 +105,6 @@ p.phonetic {
   border-top-left-radius: var(--corner);
   border-top-right-radius: var(--corner);
   font-style: italic;
-
 }
 
 p.spelling {
@@ -118,6 +112,7 @@ p.spelling {
   background-color: var(--spelling);
   border-bottom-left-radius: var(--corner);
   border-bottom-right-radius: var(--corner);
+  color: #000;
 }
 
 img.back {
@@ -131,7 +126,7 @@ img.back {
 
 /* CUES */
 
-.pairs .card {
+.pairs .space {
   left: var(--crossMargin);
   top: var(--mainMargin);
   background-color: var(--bgColor);
@@ -186,7 +181,7 @@ button {
 
 /* LEFT/BOTTOM POCKET */
 
-.phoneme-2 .card {
+.phoneme-2 .space {
   left: auto;
   right: 0;
 }
@@ -205,8 +200,29 @@ p.rule {
   margin: 0;
   color: var(--ruleColor);
   font-size: 1rem;
+  pointer-events: none;
 }
 
+
+/* ANSWERING */
+
+.space.correct {
+  top: var(--pairSpace);
+}
+
+.space.correct.phoneme-1 {
+  left: 0;
+}
+
+
+.space.correct.phoneme-2 {
+  left: auto;
+  right: 0;
+}
+
+.space.correct .card {
+  transform: rotateY(0deg);
+}
 
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
 
