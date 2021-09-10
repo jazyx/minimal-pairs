@@ -13,6 +13,7 @@
   --pocketOffset: calc(0.14 * var(--unit));
   --pocketSize: calc(var(--unit) - var(--pocketOffset));
   --pocket2Side: calc(var(--crossAxis) - var(--unit));
+  --leftHanded: calc(-1 * var(--unit));
 
   --ruleHeight: 0px; /* non-zero value set in landscape mode*/
   --buttonOffset: calc(5 * var(--edge));
@@ -60,7 +61,7 @@
   height: var(--unit);
   perspective: var(--mainAxis);
 
-  transition-property: top, left, right;
+  transition-property: top, left;
   transition-duration: .5s;
 }
 
@@ -239,7 +240,6 @@ p.rule {
 
 .space.correct.phoneme-2 {
   left: var(--pocket2Side);
-  /* right: 0; */
 }
 
 .space.correct .card {
@@ -369,6 +369,16 @@ p.rule {
   .space.correct.phoneme-2 {
     top: var(--pocket2Side);
     left: var(--pairSpace);
+  }
+
+  main.left-handed .space.correct.phoneme-1 {
+    left: var(--leftHanded);
+    top: 0;
+  }
+
+  main.left-handed .space.correct.phoneme-2 {
+    left: var(--leftHanded);
+    top: var(--pocket2Side);
   }
 }
 
