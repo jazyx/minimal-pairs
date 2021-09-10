@@ -138,7 +138,7 @@ const Activity = (props) => {
   const [ decoy, cue ] = createCards()
   const [ pocket1, pocket2 ] = createPockets()
   const { url, clip } = cue.props.card // HACK
-  audio.playClip(url, clip) // audio won't play if no document interaction
+  audio.playClip(url, clip) // audio needs document interaction to play
 
 
   return (

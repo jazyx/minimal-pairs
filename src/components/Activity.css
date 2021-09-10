@@ -1,3 +1,4 @@
+/* --mainAxis is height: this and other properties set in index.css */
 
 :root {
   --origin: calc(var(--unit) / 2);
@@ -11,8 +12,9 @@
 
   --pocketOffset: calc(0.14 * var(--unit));
   --pocketSize: calc(var(--unit) - var(--pocketOffset));
+  --pocket2Side: calc(var(--crossAxis) - var(--unit));
 
-  --ruleHeight: 0px;
+  --ruleHeight: 0px; /* non-zero value set in landscape mode*/
   --buttonOffset: calc(5 * var(--edge));
   --buttonInset: calc(var(--pocketOffset) + var(--buttonOffset));
   --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
@@ -57,6 +59,9 @@
   width: var(--unit);
   height: var(--unit);
   perspective: var(--mainAxis);
+
+  transition-property: top, left, right;
+  transition-duration: .5s;
 }
 
 .card {
@@ -66,7 +71,8 @@
   width: 100%;
   box-sizing: border-box;
 
-  transition: transform .5s;
+  transition-property: transform;
+  transition-duration: .5s;
   transform-style: preserve-3d;
 }
 
@@ -151,11 +157,11 @@ img.back {
 }
 
 .pairs div.decoy {
-  transform: rotate(15deg)
+  transform: rotateZ(30deg)
 }
 
 .pairs div.decoy.flipped {
-  transform: rotate(15deg) rotateY(180deg)
+  transform: rotateZ(30deg) rotateY(180deg)
 }
 
 /* POCKETS */
@@ -232,8 +238,8 @@ p.rule {
 }
 
 .space.correct.phoneme-2 {
-  left: auto;
-  right: 0;
+  left: var(--pocket2Side);
+  /* right: 0; */
 }
 
 .space.correct .card {
@@ -361,10 +367,8 @@ p.rule {
   }
 
   .space.correct.phoneme-2 {
-    top: auto;
-    right: auto;
+    top: var(--pocket2Side);
     left: var(--pairSpace);
-    bottom: 0;
   }
 }
 
@@ -375,11 +379,14 @@ p.rule {
   :root {
     --splitHeight: 66.667vh;
     --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
-    --splitWidth: calc(1.2 * var(--unit));
-    --splitLeft: calc((100% - var(--splitWidth)) / 2);
+    /* .pairs container */
+    --splitWidth: calc(1.35 * var(--unit));
+    --splitLeft: calc((var(--mainWidth) - var(--splitWidth)) / 2);
+    /* card .space */
     --spaceLeft: calc((var(--splitWidth) - var(--unit)) / 2);
-    --side: calc((var(--splitWidth) - var(--mainAxis)) / 2);;
-    --bottom: calc(var(--splitHeight) - var(--crossAxis));
+    --side1: calc((var(--splitWidth) - var(--mainWidth)) / 2);;
+    --side2: calc(var(--mainAxis) - var(--splitLeft) - var(--unit));
+    --top: calc(var(--crossAxis) - var(--unit));
   }
 
   main.split .pairs {
@@ -465,16 +472,15 @@ p.rule {
   /* ANSWERING */
 
   main.split .space.correct {
-    bottom: var(--bottom);
-    top: auto;
+    /* bottom: var(--bottom); */
+    top: var(--top);
   }
 
   main.split .space.correct.phoneme-1 {
-    left: var(--side);
+    left: var(--side1);
   }
 
   main.split .space.correct.phoneme-2 {
-    right: var(--side);
-    left: auto;
+    left: var(--side2);
   }
 }

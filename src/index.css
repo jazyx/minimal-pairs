@@ -7,10 +7,13 @@
   --bgColor: rgb(var(--r), var(--g), var(--b));
   --color: #fff;
 
+  --mainWidth: min(200vh, 100vw);
+  --mainHeight: min(200vw, 100vh);
   /* Customize unit size for cards, as standard dimension  */
-  --mainAxis: 100vh;
-  --crossAxis: 100vw;
-  --unit: min(var(--crossAxis) / 2, var(--mainAxis) / 2.25);
+  --mainAxis: var(--mainHeight);
+  --crossAxis: var(--mainWidth);
+  /* Slightly less than half crossAxis to fit split mode nicely*/
+  --unit: min(var(--crossAxis) / 2.04, var(--mainAxis) / 2.4);
 
   /* Fonts */
   --font: 'Times New Roman', Times, serif;
@@ -36,10 +39,8 @@ body {
 
 main {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  max-width: 200vh;
-  max-height: 200vw;
+  width: var(--mainWidth);
+  height: var(--mainHeight);
   overflow: hidden;
 }
 
@@ -49,8 +50,8 @@ div {
 
 @media (min-aspect-ratio: 1/1) {
   :root {
-    --mainAxis: 100vw;
-    --crossAxis: 100vh;
+    --mainAxis: var(--mainWidth);
+    --crossAxis: var(--mainHeight);
   }
 }
 
