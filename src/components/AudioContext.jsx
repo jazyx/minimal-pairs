@@ -9,13 +9,13 @@ export const AudioContext = createContext()
 export const AudioProvider = ({ children }) => {
   // eslint-disable-next-line
   const audio = new Audio()
-  let playing = false
+  // let playing = false
 
   const Provider = AudioContext.Provider
 
   const _stopAudioPlayback = () => {
     audio.pause()
-    playing = false
+    // playing = false
   }
 
   const _startAudioPlayback = (url, clip) => {
@@ -31,7 +31,7 @@ export const AudioProvider = ({ children }) => {
 
     audio.play()
          .then(result => {
-           playing = true
+          //  playing = true
          }).catch(error => {
            console.log("Audio.play() error:)", error)
          })

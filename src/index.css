@@ -1,5 +1,5 @@
 :root {
-  /* Customize background colour */
+  /* Customize background colour, allowing customizable opacity*/
   --r: 0;
   --g: 0;
   --b: 0;
@@ -7,6 +7,7 @@
   --bgColor: rgb(var(--r), var(--g), var(--b));
   --color: #fff;
 
+  /* Define the maximum dimensions of a centred <main> elemnt */
   --mainWidth: min(200vh, 100vw);
   --mainHeight: min(200vw, 100vh);
   /* Customize unit size for cards, as standard dimension  */
@@ -21,6 +22,9 @@
 }
 
 #root {
+  /* Ensure that the <main> element is centred, and that it uses the
+     colors and fonts defined above
+  */
   display: flex;
   justify-content: center;
   align-items: center;

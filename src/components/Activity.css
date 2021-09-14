@@ -1,27 +1,42 @@
 /* --mainAxis is height: this and other properties set in index.css */
 
 :root {
-  --origin: calc(var(--unit) / 2);
+  --origin: calc(var(--unit) / 2); /* for rotations of <p> elements */
 
+  --dealTop: calc(-1.414 * var(--unit));
+
+  /* border-radius and border-width */
   --corner: 0.25rem;
   --edge: 0.01rem;
 
+  /* Dimensions of space where cue card appears, and the margins
+     needed to center the cue card
+   */
   --pairSpace: calc(var(--mainAxis) - var(--unit));
   --mainMargin: calc(0.5 * (var(--pairSpace) - var(--unit)));
   --crossMargin: calc(0.5 * (var(--crossAxis) - var(--unit)));
 
+  /* Dimension of visible and hidden parts of cards in the pockets */
   --pocketOffset: calc(0.14 * var(--unit));
   --pocketSize: calc(var(--unit) - var(--pocketOffset));
+  --pocketFont: 3rem;
+  /* Position of phoneme 2 pocket contents */
   --pocket2Side: calc(var(--crossAxis) - var(--unit));
+  /* Position of card just before it slides into a pocket */
+  --outsidePocket: calc(var(--pairSpace) - var(--pocketSize));
+  /* Adjustment for left-handed layout */
   --leftHanded: calc(-1 * var(--unit));
 
+  /* Adjustment for instructions to use in landscape mode */
   --ruleHeight: 0px; /* non-zero value set in landscape mode*/
+
+  /* Don't let the Play Poneme buttons touch the sides of the pockets */
   --buttonOffset: calc(5 * var(--edge));
-  --buttonInset: calc(var(--pocketOffset) + var(--buttonOffset));
+  /* Push the buttons apart in landscape mode to give room for rule */
   --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
-  --buttonSize: calc(0.4 * var(--unit));
-  --buttonFont: calc(0.2 * var(--unit));
-  --ruleTop: var(--buttonInset);
+  --buttonSize: calc(0.18 * var(--unit));
+
+  --ruleTop: calc(var(--pocketOffset) + var(--buttonOffset));
 
   --btnColor: #3338;
   --btnBorder: #444;
@@ -30,6 +45,7 @@
 
   --pocketColor: rgba(var(--r), var(--g), var(--b), var(--a));
 
+  /* Backgrounds for spelling and phonetic paragraphs */
   --bgOpacity: 0.33;
   --phonetic: rgba(0,0,0,var(--bgOpacity));
   --spelling: rgba(255,255,255,var(--bgOpacity));
@@ -37,11 +53,11 @@
 }
 /* SECTIONS */
 
-.pairs {
+/* .pairs {
   position: relative;
   height: var(--pairSpace);
-  /* background-color: #600; */
-}
+  background-color: #600;
+} */
 
 .phonemes {
   position: absolute;
@@ -55,17 +71,20 @@
 
 /* CARD */
 
-.space {
+.card-holder {
   position: absolute;
   width: var(--unit);
   height: var(--unit);
-  perspective: var(--mainAxis);
-
-  transition-property: top, left;
-  transition-duration: .5s;
 }
 
-.card {
+.space { /* The space can be translated */
+  perspective: var(--mainAxis);
+  transition-property: top, left;
+  transition-duration: .5s;
+  transition-timing-function: ease-in;
+}
+
+.card { /* The card can be flipped inside the space */
   border: var(--edge) solid var(--edgeColor);
   border-radius: var(--corner);
   height: 100%;
@@ -77,7 +96,7 @@
   transform-style: preserve-3d;
 }
 
-.card > * {
+.card > * { /* icon image on back, front <div> */
   position: absolute;
   height: 100%;
   width: 100%;
@@ -86,10 +105,6 @@
 .card * {
   backface-visibility: hidden;
   transform-style: preserve-3d;
-}
-
-.card.flipped {
-  transform: rotateY(180deg)
 }
 
 .card p {
@@ -140,7 +155,7 @@ main.show-phonetic p.spelling {
   border-bottom-right-radius: var(--corner);
 }
 
-img.back {
+img.back { /* Play Audio icon */
   position: absolute;
   width: 50%;
   height: 50%;
@@ -151,35 +166,42 @@ img.back {
 
 /* CUES */
 
-.pairs .space {
+.space {
   left: var(--crossMargin);
   top: var(--mainMargin);
   background-color: var(--bgColor);
 }
 
-.pairs div.decoy {
+.cue .space {
+  z-index: 1;
+}
+
+.decoy .space {
   transform: rotateZ(30deg)
 }
 
-.pairs div.decoy.flipped {
-  transform: rotateZ(30deg) rotateY(180deg)
+.card.flipped {
+  transform: rotateY(180deg)
 }
 
 /* POCKETS */
 
+ul,
 .pocket {
   position: absolute;
   bottom: 0;
+}
+
+.pocket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: var(--pocketSize);
-  width: 100%;
+  width: 50%;
   background-color: var(--pocketColor);
   border: var(--edge) dashed var(--seamColor);
   border-top-style: solid;
-}
-
-.phonemes > div {
-  position: relative;
-  width: 50vw;
+  font-size: var(--pocketFont);
 }
 
 ul {
@@ -187,31 +209,39 @@ ul {
   margin-block-start: 0;
   margin-block-end: 0;
   padding-inline-start: 0;
+
+  height: var(--unit);
+  width: var(--unit);
 }
 
 button {
   position: absolute;
-  top: var(--buttonInset);
+  top: var(--buttonOffset);
   left: var(--buttonOffset);
   width: var(--buttonSize);
   height: var(--buttonSize);
-  font-size: var(--buttonFont);
   border-radius: var(--corner);
   background-color: var(--btnColor);
   border-color: var(--btnBorder);
   color: white;
   font-family: var(--font);
   font-style: italic;
+
+  background-image: url("../icons/sound.svg");
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* LEFT/BOTTOM POCKET */
 
-.phoneme-2 .space {
+.phoneme-1 ul,
+.phoneme-1 .pocket {
   left: auto;
   right: 0;
 }
 
-.phoneme-2 button {
+.phoneme-1 button {
   left: auto;
   right: var(--buttonOffset);
 }
@@ -220,7 +250,7 @@ button {
 
 p.rule {
   position: absolute;
-  top: var(--ruleTop);
+  bottom: var(--buttonOffset);
   width: 100%;
   margin: 0;
   color: var(--ruleColor);
@@ -230,20 +260,46 @@ p.rule {
 
 /* ANSWERING */
 
-.space.correct {
+.space.active {
   top: var(--pairSpace);
-}
-
-.space.correct.phoneme-1 {
   left: 0;
 }
 
-.space.correct.phoneme-2 {
+.phoneme-1 .space.active{
   left: var(--pocket2Side);
 }
 
-.space.correct .card {
+.space.active .card {
   transform: rotateY(0deg);
+}
+
+.space.active.outside-pocket {
+  top: var(--outsidePocket);
+  transition-duration: 0.1s
+}
+
+.space.active.inside-pocket {
+  z-index: 0;
+  transition-duration: 0.3s
+}
+
+.card-holder.space.deal{
+  top: var(--dealTop);
+  transform: rotateY(180deg), rotateZ(45deg);
+  transition-duration: 0s;
+}
+
+.space.reveal {
+  left: 0;
+  transform: rotateZ(0deg)
+}
+
+.phoneme-1 .space.reveal{
+  left: var(--pocket2Side);
+}
+
+.space.reveal .card {
+  transform: rotateY(0deg)
 }
 
 
@@ -253,43 +309,17 @@ p.rule {
   :root {
     --ruleHeight: 1.2rem;
     --ruleTop: calc(50vh - var(--ruleHeight));
-    --originIPA: calc(var(--buttonFont) - var(--origin))
+    --leftSpace: calc(var(--unit) + var(--mainMargin));
   }
 
-  .pairs {
-    width: var(--pairSpace);
-    height: 100vh;
-  }
-
-  main.left-handed .pairs {
-    left: var(--unit);
-    /* background-color: #300; */
-  }
-
-  .pairs .space {
+  .space {
     top: var(--crossMargin);
     left: var(--mainMargin);
     background-color: var(--bgColor);
   }
 
-  .phonemes {
-    flex-direction: column;
-    left: auto;
-    bottom: auto;
-    top: 0;
-    right: 0;
-    width: var(--unit);
-    height: 100vh;
-  }
-
-  main.left-handed .phonemes {
-    left: 0;
-    right: auto;
-  }
-
-  .phonemes > div {
-    width: var(--unit);
-    height: 50vh;
+  main.left-handed .space {
+    left: var(--leftSpace);
   }
 
   p.spelling {
@@ -314,71 +344,104 @@ p.rule {
     transform: rotateZ(90deg);
   }
 
+  ul,
   .pocket {
     bottom: auto;
     right: 0;
+  }
+
+  .pocket {
     width: var(--pocketSize);
-    height: 100%;
+    height: 50%;
     border: var(--edge) dashed var(--seamColor);
     border-left-style: solid;
   }
 
+  .phoneme-1 ul,
+  .phoneme-1 .pocket {
+    top: auto;
+    bottom: 0;
+  }
+
+  main.left-handed ul,
   main.left-handed .pocket {
     left: 0;
     right: auto;
   }
 
-  .phonemes button {
+  .pocket button {
     top: auto;
-    left: var(--buttonInset);
+    left: var(--buttonOffset);
     bottom: var(--buttonSpread);
   }
-
-  main.left-handed .phonemes button{
-    left: auto;
-    right: var(--buttonInset);
-  }
-
-  .phoneme-2 .space {
-    bottom: 0;
+  
+  .phoneme-1 button {
     right: auto;
-  }
-
-  .phoneme-2 button {
-    right: auto;
+    bottom: auto;
     top: var(--buttonSpread);
   }
 
+  main.left-handed .pocket button{
+    left: auto;
+    right: var(--buttonOffset);
+  }
+
   p.rule {
-    left: var(--pocketOffset);
+    left: auto;
+    right: 0;
+    top: var(--ruleTop);
     width: var(--pocketSize);
   }
 
   main.left-handed p.rule {
-    left: auto;
-    right: var(--pocketOffset);
+    left: 0;
+    right: auto;
   }
 
   /* ANSWERING */
 
-  .space.correct.phoneme-1 {
-    left: var(--pairSpace);
+  .card-holder.space.active {
     top: 0;
-  }
-
-  .space.correct.phoneme-2 {
-    top: var(--pocket2Side);
     left: var(--pairSpace);
   }
 
-  main.left-handed .space.correct.phoneme-1 {
-    left: var(--leftHanded);
-    top: 0;
+  .phoneme-1 .space.active{
+    top: var(--pocket2Side);
   }
 
-  main.left-handed .space.correct.phoneme-2 {
+  main.left-handed .space.active{
+    left: 0;
+  }
+
+  main.left-handed .space.active.phoneme-2 {
     left: var(--leftHanded);
     top: var(--pocket2Side);
+  }
+
+  .space.active.outside-pocket {
+    left: var(--outsidePocket);
+  }
+
+  main.left-handed .space.active.outside-pocket {
+    left: var(--pocketSize);
+  }
+
+  .space.reveal {
+    left: var(--mainMargin);
+    top: 0;
+    transform: rotateZ(0deg)
+  }
+
+  main.left-handed .space.reveal {
+    left: var(--leftSpace);
+  }
+
+  .phoneme-1 .space.reveal {
+    top: var(--pocket2Side);
+  }
+
+  main.left-handed .space.inside-pocket {
+    left: 0;
   }
 }
 
@@ -389,43 +452,18 @@ p.rule {
   :root {
     --splitHeight: 66.667vh;
     --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
-    /* .pairs container */
-    --splitWidth: calc(1.35 * var(--unit));
-    --splitLeft: calc((var(--mainWidth) - var(--splitWidth)) / 2);
     /* card .space */
-    --spaceLeft: calc((var(--splitWidth) - var(--unit)) / 2);
-    --side1: calc((var(--splitWidth) - var(--mainWidth)) / 2);;
-    --side2: calc(var(--mainAxis) - var(--splitLeft) - var(--unit));
-    --top: calc(var(--crossAxis) - var(--unit));
+    --side1: calc(var(--mainWidth) - var(--unit));
+    --spaceLeft: calc(var(--side1) / 2);
+    --pairSpace: calc(var(--crossAxis) - var(--unit));
+    --outsidePocket: calc(var(--pairSpace) - var(--pocketSize));
   }
 
-  main.split .pairs {
-    width: var(--splitWidth);
-    left: var(--splitLeft);
-    height: var(--splitHeight);
-
-    background-color: var(--bgColor);
-  }
-
-  main.split .pairs .space {
+  main.split .space {
     top: var(--splitTop);
     left: var(--spaceLeft);
     background-color: var(--bgColor);
-  }
-
-  main.split .phonemes {
-    flex-direction: row;
-    left: 0;
-    bottom: 0;
-    top: auto;
-    right: auto;
-    width: 100%;
-    height: var(--unit);
-  }
-
-  main.split .phonemes > div {
-    width: 50vw;
-    height: var(--unit);
+    z-index: 1;
   }
 
   main.split p.spelling {
@@ -449,48 +487,64 @@ p.rule {
     top: 0;
   }
 
+  main.split ul,
   main.split .pocket {
     bottom: 0;
     right: auto;
-    width: 100%;
+  }
+
+  main.split .phoneme-1 ul,
+  main.split .phoneme-1 .pocket {
+    left: auto;
+    right: 0;
+  }
+
+  main.split .pocket {
+    width: 50%;
     height: var(--pocketSize);
     border: var(--edge) dashed var(--seamColor);
     border-top-style: solid;
   }
 
-  main.split .phonemes button {
+  main.split .pocket button {
     left: var(--buttonOffset);
-    top: var(--buttonInset);
-    bottom: var(--buttonSpread);
-  }
-
-  main.split .phoneme-2 .space {
+    top: var(--buttonOffset);
     bottom: auto;
-    right: 0;
+    right: auto;
   }
 
-  main.split .phoneme-2 button {
+  main.split .phoneme-1 .pocket button {
     left: auto;
     right: var(--buttonOffset);
   }
 
   main.split p.rule {
-    left: 0;
+    top: auto;
+    bottom: var(--buttonOffset);
     width: 100%;
   }
 
   /* ANSWERING */
 
-  main.split .space.correct {
-    /* bottom: var(--bottom); */
-    top: var(--top);
+  main.split .card-holder.space.active {
+    left: 0;
+    top: var(--pairSpace);
   }
 
-  main.split .space.correct.phoneme-1 {
+  main.split .phoneme-1 .space.active {
     left: var(--side1);
   }
 
-  main.split .space.correct.phoneme-2 {
-    left: var(--side2);
+  main.split .space.active.outside-pocket {
+    top: var(--outsidePocket);
+  }
+
+  main.split .space.reveal {
+    left: 0;
+    top: var(--splitTop);
+  }
+
+  main.split .phoneme-1 .space.reveal {
+    left: var(--side1);
   }
 }

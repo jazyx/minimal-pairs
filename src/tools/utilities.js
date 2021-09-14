@@ -311,6 +311,50 @@ export const getRandomFromArray = (array) => {
 }
 
 
+/**
+ * @returns either 0 or 1 but never more than 4 0s or 1s in a row
+ *          and most likely not more than 3 in a row
+ */
+export const getBooleanGenerator = () => {
+  const lastFourValues = [0,1,0,1]
+
+  const randomBoolean = (hint=0) => {
+    const random = Math.max(0, Math.min(1, Math.random() * 2 + hint))
+    return Math.floor(random) // 0 | 1
+  }
+
+  return function booleanGenerator() {
+    let output
+
+    const sum = lastFourValues.reduce((accumulator, value) => {
+      return accumulator + value
+    }, 0)
+
+    switch (sum) {
+      case 0:
+        output = 1
+      break
+      case 1:
+        output = randomBoolean(0.5)
+      break
+      case 3:
+        output = randomBoolean(-0.5)
+      break
+      case 4:
+        output = 0
+      break
+      default:
+        output = randomBoolean()
+    }
+
+    lastFourValues.shift()
+    lastFourValues.push(output)
+
+    return output
+  }
+}
+
+
 
 export const arrayOverlap = (array1, array2) => {
   if (!array1 || !array1.length || !array2 || !array2.length) {

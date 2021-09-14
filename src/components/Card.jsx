@@ -3,11 +3,12 @@
  */
 
 
-import React, { useContext } from 'react'
+import React, { useContext, forwardRef } from 'react'
 import { AudioContext } from './AudioContext'
 
 
-const Card = (props) => {
+const Card = forwardRef((props, cardRef) => {
+  // console.log("card:", props.card)
   const {
     spelling
   , phonetic
@@ -16,9 +17,15 @@ const Card = (props) => {
   , image
   , image_
   } = props.card
-  const className = "card "
+
+  const className = "card"
                   + ( props.role
-                    ? `${props.role} flipped`
+                    ? " flipped"
+                    : ""
+                    )
+  const spaceName = "card-holder"
+                  + ( props.role
+                    ? " space"
                     : ""
                     )
   const src = props.taboo ? (image_ || image) : image
@@ -26,8 +33,8 @@ const Card = (props) => {
 
   return (
     <div
-      className="space"
-      ref={props.refer}
+      className={spaceName}
+      ref={cardRef}
     >
       <div
         className={className}
@@ -43,7 +50,7 @@ const Card = (props) => {
       </div>
     </div>
   )
-}
+})
 
 
 export default Card

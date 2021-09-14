@@ -12,14 +12,14 @@ export const phonemePairs = Object.keys(pairs.pairs)
 
 const AUDIO_DIR = "audio/"
 
-let taboo = false
+// let taboo = false
 
 let currentPair    // "ɪi" <<< one of the entries in phonemePairs
 let pairList       // [ [ "bitch", "beach" ],...[ "wheel", "will" ] ]
 let phonemeSymbols // [ "ɪ", "iː" ]
 let phonemes       // [ { symbol: "/ɪ/", audio: [0, 1] }, ...]
-let currentIndex   // 0
-let lastIndex      // index of list item in pairList
+// let currentIndex   // 0
+// let lastIndex      // index of list item in pairList
 let played         // { "/x/": [ <card>, ... ]
                    // , "/y/": [ <card>, ... ]
                    // }
@@ -44,8 +44,8 @@ export function setPhonemePair(pair) {
   }
 
   _setPairListAndPhonemeSymbols(pairs.pairs[pair])
-  lastIndex = pairList.length - 1
-  currentIndex = 0
+  // lastIndex = pairList.length - 1
+  // currentIndex = 0
 
   // Ensure that the pockets start empty
   word1 = word2 = undefined
@@ -107,7 +107,7 @@ function _setPairListAndPhonemeSymbols(pairMap) {
 
   phonemes = phonemeSymbols.map(_getPhonemeData)
   shuffle(pairList)
-  // [[<tit>, <tat>], ..., <this>, <that>], ...]
+  // [[<tit>, <tat>], ..., [<this>, <that>], ...]
 }
 
 
