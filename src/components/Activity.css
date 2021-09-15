@@ -8,6 +8,7 @@
   /* border-radius and border-width */
   --corner: 0.25rem;
   --edge: 0.01rem;
+  --wrongEdge: calc(5 * var(--edge));
 
   /* Dimensions of space where cue card appears, and the margins
      needed to center the cue card
@@ -18,7 +19,7 @@
 
   /* Dimension of visible and hidden parts of cards in the pockets */
   --pocketOffset: calc(0.14 * var(--unit));
-  --pocketSize: calc(var(--unit) - var(--pocketOffset));
+  --pocketSize: calc(var(--unit) - var(--pocketOffset)); /*Done width*/
   --pocketFont: 3rem;
   /* Position of phoneme 2 pocket contents */
   --pocket2Side: calc(var(--crossAxis) - var(--unit));
@@ -38,10 +39,14 @@
 
   --ruleTop: calc(var(--pocketOffset) + var(--buttonOffset));
 
-  --btnColor: #3338;
+  --btnColor: #3339;
   --btnBorder: #444;
   --edgeColor: #fff;
   --seamColor: #fff8;
+
+  --doneColor: #383d;
+  --doneHeight: max(2 * var(--ruleHeight), 2.4rem);
+  --doneLeft: calc((var(--mainWidth) - var(--pocketSize)) / 2);
 
   --pocketColor: rgba(var(--r), var(--g), var(--b), var(--a));
 
@@ -50,6 +55,8 @@
   --phonetic: rgba(0,0,0,var(--bgOpacity));
   --spelling: rgba(255,255,255,var(--bgOpacity));
   --ruleColor: #666;
+
+  --wrongDuration: 1s;
 }
 /* SECTIONS */
 
@@ -91,8 +98,8 @@
   width: 100%;
   box-sizing: border-box;
 
-  transition-property: transform;
-  transition-duration: .5s;
+  transition-property: transform, border-width, border-color;
+  transition-duration: .5s, var(--wrongDuration), var(--wrongDuration);
   transform-style: preserve-3d;
 }
 
@@ -110,7 +117,7 @@
 .card p {
   position: absolute;
   margin: 0;
-  width: var(--unit);
+  width: 100%;
 }
 
 img {
@@ -126,6 +133,7 @@ p.spelling {
   border-top-left-radius: var(--corner);
   border-top-right-radius: var(--corner);
   color: #000;
+  transition: color var(--wrongDuration);
 }
 
 p.phonetic {
@@ -202,6 +210,8 @@ ul,
   border: var(--edge) dashed var(--seamColor);
   border-top-style: solid;
   font-size: var(--pocketFont);
+  transition-property: background-color, color;
+  transition-duration: var(--wrongDuration);
 }
 
 ul {
@@ -216,21 +226,55 @@ ul {
 
 button {
   position: absolute;
+  color: white;
+  font-family: var(--font);
+  font-size: 1rem;
+}
+
+.play-phoneme {
   top: var(--buttonOffset);
   left: var(--buttonOffset);
   width: var(--buttonSize);
   height: var(--buttonSize);
-  border-radius: var(--corner);
-  background-color: var(--btnColor);
-  border-color: var(--btnBorder);
-  color: white;
-  font-family: var(--font);
   font-style: italic;
 
+  border-radius: var(--corner);
+  border-color: var(--btnBorder);
+
+  background-color: var(--btnColor);
   background-image: url("../icons/sound.svg");
   background-size: 75%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.done {
+  display: none;
+
+  background-color: var(--doneColor);
+  left: var(--doneLeft);
+  width: var(--pocketSize);
+  bottom: 0;
+  padding: 0.25rem;
+  border-radius: 2rem;
+  z-index: 99;
+}
+
+.wrong ~ .done {
+  display: block;
+}
+
+.wrong ~ p {
+  display: none;
+}
+
+.wrong.cue .card{
+  border-color: var(--noColor);
+  border-width: var(--wrongEdge);
+}
+
+.wrong.cue p.spelling{
+  color: var(--noColor);
 }
 
 /* LEFT/BOTTOM POCKET */
@@ -291,7 +335,8 @@ p.rule {
 
 .space.reveal {
   left: 0;
-  transform: rotateZ(0deg)
+  transform: rotateZ(0deg);
+  z-index: 2;
 }
 
 .phoneme-1 .space.reveal{
@@ -302,6 +347,13 @@ p.rule {
   transform: rotateY(0deg)
 }
 
+.wrong.cue .pocket {
+  background-color: var(--noColor);
+}
+
+.wrong.decoy .pocket {
+  color: var(--noColor);
+}
 
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
 
@@ -330,7 +382,7 @@ p.rule {
   main.left-handed p.spelling {
     transform: rotateZ(90deg) ;
   }
-  
+
   main.show-phonetic p.spelling {
     transform: rotateZ(0deg);
   }
@@ -374,7 +426,7 @@ p.rule {
     left: var(--buttonOffset);
     bottom: var(--buttonSpread);
   }
-  
+
   .phoneme-1 button {
     right: auto;
     bottom: auto;
@@ -418,7 +470,7 @@ p.rule {
     top: var(--pocket2Side);
   }
 
-  .space.active.outside-pocket {
+  .card-holder.space.active.outside-pocket {
     left: var(--outsidePocket);
   }
 
@@ -426,7 +478,7 @@ p.rule {
     left: var(--pocketSize);
   }
 
-  .space.reveal {
+  .card-holder.space.reveal {
     left: var(--mainMargin);
     top: 0;
     transform: rotateZ(0deg)
@@ -436,12 +488,34 @@ p.rule {
     left: var(--leftSpace);
   }
 
+  .card-holder.space.reveal.inside-pocket {
+    left: var(--pairSpace);
+  }
+
+  main.left-handed .card-holder.space.reveal.inside-pocket {
+    left: 0;
+  }
+
   .phoneme-1 .space.reveal {
     top: var(--pocket2Side);
   }
 
   main.left-handed .space.inside-pocket {
     left: 0;
+  }
+
+  .done {
+    right: 0;
+    left: auto;
+    top: var(--ruleTop);
+    height: var(--doneHeight);
+  }
+
+  main.left-handed .done {
+    right: auto;
+    left: 0;
+    top: var(--ruleTop);
+    height: var(--doneHeight);
   }
 }
 
@@ -546,5 +620,26 @@ p.rule {
 
   main.split .phoneme-1 .space.reveal {
     left: var(--side1);
+  }
+
+  main.split .card-holder.space.reveal.inside-pocket {
+    left: 0;
+  }
+
+  main.split .space.inside-pocket {
+    left: 0;
+  }
+
+  main.split .phoneme-1 .space.reveal,
+  main.split .phoneme-1 .card-holder.space.inside-pocket {
+      left: var(--side1);
+  }
+
+  main.split .done {
+    right: auto;
+    left: var(--doneLeft);
+    top: auto;
+    bottom: 0;
+    height: var(--doneHeight);
   }
 }

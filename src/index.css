@@ -4,7 +4,9 @@
   --g: 0;
   --b: 0;
   --a: 0.85;
+  --no: 96;
   --bgColor: rgb(var(--r), var(--g), var(--b));
+  --noColor: rgb(var(--no), var(--g), var(--b));
   --color: #fff;
 
   /* Define the maximum dimensions of a centred <main> elemnt */
@@ -60,7 +62,7 @@ div {
 }
 
 .unselectable {
-  -webkit-user-select: none; /* Safari */        
+  -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */

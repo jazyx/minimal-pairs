@@ -17,11 +17,15 @@ const DEAL_DELAY = 300
 
 
 const Activity = (props) => {
+  // Shared with all cards and the Play Phoneme buttons
   const audio = useContext(AudioContext)
+  // Used for animating cue and decoy cards
   const cueRef = useRef()
   const decoyRef = useRef()
+  // Used for presenting cards in pocket
+  const phoneme0Ref = useRef()
   const phoneme1Ref = useRef()
-  const phoneme2Ref = useRef()
+  // Used to tri0ger a re-render with a new card
   const [counter, setCounter] = useState(0)
 
   const {
@@ -31,12 +35,15 @@ const Activity = (props) => {
   , played: playedCards
   } = getCards() // imported from pairs.js
 
+  let wrong = false
   let cueURL
     , cueClip
     , cueSpace
     , decoyURL
     , decoyClip
     , decoySpace
+    , phoneme0
+    , phoneme1
 
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -82,8 +89,8 @@ const Activity = (props) => {
 
       // All the other properties depend on the phoneme
       const [ cardData, listRef ] = index
-                                  ? [ word2, phoneme2Ref ]
-                                  : [ word1, phoneme1Ref ]
+                                  ? [ word2, phoneme1Ref ]
+                                  : [ word1, phoneme0Ref ]
       const played = playedCards[phonemeData.phoneme]
 
       if (index !== useSecondCard) {
@@ -149,11 +156,6 @@ const Activity = (props) => {
   const moveIntoPocket = () => {
     cueSpace.classList.remove("outside-pocket")
     cueSpace.classList.add("inside-pocket")
-    // const pocketList = (useFirstCard)
-    //                  ? phoneme1Ref.current
-    //                  : phoneme2Ref.current 
-    // cueSpace.className = "space into-pocket"
-    // pocketList.appendChild(cueSpace)
 
     setTimeout(showOtherCard, POCKET_DELAY)
   }
@@ -166,6 +168,10 @@ const Activity = (props) => {
 
 
   const playRightSequence = () => {
+    if (wrong) {
+      return
+    }
+
     cueSpace.classList.add("active")
     audio.playClip(cueURL, cueClip)
     setTimeout(moveNearToPocket, REVIEW_DELAY)
@@ -173,7 +179,31 @@ const Activity = (props) => {
 
 
   const showWrong = () => {
-    console.log("wrong")
+    if (wrong) {
+      return
+    }
+
+    wrong = true
+    phoneme0.classList.add("wrong")
+    phoneme1.classList.add("wrong")
+
+    cueSpace.classList.add("active", "outside-pocket")
+    setTimeout(() => {
+      decoySpace.classList.add("active", "reveal", "outside-pocket")
+    }, PLAY_DELAY )
+  }
+
+
+  const proceed = () => {
+    phoneme0.classList.remove("wrong")
+    phoneme1.classList.remove("wrong")
+
+    cueSpace.classList.remove("outside-pocket")
+    decoySpace.classList.remove("outside-pocket")
+
+    cueSpace.classList.add("inside-pocket")
+    decoySpace.classList.add("inside-pocket")
+    setTimeout(showNextCard, NEXT_DELAY)
   }
 
 
@@ -195,13 +225,17 @@ const Activity = (props) => {
 
 
   const [ pocket1, pocket2 ] = createPockets()
-  
-  
+
+
   useEffect(() => {
     // eslint-disable-next-line
     cueSpace = cueRef.current
     // eslint-disable-next-line
     decoySpace = decoyRef.current
+    // eslint-disable-next-line
+    phoneme0 = phoneme0Ref.current
+    // eslint-disable-next-line
+    phoneme1 = phoneme1Ref.current
 
     decoySpace.classList.remove("deal")
     setTimeout(() => {
@@ -218,6 +252,12 @@ const Activity = (props) => {
       {pocket1}
       {pocket2}
       <p className="rule">Tap or drag to here</p>
+      <button
+        className="done"
+        onClick={proceed}
+      >
+        ➤
+      </button>
     </div>
   )
 }

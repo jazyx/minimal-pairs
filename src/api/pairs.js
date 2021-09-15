@@ -64,9 +64,13 @@ export function setPhonemePair(pair) {
 export function getCards() {
   const [ phoneme1, phoneme2 ] = phonemeSymbols
 
-  if (word1 && played[phoneme1].indexOf(word1) < 0 ) {
-    played[phoneme1].push(word1)
-    played[phoneme2].push(word2)
+  
+  if (word1) {
+    const spellings = played[phoneme1].map(word => word.spelling)
+    if (spellings.indexOf(word1.spelling) < 0) {
+      played[phoneme1].push(word1)
+      played[phoneme2].push(word2)
+    }
   }
 
   // Grab the first card and (for now) move it to the end
