@@ -1,10 +1,11 @@
 :root {
   /* Customize background colour, allowing customizable opacity*/
-  --r: 34;
-  --g: 0;
+  --r: 0;
+  --g: 17;
   --b: 0;
-  --a: 0.85;
+  --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
+  --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
   --color: #fff;
 
   /* Define the maximum dimensions of a centred <main> elemnt */

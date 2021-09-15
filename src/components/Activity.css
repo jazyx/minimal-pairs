@@ -55,7 +55,7 @@
   --doneHeight: max(2 * var(--ruleHeight), 2.4rem);
   --doneLeft: calc((var(--mainWidth) - var(--pocketSize)) / 2);
 
-  --pocketColor: rgba(var(--r), var(--g), var(--b), var(--a));
+  --pocketColor: var(--cgColor); /*rgba(var(--r), var(--g), var(--b), var(--a)); */
 
   /* Backgrounds for spelling and phonetic paragraphs */
   --bgOpacity: 0.33;

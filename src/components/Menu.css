@@ -7,7 +7,7 @@
   --iconOpacity: 0.25;
   --iconHover: 0.625;
   /* Menu */
-  --menuColor: rgba(17, 17, 17, 0.9);
+  --menuColor: var(--cgColor); /*rgba(17, 17, 17, 0.9); */
   --menuBorder: 1px solid #333;
   --menuSize: 10rem;
   --closedMenu: calc(-1 * var(--menuSize));
