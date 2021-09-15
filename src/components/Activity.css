@@ -47,6 +47,10 @@
   --edgeColor: #fff;
   --seamColor: #fff8;
 
+  --wrongColor: rgba(51, var(--g), var(--b), var(--a));
+  --wrongPhonemeColor: rgb(102, var(--g), var(--b));
+  --rightPhonemeColor: rgb(var(--r), 153, var(--b), var(--a));
+
   --doneColor: #383d;
   --doneHeight: max(2 * var(--ruleHeight), 2.4rem);
   --doneLeft: calc((var(--mainWidth) - var(--pocketSize)) / 2);
@@ -259,7 +263,7 @@ button {
 .done {
   display: none;
 
-  background-color: var(--doneColor);
+  background-color: var(--rightPhonemeColor);
   left: var(--doneLeft);
   width: var(--pocketSize);
   top: var(--ruleTop);
@@ -277,12 +281,12 @@ button {
 }
 
 .wrong.cue .card{
-  border-color: var(--noColor);
+  border-color: var(--wrongColor);
   border-width: var(--wrongEdge);
 }
 
 .wrong.cue p.spelling{
-  color: var(--noColor);
+  color: var(--wrongColor);
 }
 
 /* LEFT/BOTTOM POCKET */
@@ -355,12 +359,13 @@ p.rule {
   transform: rotateY(0deg)
 }
 
-.wrong.cue .pocket {
-  background-color: var(--noColor);
+.wrong.decoy .pocket {
+  background-color: var(--wrongColor);
+  color: var(--wrongPhonemeColor);
 }
 
-.wrong.decoy .pocket {
-  color: var(--noColor);
+.wrong.cue .pocket {
+  color: var(--rightPhonemeColor);
 }
 
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */

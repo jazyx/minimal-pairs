@@ -393,7 +393,14 @@ export const getPageXY = (event) => {
 }
 
 
-
+/**
+ * clientX and ~Y refer to the position within the viewport
+ * => This corresponds to the data returned by getBoundingClientRect()
+ *    which is why it is used by default here
+ *
+ * pageX   and ~Y refer to the position within the entire document
+ * offsetX and ~Y refer to the position within the target node
+ */
 export const getXY = (event, frame) => {
   if (["client", "page", "offset"].indexOf(frame) < 0) {
     frame = "client"

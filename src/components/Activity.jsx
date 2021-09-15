@@ -10,6 +10,8 @@ import { getBooleanGenerator
        , detectMovement
        , setTrackedEvents
        , getPageXY
+       , getXY
+       , pointWithin
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
 
@@ -49,7 +51,10 @@ const Activity = (props) => {
     , phoneme0
     , phoneme1
     , cancelTracking
+    , cueRect
+    , decoyRect
     , offset
+    , mouseLoc
 
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -83,25 +88,55 @@ const Activity = (props) => {
 
   const drag = (event) => {
     const { x, y } = getPageXY(event)
-    // const deltaX = x - startLoc.x
-    // const deltaY = y - startLoc.y
-    // console.log("x:", deltaX, "y:", deltaY)
+    mouseLoc = getXY(event) // will not be used until drop() is called
 
     cueSpace.style.left = (offset.x + x )+ "px"
     cueSpace.style.top =  (offset.y + y )+ "px"
 
+    // TODO: highlight cueSpace or decoySpace if the mouse is over the
+    // associated pocket
+  }
+
+
+  const showWrong = () => {
+    if (wrong) {
+      return
+    }
+
+    wrong = true
+    phoneme0.classList.add("wrong")
+    phoneme1.classList.add("wrong")
+
+    cueSpace.classList.add("active", "outside-pocket")
+    setTimeout(() => {
+      decoySpace.classList.add("active", "reveal", "outside-pocket")
+    }, PLAY_DELAY )
   }
 
 
   const drop = () => {
     setTrackedEvents(cancelTracking)
     cueSpace.style = {}
+
+    if (pointWithin( mouseLoc.x, mouseLoc.y, cueRect)) {
+      playRightSequence()
+    } else {
+      if (pointWithin( mouseLoc.x, mouseLoc.y, decoyRect)) {
+        showWrong()
+      }
+    }
   }
 
 
   const startDrag = (event) => {
     cueSpace.style.transitionDuration = "0s"
     const { x, y } = getPageXY(event)
+
+    const cuePocket = document.querySelector(".cue .pocket")
+    const decoyPocket = document.querySelector(".decoy .pocket")
+    cueRect = cuePocket.getBoundingClientRect()
+    decoyRect = decoyPocket.getBoundingClientRect()
+
     const { left, top } = cueSpace.getBoundingClientRect()
     offset = { x: left - x, y: top - y }
 
@@ -242,22 +277,6 @@ const Activity = (props) => {
     cueSpace.classList.add("active")
     audio.playClip(cueURL, cueClip)
     setTimeout(moveNearToPocket, REVIEW_DELAY)
-  }
-
-
-  const showWrong = () => {
-    if (wrong) {
-      return
-    }
-
-    wrong = true
-    phoneme0.classList.add("wrong")
-    phoneme1.classList.add("wrong")
-
-    cueSpace.classList.add("active", "outside-pocket")
-    setTimeout(() => {
-      decoySpace.classList.add("active", "reveal", "outside-pocket")
-    }, PLAY_DELAY )
   }
 
 
