@@ -30,6 +30,7 @@ const Card = forwardRef((props, cardRef) => {
                     )
   const src = props.taboo ? (image_ || image) : image
   const audio = useContext(AudioContext)
+  const action = props.action || (() => audio.playClip(url, clip))
 
   return (
     <div
@@ -39,7 +40,7 @@ const Card = forwardRef((props, cardRef) => {
       <div
         className={className}
         key={spelling}
-        onMouseDown={() => audio.playClip(url, clip)}
+        onMouseDown={action}
       >
         <img className="back" src="img/icons/sound.svg" alt="play icon" />
         <div className="front">

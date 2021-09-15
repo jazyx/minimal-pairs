@@ -6,7 +6,11 @@ import CardAndPocket from './CardAndPocket'
 
 import { getCards } from '../api/pairs'
 
-import { getBooleanGenerator } from '../tools/utilities'
+import { getBooleanGenerator
+       , detectMovement
+       , setTrackedEvents
+       , getPageXY
+} from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
 
 const REVIEW_DELAY = 2000;
@@ -44,6 +48,8 @@ const Activity = (props) => {
     , decoySpace
     , phoneme0
     , phoneme1
+    , cancelTracking
+    , offset
 
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -75,9 +81,66 @@ const Activity = (props) => {
     //   }
     // }
 
+  const drag = (event) => {
+    const { x, y } = getPageXY(event)
+    // const deltaX = x - startLoc.x
+    // const deltaY = y - startLoc.y
+    // console.log("x:", deltaX, "y:", deltaY)
+
+    cueSpace.style.left = (offset.x + x )+ "px"
+    cueSpace.style.top =  (offset.y + y )+ "px"
+
+  }
+
+
+  const drop = () => {
+    setTrackedEvents(cancelTracking)
+    cueSpace.style = {}
+  }
+
+
+  const startDrag = (event) => {
+    cueSpace.style.transitionDuration = "0s"
+    const { x, y } = getPageXY(event)
+    const { left, top } = cueSpace.getBoundingClientRect()
+    offset = { x: left - x, y: top - y }
+
+    const options = {
+      event
+    , drag
+    , drop
+    }
+    cancelTracking = setTrackedEvents(options)
+  }
+
+
+  const playCue = () => {
+    audio.playClip(cueURL, cueClip)
+  }
+
+
+  const checkForDrag = (event) => {
+    const target = event.target.closest(".space")
+
+    if (target) {
+      const classList = target.classList
+
+      if (classList.contains("active") || classList.contains("reveal")) {
+        return playCue()
+      }
+    }
+
+    detectMovement(event, 16)
+    .then(
+      () => startDrag(event)
+     )
+    .catch(playCue)
+  }
+
 
   const createPockets = () => {
     const useSecondCard = getBoolean()
+    let action
 
     const pockets = phonemes.map((phonemeData, index) => {
       // phonemeData = { phoneme, url, clip }
@@ -96,9 +159,12 @@ const Activity = (props) => {
       if (index !== useSecondCard) {
         cueURL = cardData.url
         cueClip = cardData.clip
+        action = checkForDrag
+
       } else {
         decoyURL = cardData.url
         decoyClip = cardData.clip
+        action = null
       }
 
       return <CardAndPocket
@@ -109,6 +175,7 @@ const Activity = (props) => {
         cardRef={cardRef}
         ref={listRef}
         played={played}
+        action={action}
       />
     })
 
@@ -240,7 +307,7 @@ const Activity = (props) => {
     decoySpace.classList.remove("deal")
     setTimeout(() => {
       cueSpace.classList.remove("deal")
-      audio.playClip(cueURL, cueClip)
+      playCue()
     }, DEAL_DELAY )
   })
 

@@ -446,7 +446,7 @@ export const detectMovement = (event, triggerDelta) => {
       }
     }
 
-    // Reject promise if the mouse is release before the mouse/touch
+    // Reject promise if the mouse is released before the mouse/touch
     // moved triggerDelta pixels in any direction.
     function drop(event) {
       setTrackedEvents(cancel)

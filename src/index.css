@@ -1,8 +1,8 @@
 :root {
   /* Customize background colour, allowing customizable opacity*/
-  --r: 17;
+  --r: 34;
   --g: 0;
-  --b: 17;
+  --b: 0;
   --a: 0.85;
   --no: 96;
   --bgColor: rgb(var(--r), var(--g), var(--b));
@@ -61,7 +61,8 @@ div {
   }
 }
 
-.unselectable {
+.unselectable,
+.unselectable * {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */

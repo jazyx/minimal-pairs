@@ -128,6 +128,11 @@ img {
   left: 0;
   width: 100%;
   border-radius: var(--corner);
+
+  /* Required to prevent svg Play Audio icon from being selected when
+     user drags the cue card
+  */
+  pointer-events: none;
 }
 
 p.spelling {

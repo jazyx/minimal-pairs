@@ -123,6 +123,7 @@ const CardAndPocket = forwardRef((props, listRef) => {
   , role        // cue    | decoy
   , cardRef     // cueRef | decoyRef
   , played      // [ <card object>, ... ]
+  , action
   } = props
 
   const {
@@ -136,15 +137,17 @@ const CardAndPocket = forwardRef((props, listRef) => {
       card={cardData}
       role={role}
       ref={cardRef}
+      action={action}
     />
   );
 
   const getCard = ( card, index ) => {
     const key = card.spelling
     return (
-      <li>
+      <li
+        key={key}
+      >
         <Card
-          key={key}
           card={card}
         />
       </li>
@@ -158,7 +161,6 @@ const CardAndPocket = forwardRef((props, listRef) => {
   return (
     <div
       className={className}
-      key={role}
       ref={listRef}
     >
       <ul>
@@ -169,7 +171,6 @@ const CardAndPocket = forwardRef((props, listRef) => {
 
       <div
         className="pocket unselectable"
-        key="pocket"
       >
         /{phoneme}/
 
