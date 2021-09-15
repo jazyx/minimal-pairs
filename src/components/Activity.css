@@ -37,7 +37,10 @@
   --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
   --buttonSize: calc(0.18 * var(--unit));
 
-  --ruleTop: calc(var(--pocketOffset) + var(--buttonOffset));
+  --ruleTop: calc( var(--pairSpace)
+                 + var(--pocketOffset)
+                 + var(--buttonOffset)
+                 );
 
   --btnColor: #3339;
   --btnBorder: #444;
@@ -254,7 +257,7 @@ button {
   background-color: var(--doneColor);
   left: var(--doneLeft);
   width: var(--pocketSize);
-  bottom: 0;
+  top: var(--ruleTop);
   padding: 0.25rem;
   border-radius: 2rem;
   z-index: 99;
@@ -294,7 +297,7 @@ button {
 
 p.rule {
   position: absolute;
-  bottom: var(--buttonOffset);
+  top: var(--ruleTop);
   width: 100%;
   margin: 0;
   color: var(--ruleColor);
@@ -441,7 +444,6 @@ p.rule {
   p.rule {
     left: auto;
     right: 0;
-    top: var(--ruleTop);
     width: var(--pocketSize);
   }
 
@@ -593,7 +595,7 @@ p.rule {
   }
 
   main.split p.rule {
-    top: auto;
+    top: var(--splitHeight);
     bottom: var(--buttonOffset);
     width: 100%;
   }
@@ -638,8 +640,7 @@ p.rule {
   main.split .done {
     right: auto;
     left: var(--doneLeft);
-    top: auto;
-    bottom: 0;
+    top: var(--splitHeight);
     height: var(--doneHeight);
   }
 }
