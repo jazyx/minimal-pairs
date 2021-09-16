@@ -207,11 +207,11 @@ img.back { /* Play Audio icon */
   transform: rotateY(180deg)
 }
 
-main.show-cue-image .card.flipped {
+main.show-cue-image .cue .card.flipped {
   transform: rotateY(0deg)
 }
 
-main.show-cue-image .card.flipped p{
+main.show-cue-image .card.flipped p {
   display: none;
 }
 

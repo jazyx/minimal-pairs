@@ -32,13 +32,6 @@ const Card = forwardRef((props, cardRef) => {
   const audio = useContext(AudioContext)
   const action = props.action || (() => audio.playClip(url, clip))
 
-  // useEffect(() => {
-  //   if (props.action) {
-  //     const options = {passive: false}
-  //     const card = cardRef.current
-  //     card.addEventListener("touchStart", props.action, options)
-  //   }
-  // })
 
   return (
     <div
