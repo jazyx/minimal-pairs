@@ -336,10 +336,6 @@ p.rule {
   left: var(--pocket2Side);
 }
 
-.space.active .card {
-  transform: rotateY(0deg);
-}
-
 .space.active.outside-pocket {
   top: var(--outsidePocket);
   transition-duration: 0.1s
@@ -364,10 +360,6 @@ p.rule {
 
 .phoneme-1 .space.reveal{
   left: var(--pocket2Side);
-}
-
-.space.reveal .card {
-  transform: rotateY(0deg)
 }
 
 .wrong.decoy .pocket {
@@ -504,7 +496,6 @@ p.rule {
   .card-holder.space.reveal {
     left: var(--mainMargin);
     top: 0;
-    transform: rotateZ(0deg)
   }
 
   main.left-handed .space.reveal {

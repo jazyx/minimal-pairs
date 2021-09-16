@@ -48,9 +48,11 @@ const Activity = (props) => {
   let cueURL
     , cueClip
     , cueSpace
+    , cueCard
     , decoyURL
     , decoyClip
     , decoySpace
+    , decoyCard
     , phoneme0
     , phoneme1
     , pockets
@@ -106,11 +108,13 @@ const Activity = (props) => {
     }
 
     wrong = true
+    cueCard.classList.remove("flipped")
     phoneme0.classList.add("wrong")
     phoneme1.classList.add("wrong")
 
     cueSpace.classList.add("active", "outside-pocket")
     setTimeout(() => {
+      decoyCard.classList.remove("flipped")
       decoySpace.classList.add("active", "reveal", "outside-pocket")
     }, PLAY_DELAY )
   }
@@ -143,6 +147,7 @@ const Activity = (props) => {
 
 
   const showOtherCard = () => {
+    decoyCard.classList.remove("flipped")
     decoySpace.classList.add("reveal")
     setTimeout(playOtherCard, POCKET_DELAY)
   }
@@ -183,6 +188,9 @@ const Activity = (props) => {
 
     const phoneme = target.closest("[class|=phoneme")
     // <div class="phoneme-X cue|decoy">
+
+    cueCard.classList.remove("flipped")
+
     const correct = (phoneme.classList.contains("cue"))
     if (correct) {
       playRightSequence()
@@ -214,8 +222,7 @@ const Activity = (props) => {
     cueSpace.style.left = (offset.x + x )+ "px"
     cueSpace.style.top =  (offset.y + y )+ "px"
 
-    // TODO: highlight cueSpace or decoySpace if the mouse is over the
-    // associated pocket
+    // Highlight cueSpace or decoySpace if the mouse is over a pocket
     ;[cueRect, decoyRect].forEach((rect, index) => {
       const pocket = pockets[index]
       if (pointWithin(mouseLoc, rect)) {
@@ -348,6 +355,7 @@ const Activity = (props) => {
     // eslint-disable-next-line
     phoneme1 = phoneme1Ref.current
 
+    // Pointers to DOM elements
     if (phoneme0.classList.contains("cue")) {
       pockets = [
         phoneme0.querySelector(".pocket")
@@ -359,6 +367,9 @@ const Activity = (props) => {
       , phoneme0.querySelector(".pocket")
       ]
     }
+
+    cueCard = cueSpace.querySelector(".card")
+    decoyCard = decoySpace.querySelector(".card")
 
     decoySpace.classList.remove("deal")
     setTimeout(() => {
