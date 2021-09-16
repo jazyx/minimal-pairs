@@ -15,11 +15,14 @@ import { getBooleanGenerator
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
 
+
+// <<< HARD-CODED
 const REVIEW_DELAY = 2000;
 const POCKET_DELAY = 200; // just a little more than transition-duration
 const PLAY_DELAY = 1000
 const NEXT_DELAY = 1000
 const DEAL_DELAY = 300
+// HARD-CODED >>>
 
 
 const Activity = (props) => {
@@ -50,7 +53,10 @@ const Activity = (props) => {
     , decoySpace
     , phoneme0
     , phoneme1
-    , cancelTracking
+    , pockets
+
+  // drag and drop
+  let cancelTracking
     , cueRect
     , decoyRect
     , offset
@@ -86,17 +92,13 @@ const Activity = (props) => {
     //   }
     // }
 
-  const drag = (event) => {
-    const { x, y } = getPageXY(event)
-    mouseLoc = getXY(event) // will not be used until drop() is called
 
-    cueSpace.style.left = (offset.x + x )+ "px"
-    cueSpace.style.top =  (offset.y + y )+ "px"
-
-    // TODO: highlight cueSpace or decoySpace if the mouse is over the
-    // associated pocket
+  const playCue = () => {
+    audio.playClip(cueURL, cueClip)
   }
 
+  
+  // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
 
   const showWrong = () => {
     if (wrong) {
@@ -111,115 +113,6 @@ const Activity = (props) => {
     setTimeout(() => {
       decoySpace.classList.add("active", "reveal", "outside-pocket")
     }, PLAY_DELAY )
-  }
-
-
-  const drop = () => {
-    setTrackedEvents(cancelTracking)
-    cueSpace.style = {}
-
-    if (pointWithin( mouseLoc.x, mouseLoc.y, cueRect)) {
-      playRightSequence()
-    } else {
-      if (pointWithin( mouseLoc.x, mouseLoc.y, decoyRect)) {
-        showWrong()
-      }
-    }
-  }
-
-
-  const startDrag = (event) => {
-    cueSpace.style.transitionDuration = "0s"
-    const { x, y } = getPageXY(event)
-
-    const cuePocket = document.querySelector(".cue .pocket")
-    const decoyPocket = document.querySelector(".decoy .pocket")
-    cueRect = cuePocket.getBoundingClientRect()
-    decoyRect = decoyPocket.getBoundingClientRect()
-
-    const { left, top } = cueSpace.getBoundingClientRect()
-    offset = { x: left - x, y: top - y }
-
-    const options = {
-      event
-    , drag
-    , drop
-    }
-    cancelTracking = setTrackedEvents(options)
-  }
-
-
-  const playCue = () => {
-    audio.playClip(cueURL, cueClip)
-  }
-
-
-  const checkForDrag = (event) => {
-    const target = event.target.closest(".space")
-
-    if (target) {
-      const classList = target.classList
-
-      if (classList.contains("active") || classList.contains("reveal")) {
-        return playCue()
-      }
-    }
-
-    detectMovement(event, 16)
-    .then(
-      () => startDrag(event)
-     )
-    .catch(playCue)
-  }
-
-
-  const createPockets = () => {
-    const useSecondCard = getBoolean()
-    let action
-
-    const pockets = phonemes.map((phonemeData, index) => {
-      // phonemeData = { phoneme, url, clip }
-
-      // Determine if this card is cue or decoy
-      const [ role, cardRef ]     = (index === useSecondCard)
-                                  ? [ "decoy", decoyRef ]
-                                  : [ "cue", cueRef]
-
-      // All the other properties depend on the phoneme
-      const [ cardData, listRef ] = index
-                                  ? [ word2, phoneme1Ref ]
-                                  : [ word1, phoneme0Ref ]
-      const played = playedCards[phonemeData.phoneme]
-
-      if (index !== useSecondCard) {
-        cueURL = cardData.url
-        cueClip = cardData.clip
-        action = checkForDrag
-
-      } else {
-        decoyURL = cardData.url
-        decoyClip = cardData.clip
-        action = null
-      }
-
-      return <CardAndPocket
-        index={index}
-        cardData={cardData}
-        phonemeData={phonemeData}
-        role={role}
-        cardRef={cardRef}
-        ref={listRef}
-        played={played}
-        action={action}
-      />
-    })
-
-    if (useSecondCard) {
-      // Show the cue card on top, by rendering it last
-      pockets.push(pockets.shift())
-    }
-
-    return pockets
   }
 
 
@@ -280,18 +173,7 @@ const Activity = (props) => {
   }
 
 
-  const proceed = () => {
-    phoneme0.classList.remove("wrong")
-    phoneme1.classList.remove("wrong")
-
-    cueSpace.classList.remove("outside-pocket")
-    decoySpace.classList.remove("outside-pocket")
-
-    cueSpace.classList.add("inside-pocket")
-    decoySpace.classList.add("inside-pocket")
-    setTimeout(showNextCard, NEXT_DELAY)
-  }
-
+  // Input from pockets and (>) button
 
   const checkAnswer = event => {
     const target = event.target
@@ -307,6 +189,149 @@ const Activity = (props) => {
     } else {
       showWrong()
     }
+  } 
+
+
+  const proceed = () => {
+    phoneme0.classList.remove("wrong")
+    phoneme1.classList.remove("wrong")
+
+    cueSpace.classList.remove("outside-pocket")
+    decoySpace.classList.remove("outside-pocket")
+
+    cueSpace.classList.add("inside-pocket")
+    decoySpace.classList.add("inside-pocket")
+    setTimeout(showNextCard, NEXT_DELAY)
+  }
+
+
+  // DRAG AND DROP // DRAG AND DROP // DRAG AND DROP // DRAG AND DROP //
+
+  const drag = (event) => {
+    const { x, y } = getPageXY(event)
+    mouseLoc = getXY(event) // will not be used until drop() is called
+
+    cueSpace.style.left = (offset.x + x )+ "px"
+    cueSpace.style.top =  (offset.y + y )+ "px"
+
+    // TODO: highlight cueSpace or decoySpace if the mouse is over the
+    // associated pocket
+    ;[cueRect, decoyRect].forEach((rect, index) => {
+      const pocket = pockets[index]
+      if (pointWithin(mouseLoc, rect)) {
+        pocket.classList.add("hover")
+      } else {
+        pocket.classList.remove("hover")
+      }
+    })
+  }
+
+
+  const drop = () => {
+    setTrackedEvents(cancelTracking)
+    cueSpace.style = {}
+    pockets.forEach(pocket => pocket.classList.remove("hover"))
+
+    if (pointWithin( mouseLoc, cueRect)) {
+      playRightSequence()
+
+    } else {
+      if (pointWithin( mouseLoc, decoyRect)) {
+        showWrong()
+      }
+    }
+  }
+
+
+  const startDrag = (event) => {
+    cueSpace.style.transitionDuration = "0s"
+    const { x, y } = getPageXY(event)
+
+    const cuePocket = document.querySelector(".cue .pocket")
+    const decoyPocket = document.querySelector(".decoy .pocket")
+    cueRect = cuePocket.getBoundingClientRect()
+    decoyRect = decoyPocket.getBoundingClientRect()
+
+    const { left, top } = cueSpace.getBoundingClientRect()
+    offset = { x: left - x, y: top - y }
+
+    const options = {
+      event
+    , drag
+    , drop
+    }
+    cancelTracking = setTrackedEvents(options)
+  }
+
+
+  const checkForDrag = (event) => {
+    const target = event.target.closest(".space")
+
+    if (target) {
+      const classList = target.classList
+
+      if (classList.contains("active") || classList.contains("reveal")) {
+        return playCue()
+      }
+    }
+
+    detectMovement(event, 16)
+    .then(
+      () => startDrag(event)
+     )
+    .catch(playCue)
+  }
+ 
+
+  // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
+
+  const createPockets = () => {
+    const useSecondCard = getBoolean()
+    let action
+
+    const pockets = phonemes.map((phonemeData, index) => {
+      // phonemeData = { phoneme, url, clip }
+
+      // Determine if this card is cue or decoy
+      const [ role, cardRef ]     = (index === useSecondCard)
+                                  ? [ "decoy", decoyRef ]
+                                  : [ "cue", cueRef]
+
+      // All the other properties depend on the phoneme
+      const [ cardData, listRef ] = index
+                                  ? [ word2, phoneme1Ref ]
+                                  : [ word1, phoneme0Ref ]
+      const played = playedCards[phonemeData.phoneme]
+
+      if (index !== useSecondCard) {
+        cueURL = cardData.url
+        cueClip = cardData.clip
+        action = checkForDrag
+
+      } else {
+        decoyURL = cardData.url
+        decoyClip = cardData.clip
+        action = null
+      }
+
+      return <CardAndPocket
+        index={index}
+        cardData={cardData}
+        phonemeData={phonemeData}
+        role={role}
+        cardRef={cardRef}
+        ref={listRef}
+        played={played}
+        action={action}
+      />
+    })
+
+    if (useSecondCard) {
+      // Show the cue card on top, by rendering it last
+      pockets.push(pockets.shift())
+    }
+
+    return pockets
   }
 
 
@@ -323,12 +348,25 @@ const Activity = (props) => {
     // eslint-disable-next-line
     phoneme1 = phoneme1Ref.current
 
+    if (phoneme0.classList.contains("cue")) {
+      pockets = [
+        phoneme0.querySelector(".pocket")
+      , phoneme1.querySelector(".pocket")
+      ]
+    } else {
+      pockets = [
+        phoneme1.querySelector(".pocket")
+      , phoneme0.querySelector(".pocket")
+      ]
+    }
+
     decoySpace.classList.remove("deal")
     setTimeout(() => {
       cueSpace.classList.remove("deal")
       playCue()
     }, DEAL_DELAY )
   })
+
 
   return (
     <div

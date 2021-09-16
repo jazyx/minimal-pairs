@@ -52,10 +52,13 @@
   --rightPhonemeColor: rgb(var(--r), 153, var(--b), var(--a));
 
   --doneColor: #383d;
-  --doneHeight: max(2 * var(--ruleHeight), 2.4rem);
-  --doneLeft: calc((var(--mainWidth) - var(--pocketSize)) / 2);
+  --doneSize: max(2 * var(--ruleHeight), 2.4rem);
+  --doneLeft: calc((var(--mainWidth) - var(--doneSize)) / 2);
 
-  --pocketColor: var(--cgColor); /*rgba(var(--r), var(--g), var(--b), var(--a)); */
+  --pocketBG: var(--cgColor);
+  --hoverBG: rgba(51, 51, var(--b), var(--a));
+  --hoverBorder: white;
+  --hoverEdge: calc(5 * var(--edge));
 
   /* Backgrounds for spelling and phonetic paragraphs */
   --bgOpacity: 0.33;
@@ -218,12 +221,20 @@ ul,
   justify-content: center;
   height: var(--pocketSize);
   width: 50%;
-  background-color: var(--pocketColor);
+  background-color: var(--pocketBG);
   border: var(--edge) dashed var(--seamColor);
   border-top-style: solid;
   font-size: var(--pocketFont);
   transition-property: background-color, color;
   transition-duration: var(--wrongDuration);
+}
+
+.pocket.hover {
+  border-width: var(--hoverWidth);
+  border-style: dotted;
+  border-color: var(--hoverBorder);
+  background: var(--hoverBG);
+  transition-duration: 0s;
 }
 
 ul {
@@ -265,9 +276,9 @@ button {
 
   background-color: var(--rightPhonemeColor);
   left: var(--doneLeft);
-  width: var(--pocketSize);
+  width: var(--doneSize);
+  height: var(--doneSize);
   top: var(--ruleTop);
-  padding: 0.25rem;
   border-radius: 2rem;
   z-index: 99;
 }
@@ -519,15 +530,16 @@ p.rule {
   .done {
     right: 0;
     left: auto;
+    width: var(--pocketSize);
     top: var(--ruleTop);
-    height: var(--doneHeight);
+    height: var(--doneSize);
   }
 
   main.left-handed .done {
     right: auto;
     left: 0;
     top: var(--ruleTop);
-    height: var(--doneHeight);
+    height: var(--doneSize);
   }
 }
 
@@ -651,6 +663,7 @@ p.rule {
     right: auto;
     left: var(--doneLeft);
     top: var(--splitHeight);
-    height: var(--doneHeight);
+    width: var(--doneSize);
+    height: var(--doneSize);
   }
 }

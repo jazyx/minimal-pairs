@@ -559,6 +559,13 @@ export const union = (rects) => {
 
 
 export const pointWithin = ( x, y, rect ) => {
+  if (typeof x === "object") {
+    if (typeof rect !== "object" && typeof y === "object") {
+      rect = y
+      y = x.y
+      x = x.x
+    }
+  }
   return rect.x <= x
       && rect.y <= y
       && rect.right > x
