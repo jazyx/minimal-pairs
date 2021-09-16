@@ -99,7 +99,7 @@ const Activity = (props) => {
     audio.playClip(cueURL, cueClip)
   }
 
-  
+
   // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
 
   const showWrong = () => {
@@ -197,7 +197,7 @@ const Activity = (props) => {
     } else {
       showWrong()
     }
-  } 
+  }
 
 
   const proceed = () => {
@@ -237,20 +237,28 @@ const Activity = (props) => {
   const drop = () => {
     setTrackedEvents(cancelTracking)
     cueSpace.style = {}
+
     pockets.forEach(pocket => pocket.classList.remove("hover"))
 
     if (pointWithin( mouseLoc, cueRect)) {
       playRightSequence()
 
+    } else if (pointWithin( mouseLoc, decoyRect)) {
+      showWrong()
+
     } else {
-      if (pointWithin( mouseLoc, decoyRect)) {
-        showWrong()
-      }
+      return // don't flip the card
     }
+
+    cueCard.classList.remove("flipped")
+
   }
 
 
   const startDrag = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
     cueSpace.style.transitionDuration = "0s"
     const { x, y } = getPageXY(event)
 
@@ -272,6 +280,7 @@ const Activity = (props) => {
 
 
   const checkForDrag = (event) => {
+    // console.log("event.type:", event.type)
     const target = event.target.closest(".space")
 
     if (target) {
@@ -288,7 +297,7 @@ const Activity = (props) => {
      )
     .catch(playCue)
   }
- 
+
 
   // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
 

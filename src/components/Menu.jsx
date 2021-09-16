@@ -33,7 +33,7 @@ const Items = (props) => {
   const { closeMenu, selectFromMenu, pane, className } = props
 
   const itemSelected = (item) => {
-    closeMenu()
+    closeMenu(true) // force menu to close even if timeOut is active
     selectFromMenu(item)
   }
 
@@ -86,9 +86,11 @@ class Menu extends Component {
     // Check if the click was inside the slide-out menu. If not,
     // close the menu
 
-    if (event && event.type === "touchstart") {
+    if (event && (event === true || event.type === "touchstart")) {
       // Prevent the mouseup from firing right behind
-      this.timeout = setTimeout(() => this.timeout = 0, 300)
+      this.timeout = setTimeout(() => {
+        this.timeout = 0
+      }, 300)
       // console.log("Menu closeMenu timeout", this.timeOut)
     } else if (this.timeout) {
       return

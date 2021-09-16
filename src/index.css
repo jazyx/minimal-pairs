@@ -1,8 +1,8 @@
 :root {
   /* Customize background colour, allowing customizable opacity*/
-  --r: 0;
-  --g: 17;
-  --b: 0;
+  --r: 17;
+  --g: 0;
+  --b: 17;
   --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
@@ -34,6 +34,12 @@
   color: var(--color);
   font-family: var(--font);
   text-align: center;
+}
+
+html,
+body {
+  /* Prevent drag-to-refresh */
+  overscroll-behavior-y: contain;
 }
 
 body {

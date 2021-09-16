@@ -20,7 +20,7 @@ const App = (props) => {
 
   return (
     <AudioProvider>
-      <main className="split left--handed show--phonetic">
+      <main className="split left--handed show--phonetic show-cue-image">
         <View
           startActivity={selectFromMenu}
         />

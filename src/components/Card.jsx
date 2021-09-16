@@ -3,7 +3,7 @@
  */
 
 
-import React, { useContext, forwardRef } from 'react'
+import React, { useContext, useEffect, forwardRef } from 'react'
 import { AudioContext } from './AudioContext'
 
 
@@ -32,6 +32,14 @@ const Card = forwardRef((props, cardRef) => {
   const audio = useContext(AudioContext)
   const action = props.action || (() => audio.playClip(url, clip))
 
+  // useEffect(() => {
+  //   if (props.action) {
+  //     const options = {passive: false}
+  //     const card = cardRef.current
+  //     card.addEventListener("touchStart", props.action, options)
+  //   }
+  // })
+
   return (
     <div
       className={spaceName}
@@ -41,6 +49,7 @@ const Card = forwardRef((props, cardRef) => {
         className={className}
         key={spelling}
         onMouseDown={action}
+        onTouchStart={props.action}
       >
         <img className="back" src="img/icons/sound.svg" alt="play icon" />
         <div className="front">
