@@ -44,8 +44,12 @@ const Card = forwardRef((props, cardRef) => {
         onMouseDown={action}
         onTouchStart={props.action}
       >
-        <img className="back" src="img/icons/sound.svg" alt="play icon" />
-        <div className="front">
+        <img
+          className="back unselectable"
+          src="img/icons/sound.svg"
+          alt="play audio icon"
+        />
+        <div className="front unselectable">
           <img src={src} alt={spelling}/>
           <p className="phonetic">{phonetic}</p>
           <p className="spelling">{spelling}</p>
