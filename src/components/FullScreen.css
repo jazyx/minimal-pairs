@@ -1,0 +1,65 @@
+svg#fullscreen-btn {
+  --size: 10vmin;
+  --bgColor: transparent;
+  --bgActive: #0006;
+  --bColor: #9999;
+  --bWidth: 0.5vmin;
+  --fill: #ccc;
+  --active: #fff;
+
+  position: absolute;
+  top: 0;
+
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--bgColor);
+  border-color: var(--bColor);
+  border-width: var(--bWidth);
+  border-style: outset;
+  box-sizing: border-box;
+}
+
+svg#fullscreen-btn:active {
+  background-color: var(--bgActive);
+}
+
+svg#fullscreen-btn:active {
+  border-style: inset;
+}
+
+svg#fullscreen-btn path {
+  fill: var(--fill);
+  user-select: none;
+}
+
+svg#fullscreen-btn:active path {
+  fill: var(--active);
+}
+
+/* Hide collapse when not fullscreen */
+html:not(:-moz-full-screen) svg#fullscreen-btn path.collapse {
+  opacity: 0;
+}
+html:not(:-webkit-full-screen) svg#fullscreen-btn path.collapse {
+  opacity: 0;
+}
+html:not(:-ms-fullscreen) svg#fullscreen-btn path.collapse {
+  opacity: 0;
+}
+html:not(:fullscreen) svg#fullscreen-btn path.collapse {
+  opacity: 0;
+}
+
+/* Hide expand when fullscreen */
+html:-moz-full-screen svg#fullscreen-btn path.expand {
+  opacity: 0;
+}
+html:-webkit-full-screen svg#fullscreen-btn path.expand {
+  opacity: 0;
+}
+html:-ms-fullscreen svg#fullscreen-btn path.expand {
+  opacity: 0;
+}
+html:fullscreen svg#fullscreen-btn path.expand {
+  opacity: 0;
+}

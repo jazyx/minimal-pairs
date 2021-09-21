@@ -25,7 +25,7 @@
   text-align: left;
 }
 
-#menu svg {
+#menu svg#openMenu {
   position: absolute;
   width: var(--iconSize);
   height: var(--iconSize);
@@ -40,14 +40,14 @@
   cursor: pointer;
 }
 
-#menu svg:hover {
+#menu svg#openMenu:hover {
   opacity: var(--iconHover);
   transition: left .3s linear, right .3s linear, opacity .0s;
   transition-property: left, right, opacity;
   transition-delay: 0s, 0s, .0s;
 }
 
-#menu #items.open ~ svg{
+#menu #items.open ~ svg#openMenu{
   opacity: 1;
   left: var(--openIcon);
   transition-delay: .1s, .1s, 0s;
@@ -115,7 +115,7 @@ main.left-handed #menu #items ~ svg {
 }
 
 main.left-handed #menu,
-main.left-handed #menu svg {
+main.left-handed #menu svg#openMenu {
   right: 0;
 }
 
@@ -129,6 +129,6 @@ main.left-handed #menu #items.open {
   right: 0;
 }
 
-main.left-handed #menu #items.open ~ svg {
+main.left-handed #menu #items.open ~ svg#openMenu {
   right: var(--openIcon);
 }

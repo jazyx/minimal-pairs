@@ -4,11 +4,14 @@
 
 
 import React, { Fragment } from 'react';
-
+import { FullScreenButton } from './FullScreen'
 
 const MenuItems = ({ itemSelected }) => {
   return (
     <>
+      <FullScreenButton
+        onClick={itemSelected}
+      />
       <li
         className="unselectable"
         key="index"

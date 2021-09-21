@@ -34,7 +34,9 @@ const Items = (props) => {
 
   const itemSelected = (item) => {
     closeMenu(true) // force menu to close even if timeOut is active
-    selectFromMenu(item)
+    if (typeof item === "string") {
+      selectFromMenu(item)
+    }
   }
 
   return <ul

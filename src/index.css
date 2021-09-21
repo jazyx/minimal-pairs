@@ -1,8 +1,8 @@
 :root {
   /* Customize background colour, allowing customizable opacity*/
-  --r: 17;
-  --g: 0;
-  --b: 17;
+  --r: 0;
+  --g: 34;
+  --b: 0;
   --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));

@@ -465,10 +465,16 @@ export const detectMovement = (event, triggerDelta) => {
 }
 
 
+// The prevent default function needs to be outside setTrackedEvents
+// so that the exact same function (rather than a duplicate)
+const noDefault = (event) => event.preventDefault()
+
 
 export const setTrackedEvents = ({ actions, event, drag, drop }) => {
   // Omit event to cancel tracking
   const body = document.body
+
+  const dragOption = { passive: false } // capture is false by default
 
   if (event) {
     if (typeof actions !== "object") {
@@ -485,10 +491,14 @@ export const setTrackedEvents = ({ actions, event, drag, drop }) => {
 
     body.addEventListener(actions.move, drag, false)
     body.addEventListener(actions.end, drop, false)
+    // Prevent the page scrolling during drag, or touch devices
+    document.addEventListener("touchstart", noDefault, dragOption)
 
   } else {
     body.removeEventListener(actions.move, drag, false)
     body.removeEventListener(actions.end, drop, false)
+    // Restore page scrolling on touche devices now that drag is over
+    document.removeEventListener("touchstart", noDefault)
   }
 
   return { actions, drag, drop }
