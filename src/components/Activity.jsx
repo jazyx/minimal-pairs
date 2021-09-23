@@ -9,6 +9,7 @@ import { getCards } from '../api/pairs'
 import { getBooleanGenerator
        , detectMovement
        , setTrackedEvents
+       , startDragging
        , getPageXY
        , getXY
        , pointWithin
@@ -58,11 +59,12 @@ const Activity = (props) => {
     , pockets
 
   // drag and drop
-  let cancelTracking
-    , cueRect
+  let cueRect
     , decoyRect
-    , offset
-    , mouseLoc
+
+  // pocket action
+  let cardsAreSpread
+    , visibleCard
 
     // { "phonemes": [
     //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -213,19 +215,13 @@ const Activity = (props) => {
   }
 
 
-  // DRAG AND DROP // DRAG AND DROP // DRAG AND DROP // DRAG AND DROP //
+  // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
-  const drag = (event) => {
-    const { x, y } = getPageXY(event)
-    mouseLoc = getXY(event) // will not be used until drop() is called
-
-    cueSpace.style.left = (offset.x + x )+ "px"
-    cueSpace.style.top =  (offset.y + y )+ "px"
-
-    // Highlight cueSpace or decoySpace if the mouse is over a pocket
-    ;[cueRect, decoyRect].forEach((rect, index) => {
+  const drag = (pageLoc) => {
+    [cueRect, decoyRect].forEach((rect, index) => {
       const pocket = pockets[index]
-      if (pointWithin(mouseLoc, rect)) {
+
+      if (pointWithin(pageLoc, rect)) {
         pocket.classList.add("hover")
       } else {
         pocket.classList.remove("hover")
@@ -234,16 +230,15 @@ const Activity = (props) => {
   }
 
 
-  const drop = () => {
-    setTrackedEvents(cancelTracking)
+  const drop = (pageLoc) => {
     cueSpace.style = {}
 
     pockets.forEach(pocket => pocket.classList.remove("hover"))
 
-    if (pointWithin( mouseLoc, cueRect)) {
+    if (pointWithin( pageLoc, cueRect)) {
       playRightSequence()
 
-    } else if (pointWithin( mouseLoc, decoyRect)) {
+    } else if (pointWithin( pageLoc, decoyRect)) {
       showWrong()
 
     } else {
@@ -256,26 +251,21 @@ const Activity = (props) => {
 
 
   const startDrag = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-
     cueSpace.style.transitionDuration = "0s"
-    const { x, y } = getPageXY(event)
 
     const cuePocket = document.querySelector(".cue .pocket")
     const decoyPocket = document.querySelector(".decoy .pocket")
     cueRect = cuePocket.getBoundingClientRect()
     decoyRect = decoyPocket.getBoundingClientRect()
 
-    const { left, top } = cueSpace.getBoundingClientRect()
-    offset = { x: left - x, y: top - y }
-
     const options = {
       event
+    , target: cueSpace
     , drag
     , drop
     }
-    cancelTracking = setTrackedEvents(options)
+
+    startDragging(options)
   }
 
 
@@ -299,11 +289,61 @@ const Activity = (props) => {
   }
 
 
+  // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
+
+  const pocketAction = (event, url, clip, word) => {
+    if (cardsAreSpread) {
+      if (visibleCard === word) {
+        return audio.play(url, clip)
+      }
+
+      makeCardVisible(word)
+    }
+
+    detectMovement(event, 16, 500)
+      .then(
+        prepareToSpreadCards
+      )
+      .catch(
+        (reason) => {
+          switch (reason) {
+            case "immobile":
+              return playFromPocket(url, clip)
+            case "timeOut":
+              return spreadCards()
+          }
+        }
+      )
+  }
+
+  const playFromPocket = (url, clip) => {
+    audio.play(url, clip)
+  }
+
+  const prepareToSpreadCards = () => {
+    // start dragging card
+    // limit movement to one axis
+
+
+    // finally(spreadCards)
+  }
+
+  const makeCardVisible = (word) => {
+    // Adjust other cards in this list
+    // Adjust all cards in matching list
+    // Set this card to visibleCard
+  }
+
+  const spreadCards = () => {
+
+  }
+
   // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
 
   const createPockets = () => {
     const useSecondCard = getBoolean()
-    let action
+    let cueAction
+      , listAction
 
     const pockets = phonemes.map((phonemeData, index) => {
       // phonemeData = { phoneme, url, clip }
@@ -322,12 +362,12 @@ const Activity = (props) => {
       if (index !== useSecondCard) {
         cueURL = cardData.url
         cueClip = cardData.clip
-        action = checkForDrag
+        cueAction = checkForDrag
 
       } else {
         decoyURL = cardData.url
         decoyClip = cardData.clip
-        action = null
+        cueAction = null
       }
 
       return <CardAndPocket
@@ -338,7 +378,7 @@ const Activity = (props) => {
         cardRef={cardRef}
         ref={listRef}
         played={played}
-        action={action}
+        cueAction={cueAction}
       />
     })
 

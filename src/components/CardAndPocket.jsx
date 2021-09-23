@@ -117,13 +117,14 @@ import Card from './Card'
 const CardAndPocket = forwardRef((props, listRef) => {
   const audio = useContext(AudioContext)
   const {
-    index       // 0 | 1
-  , cardData    // { spelling, phonetic, image, url, clip }
-  , phonemeData // { phoneme, url, clip }
-  , role        // cue    | decoy
-  , cardRef     // cueRef | decoyRef
-  , played      // [ <card object>, ... ]
-  , action
+    index        // 0 | 1
+  , cardData     // { spelling, phonetic, image, url, clip }
+  , phonemeData  // { phoneme, url, clip }
+  , role         // cue    | decoy
+  , cardRef      // cueRef | decoyRef
+  , played       // [ <card object>, ... ]
+  , cueAction    // Activity.checkForDrag, for cue card
+  , pocketAction //
   } = props
 
   const {
@@ -137,7 +138,7 @@ const CardAndPocket = forwardRef((props, listRef) => {
       card={cardData}
       role={role}
       ref={cardRef}
-      action={action}
+      action={cueAction}
     />
   );
 
