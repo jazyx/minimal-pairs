@@ -30,8 +30,8 @@ const Card = forwardRef((props, cardRef) => {
                     )
   const src = props.taboo ? (image_ || image) : image
   const audio = useContext(AudioContext)
-  const action = props.action // will be undefined for cards in list
-              || (() => audio.playClip(url, clip))
+  const action = props.action // will be undefined for decoy
+              || (() => audio.playClip(url, clip)) // only for decoy
 
   return (
     <div

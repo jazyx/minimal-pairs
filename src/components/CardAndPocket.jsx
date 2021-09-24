@@ -142,7 +142,7 @@ const CardAndPocket = forwardRef((props, listRef) => {
     />
   );
 
-  const getCard = ( card, index ) => {
+  const getCard = ( card ) => {
     const key = card.spelling
     return (
       <li
@@ -150,6 +150,7 @@ const CardAndPocket = forwardRef((props, listRef) => {
       >
         <Card
           card={card}
+          action={pocketAction}
         />
       </li>
     )

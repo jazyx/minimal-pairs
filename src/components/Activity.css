@@ -60,6 +60,8 @@
   --hoverBorder: white;
   --hoverEdge: calc(5 * var(--edge));
 
+  --maskColor: rgba(0, 0, 0, var(--a));
+
   /* Backgrounds for spelling and phonetic paragraphs */
   --bgOpacity: 0.33;
   --phonetic: rgba(0,0,0,var(--bgOpacity));
@@ -67,23 +69,6 @@
   --ruleColor: #666;
 
   --wrongDuration: 1s;
-}
-/* SECTIONS */
-
-/* .pairs {
-  position: relative;
-  height: var(--pairSpace);
-  background-color: #600;
-} */
-
-.phonemes {
-  position: absolute;
-  display: flex;
-  left: 0;
-  bottom: 0;
-  height: var(--unit);
-  width: 100vw;
-  /* background-color: #006; */
 }
 
 /* CARD */
@@ -377,6 +362,28 @@ p.rule {
 
 .wrong.cue .pocket {
   color: var(--rightPhonemeColor);
+}
+
+/* DISPLAY CARDS FROM POCKET / POCKET / DISPLAY CARDS FROM POCKET */
+
+#mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--pairSpace);
+  background-color: var(--cgColor);
+  z-index: 1;
+  display: none;
+}
+
+#mask.pocket-play{
+  display: block;
+}
+
+.pocket-play {
+  top: calc(-1 * var(--pocketSize));
+  z-index: 2;
 }
 
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */

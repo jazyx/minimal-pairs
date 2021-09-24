@@ -8,10 +8,7 @@ import { getCards } from '../api/pairs'
 
 import { getBooleanGenerator
        , detectMovement
-       , setTrackedEvents
        , startDragging
-       , getPageXY
-       , getXY
        , pointWithin
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
@@ -35,7 +32,8 @@ const Activity = (props) => {
   // Used for presenting cards in pocket
   const phoneme0Ref = useRef()
   const phoneme1Ref = useRef()
-  // Used to tri0ger a re-render with a new card
+  const maskRef = useRef()
+  // Used to trigger a re-render with a new card
   const [counter, setCounter] = useState(0)
 
   const {
@@ -56,6 +54,7 @@ const Activity = (props) => {
     , decoyCard
     , phoneme0
     , phoneme1
+    , mask
     , pockets
 
   // drag and drop
@@ -291,13 +290,33 @@ const Activity = (props) => {
 
   // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
 
-  const pocketAction = (event, url, clip, word) => {
+  const pocketCard = (event) => {
+    const card = event.target.closest(".card-holder")
+    const item = card.closest("li")
+    const list = card.closest("ul")
+    const index = Array.from(list.children).indexOf(item)
+    const className = list.parentNode.className
+    const number = parseInt(/phoneme-(\d)/.exec(className)[1], 10)
+    const phonemeData = playedCards[phonemes[number].phoneme][index]
+    const { url, clip, spelling } = phonemeData
+
+    return {
+      card
+    , index
+    , url
+    , clip
+    }
+  }
+
+  const pocketAction = (event) => { //}, url, clip, word) => {
+    const { card, index, url, clip } = pocketCard(event)
+
     if (cardsAreSpread) {
-      if (visibleCard === word) {
+      if (visibleCard === index) {
         return audio.play(url, clip)
       }
 
-      makeCardVisible(word)
+      makeCardVisible(index)
     }
 
     detectMovement(event, 16, 500)
@@ -307,8 +326,8 @@ const Activity = (props) => {
       .catch(
         (reason) => {
           switch (reason) {
-            case "immobile":
-              return playFromPocket(url, clip)
+            case "release":
+              return playFromPocket(card, url, clip)
             case "timeOut":
               return spreadCards()
           }
@@ -316,8 +335,16 @@ const Activity = (props) => {
       )
   }
 
-  const playFromPocket = (url, clip) => {
-    audio.play(url, clip)
+  const playFromPocket = (card, url, clip) => {
+    mask.classList.add("pocket-play")
+    card.classList.add("pocket-play")
+    audio.playClip(url, clip)
+    setTimeout(() => {
+      mask.classList.remove("pocket-play")
+      card.classList.remove("pocket-play")
+      }
+    , PLAY_DELAY
+    )
   }
 
   const prepareToSpreadCards = () => {
@@ -379,6 +406,7 @@ const Activity = (props) => {
         ref={listRef}
         played={played}
         cueAction={cueAction}
+        pocketAction={pocketAction}
       />
     })
 
@@ -403,6 +431,7 @@ const Activity = (props) => {
     phoneme0 = phoneme0Ref.current
     // eslint-disable-next-line
     phoneme1 = phoneme1Ref.current
+    mask = maskRef.current
 
     // Pointers to DOM elements
     if (phoneme0.classList.contains("cue")) {
@@ -435,6 +464,10 @@ const Activity = (props) => {
     >
       {pocket1}
       {pocket2}
+      <div
+        id="mask"
+        ref={maskRef}
+      />
       <p className="rule">Tap or drag to here</p>
       <button
         className="done"
