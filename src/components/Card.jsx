@@ -3,7 +3,7 @@
  */
 
 
-import React, { useContext, useEffect, forwardRef } from 'react'
+import React, { useContext, forwardRef } from 'react'
 import { AudioContext } from './AudioContext'
 
 

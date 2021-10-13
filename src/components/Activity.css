@@ -276,10 +276,12 @@ button {
   z-index: 99;
 }
 
+.review ~ .done,
 .wrong ~ .done {
   display: block;
 }
 
+.review ~ p,
 .wrong ~ p {
   display: none;
 }
@@ -374,11 +376,14 @@ p.rule {
   height: var(--pairSpace);
   background-color: var(--cgColor);
   z-index: 1;
-  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 #mask.pocket-play{
-  display: block;
+  pointer-events: all;
+  opacity: 0.9;
 }
 
 .pocket-play {
@@ -533,6 +538,16 @@ p.rule {
     left: 0;
   }
 
+  #mask {
+    width: var(--pairSpace);
+    height: 100vh;
+  }
+
+  .pocket-play {
+    top: auto;
+    left: calc(-1 * var(--pocketSize));
+  }
+
   .done {
     right: 0;
     left: auto;
@@ -665,11 +680,25 @@ p.rule {
       left: var(--side1);
   }
 
+  main.split #mask {
+    width: 100vw;
+    height: calc(100vh - var(--pocketSize));
+  }
+
   main.split .done {
     right: auto;
     left: var(--doneLeft);
     top: var(--splitHeight);
     width: var(--doneSize);
     height: var(--doneSize);
+  }
+
+  main.split .pocket-play {
+    left: auto;
+    top: calc(-1 * var(--pocketSize));
+  }
+
+  main.split .decoy.review .space {
+    display: none;
   }
 }

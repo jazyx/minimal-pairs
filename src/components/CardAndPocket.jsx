@@ -114,7 +114,7 @@ import { AudioContext } from './AudioContext'
 
 import Card from './Card'
 
-const CardAndPocket = forwardRef((props, listRef) => {
+const CardAndPocket = forwardRef((props, pocketRef) => {
   const audio = useContext(AudioContext)
   const {
     index        // 0 | 1
@@ -163,7 +163,7 @@ const CardAndPocket = forwardRef((props, listRef) => {
   return (
     <div
       className={className}
-      ref={listRef}
+      ref={pocketRef}
     >
       <ul>
         {listOfCards}

@@ -43,19 +43,49 @@ const Activity = (props) => {
   , played: playedCards
   } = getCards() // imported from pairs.js
 
+  // { "phonemes": [
+  //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
+  //   , { phoneme: "iː", audio: [0, 11], url: "audio/i.mp3" }
+  //   ],
+  //   "word1": {
+  //     "spelling": "ship",
+  //     "phonetic": "/∫ɪp/",
+  //     "image": "img/ship.jpg",
+  //     "url": "audio/ɪ.mp3"
+  //     "audio": [
+  //       12.34,
+  //       13.24
+  //     ]
+  //   },
+  //   "word2": {
+  //     "spelling": "sheep",
+  //     "phonetic": "/∫iːp/",
+  //     "image": "img/sheep.jpg",
+  //     "url": "audio/i.mp3",
+  //     "audio": [
+  //       6.78,
+  //       7.68
+  //     ]
+  //   },
+  //   "played" {
+  //     "ɪ": [<card>, ...],
+  //     "iː": [<card>, ...]
+  //   }
+  // }
+
   let wrong = false
-  let cueURL
-    , cueClip
-    , cueSpace
-    , cueCard
+  let cueURL      // source of audio for cue card
+    , cueClip     // [<start>, <end>] of audio for cue card
+    , cueSpace    // cueRef.current: ".cue .card-holder.space"
+    , cueCard     // div holding .back and .front inside cueSpace
     , decoyURL
     , decoyClip
-    , decoySpace
-    , decoyCard
-    , phoneme0
-    , phoneme1
-    , mask
-    , pockets
+    , decoySpace  // decoyRef.current: ".decoy .card-holder.space"
+    , decoyCard   // div holding .back and .front inside decoySpace
+    , phoneme0    // phoneme0Ref.current: <div class="phoneme-0 <role>">
+    , phoneme1    // phoneme1Ref.current: <div class="phoneme-1 <role>">
+    , mask        // maskRef.current
+    , pockets     // [<decoy pocket>, <cue pocket>]
 
   // drag and drop
   let cueRect
@@ -64,36 +94,6 @@ const Activity = (props) => {
   // pocket action
   let cardsAreSpread
     , visibleCard
-
-    // { "phonemes": [
-    //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
-    //   , { phoneme: "iː", audio: [0, 11], url: "audio/i.mp3" }
-    //   ],
-    //   "word1": {
-    //     "spelling": "ship",
-    //     "phonetic": "/∫ɪp/",
-    //     "image": "img/ship.jpg",
-    //     "url": "audio/ɪ.mp3"
-    //     "audio": [
-    //       12.34,
-    //       13.24
-    //     ]
-    //   },
-    //   "word2": {
-    //     "spelling": "sheep",
-    //     "phonetic": "/∫iːp/",
-    //     "image": "img/sheep.jpg",
-    //     "url": "audio/i.mp3",
-    //     "audio": [
-    //       6.78,
-    //       7.68
-    //     ]
-    //   },
-    //   "played" {
-    //     "ɪ": [<card>, ...],
-    //     "iː": [<card>, ...]
-    //   }
-    // }
 
 
   const playCue = () => {
@@ -202,6 +202,14 @@ const Activity = (props) => {
 
 
   const proceed = () => {
+    if (!isNaN(visibleCard)) {
+      unspreadCards()
+    } else {
+      proceedToNextCard()
+    }
+  }
+
+  const proceedToNextCard = () => {
     phoneme0.classList.remove("wrong")
     phoneme1.classList.remove("wrong")
 
@@ -210,7 +218,18 @@ const Activity = (props) => {
 
     cueSpace.classList.add("inside-pocket")
     decoySpace.classList.add("inside-pocket")
+
+    // Only after a mistake, not after checking a played card
     setTimeout(showNextCard, NEXT_DELAY)
+  }
+ 
+  const unspreadCards = () => {
+    phoneme0.classList.remove("review")
+    phoneme1.classList.remove("review")
+
+    const cards = Array.from(document.querySelectorAll(".pocket-play"))
+    cards.forEach( card => card.classList.remove("pocket-play"))
+    visibleCard = undefined
   }
 
 
@@ -291,63 +310,96 @@ const Activity = (props) => {
   // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
 
   const pocketCard = (event) => {
+    // Determine which card from the pocket was clicked. (This means
+    // that the cards can be spread, so that the clicked card is not
+    // necessarilly the top one.)
     const card = event.target.closest(".card-holder")
     const item = card.closest("li")
     const list = card.closest("ul")
     const index = Array.from(list.children).indexOf(item)
+
+    // Determine which phoneme the clicked card uses: 0 or 1
     const className = list.parentNode.className
-    const number = parseInt(/phoneme-(\d)/.exec(className)[1], 10)
-    const phonemeData = playedCards[phonemes[number].phoneme][index]
+    const phoneme = parseInt(/phoneme-(\d)/.exec(className)[1], 10)
+
+    // Get the text and audio data for the clicked card
+    const phonemeData = playedCards[phonemes[phoneme].phoneme][index]
     const { url, clip, spelling } = phonemeData
 
     return {
       card
     , index
+    , phoneme
     , url
     , clip
+    , spelling // not yet used
     }
   }
 
   const pocketAction = (event) => { //}, url, clip, word) => {
-    const { card, index, url, clip } = pocketCard(event)
+    const { card, index, phoneme, url, clip } = pocketCard(event)
 
+    // <<< NOT YET IMPLEMENTED
     if (cardsAreSpread) {
       if (visibleCard === index) {
         return audio.play(url, clip)
       }
 
-      makeCardVisible(index)
+      return makeCardVisible(index)
     }
+    // NOT YET IMPLEMENTED >>>
 
     detectMovement(event, 16, 500)
       .then(
-        prepareToSpreadCards
+        // The user dragged the card within 500 ms
+        () => prepareToSpreadCards(index, phoneme)
       )
       .catch(
         (reason) => {
           switch (reason) {
             case "release":
+              // Simple click: show card, play audio, then hide it
               return playFromPocket(card, url, clip)
             case "timeOut":
-              return spreadCards()
+              // Long click
+              return spreadCards(index, phoneme)
           }
         }
       )
   }
 
-  const playFromPocket = (card, url, clip) => {
+  const showCardOutsidePocket = (card) => {
     mask.classList.add("pocket-play")
     card.classList.add("pocket-play")
-    audio.playClip(url, clip)
-    setTimeout(() => {
-      mask.classList.remove("pocket-play")
-      card.classList.remove("pocket-play")
-      }
-    , PLAY_DELAY
-    )
   }
 
-  const prepareToSpreadCards = () => {
+  const showCardsOutsidePocket = (cards) => {
+    mask.classList.add("pocket-play")
+    cards.forEach(card => card.classList.add("pocket-play"))
+    phoneme0.classList.add("review")
+  }
+
+  const playFromPocket = (card, url, clip) => {
+    showCardOutsidePocket(card)
+    
+    audio.playClip(url, clip)
+
+    if (isNaN(visibleCard)) {
+      // The cards are not spread
+      setTimeout(() => {
+        mask.classList.remove("pocket-play")
+        card.classList.remove("pocket-play")
+        }
+      , PLAY_DELAY
+      )
+    }
+  }
+
+  const prepareToSpreadCards = (index, phoneme) => {
+    // LEAVE FULL CARD SPREAD UNTIL LATER
+    spreadCards(index, phoneme)
+
+    // TODO
     // start dragging card
     // limit movement to one axis
 
@@ -361,8 +413,25 @@ const Activity = (props) => {
     // Set this card to visibleCard
   }
 
-  const spreadCards = () => {
+  const spreadCards = (cardIndex, phonemeIndex) => {
+    visibleCard = cardIndex
+     
+    const cards = [phoneme0, phoneme1].map(( phoneme, index ) => {
+      const list = phoneme.querySelector("ul")
+      const item = list.children[cardIndex]
+      const card = item.children[0]
 
+      if (index === phonemeIndex) {
+        const phoneme = phonemes[phonemeIndex].phoneme // e.g. "ɪ"
+        const cardData = playedCards[phoneme][cardIndex]
+        const { url, clip } = cardData
+        audio.playClip(url, clip)
+      }
+      
+      return card
+    })
+
+    showCardsOutsidePocket(cards)
   }
 
   // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
@@ -381,7 +450,7 @@ const Activity = (props) => {
                                   : [ "cue", cueRef]
 
       // All the other properties depend on the phoneme
-      const [ cardData, listRef ] = index
+      const [ cardData, pocketRef ] = index
                                   ? [ word2, phoneme1Ref ]
                                   : [ word1, phoneme0Ref ]
       const played = playedCards[phonemeData.phoneme]
@@ -403,7 +472,7 @@ const Activity = (props) => {
         phonemeData={phonemeData}
         role={role}
         cardRef={cardRef}
-        ref={listRef}
+        ref={pocketRef}
         played={played}
         cueAction={cueAction}
         pocketAction={pocketAction}
