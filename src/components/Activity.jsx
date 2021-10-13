@@ -185,6 +185,8 @@ const Activity = (props) => {
     const target = event.target
     if (!target.classList.contains("pocket")) {
       return
+    } else if (!isNaN(visibleCard)) {
+      return
     }
 
     const phoneme = target.closest("[class|=phoneme")
@@ -209,6 +211,7 @@ const Activity = (props) => {
     }
   }
 
+
   const proceedToNextCard = () => {
     phoneme0.classList.remove("wrong")
     phoneme1.classList.remove("wrong")
@@ -222,7 +225,8 @@ const Activity = (props) => {
     // Only after a mistake, not after checking a played card
     setTimeout(showNextCard, NEXT_DELAY)
   }
- 
+
+
   const unspreadCards = () => {
     phoneme0.classList.remove("review")
     phoneme1.classList.remove("review")
@@ -336,6 +340,7 @@ const Activity = (props) => {
     }
   }
 
+
   const pocketAction = (event) => { //}, url, clip, word) => {
     const { card, index, phoneme, url, clip } = pocketCard(event)
 
@@ -368,20 +373,24 @@ const Activity = (props) => {
       )
   }
 
+
   const showCardOutsidePocket = (card) => {
     mask.classList.add("pocket-play")
     card.classList.add("pocket-play")
   }
 
+
   const showCardsOutsidePocket = (cards) => {
     mask.classList.add("pocket-play")
     cards.forEach(card => card.classList.add("pocket-play"))
     phoneme0.classList.add("review")
+    phoneme1.classList.add("review")
   }
+
 
   const playFromPocket = (card, url, clip) => {
     showCardOutsidePocket(card)
-    
+
     audio.playClip(url, clip)
 
     if (isNaN(visibleCard)) {
@@ -394,6 +403,7 @@ const Activity = (props) => {
       )
     }
   }
+
 
   const prepareToSpreadCards = (index, phoneme) => {
     // LEAVE FULL CARD SPREAD UNTIL LATER
@@ -413,9 +423,10 @@ const Activity = (props) => {
     // Set this card to visibleCard
   }
 
+
   const spreadCards = (cardIndex, phonemeIndex) => {
     visibleCard = cardIndex
-     
+
     const cards = [phoneme0, phoneme1].map(( phoneme, index ) => {
       const list = phoneme.querySelector("ul")
       const item = list.children[cardIndex]
@@ -427,19 +438,19 @@ const Activity = (props) => {
         const { url, clip } = cardData
         audio.playClip(url, clip)
       }
-      
+
       return card
     })
 
     showCardsOutsidePocket(cards)
   }
 
+
   // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
 
   const createPockets = () => {
     const useSecondCard = getBoolean()
     let cueAction
-      , listAction
 
     const pockets = phonemes.map((phonemeData, index) => {
       // phonemeData = { phoneme, url, clip }
