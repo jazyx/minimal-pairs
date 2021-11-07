@@ -57,12 +57,12 @@ export const FullScreenButton = (props) => {
         width="100"
         height="100"
         stroke="white"
-        stroke-width="1"
+        strokeWidth="1"
         opacity="0"
       />
 
       <path
-        class="collapse"
+        className="collapse"
         d="
           M 45 55
           v 27
@@ -89,7 +89,7 @@ export const FullScreenButton = (props) => {
       />
 
       <path
-        class="expand"
+        className="expand"
         d="
           M 95 5
           v 27

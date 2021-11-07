@@ -1,4 +1,4 @@
-{ 
+{
   "words": {
     "ɑː": {
       "url": "ɑ.mp3"
@@ -177,22 +177,31 @@
 
 , "pairs": {
     "ɪi": {
-      "ɪ": "iː"
-    , "ship": "sheep"
-    , "bitch": "beach"
+      "bitch": "beach"
     , "chick": "cheek"
     , "fist": "feast"
     , "pillar": "peeler"
+    , "ship": "sheep"
     , "shit": "sheet"
     , "tit": "teat"
     }
   , "ɑʌ": {
-      "ɑː": "ʌ"
+      "barn": "bun"
     , "heart": "hut"
-    , "barn": "bun"
     , "marsh": "mush"
     , "park": "puck"
     , "staff": "stuff"
+    }
+  }
+
+, "index": {
+    "ɪi": {
+      "phonemes": ["ɪ", "iː"]
+    , "words": ["ship", "sheep"]
+    }
+  , "ɑʌ": {
+      "phonemes": ["ɑː", "ʌ"]
+    , "words": ["heart", "hut"]
     }
   }
 }

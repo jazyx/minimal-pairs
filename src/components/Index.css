@@ -1,0 +1,89 @@
+
+
+ul#index {
+  font-size: 0.9rem;
+  --size: 1.25em;
+  --borderWidth: 0.05em;
+  --btnSize: calc(2* var(--borderWidth) + var(--size));
+  --phonemeWidth: calc(1.333 * var(--size));
+  --progressColor: rgba(255, 255, 255, 0.2);
+  margin-top: var(--iconSize);
+  width: 100%;
+  right: auto;
+  bottom: auto;
+}
+
+ul#index li {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  border: none;
+  padding: 0;
+}
+
+ul#index li.current {
+  background-color: #33c;
+}
+
+ul#index li:hover {
+  background-color: #333
+}
+
+#index button {
+  position: relative;
+  height: var(--btnSize);
+  border-width: var(--borderWidth);
+  border-radius: var(--corner);
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#index button.phoneme {
+  display: block;
+  width: var(--phonemeWidth);
+}
+
+#index button.word {
+  width: 5em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#index button.word:last-child {
+  justify-content: flex-start;
+}
+
+#index button.word span {
+  flex-grow: 1;
+  text-align: center;
+}
+
+#index img {
+  width: var(--size);
+}
+
+#index div.progress {
+  width: 1em;
+  height: 0.5em;
+  border: 1px solid var(--progressColor);
+  margin: 0.5em;
+  flex-grow: 1;
+}
+
+#index div.progress > div {
+  height: 100%;
+  background-color: var(--progressColor);
+}
+
+#index button.select {
+  height: var(--btnSize);
+  width: var(--btnSize);
+  background-color: #666;
+  border-radius: 0.25em;
+}
+
+#index button.select:hover {
+  background-color: var(--rightPhonemeColor);
+}

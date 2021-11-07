@@ -74,6 +74,7 @@ const Activity = (props) => {
   // }
 
   let wrong = false
+  let inProgress = false
   let cueURL      // source of audio for cue card
     , cueClip     // [<start>, <end>] of audio for cue card
     , cueSpace    // cueRef.current: ".cue .card-holder.space"
@@ -132,6 +133,7 @@ const Activity = (props) => {
     decoySpace.classList.add("deal")
 
     setCounter(counter + 1)
+    inProgress = false
   }
 
 
@@ -183,10 +185,11 @@ const Activity = (props) => {
 
   const checkAnswer = event => {
     const target = event.target
-    if (!target.classList.contains("pocket")) {
+    if (inProgress ||!target.classList.contains("pocket")) {
       return
     }
 
+    inProgress = true
     const phoneme = target.closest("[class|=phoneme")
     // <div class="phoneme-X cue|decoy">
 
@@ -357,6 +360,7 @@ const Activity = (props) => {
       .catch(
         (reason) => {
           switch (reason) {
+            default: return
             case "release":
               // Simple click: show card, play audio, then hide it
               return playFromPocket(card, url, clip)
@@ -439,7 +443,6 @@ const Activity = (props) => {
   const createPockets = () => {
     const useSecondCard = getBoolean()
     let cueAction
-      , listAction
 
     const pockets = phonemes.map((phonemeData, index) => {
       // phonemeData = { phoneme, url, clip }
