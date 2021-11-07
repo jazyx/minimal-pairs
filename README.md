@@ -6,7 +6,7 @@ Learners of a foreign language often have difficulty hearing minor differences w
 
 This app trains you to recognize the differences.
 
-You can test the app [here](https://jazyx.github.io/minimal-pairs/)
+You can test the app [here](https://jazyx.github.io/minimal-pairs/).
 
 ## Activity
 You will see two pockets, each displaying a button for one of two different phonemes (say `/ʌ/` and `/ɑ/`, the vowels in "stuff" and "staff"). You can press these buttons to hear the phoneme.
