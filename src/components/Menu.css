@@ -9,7 +9,7 @@
   /* Menu */
   --menuColor: var(--cgColor); /*rgba(17, 17, 17, 0.9); */
   --menuBorder: 1px solid #333;
-  --menuSize: 10rem;
+  --menuSize: 10.1rem;
   --closedMenu: calc(-1 * var(--menuSize));
   --openIcon: calc(var(--menuSize) - var(--iconSize));
 }
@@ -123,5 +123,6 @@ main.left-handed #menu #items.open {
 }
 
 main.left-handed #menu #items.open ~ svg#openMenu {
+  left: auto;
   right: var(--openIcon);
 }

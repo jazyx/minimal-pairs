@@ -6,10 +6,10 @@ import Menu from "./Menu";
 
 
 const App = (props) => {
-  const [ view, setView ] = useState("Activity")
+  const [ view, setView ] = useState("About")
 
   const selectFromMenu = (newView) => {
-    if (!newView) {
+    if (typeof newView !== "string") {
       newView = "Activity"
     }
 
@@ -20,7 +20,7 @@ const App = (props) => {
 
   return (
     <AudioProvider>
-      <main className="split left--handed show--phonetic show-cue-image">
+      <main className="split left-handed show--phonetic show-cue-image">
         <View
           startActivity={selectFromMenu}
         />
