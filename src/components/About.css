@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100vh;
+  height: 90vh;
 }
 
 #about h1,
@@ -11,7 +11,15 @@
   margin: 0 1em;
 }
 
-#about button {
-  position: relative;
+button.continue {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   color: black;
+}
+
+
+label {
+  margin: 1em 0;
 }

@@ -242,7 +242,7 @@ ul {
   height: var(--unit);
   width: var(--unit);
 
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 button {
@@ -299,6 +299,14 @@ button {
 
 .wrong.cue p.spelling{
   color: var(--wrongColor);
+}
+
+.wrong .pocket {
+  cursor: default;
+}
+
+.wrong .play-phoneme {
+  cursor: pointer;
 }
 
 /* LEFT/BOTTOM POCKET */

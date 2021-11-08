@@ -21,6 +21,7 @@ const About = ({ startActivity }) => {
 
       <p>You can use the menu in the top corner to choose other pairs of sounds, or to set your preferences.</p>
       <button
+        className="continue"
         onClick={startActivity}
       >
         Continue
