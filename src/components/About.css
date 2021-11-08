@@ -1,0 +1,17 @@
+#about {
+  font-size: 0.7em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+#about h1,
+#about p {
+  margin: 0 1em;
+}
+
+#about button {
+  position: relative;
+  color: black;
+}

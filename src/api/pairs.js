@@ -4,13 +4,13 @@
 
 import { shuffle, removeFrom } from '../tools/utilities'
 const pairs = require('../json/pairs.json')
+const AUDIO_DIR = "audio/"
 
 /** Export an array of pairs of phonemes that can be contrasted with
  * each other. This will be imported by the Index component
  */
 export const phonemePairs = Object.keys(pairs.pairs)
-
-const AUDIO_DIR = "audio/"
+export const pairIndex = pairs.index
 
 // let taboo = false
 
@@ -26,10 +26,15 @@ let played         // { "/x/": [ <card>, ... ]
 let word1, word2   // "bitch", "beach"
 
 
+export function getCurrentPair() {
+  return currentPair
+}
+
+
 /**
  * Export a function to set the array of pairs that will produce the
  * next minimal pair of cards
- * 
+ *
  * @param {string} pair: one ef the items from phonemePairs
  */
 export function setPhonemePair(pair) {
@@ -43,7 +48,7 @@ export function setPhonemePair(pair) {
     pair = phonemePairs[0]
   }
 
-  _setPairListAndPhonemeSymbols(pairs.pairs[pair])
+  _setPairListAndPhonemeSymbols(pair)
   // lastIndex = pairList.length - 1
   // currentIndex = 0
 
@@ -58,13 +63,12 @@ export function setPhonemePair(pair) {
 /**
  * Export a function to return all the data required to display a
  * minimal pair of words and play their audio files
- * 
- * @returns 
+ *
+ * @returns
  */
 export function getCards() {
   const [ phoneme1, phoneme2 ] = phonemeSymbols
 
-  
   if (word1) {
     const spellings = played[phoneme1].map(word => word.spelling)
     if (spellings.indexOf(word1.spelling) < 0) {
@@ -77,8 +81,8 @@ export function getCards() {
   const cards = pairList.shift()
   pairList.push(cards)
 
-  word1 = _getWordData(phoneme1, cards[0])
-  word2 = _getWordData(phoneme2, cards[1])
+  word1 = getWordData(phoneme1, cards[0])
+  word2 = getWordData(phoneme2, cards[1])
 
   removeFrom(played[phoneme1], word1)
   removeFrom(played[phoneme2], word2)
@@ -102,24 +106,24 @@ export function getCards() {
  * , ...
  * }
  */
-function _setPairListAndPhonemeSymbols(pairMap) {
-  pairList = Object.entries(pairMap)
-  // [[<ɪ>, <æ>], [<this>, <that>], [<tit>, <tat>], ...]
+function _setPairListAndPhonemeSymbols(pair) {
+  phonemeSymbols = pairs.index[pair].phonemes
+  // [<ɪ>, <æ>]
 
-  phonemeSymbols = pairList.shift()
-  // [[<ɪ>, <æ>]
+  pairList = Object.entries(pairs.pairs[pair])
+  // [[<this>, <that>], [<tit>, <tat>], ...]
 
-  phonemes = phonemeSymbols.map(_getPhonemeData)
+  phonemes = phonemeSymbols.map(getPhonemeData)
   shuffle(pairList)
   // [[<tit>, <tat>], ..., [<this>, <that>], ...]
 }
 
 
 /**
- * 
+ *
  * @param {string} phoneme (e.g.: "ɑː")
  * @param {string} word    (e.g.: "heart")
- * 
+ *
  * @returns an object with a format like:
  * { "spelling": "heart"
  * , "phonetic": "/hɑːt/"
@@ -128,7 +132,7 @@ function _setPairListAndPhonemeSymbols(pairMap) {
  * , url: "audio/ɑ.mp3"
  * }
  */
-function _getWordData(phoneme, word) {
+export function getWordData(phoneme, word) {
   const phonemeData = pairs.words[phoneme]
   const data = {...phonemeData[word]}
   data.url = AUDIO_DIR + phonemeData.url
@@ -140,7 +144,7 @@ function _getWordData(phoneme, word) {
 /**
  * Creates an object that allows the app to display the phoneme and
  * play its audio clip
- * 
+ *
  * @param {string} phoneme (e.g. : "ɑː")
  * @returns an object with a format like:
  * { "clip": [ <startTime>, <endTime> ]
@@ -148,7 +152,7 @@ function _getWordData(phoneme, word) {
  * , phoneme: <x>
  * }
  */
-function _getPhonemeData(phoneme) {
+export function getPhonemeData(phoneme) {
   const phonemeData = pairs.words[phoneme]
   const data = {...phonemeData[phoneme]}
   data.url = AUDIO_DIR + phonemeData.url

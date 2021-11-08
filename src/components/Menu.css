@@ -9,7 +9,7 @@
   /* Menu */
   --menuColor: var(--cgColor); /*rgba(17, 17, 17, 0.9); */
   --menuBorder: 1px solid #333;
-  --menuSize: 10rem;
+  --menuSize: 10.1rem;
   --closedMenu: calc(-1 * var(--menuSize));
   --openIcon: calc(var(--menuSize) - var(--iconSize));
 }
@@ -79,13 +79,8 @@
   box-shadow: 0 0 3vw 0 rgba(255,255,255,0.250)
 }
 
-ul#index {
-  margin-top: var(--iconSize);
-}
 
-
-#menu #items li,
-#index li {
+#menu #items li {
   border: 0.05rem outset #888;
   border-radius: 0.2rem;
   padding: 0.25rem 0.5rem;
@@ -94,15 +89,13 @@ ul#index {
   cursor: pointer;
 }
 
-#menu #items li:hover,
-#index li:hover {
+#menu #items li:hover {
   background-color: var(--bgColor);
   color: #fff;
 }
 
-#menu #items li:active,
-#index li:active {
-    border-style: inset;
+#menu #items li:active {
+  border-style: inset;
 }
 
 /* LEFT-HANDED / LEFT-HANDED / LEFT-HANDED LEFT-HANDED / LEFT-HANDED */
@@ -130,5 +123,6 @@ main.left-handed #menu #items.open {
 }
 
 main.left-handed #menu #items.open ~ svg#openMenu {
+  left: auto;
   right: var(--openIcon);
 }

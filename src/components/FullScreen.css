@@ -9,6 +9,7 @@ svg#fullscreen-btn {
 
   position: absolute;
   top: 0;
+  left: 0;
 
   width: var(--size);
   height: var(--size);
@@ -17,6 +18,11 @@ svg#fullscreen-btn {
   border-width: var(--bWidth);
   border-style: outset;
   box-sizing: border-box;
+}
+
+.left-handed svg#fullscreen-btn {
+  left: auto;
+  right: 0;
 }
 
 svg#fullscreen-btn:active {

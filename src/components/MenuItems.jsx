@@ -17,7 +17,7 @@ const MenuItems = ({ itemSelected }) => {
         key="index"
         onClick={() => itemSelected("Index")}
       >
-        Select minimal pair
+        Select phoneme pair
       </li>
 
       <li
