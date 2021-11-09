@@ -21,14 +21,16 @@ import React, { useState } from 'react';
 
 
 const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
-  const startUp = {
+  const store = {
     leftHanded: classNameIsSet("left-handed")
-    , split: classNameIsSet("split")
-    , showCue: classNameIsSet("show-cue-image")
+  , split: classNameIsSet("split")
+  , showCue: classNameIsSet("show-cue-image")
+  , showPhonetic: classNameIsSet("show-phonetic")
   }
-  const [ leftHanded, setLeftHanded ] = useState(startUp.leftHanded)
-  const [ split, setSplit ] = useState(startUp.split)
-  const [ showCue, setShowCue ] = useState(startUp.showCue)
+  const [ leftHanded, setLeftHanded ] = useState(store.leftHanded)
+  const [ split, setSplit ] = useState(store.split)
+  const [ showCue, setShowCue ] = useState(store.showCue)
+  const [ showPhonetic, setShowPhonetic ] = useState(store.showPhonetic)
 
 
   const toggleLeftHanded = () => {
@@ -45,7 +47,13 @@ const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
 
   const toggleShowCue = () => {
     toggleClassName("show-cue-image", !showCue)
-    setSplit(!showCue)
+    setShowCue(!showCue)
+  }
+
+
+  const toggleShowPhonetic = () => {
+    toggleClassName("show-phonetic", !showPhonetic)
+    setShowPhonetic(!showPhonetic)
   }
 
 
@@ -82,7 +90,6 @@ const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
           Use split layout in landscape mode
         </label>
 
-
         <label htmlFor="showCue">
           <input
             id="showCue"
@@ -94,6 +101,20 @@ const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
             <span className="slider" />
           </span>
           Show cue image
+        </label>
+
+
+        <label htmlFor="showPhonetic">
+          <input
+            id="showPhonetic"
+            type="checkbox"
+            defaultChecked={showPhonetic}
+            onChange={toggleShowPhonetic}
+          />
+          <span className="slot">
+            <span className="slider" />
+          </span>
+          Always show phonetic spelling
         </label>
       </fieldset>
 

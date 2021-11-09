@@ -56,7 +56,7 @@ const App = (props) => {
   return (
     <AudioProvider>
       <main
-        className="split left--handed show--phonetic show-cue-image"
+        className="split show-cue-image"
         ref={mainRef}
       >
         <View
