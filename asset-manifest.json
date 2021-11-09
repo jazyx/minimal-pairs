@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/minimal-pairs/static/css/main.4996b9f6.chunk.css",
-    "main.js": "/minimal-pairs/static/js/main.4ebce088.chunk.js",
-    "main.js.map": "/minimal-pairs/static/js/main.4ebce088.chunk.js.map",
+    "main.css": "/minimal-pairs/static/css/main.8ee1f05c.chunk.css",
+    "main.js": "/minimal-pairs/static/js/main.4726b018.chunk.js",
+    "main.js.map": "/minimal-pairs/static/js/main.4726b018.chunk.js.map",
     "runtime-main.js": "/minimal-pairs/static/js/runtime-main.174ab1cc.js",
     "runtime-main.js.map": "/minimal-pairs/static/js/runtime-main.174ab1cc.js.map",
     "static/js/2.07fb56b5.chunk.js": "/minimal-pairs/static/js/2.07fb56b5.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.2814849f.chunk.js": "/minimal-pairs/static/js/3.2814849f.chunk.js",
     "static/js/3.2814849f.chunk.js.map": "/minimal-pairs/static/js/3.2814849f.chunk.js.map",
     "index.html": "/minimal-pairs/index.html",
-    "static/css/main.4996b9f6.chunk.css.map": "/minimal-pairs/static/css/main.4996b9f6.chunk.css.map",
+    "static/css/main.8ee1f05c.chunk.css.map": "/minimal-pairs/static/css/main.8ee1f05c.chunk.css.map",
     "static/js/2.07fb56b5.chunk.js.LICENSE.txt": "/minimal-pairs/static/js/2.07fb56b5.chunk.js.LICENSE.txt",
     "static/media/Activity.css": "/minimal-pairs/static/media/sound.c5d2abdc.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.174ab1cc.js",
     "static/js/2.07fb56b5.chunk.js",
-    "static/css/main.4996b9f6.chunk.css",
-    "static/js/main.4ebce088.chunk.js"
+    "static/css/main.8ee1f05c.chunk.css",
+    "static/js/main.4726b018.chunk.js"
   ]
 }
