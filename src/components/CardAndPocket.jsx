@@ -52,8 +52,23 @@
  * Previous Cards
  * --------------
  * The most recent card will be partly visible in the pocket. The
- * earlier cards will be hidden behind it. Clicking on the visible part
- * of the top card will play the audio associated with it.
+ * earlier cards will be hidden behind it.
+ *
+ * Clicking on the visible part of the top card will:
+ * • Block any other mouse interactions
+ * • Slide the card out of the pocket
+ * • Play the audio associated with the card
+ * • Slide the card back in
+ * • Restore other mouse interactions.
+ *
+ * Clicking-and-holding on the visible part of the top card, or
+ * dragging the card in any direction, will:
+ * • Block default other mouse interactions
+ * • Slide both lists of cards out of the pocket in two ribbon spreads
+ * • Show a > button, which will return the cards to their pockets and *   restore other mouse interactions
+ * • Wait for the user to click on a card
+ *
+ *
  *
  * INTERACTIONS
  * ============

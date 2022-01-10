@@ -574,6 +574,10 @@ p.rule {
     left: calc(-1 * var(--pocketSize));
   }
 
+  .left-handed .pocket-play {
+    left: var(--pocketSize);
+  }
+
   .done {
     right: 0;
     left: auto;

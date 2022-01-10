@@ -515,10 +515,12 @@ const Activity = (props) => {
     phoneme0 = phoneme0Ref.current
     // eslint-disable-next-line
     phoneme1 = phoneme1Ref.current
+    // eslint-disable-next-line
     mask = maskRef.current
 
     // Pointers to DOM elements
     if (phoneme0.classList.contains("cue")) {
+      // eslint-disable-next-line
       pockets = [
         phoneme0.querySelector(".pocket")
       , phoneme1.querySelector(".pocket")
@@ -530,14 +532,16 @@ const Activity = (props) => {
       ]
     }
 
+    // eslint-disable-next-line
     cueCard = cueSpace.querySelector(".card")
+    // eslint-disable-next-line
     decoyCard = decoySpace.querySelector(".card")
 
     decoySpace.classList.remove("deal")
     setTimeout(() => {
       cueSpace.classList.remove("deal")
       playCue()
-    }, DEAL_DELAY )
+    }, DEAL_DELAY )
   })
 
 

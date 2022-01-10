@@ -18,15 +18,20 @@
 
 
 import React, { useState } from 'react';
+import storage from '../tools/storage';
+
+// Read localStorage values or use default preferences on first use
+const store = storage.get({
+  leftHanded: false
+, split: true
+, showCue: true
+, showPhonetic: false
+})
 
 
 const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
-  const store = {
-    leftHanded: classNameIsSet("left-handed")
-  , split: classNameIsSet("split")
-  , showCue: classNameIsSet("show-cue-image")
-  , showPhonetic: classNameIsSet("show-phonetic")
-  }
+  // Preferences will be set from store only the first time. The
+  // saved state will be used thereafter.
   const [ leftHanded, setLeftHanded ] = useState(store.leftHanded)
   const [ split, setSplit ] = useState(store.split)
   const [ showCue, setShowCue ] = useState(store.showCue)
@@ -34,26 +39,40 @@ const Preferences = ({ classNameIsSet, toggleClassName, startActivity }) => {
 
 
   const toggleLeftHanded = () => {
-    toggleClassName("left-handed", !leftHanded)
-    setLeftHanded(!leftHanded)
+    const newValue = !leftHanded
+
+    toggleClassName("left-handed", newValue)
+    setLeftHanded(newValue)
+    storage.setItem("leftHanded", newValue)
   }
 
 
   const toggleSplit = () => {
-    toggleClassName("split", !split)
-    setSplit(!split)
+    const newValue = !split
+
+    toggleClassName("split", newValue)
+    setSplit(newValue)
+    storage.setItem("split", newValue)
   }
 
 
   const toggleShowCue = () => {
-    toggleClassName("show-cue-image", !showCue)
-    setShowCue(!showCue)
+    const newValue = !showCue
+
+    toggleClassName("show-cue-image", newValue)
+    setShowCue(newValue)
+
+    storage.setItem("showCue", newValue)
   }
 
 
   const toggleShowPhonetic = () => {
-    toggleClassName("show-phonetic", !showPhonetic)
-    setShowPhonetic(!showPhonetic)
+    const newValue = !showPhonetic
+
+    toggleClassName("show-phonetic", newValue)
+    setShowPhonetic(newValue)
+
+    storage.setItem("showPhonetic", newValue)
   }
 
 
