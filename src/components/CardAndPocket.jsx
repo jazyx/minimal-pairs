@@ -157,6 +157,11 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
     />
   );
 
+  /**
+   * Called on each item in the played list to create listOfCards
+   * @param {Object} card 
+   * @returns 
+   */
   const getCard = ( card ) => {
     const key = card.spelling
     return (

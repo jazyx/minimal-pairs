@@ -10,6 +10,7 @@ import { getBooleanGenerator
        , detectMovement
        , startDragging
        , pointWithin
+       , debounce
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
 
@@ -17,9 +18,9 @@ const getBoolean = getBooleanGenerator()
 // <<< HARD-CODED
 const REVIEW_DELAY = 2000;
 const POCKET_DELAY = 200; // just a little more than transition-duration
-const PLAY_DELAY = 1000
-const NEXT_DELAY = 1000
-const DEAL_DELAY = 300
+const PLAY_DELAY = 1000
+const NEXT_DELAY = 1000
+const DEAL_DELAY = 300
 // HARD-CODED >>>
 
 
@@ -79,6 +80,8 @@ const Activity = (props) => {
     , cueClip     // [<start>, <end>] of audio for cue card
     , cueSpace    // cueRef.current: ".cue .card-holder.space"
     , cueCard     // div holding .back and .front inside cueSpace
+    , unit        // height of (square) cue card
+    , space       //
     , decoyURL
     , decoyClip
     , decoySpace  // decoyRef.current: ".decoy .card-holder.space"
@@ -87,6 +90,7 @@ const Activity = (props) => {
     , phoneme1    // phoneme1Ref.current: <div class="phoneme-1 <role>">
     , mask        // maskRef.current
     , pockets     // [<decoy pocket>, <cue pocket>]
+    , playedLists // [<decoy li's>, <cue li's>]
 
   // drag and drop
   let cueRect
@@ -97,12 +101,40 @@ const Activity = (props) => {
     , visibleCard
 
 
+  // Refresh unit and space after useEffect and on window.resize.
+  // These values will be used to arrange spread cards
+  const refresh = (source, counter) => {
+    const size = parseInt(
+      getComputedStyle(cueCard).getPropertyValue("height")
+    );
+
+    // <<< HARD-CODED Check against CSS for .split
+    const { clientWidth, clientHeight } = document.documentElement
+    const split = clientHeight * 16 <= clientWidth * 9
+               && props.classNameIsSet("split")
+    // HARD-CODED >>>
+
+    const free = (clientWidth < clientHeight) || split
+               ? clientHeight - size
+               : clientWidth - size
+
+    if (unit !== size || space !== free) {
+      unit  = size
+      space = free
+    }
+  }
+
+
+  const resize = debounce(refresh, 300)
+  window.addEventListener("resize", () => resize("from debounce"), false)
+
+
   const playCue = () => {
     audio.playClip(cueURL, cueClip)
   }
 
 
-  // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
+  // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
 
   const showWrong = () => {
     if (wrong) {
@@ -118,7 +150,7 @@ const Activity = (props) => {
     setTimeout(() => {
       decoyCard.classList.remove("flipped")
       decoySpace.classList.add("active", "reveal", "outside-pocket")
-    }, PLAY_DELAY )
+    }, PLAY_DELAY )
   }
 
 
@@ -164,7 +196,7 @@ const Activity = (props) => {
   }
 
 
-  const moveNearToPocket = () => {
+  const moveNearToPocket = () => {
     cueSpace.classList.add("outside-pocket")
     setTimeout(moveIntoPocket, POCKET_DELAY)
   }
@@ -240,7 +272,7 @@ const Activity = (props) => {
   }
 
 
-  // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
+  // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
   const drag = (pageLoc) => {
     [cueRect, decoyRect].forEach((rect, index) => {
@@ -314,7 +346,7 @@ const Activity = (props) => {
   }
 
 
-  // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
+  // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
 
   const pocketCard = (event) => {
     // Determine which card from the pocket was clicked. (This means
@@ -344,10 +376,22 @@ const Activity = (props) => {
   }
 
 
+  /**
+   *`
+   * @param {MouseDownEvent} event
+   * @returns
+   */
   const pocketAction = (event) => { //}, url, clip, word) => {
     const { card, index, phoneme, url, clip } = pocketCard(event)
 
-    // <<< NOT YET IMPLEMENTED
+    // card is div.card-holder for clicked card in pocket
+    // index is initially 0 (for top card)
+    // phoneme is 0 or 1
+    // url is path to phoneme clip
+    // clip is [<start seconds>, <end seconds>] of url file
+
+
+    // <<< NOT YET IMPLEMENTED
     if (cardsAreSpread) {
       if (visibleCard === index) {
         return audio.play(url, clip)
@@ -355,12 +399,12 @@ const Activity = (props) => {
 
       return makeCardVisible(index)
     }
-    // NOT YET IMPLEMENTED >>>
+    // NOT YET IMPLEMENTED >>>
 
     detectMovement(event, 16, 500)
       .then(
         // The user dragged the card within 500 ms
-        () => prepareToSpreadCards(index, phoneme)
+        () => startDragToSpreadCards(index, phoneme)
       )
       .catch(
         (reason) => {
@@ -371,7 +415,7 @@ const Activity = (props) => {
               return playFromPocket(card, url, clip)
             case "timeOut":
               // Long click
-              return spreadCards(index, phoneme)
+              return prepareToSpreadCards(index, phoneme)
           }
         }
       )
@@ -384,6 +428,19 @@ const Activity = (props) => {
   }
 
 
+  /**
+   * @param {Array} cards  .card-holder elements for both cards in a
+   *                       minimal pair
+   *
+   * • Ensures that a mask is shown over the cue cards so that they
+   *   can't be clicked.
+   * • Shows each card just outside the pocket
+   * ---
+   * • Shows the (>) Done button
+   * • Hides the "Tap or Drag to here" text
+   * • Dims the brightness of the /phoneme/ text on the pocket
+   * • Ensures that the Play Phoneme button is active
+   */
   const showCardsOutsidePocket = (cards) => {
     mask.classList.add("pocket-play")
     cards.forEach(card => card.classList.add("pocket-play"))
@@ -409,17 +466,50 @@ const Activity = (props) => {
   }
 
 
-  const prepareToSpreadCards = (index, phoneme) => {
-    // LEAVE FULL CARD SPREAD UNTIL LATER
-    spreadCards(index, phoneme)
+  /**
+   * Called by pocketAction if detectMovement is resolved after a
+   * click on a visible card in a pocket.
+   *
+   * @param {Integer} cardIndex    index of clicked card
+   * @param {Integer} phonemeIndex index of clicked list
+   */
+  const startDragToSpreadCards = (cardIndex, phonemeIndex) => {
+    // LEAVE FULL CARD SPREAD UNTIL LATER
+    prepareToSpreadCards(cardIndex, phonemeIndex)
 
     // TODO
     // start dragging card
     // limit movement to one axis
 
-
     // finally(spreadCards)
   }
+
+
+  const prepareToSpreadCards = (cardIndex, phonemeIndex) => {
+    const cardsToSpread = playedLists[0].length
+    // Calculate how many cards need to fill this space
+    // * If only one card, treat as spreadCards does currently
+    // * If only two cards, there will be room for each
+
+    // Calculate available space between limit of pocket card
+    // and edge of viewport
+    const unit = 0
+
+
+    // If earlier cards will not fill this space, move edge inwards
+    // to the limit of the space they will fill
+
+    // Move all cards to this edge
+
+    // Move pack of cards back, dropping a card at regular intervals
+
+    // Topmost card should now be on top of pocket.
+
+    // Dim other cards, so that it is clear which is the active card
+
+    spreadCards(cardIndex, phonemeIndex)
+  }
+
 
   const makeCardVisible = (word) => {
     // Adjust other cards in this list
@@ -428,17 +518,35 @@ const Activity = (props) => {
   }
 
 
-  const spreadCards = (cardIndex, phonemeIndex) => {
+  /**
+   *
+   * @param {Integer} cardIndex    index of clicked card
+   * @param {Integer} phonemeIndex index of clicked list
+   */
+   const spreadCards = (cardIndex, phonemeIndex) => {
     visibleCard = cardIndex
 
-    const cards = [phoneme0, phoneme1].map(( phoneme, index ) => {
-      const list = phoneme.querySelector("ul")
-      const item = list.children[cardIndex]
-      const card = item.children[0]
+    //phoneme-X is DOM element containing
+    // * The list of played cards
+    // * The cue or decoy card
+    // * The pocket with its phoneme audio button
+
+    // Get an array of two cards, one for each phoneme, at the current
+    // cardIndex level
+    const cards = playedLists.map(( list, index ) => {
+      const item = list[cardIndex] // played .card_holder that was clicked
+      const card = item.children[0] // div containing image of clicked card
 
       if (index === phonemeIndex) {
+        // Play the audio for the clicked card
         const phoneme = phonemes[phonemeIndex].phoneme // e.g. "ɪ"
         const cardData = playedCards[phoneme][cardIndex]
+        // clip: array
+        // url: audio file
+        // image: url of image file
+        // phonetic: string
+        // spelling: string
+
         const { url, clip } = cardData
         audio.playClip(url, clip)
       }
@@ -450,7 +558,49 @@ const Activity = (props) => {
   }
 
 
-  // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
+
+  // /**
+  //  *
+  //  * @param {Integer} cardIndex    index of clicked card
+  //  * @param {Integer} phonemeIndex index of clicked list
+  //  */
+  // const spreadCards = (cardIndex, phonemeIndex) => {
+  //   visibleCard = cardIndex
+
+  //   //phoneme-X is DOM element containing
+  //   // * The list of played cards
+  //   // * The cue or decoy card
+  //   // * The pocket with its phoneme audio button
+
+  //   // Get an array of two cards, one for each phoneme, at the current
+  //   // cardIndex level
+  //   const cards = [phoneme0, phoneme1].map(( phoneme, index ) => {
+  //     const list = phoneme.querySelector("ul") // DOM for all played cards
+  //     const item = list.children[cardIndex]    // played .card_holder that was clicked
+  //     const card = item.children[0]            // div containing image of clicked card
+
+  //     if (index === phonemeIndex) {
+  //       // Play the audio for the clicked card
+  //       const phoneme = phonemes[phonemeIndex].phoneme // e.g. "ɪ"
+  //       const cardData = playedCards[phoneme][cardIndex]
+  //       // clip: array
+  //       // url: audio file
+  //       // image: url of image file
+  //       // phonetic: string
+  //       // spelling: string
+
+  //       const { url, clip } = cardData
+  //       audio.playClip(url, clip)
+  //     }
+
+  //     return card
+  //   })
+
+  //   showCardsOutsidePocket(cards)
+  // }
+
+
+  // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
 
   const createPockets = () => {
     const useSecondCard = getBoolean()
@@ -518,17 +668,27 @@ const Activity = (props) => {
     // eslint-disable-next-line
     mask = maskRef.current
 
-    // Pointers to DOM elements
+    // Pointers to DOM elements
     if (phoneme0.classList.contains("cue")) {
       // eslint-disable-next-line
       pockets = [
         phoneme0.querySelector(".pocket")
       , phoneme1.querySelector(".pocket")
       ]
+      // eslint-disable-next-line
+      playedLists = [
+        Array.from(phoneme0.querySelectorAll("li")),
+        Array.from(phoneme1.querySelectorAll("li"))
+      ]
     } else {
       pockets = [
         phoneme1.querySelector(".pocket")
       , phoneme0.querySelector(".pocket")
+      ]
+      // eslint-disable-next-line
+      playedLists = [
+        Array.from(phoneme1.querySelectorAll("li")),
+        Array.from(phoneme0.querySelectorAll("li"))
       ]
     }
 
@@ -536,6 +696,8 @@ const Activity = (props) => {
     cueCard = cueSpace.querySelector(".card")
     // eslint-disable-next-line
     decoyCard = decoySpace.querySelector(".card")
+
+    refresh("from useEffect")
 
     decoySpace.classList.remove("deal")
     setTimeout(() => {

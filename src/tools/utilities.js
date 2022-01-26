@@ -1220,3 +1220,16 @@ export const getElementIndex = (element, parentTag) => {
 
   return index
 }
+
+
+
+// DEBOUNCE //
+export const debounce = (func, timeOut = 300) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func(...args);
+    }, timeOut);
+  }; 
+}

@@ -2,6 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { AudioProvider } from "./AudioContext"
 
 import Views from "../api/views";
+// { About
+// , Activity
+// , Contact
+// , Index
+// , Preferences
+// , Splash
+// }
 import Menu from "./Menu";
 
 
