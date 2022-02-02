@@ -8,7 +8,7 @@ import { getCards } from '../api/pairs'
 
 import { getBooleanGenerator
        , detectMovement
-       , startDragging
+       , startTracking
        , pointWithin
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
@@ -242,7 +242,7 @@ const Activity = (props) => {
 
   // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
-  const drag = (pageLoc) => {
+  const rider = (pageLoc) => {
     [cueRect, decoyRect].forEach((rect, index) => {
       const pocket = pockets[index]
 
@@ -286,11 +286,12 @@ const Activity = (props) => {
     const options = {
       event
     , target: cueSpace
-    , drag
+    , drag: ".space"
+    , rider
     , drop
     }
 
-    startDragging(options)
+    startTracking(options)
   }
 
 
@@ -306,7 +307,7 @@ const Activity = (props) => {
       }
     }
 
-    detectMovement(event, 16)
+    detectMovement(event, 16, 0)
     .then(
       () => startDrag(event)
      )
