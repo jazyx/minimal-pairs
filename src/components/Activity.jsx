@@ -17,9 +17,9 @@ const getBoolean = getBooleanGenerator()
 // <<< HARD-CODED
 const REVIEW_DELAY = 2000;
 const POCKET_DELAY = 200; // just a little more than transition-duration
-const PLAY_DELAY = 1000
-const NEXT_DELAY = 1000
-const DEAL_DELAY = 300
+const PLAY_DELAY = 1000
+const NEXT_DELAY = 1000
+const DEAL_DELAY = 300
 // HARD-CODED >>>
 
 
@@ -102,7 +102,7 @@ const Activity = (props) => {
   }
 
 
-  // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
+  // CHECKING THE ANSWER / CHECKING THE ANSWER / CHECKING THE ANSWER //
 
   const showWrong = () => {
     if (wrong) {
@@ -118,7 +118,7 @@ const Activity = (props) => {
     setTimeout(() => {
       decoyCard.classList.remove("flipped")
       decoySpace.classList.add("active", "reveal", "outside-pocket")
-    }, PLAY_DELAY )
+    }, PLAY_DELAY )
   }
 
 
@@ -164,7 +164,7 @@ const Activity = (props) => {
   }
 
 
-  const moveNearToPocket = () => {
+  const moveNearToPocket = () => {
     cueSpace.classList.add("outside-pocket")
     setTimeout(moveIntoPocket, POCKET_DELAY)
   }
@@ -240,7 +240,7 @@ const Activity = (props) => {
   }
 
 
-  // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
+  // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
   const drag = (pageLoc) => {
     [cueRect, decoyRect].forEach((rect, index) => {
@@ -314,7 +314,7 @@ const Activity = (props) => {
   }
 
 
-  // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
+  // POCKET CLICK OR DRAG, AND PLAY // POCKET CLICK OR DRAG, AND PLAY //
 
   const pocketCard = (event) => {
     // Determine which card from the pocket was clicked. (This means
@@ -347,7 +347,7 @@ const Activity = (props) => {
   const pocketAction = (event) => { //}, url, clip, word) => {
     const { card, index, phoneme, url, clip } = pocketCard(event)
 
-    // <<< NOT YET IMPLEMENTED
+    // <<< NOT YET IMPLEMENTED
     if (cardsAreSpread) {
       if (visibleCard === index) {
         return audio.play(url, clip)
@@ -355,7 +355,7 @@ const Activity = (props) => {
 
       return makeCardVisible(index)
     }
-    // NOT YET IMPLEMENTED >>>
+    // NOT YET IMPLEMENTED >>>
 
     detectMovement(event, 16, 500)
       .then(
@@ -410,7 +410,7 @@ const Activity = (props) => {
 
 
   const prepareToSpreadCards = (index, phoneme) => {
-    // LEAVE FULL CARD SPREAD UNTIL LATER
+    // LEAVE FULL CARD SPREAD UNTIL LATER
     spreadCards(index, phoneme)
 
     // TODO
@@ -450,7 +450,7 @@ const Activity = (props) => {
   }
 
 
-  // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
+  // GENERATING THE ACTIVITY LAYOUT // GENERATING THE ACTIVITY LAYOUT //
 
   const createPockets = () => {
     const useSecondCard = getBoolean()
@@ -518,7 +518,7 @@ const Activity = (props) => {
     // eslint-disable-next-line
     mask = maskRef.current
 
-    // Pointers to DOM elements
+    // Pointers to DOM elements
     if (phoneme0.classList.contains("cue")) {
       // eslint-disable-next-line
       pockets = [

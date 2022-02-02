@@ -12,7 +12,7 @@
  * Each of these components will be absolutely placed, so that their
  * internal elements will belong to the same stacking context. The
  * container <div> will not be positioned, so co-ordinates will be
- * determined with respect to the <main> parent element. THere will be
+ * determined with respect to the <main> parent element. There will be
  * two CardAndPocket components, one for the decoy card and one for the
  * cue card. The stacking will be as follows:
  *
