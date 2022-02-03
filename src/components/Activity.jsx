@@ -244,9 +244,9 @@ const Activity = (props) => {
   // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
   const rider = (event, cardTopLeft) => {
-    const pageLoc = getPageXY(event)
+    const pageLoc = getPageXY(event);
 
-    ;[cueRect, decoyRect].forEach((rect, index) => {
+    [cueRect, decoyRect].forEach((rect, index) => {
       const pocket = pockets[index]
       const overPocket = pointWithin(pageLoc, rect)
 

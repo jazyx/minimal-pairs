@@ -4,7 +4,7 @@
 
 import { shuffle, removeFrom } from '../tools/utilities'
 const pairs = require('../json/pairs.json')
-const AUDIO_DIR = "audio/"
+export const AUDIO_DIR = "audio/"
 
 /** Export an array of pairs of phonemes that can be contrasted with
  * each other. This will be imported by the Index component
