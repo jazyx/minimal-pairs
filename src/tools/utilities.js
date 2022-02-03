@@ -610,7 +610,7 @@ const defaultDragAction = (event, selector, rider, offset) => {
     target.style.top =  y + "px"
 
     if (typeof rider === "function") {
-      rider({ x, y })
+      rider(event, { x, y })
     }
   }
 

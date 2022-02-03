@@ -10,6 +10,7 @@ import { getBooleanGenerator
        , detectMovement
        , startTracking
        , pointWithin
+       , getPageXY
 } from '../tools/utilities'
 const getBoolean = getBooleanGenerator()
 
@@ -242,11 +243,14 @@ const Activity = (props) => {
 
   // CUE DRAG AND DROP // CUE DRAG AND DROP // CUE DRAG AND DROP //
 
-  const rider = (pageLoc) => {
-    [cueRect, decoyRect].forEach((rect, index) => {
-      const pocket = pockets[index]
+  const rider = (event, cardTopLeft) => {
+    const pageLoc = getPageXY(event)
 
-      if (pointWithin(pageLoc, rect)) {
+    ;[cueRect, decoyRect].forEach((rect, index) => {
+      const pocket = pockets[index]
+      const overPocket = pointWithin(pageLoc, rect)
+
+      if (overPocket) {
         pocket.classList.add("hover")
       } else {
         pocket.classList.remove("hover")
