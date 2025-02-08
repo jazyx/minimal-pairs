@@ -5,26 +5,33 @@
   --b: 0;
   --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
+  /* Slightly transparent colour for pocket and mask */
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
   --color: #fff;
 
-  /* Define the maximum dimensions of a centred <main> elemnt */
+  /* Define the maximum dimensions of a centred <main> elemnt
+   * limited to a 2:1 or 1:2 ratio
+   */
   --mainWidth: min(200vh, 100vw);
+  /* full width, unless more than twice the height */
   --mainHeight: min(200vw, 100vh);
+  /* full height, unless more than twice the width */
+
   /* Customize unit size for cards, as standard dimension  */
   --mainAxis: var(--mainHeight);
   --crossAxis: var(--mainWidth);
-  /* Slightly less than half crossAxis to fit split mode nicely*/
+  /* Slightly less than half crossAxis to fit split mode nicely */
   --unit: min(var(--crossAxis) / 2.04, var(--mainAxis) / 2.4);
+  --cent: calc(var(--unit) / 100);
 
   /* Fonts */
   --font: 'Times New Roman', Times, serif;
-  font-size: calc(0.125 * var(--unit));
+  font-size: calc(12 * var(--cent));
 }
 
 #root {
   /* Ensure that the <main> element is centred, and that it uses the
-     colors and fonts defined above
+     colours and fonts defined above
   */
   display: flex;
   justify-content: center;
@@ -59,11 +66,34 @@ div {
   box-sizing: border-box;
 }
 
+/* <<< Temporary, for testing purposes */
+@media (min-aspect-ratio: 9/16) {
+  main {
+    background-color: #300;
+  }
+}
+/* Temporary >>> */
+
+
 @media (min-aspect-ratio: 1/1) {
   :root {
     --mainAxis: var(--mainWidth);
     --crossAxis: var(--mainHeight);
   }
+
+  /* <<< Temporary, for testing purposes */
+  main {
+    background-color: #030;
+  }
+  /* Temporary >>> */
+}
+
+/* <<< Temporary, for testing purposes */
+@media (min-aspect-ratio: 16/9) {
+  main {
+    background-color: #003;
+  }
+  /* Temporary >>> */
 }
 
 .unselectable,

@@ -13,7 +13,7 @@ const About = ({ startActivity }) => {
       <h1>Minimal Pairs</h1>
       <p>A minimal pair is a set of two words whose sounds differ by only one phoneme.<br/>For example: "stuff" and "staff".</p>
 
-      <p>When you are learning English as a foreign language, you may have difficulty hearing minor differences which are important in your target language but not in your native language.</p>
+      <p>When you are learning a foreign language, you may have difficulty hearing minor differences which are important in your target language but not in your native language.</p>
 
       <p>This app helps you to recognize the differences.</p>
 

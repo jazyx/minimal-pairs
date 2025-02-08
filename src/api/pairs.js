@@ -52,9 +52,13 @@ export function setPhonemePair(pair) {
   // lastIndex = pairList.length - 1
   // currentIndex = 0
 
-  // Ensure that the pockets start empty
-  word1 = word2 = undefined
-  played = { [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] }
+  // // Ensure that the pockets start empty
+  // word1 = word2 = undefined
+  // played = { [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] }
+
+    // Fill the pockets
+    word1 = word2 = undefined
+    played = { [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] }
 
   currentPair = pair
 }
@@ -71,6 +75,7 @@ export function getCards() {
 
   if (word1) {
     const spellings = played[phoneme1].map(word => word.spelling)
+
     if (spellings.indexOf(word1.spelling) < 0) {
       played[phoneme1].push(word1)
       played[phoneme2].push(word2)

@@ -1,0 +1,734 @@
+/* --mainAxis is height: this and other properties set in index.css */
+
+:root {
+  --origin: calc(var(--unit) / 2); /* for rotations of <p> elements */
+
+  --dealTop: calc(-1.414 * var(--unit));
+
+  /* border-radius and border-width */
+  --corner: 0.25rem;
+  --edge: 0.01rem;
+  --wrongEdge: calc(5 * var(--edge));
+
+  /* Dimensions of space where cue card appears, and the margins
+     needed to center the cue card
+   */
+  --pairSpace: calc(var(--mainAxis) - var(--unit));
+  --mainMargin: calc(0.5 * (var(--pairSpace) - var(--unit)));
+  --crossMargin: calc(0.5 * (var(--crossAxis) - var(--unit)));
+
+  /* Dimension of visible and hidden parts of cards in the pockets */
+  --pocketOffset: calc(0.14 * var(--unit));
+  --pocketSize: calc(var(--unit) - var(--pocketOffset)); /*Done width*/
+  --pocketFont: 3rem;
+  /* Position of phoneme 2 pocket contents */
+  --pocket2Side: calc(var(--crossAxis) - var(--unit));
+  /* Position of card just before it slides into a pocket */
+  --outsidePocket: calc(var(--pairSpace) - var(--pocketSize));
+  /* Adjustment for left-handed layout */
+  --leftHanded: calc(-1 * var(--unit));
+
+  /* Adjustment for instructions to use in landscape mode */
+  --ruleHeight: 0px; /* non-zero value set in landscape mode*/
+
+  /* Don't let the Play Poneme buttons touch the sides of the pockets */
+  --buttonOffset: calc(5 * var(--edge));
+  /* Push the buttons apart in landscape mode to give room for rule */
+  --buttonSpread: calc(var(--ruleHeight) + var(--buttonOffset));
+  --buttonSize: calc(0.18 * var(--unit));
+
+  --ruleTop: calc( var(--pairSpace)
+                 + var(--pocketOffset)
+                 + var(--buttonOffset)
+                 );
+
+  --btnColor: #3339;
+  --btnBorder: #444;
+  --edgeColor: #fff;
+  --seamColor: #fff8;
+
+  --wrongColor: rgba(51, var(--g), var(--b), var(--a));
+  --wrongPhonemeColor: rgb(102, var(--g), var(--b));
+  --rightPhonemeColor: rgba(var(--r), 153, var(--b), var(--a));
+  --reviewColor: rgba(255, 255, 255, 0.25);
+
+  --doneColor: #383d;
+  --doneSize: max(2 * var(--ruleHeight), 2.4rem);
+  --doneLeft: calc((var(--mainWidth) - var(--doneSize)) / 2);
+
+  --pocketBG: var(--cgColor);
+  --hoverBG: rgba(51, 51, var(--b), var(--a));
+  --hoverBorder: white;
+  --hoverEdge: calc(5 * var(--edge));
+
+  --maskColor: rgba(0, 0, 0, var(--a));
+
+  /* Backgrounds for spelling and phonetic paragraphs */
+  --bgOpacity: 0.33;
+  --phonetic: rgba(0,0,0,var(--bgOpacity));
+  --spelling: rgba(255,255,255,var(--bgOpacity));
+  --ruleColor: #666;
+
+  --wrongDuration: 1s;
+}
+
+/* CARD */
+
+.card-holder {
+  position: absolute;
+  width: var(--unit);
+  height: var(--unit);
+  pointer-events: all;
+}
+
+.space { /* The space can be translated */
+  perspective: var(--mainAxis);
+  transition-property: top, left;
+  transition-duration: .5s;
+  transition-timing-function: ease-in;
+
+  left: var(--crossMargin);
+  top: var(--mainMargin);
+  background-color: var(--bgColor);
+}
+
+.card { /* The card can be flipped inside the space */
+  border: var(--edge) solid var(--edgeColor);
+  border-radius: var(--corner);
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+  transition-property: transform, border-width, border-color;
+  transition-duration: .5s, var(--wrongDuration), var(--wrongDuration);
+  transform-style: preserve-3d;
+
+  cursor: pointer;
+}
+
+.card > * { /* icon image on back, front <div> */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.card * {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.card p {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+}
+
+img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: var(--corner);
+
+  /* Required to prevent svg Play Audio icon from being selected when
+     user drags the cue card
+  */
+  pointer-events: none;
+}
+
+p.spelling {
+  top: 0;
+  background-color: var(--spelling);
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
+  color: #000;
+  transition: color var(--wrongDuration);
+}
+
+p.phonetic {
+  bottom: 0;
+  color: #fff;
+  background-color: var(--phonetic);
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+  font-style: italic;
+}
+
+main.show-phonetic p.phonetic {
+  top: 0;
+  bottom: auto;
+  border-top-left-radius: var(--corner);
+  border-top-right-radius: var(--corner);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+main.show-phonetic p.spelling {
+  top: auto;
+  bottom: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: var(--corner);
+  border-bottom-right-radius: var(--corner);
+}
+
+img.back { /* Play Audio icon */
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  transform: rotateY(180deg)
+}
+
+/* CUES */
+
+.cue .space {
+  z-index: 1;
+}
+
+.decoy .space {
+  transform: rotateZ(30deg)
+}
+
+.card.flipped {
+  transform: rotateY(180deg)
+}
+
+main.show-cue-image .cue .card.flipped {
+  transform: rotateY(0deg)
+}
+
+main.show-cue-image .card.flipped p {
+  display: none;
+}
+
+/* POCKETS */
+
+ul,
+.pocket {
+  position: absolute;
+  bottom: 0;
+}
+
+.pocket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--pocketSize);
+  width: 50%;
+  background-color: var(--pocketBG);
+  border: var(--edge) dashed var(--seamColor);
+  border-top-style: solid;
+  font-size: var(--pocketFont);
+  transition-property: background-color, color;
+  transition-duration: var(--wrongDuration);
+  cursor: pointer;
+}
+
+.pocket.hover {
+  border-width: var(--hoverWidth);
+  border-style: dotted;
+  border-color: var(--hoverBorder);
+  background: var(--hoverBG);
+  transition-duration: 0s;
+}
+
+ul {
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+
+  height: var(--unit);
+  width: var(--unit);
+
+  /* pointer-events: none; */
+}
+
+button {
+  position: absolute;
+  color: white;
+  font-family: var(--font);
+  font-size: 1rem;
+}
+
+.play-phoneme {
+  top: var(--buttonOffset);
+  left: var(--buttonOffset);
+  width: var(--buttonSize);
+  height: var(--buttonSize);
+  font-style: italic;
+
+  border-radius: var(--corner);
+  border-color: var(--btnBorder);
+
+  background-color: var(--btnColor);
+  background-image: url("../icons/sound.svg");
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.done {
+  display: none;
+
+  background-color: var(--rightPhonemeColor);
+  left: var(--doneLeft);
+  width: var(--doneSize);
+  height: var(--doneSize);
+  top: var(--ruleTop);
+  border-radius: 2rem;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.review ~ .done,
+.wrong ~ .done {
+  display: block;
+}
+
+.review ~ p,
+.wrong ~ p {
+  display: none;
+}
+
+.wrong.cue .card{
+  border-color: var(--wrongColor);
+  border-width: var(--wrongEdge);
+}
+
+.wrong.cue p.spelling{
+  color: var(--wrongColor);
+}
+
+.wrong .pocket {
+  cursor: default;
+}
+
+.wrong .play-phoneme {
+  cursor: pointer;
+}
+
+/* LEFT/BOTTOM POCKET */
+
+.phoneme-1 ul,
+.phoneme-1 .pocket {
+  left: auto;
+  right: 0;
+}
+
+.phoneme-1 button {
+  left: auto;
+  right: var(--buttonOffset);
+}
+
+/* INSTRUCTIONS */
+
+p.rule {
+  position: absolute;
+  top: var(--ruleTop);
+  width: 100%;
+  margin: 0;
+  color: var(--ruleColor);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* ANSWERING */
+
+.space.active {
+  top: var(--pairSpace);
+  left: 0;
+}
+
+.phoneme-1 .space.active{
+  left: var(--pocket2Side);
+}
+
+.space.active.outside-pocket {
+  top: var(--outsidePocket);
+  transition-duration: 0.1s
+}
+
+.space.active.inside-pocket {
+  z-index: 0;
+  transition-duration: 0.3s
+}
+
+.card-holder.space.deal{
+  top: var(--dealTop);
+  transform: rotateY(180deg), rotateZ(45deg);
+  transition-duration: 0s;
+}
+
+.space.reveal {
+  left: 0;
+  transform: rotateZ(0deg);
+  z-index: 2;
+}
+
+.phoneme-1 .space.reveal{
+  left: var(--pocket2Side);
+}
+
+.wrong.decoy .pocket {
+  background-color: var(--wrongColor);
+  color: var(--wrongPhonemeColor);
+}
+
+.wrong.cue .pocket {
+  color: var(--rightPhonemeColor);
+}
+
+.review .pocket {
+  color: var(--reviewColor);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* DISPLAY CARDS FROM POCKET / POCKET / DISPLAY CARDS FROM POCKET */
+
+#mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--pairSpace);
+  background-color: var(--cgColor);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#mask.pocket-play{
+  pointer-events: all;
+  opacity: 0.9;
+}
+
+.pocket-play {
+  top: calc(-1 * var(--pocketSize));
+  z-index: 2;
+}
+
+/* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
+
+@media (min-aspect-ratio: 1/1) {
+  :root {
+    --ruleHeight: 1.2rem;
+    --ruleTop: calc(50vh - var(--ruleHeight));
+    --leftSpace: calc(var(--unit) + var(--mainMargin));
+  }
+
+  .space {
+    top: var(--crossMargin);
+    left: var(--mainMargin);
+    background-color: var(--bgColor);
+  }
+
+  main.left-handed .space {
+    left: var(--leftSpace);
+  }
+
+  p.spelling {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg);
+  }
+
+  main.left-handed p.spelling {
+    transform: rotateZ(90deg) ;
+  }
+
+  main.show-phonetic p.spelling {
+    transform: rotateZ(0deg);
+  }
+
+  main.show-phonetic p.phonetic {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg);
+  }
+
+  main.show-phonetic.left-handed p.phonetic {
+    transform: rotateZ(90deg);
+  }
+
+  ul,
+  .pocket {
+    bottom: auto;
+    right: 0;
+  }
+
+  .pocket {
+    width: var(--pocketSize);
+    height: 50%;
+    border: var(--edge) dashed var(--seamColor);
+    border-left-style: solid;
+  }
+
+  .phoneme-1 ul,
+  .phoneme-1 .pocket {
+    top: auto;
+    bottom: 0;
+  }
+
+  main.left-handed ul,
+  main.left-handed .pocket {
+    left: 0;
+    right: auto;
+  }
+
+  .pocket button {
+    top: auto;
+    left: var(--buttonOffset);
+    bottom: var(--buttonSpread);
+    cursor: pointer;
+  }
+
+  .review .pocket button {
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .phoneme-1 button {
+    right: auto;
+    bottom: auto;
+    top: var(--buttonSpread);
+  }
+
+  main.left-handed .pocket button{
+    left: auto;
+    right: var(--buttonOffset);
+  }
+
+  p.rule {
+    left: auto;
+    right: 0;
+    width: var(--pocketSize);
+  }
+
+  main.left-handed p.rule {
+    left: 0;
+    right: auto;
+  }
+
+  /* ANSWERING */
+
+  .card-holder.space.active {
+    top: 0;
+    left: var(--pairSpace);
+  }
+
+  .phoneme-1 .space.active{
+    top: var(--pocket2Side);
+  }
+
+  main.left-handed .space.active{
+    left: 0;
+  }
+
+  main.left-handed .space.active.phoneme-2 {
+    left: var(--leftHanded);
+    top: var(--pocket2Side);
+  }
+
+  .card-holder.space.active.outside-pocket {
+    left: var(--outsidePocket);
+  }
+
+  main.left-handed .space.active.outside-pocket {
+    left: var(--pocketSize);
+  }
+
+  .card-holder.space.reveal {
+    left: var(--mainMargin);
+    top: 0;
+  }
+
+  main.left-handed .space.reveal {
+    left: var(--leftSpace);
+  }
+
+  .card-holder.space.reveal.inside-pocket {
+    left: var(--pairSpace);
+  }
+
+  main.left-handed .card-holder.space.reveal.inside-pocket {
+    left: 0;
+  }
+
+  .phoneme-1 .space.reveal {
+    top: var(--pocket2Side);
+  }
+
+  main.left-handed .space.inside-pocket {
+    left: 0;
+  }
+
+  #mask {
+    width: var(--pairSpace);
+    height: 100vh;
+  }
+
+  .pocket-play {
+    top: auto;
+    left: calc(-1 * var(--pocketSize));
+  }
+
+  .left-handed .pocket-play {
+    left: var(--pocketSize);
+  }
+
+  .done {
+    right: 0;
+    left: auto;
+    width: var(--pocketSize);
+    top: var(--ruleTop);
+    height: var(--doneSize);
+  }
+
+  main.left-handed .done {
+    right: auto;
+    left: 0;
+    top: var(--ruleTop);
+    height: var(--doneSize);
+  }
+}
+
+
+/* SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT / SPLIT */
+
+@media (min-aspect-ratio: 16/9) {
+  :root {
+    --splitHeight: 66.667vh;
+    --splitTop: calc((var(--splitHeight) - var(--unit)) / 2);
+    /* card .space */
+    --side1: calc(var(--mainWidth) - var(--unit));
+    --spaceLeft: calc(var(--side1) / 2);
+    --pairSpace: calc(var(--crossAxis) - var(--unit));
+    --outsidePocket: calc(var(--pairSpace) - var(--pocketSize));
+  }
+
+  main.split .space {
+    top: var(--splitTop);
+    left: var(--spaceLeft);
+    background-color: var(--bgColor);
+    z-index: 1;
+  }
+
+  main.split p.spelling {
+    transform: rotateZ(0) ;
+  }
+
+  p.spelling {
+    transform-origin: var(--origin) var(--origin);
+    transform: rotateZ(270deg);
+  }
+
+  main.split.show-phonetic p.spelling {
+    transform: rotateZ(0deg);
+    top: auto;
+    bottom: 0;
+  }
+
+  main.split.show-phonetic p.phonetic {
+    transform: rotateZ(0deg);
+    bottom: auto;
+    top: 0;
+  }
+
+  main.split ul,
+  main.split .pocket {
+    bottom: 0;
+    right: auto;
+  }
+
+  main.split .phoneme-1 ul,
+  main.split .phoneme-1 .pocket {
+    left: auto;
+    right: 0;
+  }
+
+  main.split .pocket {
+    width: 50%;
+    height: var(--pocketSize);
+    border: var(--edge) dashed var(--seamColor);
+    border-top-style: solid;
+  }
+
+  main.split .pocket button {
+    left: var(--buttonOffset);
+    top: var(--buttonOffset);
+    bottom: auto;
+    right: auto;
+  }
+
+  main.split .phoneme-1 .pocket button {
+    left: auto;
+    right: var(--buttonOffset);
+  }
+
+  main.split p.rule {
+    top: var(--splitHeight);
+    bottom: var(--buttonOffset);
+    width: 100%;
+  }
+
+  /* ANSWERING */
+
+  main.split .card-holder.space.active {
+    left: 0;
+    top: var(--pairSpace);
+  }
+
+  main.split .phoneme-1 .space.active {
+    left: var(--side1);
+  }
+
+  main.split .space.active.outside-pocket {
+    top: var(--outsidePocket);
+  }
+
+  main.split .space.reveal {
+    left: 0;
+    top: var(--splitTop);
+  }
+
+  main.split .phoneme-1 .space.reveal {
+    left: var(--side1);
+  }
+
+  main.split .card-holder.space.reveal.inside-pocket {
+    left: 0;
+  }
+
+  main.split .space.inside-pocket {
+    left: 0;
+  }
+
+  main.split .phoneme-1 .space.reveal,
+  main.split .phoneme-1 .card-holder.space.inside-pocket {
+      left: var(--side1);
+  }
+
+  main.split #mask {
+    width: 100vw;
+    height: calc(100vh - var(--pocketSize));
+  }
+
+  main.split .done {
+    right: auto;
+    left: var(--doneLeft);
+    top: var(--splitHeight);
+    width: var(--doneSize);
+    height: var(--doneSize);
+  }
+
+  main.split .pocket-play {
+    left: auto;
+    top: calc(-1 * var(--pocketSize));
+  }
+
+  main.split .decoy.review .space {
+    display: none;
+  }
+}

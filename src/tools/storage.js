@@ -1,17 +1,17 @@
 /**
  * import/tools/storage.js
  *
- * Exports a singleton Storage instance which reads from and writes to
- * localStorage, if it's available, or just pretends to do so if it's
- * not.
+ * Exports a singleton Storage instance which reads from and
+ * writes to localStorage, if it's available, or just pretends
+ * to do so if it's not.
  */
 
 
 
 /**
  * If window.localStorage is not available, an instance of the
- * CustomStorage class will be used instead. No data will be saved
- * to the user's hard drive, and no errors will occur.
+ * CustomStorage class will be used instead. No data will be
+ * saved to the user's hard drive, and no errors will occur.
  *
  * @class      CustomStorage (name)
  */

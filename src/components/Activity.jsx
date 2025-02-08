@@ -426,6 +426,7 @@ const Activity = (props) => {
     // finally(spreadCards)
   }
 
+
   const makeCardVisible = (word) => {
     // Adjust other cards in this list
     // Adjust all cards in matching list

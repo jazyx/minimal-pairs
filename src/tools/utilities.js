@@ -7,6 +7,18 @@
 
 /// COLOR FUNCTIONS //
 
+/**
+ * @param {String} color     Accepted formats:
+ *                           HEX
+ *                             "RGB"
+ *                             "#RGB"
+ *                             "RRGGBB"
+ *                             "#RRGGBB"
+ *                           HSL
+ *                             "hsl(412.523,50%,40%)"   <<< percentages
+ *                             "HSL(412.523, 0.5, 0.4)" <<< ratios
+ * @return ["RR", "GG", "BB"]
+ */
 export const rgbify = (color) => {
   if (color.substring(0, 3).toLowerCase() === "hsl") {
     return HSLtoRGB(color);
@@ -58,6 +70,20 @@ export const toneColor = (color, ratio) => {
   return (prefix ? "#" : "") + rgb.join("");
 };
 
+
+/**
+ * @param {String} color     Accepted formats:
+ *                           HEX
+ *                             "RGB"
+ *                             "#RGB"
+ *                             "RRGGBB"
+ *                             "#RRGGBB"
+ *                           HSL
+ *                             "hsl(412.523,50%,40%)"   <<< percentages
+ *                             "HSL(412.523, 0.5, 0.4)" <<< ratios
+ * @param {Number} opacity   0.0 - 1.0
+ * @return "rgba(rrr, ggg, bbb, aaa)", where values are numbers
+ */
 export const translucify = (color, opacity) => {
   if (color[0] === "#") {
     color = color.slice(1);
@@ -128,6 +154,13 @@ export const hsl2hex = (h, s, l) => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
+/**
+ * @param {String} color     Accepted formats:
+ *                           HSL
+ *                             "hsl(412.523,50%,40%)" <<< percentages
+ *                             "412.523, 0.5, 0.4"    <<< ratios
+ * @return ["RR", "GG", "BB"]
+ */
 export const HSLtoRGB = (colorString) => {
   // "hsl(412.523,50%,40%)" <<< percentages
   // "412.523, 0.5, 0.4"    <<< ratios

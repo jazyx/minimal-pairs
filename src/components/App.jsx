@@ -46,7 +46,7 @@ const App = (props) => {
   }
 
 
-  useEffect(() => {
+  useEffect(() => {
     mainElement = mainRef.current
   }, [])
 

@@ -1,0 +1,164 @@
+:root {
+  /* Customize background colour, allowing customizable opacity*/
+  --r: 0;
+  --g: 0;
+  --b: 0;
+  --a: 0.9;
+  --bgColor: rgb(var(--r), var(--g), var(--b));
+  --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
+  --color: #fff;
+
+  /* Define the maximum dimensions of a centred <main> elemnt */
+  --mainWidth: min(200vh, 100vw);
+  --mainHeight: min(200vw, 100vh);
+  /* Customize unit size for cards, as standard dimension  */
+  --mainAxis: var(--mainHeight);
+  --crossAxis: var(--mainWidth);
+  /* Slightly less than half crossAxis to fit split mode nicely*/
+  --unit: min(var(--crossAxis) / 2.04, var(--mainAxis) / 2.4);
+
+  /* Fonts */
+  --font: 'Times New Roman', Times, serif;
+  font-size: calc(0.125 * var(--unit));
+}
+
+#root {
+  /* Ensure that the <main> element is centred, and that it uses the
+     colours and fonts defined above
+  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bgColor);
+  color: var(--color);
+  font-family: var(--font);
+  text-align: center;
+}
+
+html,
+body {
+  /* Prevent drag-to-refresh */
+  overscroll-behavior-y: contain;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  position: relative;
+  width: var(--mainWidth);
+  height: var(--mainHeight);
+  overflow: hidden;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  :root {
+    --mainAxis: var(--mainWidth);
+    --crossAxis: var(--mainHeight);
+  }
+}
+
+.unselectable,
+.unselectable * {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+
+/*********************************************************************/
+/** Slider-style checkbox                                           **/
+/**                                                                 **/
+/** Note that the #left-handed checkbox slides to the left when it  **/
+/** is switched _on_.                                               **/
+/*********************************************************************/
+
+label {
+ display: block;
+}
+
+/* Hide the checkbox itself */
+input[type=checkbox] {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* The outer .slot span appears twice as wide as it is high, with
+ * rounded ends. It shows a dull background and off border when
+ * unchecked.
+ */
+input[type=checkbox] ~ span {
+  --size: 0.6em;
+  --onColor: rgb(255,255,255);
+  --offColor: rgba(255,255,255,0.5);
+  --dullColor: rgba(255,255,255,0.125);
+
+  display: inline-block;
+  position: relative;
+  margin: 0 0.5em;
+  width: calc(2 * var(--size));
+  height: var(--size);
+  border: 0.02em solid var(--offColor);
+  border-radius: var(--size);
+  background-color: var(--dullColor);
+}
+
+/* When checked (or always, if it's the #left-handed checkbox) the outer
+ * .slot span appears brighter, with a transparent background
+ */
+input[type=checkbox]:checked ~ span,
+#left-handed ~ span {
+  border-color: var(--onColor);
+  background-color: transparent;
+}
+
+/* The inner .slider span appears as a filled circle inside the .slot.
+ * When it is _off_, it appears
+ * • On the left
+ * • In a dull colour
+ */
+input[type=checkbox] ~ span span{
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  width: var(--size);
+  height: var(--size);
+  left: 0;
+  top: 0;
+
+  background-color: var(--offColor);
+  border-radius: var(--size);
+  transition: all 0.25s;
+}
+
+/* For the #left-handed checkbox, the inner .slider span always appears
+ * on. When it is _off_, it appears on the right.
+ */
+#left-handed ~ span span {
+  left: var(--size);
+  background-color: var(--onColor);
+}
+
+/* When the checkbox is _on_, the slider moves to the right... */
+input[type=checkbox]:checked ~ span  span {
+  left: var(--size);
+  background-color: var(--onColor);
+}
+
+/* ... except for the #left-handed checkbox, which moves left.*/
+#left-handed:checked ~ span  span {
+  left: 0;
+}
