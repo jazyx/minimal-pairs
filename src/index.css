@@ -1,13 +1,13 @@
 :root {
   /* Customize background colour, allowing customizable opacity*/
-  --r: 0;
-  --g: 0;
-  --b: 0;
+  --r: 34;
+  --g: 34;
+  --b: 34;
   --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
   /* Slightly transparent colour for pocket and mask */
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
-  --color: #fff;
+  --light: #ddd;
 
   /* Define the maximum dimensions of a centred <main> elemnt
    * limited to a 2:1 or 1:2 ratio
@@ -38,7 +38,7 @@
   align-items: center;
   height: 100vh;
   background-color: var(--bgColor);
-  color: var(--color);
+  color: var(--light);
   font-family: var(--font);
   text-align: center;
 }
@@ -66,7 +66,7 @@ div {
   box-sizing: border-box;
 }
 
-/* <<< Temporary, for testing purposes */
+/* <<< Temporary, for testing purposes
 @media (min-aspect-ratio: 9/16) {
   main {
     background-color: #300;
@@ -81,20 +81,20 @@ div {
     --crossAxis: var(--mainHeight);
   }
 
-  /* <<< Temporary, for testing purposes */
+  /* <<< Temporary, for testing purposes
   main {
     background-color: #030;
   }
   /* Temporary >>> */
 }
 
-/* <<< Temporary, for testing purposes */
+/* <<< Temporary, for testing purposes
 @media (min-aspect-ratio: 16/9) {
   main {
     background-color: #003;
   }
-  /* Temporary >>> */
 }
+/* Temporary >>> */
 
 .unselectable,
 .unselectable * {

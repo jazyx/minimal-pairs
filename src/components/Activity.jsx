@@ -177,6 +177,7 @@ const Activity = (props) => {
     }
 
     cueSpace.classList.add("active")
+
     audio.playClip(cueURL, cueClip)
     setTimeout(moveNearToPocket, REVIEW_DELAY)
   }

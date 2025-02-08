@@ -8,6 +8,21 @@ import { AudioContext } from './AudioContext'
 
 
 const Card = forwardRef((props, cardRef) => {
+  console.log("props", props);
+  // {
+  //   "card": {
+  //     "spelling": "marsh",
+  //     "phonetic": "/mɑː∫/",
+  //     "image": "img/ɑ/marsh.jpg",
+  //     "clip": [
+  //       3.75,
+  //       4.9
+  //     ],
+  //     "url": "audio/ɑ.mp3"
+  //   },
+  //   "role": "decoy" | "cue"          | missing for seen cards,
+  //   "action": null  | checkForDrag() | pocketAction()
+  // }
   // console.log("card:", props.card)
   const {
     spelling
@@ -30,7 +45,7 @@ const Card = forwardRef((props, cardRef) => {
                     )
   const src = props.taboo ? (image_ || image) : image
   const audio = useContext(AudioContext)
-  const action = props.action // will be undefined for decoy
+  const action = props.action // will be null for decoy
               || (() => audio.playClip(url, clip)) // only for decoy
 
   return (

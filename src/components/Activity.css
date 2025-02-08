@@ -15,6 +15,7 @@
   /* For rotations of cards in non-split landscape mode */
   --longOrigin: calc(var(--unit) - var(--corner));
   --shortOrigin: var(--corner);
+  --origin: calc(var(--unit) / 2);
 
   /* Place cards above top of page before they are dealt,
    * even if they are rotated by 45°, so they are not seen
@@ -107,6 +108,7 @@
 .card {
   width: var(--unit);
   height: var(--unit);
+  border-radius: var(--corner);
 }
 
 /* .card-holder defines rules for both active and
@@ -176,8 +178,17 @@
 }
 
 .card .details {
-  background-color: #f008;
+  background-color: #fff6;
   height: 1.2em;
+}
+
+div[class^=phoneme].wrong .details {
+  background-color: #f006;
+}
+
+div[class^=phoneme].review .details,
+  div[class^=phoneme].seen .details {
+    background-color: #fff6;
 }
 
 img {
@@ -218,11 +229,6 @@ div.details {
 
 .front .icon:hover {
   opacity: 1;
-}
-
-.space .flipped .meaning {
-  visibility: hidden;
-  pointer-events: none;
 }
 
 p.phonetic {
@@ -272,16 +278,29 @@ img.back { /* Play Audio icon */
   transform: rotateZ(30deg)
 }
 
+/* By default, turn both cards face down */
 .card.flipped {
-  transform: rotateY(180deg)
+  transform: rotateY(180deg);
+
+  & .details {
+    background-color: transparent;
+  }
 }
 
+/* Show the cue card face up... */
 main.show-cue-image .cue .card.flipped {
   transform: rotateY(0deg)
 }
 
+/* ... but without its spelling... */
 main.show-cue-image .card.flipped p {
   display: none;
+}
+
+/* ... or its meaning (Wiktionary) icon */
+.space .flipped .meaning {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* POCKETS */
@@ -515,7 +534,7 @@ p.rule {
 
   /* .wrong.cue p.spelling { */
   div.details {
-    transform-origin: var(--longOrigin) var(--shortOrigin);
+    transform-origin: var(--origin) var(--origin);
     transform: rotateZ(270deg);
   }
 

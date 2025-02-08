@@ -6,7 +6,7 @@
   --a: 0.9;
   --bgColor: rgb(var(--r), var(--g), var(--b));
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
-  --color: #fff;
+  --light: #fff;
 
   /* Define the maximum dimensions of a centred <main> elemnt */
   --mainWidth: min(200vh, 100vw);
@@ -31,7 +31,7 @@
   align-items: center;
   height: 100vh;
   background-color: var(--bgColor);
-  color: var(--color);
+  color: var(--light);
   font-family: var(--font);
   text-align: center;
 }
