@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
-import { AudioContext } from '../contexts/AudioContext'
+import { PreferencesContext, AudioContext } from '../contexts'
 
 import './Activity.css';
 import CardAndPocket from './CardAndPocket'
@@ -25,6 +25,7 @@ const DEAL_DELAY = 300
 
 
 const Activity = (props) => {
+  const { taboo } = useContext(PreferencesContext)
   // Shared with all cards and the Play Phoneme buttons
   const audio = useContext(AudioContext)
   // Used for animating cue and decoy cards
@@ -36,13 +37,16 @@ const Activity = (props) => {
   const maskRef = useRef()
   // Used to trigger a re-render with a new card
   const [counter, setCounter] = useState(0)
+  const phonemeDivs = [phoneme0Ref.current, phoneme1Ref.current]
+  // ^^^ will be undefined until first cards are in the pocket
+
 
   const {
     phonemes
   , word1
   , word2
   , played: playedCards
-  } = getCards() // imported from pairs.js
+  } = getCards(!taboo) // imported from pairs.js
 
   // { "phonemes": [
   //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -416,11 +420,11 @@ const Activity = (props) => {
 
 
   const prepareToSpreadCards = (cardIndex, phonemeIndex) => {
-    // 
+    //
     // LEAVE FULL CARD SPREAD UNTIL LATER
     spreadCards(cardIndex, phonemeIndex)
 
-    const phoneme = phonemes[phonemeIndex]
+    const phoneme = phonemeDivs[phonemeIndex]
 
     // TODO
     // Get number of cards in pocket
@@ -431,7 +435,8 @@ const Activity = (props) => {
     const topCard = phoneme.querySelector("li div") // .card-holder
     const details = topCard.querySelector(".details")
     const { width, height } = details.getBoundingClientRect()
-    
+
+    // console.log({ width, height });
 
     // Determine direction of spread (up, left, right)
     // Calculate position of oldest card when spread (with size as

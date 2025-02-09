@@ -4,7 +4,7 @@
 
 
 import React, { useContext, forwardRef } from 'react'
-import { AudioContext } from '../contexts/AudioContext'
+import { PreferencesContext, AudioContext } from '../contexts/'
 
 
 const Card = forwardRef((props, cardRef) => {
@@ -45,8 +45,11 @@ const Card = forwardRef((props, cardRef) => {
                     ? " space"
                     : ""
                     )
-  const src = props.taboo ? (image_ || image) : image
+
+  const { taboo } = useContext(PreferencesContext)
   const audio = useContext(AudioContext)
+  
+  const src = taboo ? (image_ || image) : image
   const action = props.action // will be null for decoy
               || (() => audio.playClip(url, clip)) // only for decoy
   const icon = /wikipedia/i.test(wiki)

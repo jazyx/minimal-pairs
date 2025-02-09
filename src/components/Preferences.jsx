@@ -27,10 +27,12 @@ const Preferences = ({ startActivity }) => {
     split,
     showCue,
     phonetic,
+    taboo,
     toggleleftHanded,
     toggleSplit,
     toggleCue,
-    togglePhonetic
+    togglePhonetic,
+    toggleTaboo
   } = useContext(PreferencesContext)
 
   return (
@@ -90,6 +92,19 @@ const Preferences = ({ startActivity }) => {
             <span className="slider" />
           </span>
           Always show phonetic spelling
+        </label>
+
+        <label htmlFor="taboo">
+          <input
+            id="taboo"
+            type="checkbox"
+            defaultChecked={taboo}
+            onChange={toggleTaboo}
+          />
+          <span className="slot">
+            <span className="slider" />
+          </span>
+          Allow taboo words
         </label>
       </fieldset>
 

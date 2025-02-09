@@ -75,7 +75,7 @@ export function setPhonemePair(pair) {
  *
  * @returns
  */
-export function getCards() {
+export function getCards(noTaboo) {
   const [ phoneme1, phoneme2 ] = phonemeSymbols
 
   if (word1) {
@@ -88,11 +88,19 @@ export function getCards() {
   }
 
   // Grab the first card and (for now) move it to the end
-  const cards = pairList.shift()
-  pairList.push(cards)
+  do {
+    const cards = pairList.shift()
+    pairList.push(cards)
 
-  word1 = getWordData(phoneme1, cards[0])
-  word2 = getWordData(phoneme2, cards[1])
+    word1 = getWordData(phoneme1, cards[0])
+    word2 = getWordData(phoneme2, cards[1])
+
+    if (word1.image && word2.image) {
+      // if noTaboo, then this pair is clean
+      // if !noTaboo, while loop will exit anyway
+      break
+    }
+  } while (noTaboo)
 
   removeFrom(played[phoneme1], word1)
   removeFrom(played[phoneme2], word2)

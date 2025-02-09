@@ -14,6 +14,7 @@ const store = storage.get({
 , split: true
 , showCue: true
 , phonetic: true
+, taboo: false
 , pair: undefined // will be set by default if missing
 })
 
@@ -24,16 +25,18 @@ export const PreferencesContext = createContext()
 export const PreferencesProvider = ({ children }) => {
   // Preferences will be set from store only the first time. The
   // saved state will be used thereafter.
-  const [ leftHanded, setleftHanded  ] = useState(store.leftHanded)
-  const [ split,      setSplit        ] = useState(store.split)
-  const [ showCue,    setShowCue      ] = useState(store.showCue)
-  const [ phonetic,   setShowPhonetic ] = useState(store.phonetic)
-  const [ pair,       setPair         ] = useState(store.pair)
-
-  const [ classes, setClasses ] = useState("")
-
+  const [leftHanded, setleftHanded  ] = useState(store.leftHanded)
+  const [split,      setSplit       ] = useState(store.split)
+  const [showCue,    setShowCue     ] = useState(store.showCue)
+  const [phonetic,   setShowPhonetic] = useState(store.phonetic)
+  const [taboo,      setTaboo       ] = useState(store.taboo)
   
-  
+  const [pair,       setPair        ] = useState(store.pair)
+
+  const [classes, setClasses ] = useState("")
+
+
+
   const toggleleftHanded = () => {
     const newValue = !leftHanded
     setleftHanded(newValue)
@@ -62,6 +65,13 @@ export const PreferencesProvider = ({ children }) => {
   }
 
 
+  const toggleTaboo = () => {
+    const newValue = !taboo
+    setTaboo(newValue)
+    storage.setItem("taboo", newValue)
+  }
+
+
   const updateClasses = () => {
     const classes = ""
     + (leftHanded ? " left-handed"    : "")
@@ -79,14 +89,16 @@ export const PreferencesProvider = ({ children }) => {
     <PreferencesContext.Provider
       value ={{
         leftHanded,
-        split,     
-        showCue,   
-        phonetic,  
-        pair,      
+        split,
+        showCue,
+        phonetic,
+        taboo,
+        pair,
         toggleleftHanded,
         toggleSplit,
         toggleCue,
         togglePhonetic,
+        toggleTaboo,
         classes
       }}
     >

@@ -142,7 +142,7 @@
     , "shit": {
         "spelling": "shit"
       , "phonetic": "/∫ɪt/"
-      , "image": "img/ɪ/shit_.png"
+      , "image_": "img/ɪ/shit_.png"
       , "clip": [6.650, 7.750]
       , "wiki": "https://en.wikipedia.org/wiki/Shit"
       }
