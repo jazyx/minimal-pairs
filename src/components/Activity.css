@@ -15,7 +15,7 @@
   /* For rotations of cards in non-split landscape mode */
   --longOrigin: calc(var(--unit) - var(--corner));
   --shortOrigin: var(--corner);
-  --origin: calc(var(--unit) / 2);
+  --origin: calc((var(--unit) - var(--cent)) / 2);
 
   /* Place cards above top of page before they are dealt,
    * even if they are rotated by 45°, so they are not seen
@@ -105,7 +105,9 @@
 
 .card-holder,
 .board,
-.card {
+.card,
+.front,
+.back {
   width: var(--unit);
   height: var(--unit);
   border-radius: var(--corner);
@@ -182,7 +184,7 @@
   height: 1.2em;
 }
 
-div[class^=phoneme].wrong .details {
+div[class^=phoneme].wrong .active .details {
   background-color: var(--wrong);
 }
 
@@ -280,6 +282,7 @@ img.back { /* Play Audio icon */
 /* By default, turn both cards face down */
 .card.flipped {
   transform: rotateY(180deg);
+  backface-visibility: hidden;
 
   & .details {
     background-color: transparent;
@@ -288,7 +291,7 @@ img.back { /* Play Audio icon */
 
 /* Show the cue card face up... */
 main.show-cue-image .cue .card.flipped {
-  transform: rotateY(0deg)
+  transform: none
 }
 
 /* ... but without its spelling... */
