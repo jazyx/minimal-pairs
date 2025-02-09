@@ -85,3 +85,48 @@ ul#index li:hover {
 #index button.select:hover {
   background-color: var(--rightPhonemeColor);
 }
+
+#contact {
+  --min-height: 100px;
+  --height: max(var(--min-height), 50vh);
+  --vertical: calc((100vh - var(--height)) / 2);
+  margin: var(--vertical) auto;
+  position: relative;
+  height: 50vh;
+  width: 50vw;
+
+  h1 {
+    margin: 0;
+  }
+
+  a {
+    color: #fec;
+
+    &:visited {
+      color: #fe9;
+    }
+  }
+}
+
+/* Show the GitHub logo */
+a.github {
+  width: 0;
+  height: 0;
+
+  img {
+    position: absolute;
+    pointer-events: all;
+    top: auto;
+    left: auto;
+    right: 3px;
+    bottom: 3px;
+    width: 32px;
+    height: 32px;
+    filter: grayscale(1);
+    opacity: 0.75;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

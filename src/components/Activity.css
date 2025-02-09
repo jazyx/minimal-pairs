@@ -178,17 +178,12 @@
 }
 
 .card .details {
-  background-color: #fff6;
+  background-color: var(--details);
   height: 1.2em;
 }
 
 div[class^=phoneme].wrong .details {
-  background-color: #f006;
-}
-
-div[class^=phoneme].review .details,
-  div[class^=phoneme].seen .details {
-    background-color: #fff6;
+  background-color: var(--wrong);
 }
 
 img {
@@ -225,6 +220,10 @@ div.details {
   opacity: 0.5;
   cursor: pointer;
   pointer-events: all;
+}
+
+.front .icon.credits {
+  opacity: 0;
 }
 
 .front .icon:hover {

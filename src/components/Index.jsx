@@ -22,14 +22,14 @@ import './Index.css';
 
 
 const Index = (props) =>  {
-  console.log("props:", props)
+  const { startActivity } = props
   const audio = useContext(AudioContext)
 
   const current = getCurrentPair()
 
   const itemClicked = (pair) => {
     setPhonemePair(pair)
-    props.startActivity()
+    startActivity()
   }
 
   const getPhonemeButton = ({ phoneme, url, clip }) => {

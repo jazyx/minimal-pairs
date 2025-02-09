@@ -10,6 +10,8 @@ export const AUDIO_DIR = "audio/"
  * each other. This will be imported by the Index component
  */
 export const phonemePairs = Object.keys(pairs.pairs)
+  // Ignore pairs like "ɪiX" which have not been fully treated yet
+  .filter( pairing => !pairing.match(/X$/))
 export const pairIndex = pairs.index
 
 // let taboo = false

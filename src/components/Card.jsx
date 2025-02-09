@@ -18,7 +18,9 @@ const Card = forwardRef((props, cardRef) => {
   //       3.75,
   //       4.9
   //     ],
-  //     "url": "audio/ɑ.mp3"
+  //     "url": "audio/ɑ.mp3",
+  //     "wiki": "https://en.wiktionary.org/wiki/<word>#English" ||
+  //             "https://en.wikipedia.org/wiki/<word>"
   //   },
   //   "role": "decoy" | "cue"          | missing for seen cards,
   //   "action": null  | checkForDrag() | pocketAction()
@@ -31,6 +33,7 @@ const Card = forwardRef((props, cardRef) => {
   , url
   , image
   , image_
+  , wiki
   } = props.card
 
   const className = "card"
@@ -47,6 +50,9 @@ const Card = forwardRef((props, cardRef) => {
   const audio = useContext(AudioContext)
   const action = props.action // will be null for decoy
               || (() => audio.playClip(url, clip)) // only for decoy
+  const icon = wiki.match(/wikipedia/i)
+    ? "img/icons/wikipedia.webp"
+    : "img/icons/wiktionary.svg"
 
   return (
     // 
@@ -81,18 +87,20 @@ const Card = forwardRef((props, cardRef) => {
 
             <div className="details">
               <img
-                className="icon"
+                className="icon credits"
                 src="img/icons/credits.svg"
                 alt="Credit"
               />
 
               <p className="spelling">{spelling}</p>
 
-              <img
-                className="icon meaning"
-                src="img/icons/wiktionary.svg"
-                alt="Meaning"
-              />
+              <a href={wiki} target="meaning">
+                <img
+                  className="icon meaning"
+                  src={icon}
+                  alt="Meaning"
+                />
+              </a>
             </div>
 
             <p className="phonetic">{phonetic}</p>

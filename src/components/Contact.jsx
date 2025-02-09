@@ -8,7 +8,17 @@ import React from 'react';
 
 const Contact = (props) => {
  return (
-   <h1>Contact page goes here</h1>
+   <div id="contact">
+    <h3>Contact us</h3>
+    <p>Please <a href="https://github.com/jazyx/minimal-pairs/issues/new/choose">create an issue on the GitHub website</a> and we'll get back to you as soon as we can.</p>
+    <a
+      className="github"
+      href="https://github.com/jazyx/minimal-pairs"
+      target="github"
+    >
+      <img src="img/icons/github.svg" alt="github"/>
+    </a>
+  </div>
  )
 }
 

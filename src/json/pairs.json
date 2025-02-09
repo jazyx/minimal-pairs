@@ -10,30 +10,35 @@
       , "phonetic": "/bɑːn/"
       , "image": "img/ɑ/barn.jpg"
       , "clip": [1.10, 2.250]
+      , "wiki": "https://en.wiktionary.org/wiki/barn#English"
       }
     , "heart": {
         "spelling": "heart"
       , "phonetic": "/hɑːt/"
       , "image": "img/ɑ/heart.jpg"
       , "clip": [2.450, 3.550]
+      , "wiki": "https://en.wiktionary.org/wiki/heart#English"
       }
     , "marsh": {
         "spelling": "marsh"
       , "phonetic": "/mɑː∫/"
       , "image": "img/ɑ/marsh.jpg"
       , "clip": [3.750, 4.90]
+      , "wiki": "https://en.wikipedia.org/wiki/Marsh"
       }
     , "park": {
         "spelling": "park"
       , "phonetic": "/pɑːk/"
       , "image": "img/ɑ/park.jpg"
       , "clip": [5.10, 6.250]
+      , "wiki": "https://en.wiktionary.org/wiki/park#English"
       }
     , "staff": {
         "spelling": "staff"
       , "phonetic": "/stɑːf/"
       , "image": "img/ɑ/staff.jpg"
       , "clip": [6.450, 7.70]
+      , "wiki": "https://en.wiktionary.org/wiki/staff#English"
       }
     }
 
@@ -47,42 +52,49 @@
       , "phonetic": "/biːʧ/"
       , "image": "img/i/beach.jpg"
       , "clip": [1.0, 2.150]
+      , "wiki": "https://en.wiktionary.org/wiki/beach#English"
       }
     , "cheek": {
         "spelling": "cheek"
       , "phonetic": "/ʧiːk/"
       , "image": "img/i/cheek.jpg"
       , "clip": [2.30, 3.450]
+      , "wiki": "https://en.wiktionary.org/wiki/cheek#English"
       }
     , "feast": {
         "spelling": "feast"
       , "phonetic": "/fiːst/"
       , "image": "img/i/feast.jpg"
       , "clip": [3.60, 4.750]
+      , "feast": "https://en.wiktionary.org/wiki/feast#English"
       }
     , "peeler": {
         "spelling": "peeler"
       , "phonetic": "/piːlə/"
       , "image": "img/i/peeler.jpg"
       , "clip": [4.850, 6.0]
+      , "wiki": "https://en.wiktionary.org/wiki/peeler#English"
       }
     , "sheep": {
         "spelling": "sheep"
       , "phonetic": "/∫iːp/"
       , "image": "img/i/sheep.jpg"
       , "clip": [6.15, 7.30]
+      , "wiki": "https://en.wiktionary.org/wiki/sheep#English"
       }
     , "sheet": {
         "spelling": "sheet"
       , "phonetic": "/∫iːt/"
       , "image": "img/i/sheet.jpg"
       , "clip": [7.450, 8.550]
+      , "wiki": "https://en.wiktionary.org/wiki/Sheet#English"
       }
     , "teat": {
         "spelling": "teat"
       , "phonetic": "/tiːt/"
       , "image": "img/i/teat.jpg"
       , "clip": [8.70, 9.482]
+      , "wiki": "https://en.wikipedia.org/wiki/Teat"
       }
     }
 
@@ -97,36 +109,42 @@
       , "image": "img/ɪ/bitch.jpg"
       , "image_": "img/ɪ/bitch_.jpg"
       , "clip": [0.80, 1.850]
+      , "wiki": "https://en.wiktionary.org/wiki/bitch#English"
       }
     , "chick": {
         "spelling": "chick"
       , "phonetic": "/ʧɪk/"
       , "image": "img/ɪ/chick.jpg"
       , "clip": [2.0, 2.950]
+      , "wiki": "https://en.wiktionary.org/wiki/chick#English"
       }
     , "fist": {
         "spelling": "fist"
       , "phonetic": "/fɪst/"
       , "image": "img/ɪ/fist.jpg"
       , "clip": [3.10, 4.20]
+      , "wiki": "https://en.wikipedia.org/wiki/Fist"
       }
     , "pillar": {
         "spelling": "pillar"
       , "phonetic": "/pɪlə/"
       , "image": "img/ɪ/pillar.jpg"
       , "clip": [4.350, 5.350]
+      , "wiki": "https://en.wiktionary.org/wiki/pillar#English"
       }
     , "ship": {
         "spelling": "ship"
       , "phonetic": "/∫ɪp/"
       , "image": "img/ɪ/ship.jpg"
       , "clip": [5.50, 6.50]
+      , "wiki": "https://en.wiktionary.org/wiki/ship#English"
       }
     , "shit": {
         "spelling": "shit"
       , "phonetic": "/∫ɪt/"
       , "image": "img/ɪ/shit_.png"
       , "clip": [6.650, 7.750]
+      , "wiki": "https://en.wikipedia.org/wiki/Shit"
       }
     , "tit": {
         "spelling": "tit"
@@ -134,6 +152,7 @@
       , "image": "img/ɪ/tit.jpg"
       , "image_": "img/ɪ/tit_.jpg"
       , "clip": [7.859, 8.683]
+      , "wiki": "https://en.wiktionary.org/wiki/tit#English"
       }
     }
 
@@ -147,30 +166,35 @@
       , "phonetic": "/bʌn/"
       , "image": "img/ʌ/bun.jpg"
       , "clip": [0.80, 1.85]
+      , "wiki": "https://en.wiktionary.org/wiki/bun#English"
       }
     , "hut": {
         "spelling": "hut"
       , "phonetic": "/hʌt/"
       , "image": "img/ʌ/hut.jpg"
       , "clip": [2.0, 3.050]
+      , "wiki": "https://en.wiktionary.org/wiki/hut#English"
       }
     , "mush": {
         "spelling": "mush"
       , "phonetic": "/mʌ∫/"
       , "image": "img/ʌ/mush.jpg"
       , "clip": [3.20, 4.10]
+      , "wiki": "https://en.wiktionary.org/wiki/mush#English"
       }
     , "puck": {
         "spelling": "puck"
       , "phonetic": "/pʌk/"
       , "image": "img/ʌ/puck.jpg"
       , "clip": [4.250, 5.250]
+      , "wiki": "https://en.wiktionary.org/wiki/mush#English"
       }
     , "stuff": {
         "spelling": "stuff"
       , "phonetic": "/stʌf/"
       , "image": "img/ʌ/stuff.jpg"
       , "clip": [5.30, 6.415]
+      , "wiki": "https://en.wiktionary.org/wiki/stuff#English"
       }
     }
   }
@@ -185,12 +209,72 @@
     , "shit": "sheet"
     , "tit": "teat"
     }
+  , 
+  "ɪiX": {
+      "bid": "bead",
+      "bins": "beans",
+      "bits": "beets",
+      "dip": "deep",
+      "filled": "field",
+      "fit": "feet",
+      "gins": "jeans",
+      "grid": "greed",
+      "hill": "heel",
+      "hip": "heap",
+      "hit": "heat",
+      "ill": "eel",
+      "kill": "keel",
+      "knit": "neat",
+      "lick": "leek",
+      "lid": "lead",
+      "lip": "leap",
+      "litter": "litre",
+      "liver": "lever",
+      "mill": "meal",
+      "mitt": "meat",
+      "pick": "peak",
+      "piss": "peace",
+      "pitch": "peach",
+      "rich": "reach",
+      "rip": "reap",
+      "slip": "sleep",
+      "still": "steal",
+      "whip": "weep"
+    }
   , "ɑʌ": {
       "barn": "bun"
     , "heart": "hut"
     , "marsh": "mush"
     , "park": "puck"
     , "staff": "stuff"
+    }
+  , "ɑʌX": {
+      "branch": "brunch",
+      "buck": "bark",
+      "calf": "cuff",
+      "carp": "cup",
+      "cart": "cut",
+      "cover": "carver",
+      "dance": "dunce",
+      "dark": "duck",
+      "drama": "drummer",
+      "farce": "fuss",
+      "garter": "gutter",
+      "graph": "gruff",
+      "half": "huff",
+      "harm": "hum",
+      "lager": "lugger",
+      "mark": "muck",
+      "parts": "putts",
+      "psalms": "sums",
+      "sari": "Surry",
+      "scarf": "scuff",
+      "scarred": "scud",
+      "stark": "stuck",
+      "starter": "stutter",
+      "starred": "stud",
+      "tarsal": "tussle",
+      "task": "tusk"
     }
   }
 

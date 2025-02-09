@@ -7,7 +7,9 @@
   --bgColor: rgb(var(--r), var(--g), var(--b));
   /* Slightly transparent colour for pocket and mask */
   --cgColor: rgba(var(--r), var(--g), var(--b), var(--a));
-  --light: #ddd;
+  --light:   #ddd;
+  --details: #fff8;
+  --wrong:   #f006;
 
   /* Define the maximum dimensions of a centred <main> elemnt
    * limited to a 2:1 or 1:2 ratio
