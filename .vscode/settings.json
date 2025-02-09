@@ -1,7 +1,7 @@
 {
     "editor.rulers": [{
         "column": 72,
-        "color": "#333"
+        "color": "#363"
     }
 ],
 "liveServer.settings.port": 5502

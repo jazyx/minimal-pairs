@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
-import { AudioContext } from './AudioContext'
+import { AudioContext } from '../contexts/AudioContext'
 
 import './Activity.css';
 import CardAndPocket from './CardAndPocket'
@@ -17,7 +17,7 @@ const getBoolean = getBooleanGenerator()
 
 // <<< HARD-CODED
 const REVIEW_DELAY = 2000;
-const POCKET_DELAY = 200; // just a little more than transition-duration
+const POCKET_DELAY = 200; // a little more than transition-duration
 const PLAY_DELAY = 1000
 const NEXT_DELAY = 1000
 const DEAL_DELAY = 300
@@ -365,7 +365,7 @@ const Activity = (props) => {
 
     detectMovement(event, 16, 500)
       .then(
-        // The user dragged the card within 500 ms
+        // The user dragged the card more than √16 pixels within 500 ms
         () => prepareToSpreadCards(index, phoneme)
       )
       .catch(
@@ -415,13 +415,31 @@ const Activity = (props) => {
   }
 
 
-  const prepareToSpreadCards = (index, phoneme) => {
+  const prepareToSpreadCards = (cardIndex, phonemeIndex) => {
+    // 
     // LEAVE FULL CARD SPREAD UNTIL LATER
-    spreadCards(index, phoneme)
+    spreadCards(cardIndex, phonemeIndex)
+
+    const phoneme = phonemes[phonemeIndex]
 
     // TODO
-    // start dragging card
-    // limit movement to one axis
+    // Get number of cards in pocket
+    const cardsInPocket = phoneme.children[0].children  // <li>s
+    const numberInPocket = cardsInPocket.length       // 1 or more
+
+    // Get size of .details div
+    const topCard = phoneme.querySelector("li div") // .card-holder
+    const details = topCard.querySelector(".details")
+    const { width, height } = details.getBoundingClientRect()
+    
+
+    // Determine direction of spread (up, left, right)
+    // Calculate position of oldest card when spread (with size as
+    //   limit)
+    // Transition all cards to this position
+    // Transition each card back to its own place, with newest card
+    //   next to pocket
+    // Play audio for newest card
 
 
     // finally(spreadCards)
@@ -440,10 +458,11 @@ const Activity = (props) => {
 
     const cards = [phoneme0, phoneme1].map(( phoneme, index ) => {
       const list = phoneme.querySelector("ul")
-      const item = list.children[cardIndex]
-      const card = item.children[0]
+      const item = list.children[cardIndex] // li
+      const card = item.children[0]         // .card-holder
 
       if (index === phonemeIndex) {
+        // The card with this phoneme was clicked. Play its name.
         const phoneme = phonemes[phonemeIndex].phoneme // e.g. "ɪ"
         const cardData = playedCards[phoneme][cardIndex]
         const { url, clip } = cardData

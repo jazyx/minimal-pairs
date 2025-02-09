@@ -4,7 +4,7 @@
 
 
 import React, { useContext, forwardRef } from 'react'
-import { AudioContext } from './AudioContext'
+import { AudioContext } from '../contexts/AudioContext'
 
 
 const Card = forwardRef((props, cardRef) => {
@@ -25,7 +25,6 @@ const Card = forwardRef((props, cardRef) => {
   //   "role": "decoy" | "cue"          | missing for seen cards,
   //   "action": null  | checkForDrag() | pocketAction()
   // }
-  // console.log("card:", props.card)
   const {
     spelling
   , phonetic
@@ -54,8 +53,8 @@ const Card = forwardRef((props, cardRef) => {
     ? "img/icons/wikipedia.webp"
     : "img/icons/wiktionary.svg"
 
+
   return (
-    // 
     // div.space reserves an area for the card to 3D rotate in
     <div
       className={spaceName}

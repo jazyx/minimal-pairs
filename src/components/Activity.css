@@ -467,7 +467,7 @@ p.rule {
 
 .space.reveal {
   left: 0;
-  transform: rotateZ(0deg);
+  transform: none;
   z-index: 2;
 }
 
@@ -546,11 +546,11 @@ p.rule {
 
   /* main.show-phonetic p.spelling { */
   main.show-phonetic div.details {
-      transform: rotateZ(0deg);
+    transform: none;
   }
 
   main.show-phonetic p.phonetic {
-    transform-origin: var(--longOrigin) var(--longOrigin);
+    transform-origin: var(--origin) var(--origin);
     transform: rotateZ(270deg);
   }
 
@@ -735,13 +735,13 @@ p.rule {
 
   /* main.split.show-phonetic p.spelling { */
   main.split.show-phonetic div.details {
-    transform: rotateZ(0deg);
+    transform: none;
     top: auto;
     bottom: 0;
   }
 
   main.split.show-phonetic p.phonetic {
-    transform: rotateZ(0deg);
+    transform: none;
     bottom: auto;
     top: 0;
   }

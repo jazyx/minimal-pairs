@@ -1,14 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
-import { AudioProvider } from "./AudioContext"
+/**
+ * src/components/Main.jsx
+ */
+
+
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext
+} from "react";
+import { PreferencesContext } from "../contexts"
 
 import Views from "../api/views";
 import Menu from "./Menu";
 
-
 let mainElement
 
 
-const App = (props) => {
+export const Main = (prop) => {
+  const { classes } = useContext(PreferencesContext)
   const [ view, setView ] = useState("About")
   const mainRef = useRef()
 
@@ -54,22 +64,18 @@ const App = (props) => {
   const View = Views[view];
 
   return (
-    <AudioProvider>
-      <main
-        className="split show-cue-image"
-        ref={mainRef}
-      >
-        <View
-          startActivity={selectFromMenu}
-          toggleClassName={toggleClassName}
-          classNameIsSet={classNameIsSet}
-        />
-        <Menu
-          selectFromMenu={selectFromMenu}
-        />
-      </main>
-    </AudioProvider>
-  );
+    <main
+      className={classes}
+      ref={mainRef}
+    >
+      <View
+        startActivity={selectFromMenu}
+        toggleClassName={toggleClassName}
+        classNameIsSet={classNameIsSet}
+      />
+      <Menu
+        selectFromMenu={selectFromMenu}
+      />
+    </main>
+  )
 }
-
-export default App;

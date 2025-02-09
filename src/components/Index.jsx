@@ -5,7 +5,7 @@
 
  
 import React, { useContext } from 'react';
-import { AudioContext } from '../components/AudioContext'
+import { AudioContext } from '../contexts/AudioContext'
 import {
   pairIndex
 , phonemePairs

@@ -125,7 +125,7 @@
  */
 
 import React, { useContext, forwardRef } from 'react'
-import { AudioContext } from './AudioContext'
+import { AudioContext } from '../contexts/AudioContext'
 
 import Card from './Card'
 
