@@ -65,7 +65,10 @@ const Card = forwardRef((props, cardRef) => {
           cards in non-split landscape mode as they go in the
           pocket
        */}
-      <div className="board">
+      <div className="board"
+        onMouseDown={action}
+        onTouchStart={props.action}
+      >
         {/* div.card.(cue|decoy)[.flipped] contains the actual
             text, image and buttons (credit + meaning) that
             is rotated
@@ -73,8 +76,6 @@ const Card = forwardRef((props, cardRef) => {
         <div
           className={className}
           key={spelling}
-          onMouseDown={action}
-          onTouchStart={props.action}
         >
           <img
             className="back unselectable"
