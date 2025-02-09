@@ -2,8 +2,10 @@
  * /src/api/pairs.js
  */
 
+import storage from '../tools/storage';
 import { shuffle, removeFrom } from '../tools/utilities'
 const pairs = require('../json/pairs.json')
+
 export const AUDIO_DIR = "audio/"
 
 /** Export an array of pairs of phonemes that can be contrasted with
@@ -40,7 +42,7 @@ export function getCurrentPair() {
  * @param {string} pair: one ef the items from phonemePairs
  */
 export function setPhonemePair(pair) {
-  if (currentPair === pair) {
+  if (pair && currentPair === pair) {
     return
   }
 
@@ -63,6 +65,7 @@ export function setPhonemePair(pair) {
     played = { [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] }
 
   currentPair = pair
+  storage.set({ pair })
 }
 
 
@@ -169,4 +172,4 @@ export function getPhonemeData(phoneme) {
 }
 
 
-setPhonemePair("ɑʌ")
+setPhonemePair(storage.getItem("pair"))

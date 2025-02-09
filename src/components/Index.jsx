@@ -65,6 +65,7 @@ const Index = (props) =>  {
   const getProgress = (pair) => {
     return (
       <div
+        key="progress"
         className="progress"
       >
         <div
@@ -142,7 +143,7 @@ const Index = (props) =>  {
     )
   })
   
-
+  
   return (
     <ul
       id="index"

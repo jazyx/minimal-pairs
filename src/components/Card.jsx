@@ -8,7 +8,7 @@ import { AudioContext } from './AudioContext'
 
 
 const Card = forwardRef((props, cardRef) => {
-  console.log("props", props);
+  // console.log("props", props);
   // {
   //   "card": {
   //     "spelling": "marsh",
@@ -50,7 +50,7 @@ const Card = forwardRef((props, cardRef) => {
   const audio = useContext(AudioContext)
   const action = props.action // will be null for decoy
               || (() => audio.playClip(url, clip)) // only for decoy
-  const icon = wiki.match(/wikipedia/i)
+  const icon = /wikipedia/i.test(wiki)
     ? "img/icons/wikipedia.webp"
     : "img/icons/wiktionary.svg"
 
@@ -67,7 +67,7 @@ const Card = forwardRef((props, cardRef) => {
        */}
       <div className="board"
         onMouseDown={action}
-        onTouchStart={props.action}
+        onTouchStart={action}
       >
         {/* div.card.(cue|decoy)[.flipped] contains the actual
             text, image and buttons (credit + meaning) that
@@ -95,13 +95,14 @@ const Card = forwardRef((props, cardRef) => {
 
               <p className="spelling">{spelling}</p>
 
-              <a href={wiki} target="meaning">
+              {/* Protect against a missing `wiki` entry */}
+              {false && <a href={wiki} target="meaning">
                 <img
                   className="icon meaning"
                   src={icon}
                   alt="Meaning"
                 />
-              </a>
+              </a> || <div className="icon"/>}
             </div>
 
             <p className="phonetic">{phonetic}</p>
