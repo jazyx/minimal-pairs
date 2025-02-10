@@ -37,9 +37,8 @@ const Preferences = ({ startActivity }) => {
 
   return (
     <div id="preferences">
-      <h1>Preferences</h1>
       <fieldset>
-        <legend>Display</legend>
+        <legend>Preferences</legend>
 
         <label htmlFor="left-handed">
           Left-handed
