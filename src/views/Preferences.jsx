@@ -19,6 +19,7 @@
 
 import React, { useContext } from 'react';
 import { PreferencesContext } from '../contexts';
+import './Preferences.css'
 
 
 const Preferences = ({ startActivity }) => {
@@ -103,7 +104,7 @@ const Preferences = ({ startActivity }) => {
           <span className="slot">
             <span className="slider" />
           </span>
-          Allow taboo words
+          Allow taboo 🤬 words
         </label>
       </fieldset>
 

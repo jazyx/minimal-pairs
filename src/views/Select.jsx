@@ -1,57 +1,31 @@
 /**
- * /src/components/Index.jsx
+ * /src/components/Select.jsx
  */
 
 
  
 import React, { useContext } from 'react';
-import { AudioContext, PairsContext } from '../contexts/'
-// import {
-//   pairIndex
-// , phonemePairs
-// , getCurrentPair
-// , setPhonemePair
-// , getWordData
-// , getPhonemeData
-// } from '../api/pairs'
+import {
+  PairsContext,
+  AudioContext
+} from '../contexts'
 
-
-import './Index.css';
+import './Select.css';
 
 // console.log("phonemePairs:", phonemePairs)
 // Array [ "ɪi", "ɑʌ" ]
 
 
-const Index = ({ startActivity }) =>  {
+const Select = ({ startActivity }) =>  {
   const { playClip } = useContext(AudioContext)
   const {
     pairIndex
-  , phonemePairs
   , currentPair
+  , phonemePairs
   , setPhonemePair
   , getWordData
   , getPhonemeData
   } = useContext(PairsContext)
-
-
-console.log({
-  pairIndex
-, phonemePairs
-, currentPair
-, setPhonemePair
-, getWordData
-, getPhonemeData
-});
-
-console.log(JSON.stringify({
-  pairIndex
-, phonemePairs
-, currentPair
-, setPhonemePair
-, getWordData
-, getPhonemeData
-}, null, 2))
-
 
   const itemClicked = (pair) => {
     setPhonemePair(pair)
@@ -180,4 +154,4 @@ console.log(JSON.stringify({
 }
 
 
-export default Index
+export default Select

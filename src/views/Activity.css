@@ -842,9 +842,3 @@ p.rule {
     display: none;
   }
 }
-
-main:has(#preferences) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}

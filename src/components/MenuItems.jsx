@@ -15,7 +15,7 @@ const MenuItems = ({ itemSelected }) => {
       <li
         className="unselectable"
         key="index"
-        onClick={() => itemSelected("Index")}
+        onClick={() => itemSelected("Select")}
       >
         Select phoneme pair
       </li>

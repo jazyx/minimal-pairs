@@ -6,7 +6,7 @@ import {
 } from '../contexts'
 
 import './Activity.css';
-import CardAndPocket from './CardAndPocket'
+import CardAndPocket from '../components/CardAndPocket'
 
 
 import { getBooleanGenerator

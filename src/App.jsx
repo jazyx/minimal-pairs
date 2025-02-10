@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "./contexts/"
-import { Main } from "./components/Main";
+import { Main } from "./views/Main";
 
 
 const App = () => {

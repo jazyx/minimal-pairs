@@ -10,7 +10,7 @@ import storage from '../tools/storage';
 
 // Read localStorage values or use default preferences on first use
 const store = storage.get({
-  leftHanded: true
+  leftHanded: false
 , split: true
 , showCue: true
 , phonetic: true
@@ -72,6 +72,12 @@ export const PreferencesProvider = ({ children }) => {
   }
 
 
+  const choosePair = (pair) => {
+    setPair(pair)
+    storage.set({ pair })
+  }
+
+
   const updateClasses = () => {
     const classes = ""
     + (leftHanded ? " left-handed"    : "")
@@ -99,6 +105,7 @@ export const PreferencesProvider = ({ children }) => {
         toggleCue,
         togglePhonetic,
         toggleTaboo,
+        choosePair,
         classes
       }}
     >

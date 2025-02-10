@@ -11,8 +11,8 @@ import React, {
 } from "react";
 import { PreferencesContext } from "../contexts"
 
-import Views from "./views";
-import Menu from "./Menu";
+import Views from ".";
+import Menu from "../components/Menu";
 
 let mainElement
 

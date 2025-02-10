@@ -1,0 +1,15 @@
+
+
+main:has(#preferences) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+label:first-of-type {
+  margin-top: 0.5em;
+}
+
+label:last-child {
+  margin-bottom: 0.5em;
+}
