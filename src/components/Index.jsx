@@ -23,7 +23,7 @@ import './Index.css';
 
 const Index = (props) =>  {
   const { startActivity } = props
-  const audio = useContext(AudioContext)
+  const { playClip } = useContext(AudioContext)
 
   const current = getCurrentPair()
 
@@ -37,7 +37,7 @@ const Index = (props) =>  {
       <button
         key={phoneme}
         className="phoneme"
-        onClick={() => audio.playClip(url, clip)}
+        onClick={() => playClip(url, clip)}
       >
         /{phoneme}/
       </button>
@@ -55,7 +55,7 @@ const Index = (props) =>  {
       <button
         key={word}
         className="word"
-        onClick={() => audio.playClip(url, clip)}
+        onClick={() => playClip(url, clip)}
       >
         {set}
       </button>

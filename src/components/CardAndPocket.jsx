@@ -130,7 +130,7 @@ import { AudioContext } from '../contexts/AudioContext'
 import Card from './Card'
 
 const CardAndPocket = forwardRef((props, pocketRef) => {
-  const audio = useContext(AudioContext)
+  const { playClip } = useContext(AudioContext)
   const {
     index        // 0 | 1
   , cardData     // { spelling, phonetic, image, url, clip }
@@ -193,7 +193,7 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
 
         <button
           className="play-phoneme"
-          onClick={() => audio.playClip(url, clip)}
+          onClick={() => playClip(url, clip)}
         />
       </div>
     </div>

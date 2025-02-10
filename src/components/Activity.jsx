@@ -27,7 +27,8 @@ const DEAL_DELAY = 300
 const Activity = (props) => {
   const { taboo } = useContext(PreferencesContext)
   // Shared with all cards and the Play Phoneme buttons
-  const audio = useContext(AudioContext)
+  const { playClip } = useContext(AudioContext)
+  
   // Used for animating cue and decoy cards
   const cueRef = useRef()
   const decoyRef = useRef()
@@ -103,7 +104,7 @@ const Activity = (props) => {
 
 
   const playCue = () => {
-    audio.playClip(cueURL, cueClip)
+    playClip(cueURL, cueClip)
   }
 
 
@@ -149,7 +150,7 @@ const Activity = (props) => {
 
 
   const playOtherCard = () => {
-    audio.playClip(decoyURL, decoyClip)
+    playClip(decoyURL, decoyClip)
     setTimeout(hideOtherCard, PLAY_DELAY)
   }
 
@@ -182,7 +183,7 @@ const Activity = (props) => {
 
     cueSpace.classList.add("active")
 
-    audio.playClip(cueURL, cueClip)
+    playClip(cueURL, cueClip)
     setTimeout(moveNearToPocket, REVIEW_DELAY)
   }
 
@@ -360,7 +361,7 @@ const Activity = (props) => {
     // <<< NOT YET IMPLEMENTED
     if (cardsAreSpread) {
       if (visibleCard === index) {
-        return audio.play(url, clip)
+        return playClip(url, clip)
       }
 
       return makeCardVisible(index)
@@ -405,7 +406,7 @@ const Activity = (props) => {
   const playFromPocket = (card, url, clip) => {
     showCardOutsidePocket(card)
 
-    audio.playClip(url, clip)
+    playClip(url, clip)
 
     if (isNaN(visibleCard)) {
       // The cards are not spread
@@ -471,7 +472,7 @@ const Activity = (props) => {
         const phoneme = phonemes[phonemeIndex].phoneme // e.g. "ɪ"
         const cardData = playedCards[phoneme][cardIndex]
         const { url, clip } = cardData
-        audio.playClip(url, clip)
+        playClip(url, clip)
       }
 
       return card

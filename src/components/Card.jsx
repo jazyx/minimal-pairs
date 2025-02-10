@@ -47,11 +47,11 @@ const Card = forwardRef((props, cardRef) => {
                     )
 
   const { taboo } = useContext(PreferencesContext)
-  const audio = useContext(AudioContext)
+  const { playClip } = useContext(AudioContext)
   
   const src = taboo ? (image_ || image) : image
   const action = props.action // will be null for decoy
-              || (() => audio.playClip(url, clip)) // only for decoy
+              || (() => playClip(url, clip)) // only for decoy
   const icon = /wikipedia/i.test(wiki)
     ? "img/icons/wikipedia.webp"
     : "img/icons/wiktionary.svg"
@@ -98,13 +98,13 @@ const Card = forwardRef((props, cardRef) => {
               <p className="spelling">{spelling}</p>
 
               {/* Protect against a missing `wiki` entry */}
-              {false && <a href={wiki} target="meaning">
+              {wiki && (<a href={wiki} target="meaning">
                 <img
                   className="icon meaning"
                   src={icon}
                   alt="Meaning"
                 />
-              </a> || <div className="icon"/>}
+              </a> || <div className="icon"/>)}
             </div>
 
             <p className="phonetic">{phonetic}</p>

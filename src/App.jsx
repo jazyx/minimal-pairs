@@ -1,5 +1,5 @@
 import React from "react";
-import { Provider } from "./contexts"
+import { Provider } from "./contexts/"
 import { Main } from "./components/Main";
 
 
