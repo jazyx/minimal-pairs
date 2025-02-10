@@ -182,6 +182,10 @@
 .card .details {
   background-color: var(--details);
   height: 1.2em;
+
+  &.taboo .spelling::after {
+    content: " 🤬"
+  }
 }
 
 div[class^=phoneme].wrong .active .details {
@@ -724,7 +728,7 @@ p.rule {
   /* main.split p.spelling { */
   main.split div.details,
   main.split .wrong div.details {
-      transform: rotateZ(0) ;
+    transform: none;
   }
 
   /* p.spelling { */

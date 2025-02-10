@@ -13,3 +13,105 @@ label:first-of-type {
 label:last-child {
   margin-bottom: 0.5em;
 }
+
+
+
+/*****************************************************************/
+/** Slider-style checkbox                                       **/
+/**                                                             **/
+/** Note that the #left-handed checkbox slides to the left when **/
+/** it is switched _on_.                                        **/
+/*****************************************************************/
+
+label {
+  display: block;
+ }
+ 
+ /* Hide the checkbox itself */
+ input[type=checkbox] {
+   width: 0px;
+   height: 0px;
+   opacity: 0;
+   padding: 0;
+   margin: 0;
+   border: none;
+ }
+ 
+ /* The outer .slot span appears twice as wide as it is high, with
+  * rounded ends. It shows a dull background and off border when
+  * unchecked.
+  */
+ input[type=checkbox] ~ span {
+   --size: 0.6em;
+   --onColor: rgb(255,255,255);
+   --offColor: rgba(255,255,255,0.5);
+   --dullColor: rgba(255,255,255,0.125);
+ 
+   display: inline-block;
+   position: relative;
+   margin: 0 0.5em;
+   width: calc(2 * var(--size));
+   height: var(--size);
+   border: 0.02em solid var(--offColor);
+   border-radius: var(--size);
+   background-color: var(--dullColor);
+ }
+ 
+ /* When checked (or always, if it's the #left-handed checkbox) the outer
+  * .slot span appears brighter, with a transparent background
+  */
+ input[type=checkbox]:checked ~ span,
+ #left-handed ~ span {
+   border-color: var(--onColor);
+   background-color: transparent;
+ }
+ 
+ /* The inner .slider span appears as a filled circle inside the .slot.
+  * When it is _off_, it appears
+  * • On the left
+  * • In a dull colour
+  */
+ input[type=checkbox] ~ span span{
+   display: inline-block;
+   position: absolute;
+   margin: 0;
+   width: var(--size);
+   height: var(--size);
+   left: 0;
+   top: 0;
+ 
+   background-color: var(--offColor);
+   border-radius: var(--size);
+   transition: all 0.25s;
+ }
+ 
+ /* For the #left-handed checkbox, the inner .slider span always appears
+  * on. When it is _off_, it appears on the right.
+  */
+ #left-handed ~ span span {
+   left: var(--size);
+   background-color: var(--onColor);
+ }
+ 
+ /* When the checkbox is _on_, the slider moves to the right... */
+ input[type=checkbox]:checked ~ span  span {
+   left: var(--size);
+   background-color: var(--onColor);
+ }
+ 
+ /* ... except for the #left-handed checkbox, which moves left.*/
+ #left-handed:checked ~ span  span {
+   left: 0;
+ }
+
+ [for=taboo]:has(:checked) {
+  color: var(--taboo);
+
+  & span {
+    border-color: var(--taboo)!important;
+
+    &.slider {
+      background-color: var(--taboo)!important;
+    }
+  }
+}

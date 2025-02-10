@@ -9,7 +9,8 @@ import React, {
   createContext,
   useState,
   useContext,
-  useEffect
+  useEffect,
+  useRef
 } from 'react'
 import { PreferencesContext } from './PreferencesContext';
 import storage from '../tools/storage';
@@ -23,7 +24,6 @@ const phonemePairs = Object.keys(pairs.pairs)
 const pairIndex = pairs.index
 
 const AUDIO_DIR = "audio/"
-
 
 
 export const PairsContext = createContext()
@@ -43,8 +43,8 @@ export const PairsProvider = ({ children }) => {
   // { "/x/": [ <card>, ... ]
   // , "/y/": [ <card>, ... ]
   // }
-  const [ word1, setWord1 ] = useState("")
-  const [ word2, setWord2 ] = useState("")
+  const wordsRef = useRef([])
+  const lastWords = wordsRef.current
 
 
   /** Set the array of pairs that will produce the
@@ -65,9 +65,8 @@ export const PairsProvider = ({ children }) => {
 
     _setPairListAndPhonemeSymbols(pair)
 
-    // Fill the pockets
-    setWord1()
-    setWord2()
+    // Empty the pockets
+    lastWords.length = 0
 
     choosePair(pair)
     storage.set({ pair })
@@ -82,6 +81,7 @@ export const PairsProvider = ({ children }) => {
    */
   function getCards(noTaboo) {
     const [ phoneme1, phoneme2 ] = phonemeSymbols
+    const [ word1, word2 ] = lastWords
 
     if (word1) {
       const spellings = played[phoneme1].map(word => word.spelling)
@@ -93,31 +93,32 @@ export const PairsProvider = ({ children }) => {
     }
 
     // Grab the first card and (for now) move it to the end
-    let word_1
-    let word_2
     do {
       const cards = pairList.shift()
       pairList.push(cards)
 
-      word_1 = getWordData(phoneme1, cards[0])
-      word_2 = getWordData(phoneme2, cards[1])
+      lastWords[0] = getWordData(phoneme1, cards[0])
+      lastWords[1] = getWordData(phoneme2, cards[1])
 
-      if (word_1.image && word_2.image) {
+      if (lastWords[0].image && lastWords[1].image) {
         // if noTaboo, then this pair is clean
         // if !noTaboo, while loop will exit anyway
         break
       }
     } while (noTaboo)
 
-    removeFrom(played[phoneme1], word_1)
-    removeFrom(played[phoneme2], word_2)
-
+      removeFrom(played[phoneme1], item => (
+        JSON.stringify(item) === JSON.stringify(lastWords[0])
+      ))
+      removeFrom(played[phoneme2], item => (
+        JSON.stringify(item) === JSON.stringify(lastWords[1])
+      ))
 
 
     const output = {
       phonemes
-    , word1: word_1
-    , word2: word_2
+    , word1: lastWords[0]
+    , word2: lastWords[1]
     , played
     }
 

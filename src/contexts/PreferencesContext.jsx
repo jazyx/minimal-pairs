@@ -13,7 +13,7 @@ const store = storage.get({
   leftHanded: false
 , split: true
 , showCue: true
-, phonetic: true
+, phonetic: false
 , taboo: false
 , pair: undefined // will be set by default if missing
 })

@@ -46,16 +46,18 @@ const Card = forwardRef((props, cardRef) => {
                     : ""
                     )
 
-  const { taboo } = useContext(PreferencesContext)
   const { playClip } = useContext(AudioContext)
-  
-  const src = taboo ? (image_ || image) : image
+  const { taboo } = useContext(PreferencesContext)
+  const isTaboo = taboo && image_
+  const src = isTaboo ? image_ : image
+
   const action = props.action // will be null for decoy
               || (() => playClip(url, clip)) // only for decoy
   const icon = /wikipedia/i.test(wiki)
     ? "img/icons/wikipedia.webp"
     : "img/icons/wiktionary.svg"
 
+  const detailsClass = "details" + (isTaboo ? " taboo" : "")
 
   return (
     // div.space reserves an area for the card to 3D rotate in
@@ -88,7 +90,7 @@ const Card = forwardRef((props, cardRef) => {
           <div className="front unselectable">
             <img src={src} alt={spelling}/>
 
-            <div className="details">
+            <div className={detailsClass}>
               <img
                 className="icon credits"
                 src="img/icons/credits.svg"
