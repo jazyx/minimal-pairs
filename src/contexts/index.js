@@ -7,6 +7,7 @@
 
 import React, { createContext } from 'react'
 import { AudioContext, AudioProvider } from './AudioContext'
+import { PairsContext, PairsProvider } from './PairsContext'
 import {
   PreferencesContext,
   PreferencesProvider
@@ -23,9 +24,11 @@ export const Provider = ({ children }) => {
       value={{}} // required to prevent React warnings
     >
       <PreferencesProvider>
-        <AudioProvider>
-          {children}
-        </AudioProvider>
+        <PairsProvider>
+          <AudioProvider>
+            {children}
+          </AudioProvider>
+        </PairsProvider>
       </PreferencesProvider>
     </Context.Provider>
   )
@@ -33,5 +36,6 @@ export const Provider = ({ children }) => {
 
 export {
   AudioContext,
+  PairsContext,
   PreferencesContext
 }

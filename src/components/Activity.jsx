@@ -1,10 +1,13 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
-import { PreferencesContext, AudioContext } from '../contexts'
+import {
+  PreferencesContext,
+  PairsContext,
+  AudioContext
+} from '../contexts'
 
 import './Activity.css';
 import CardAndPocket from './CardAndPocket'
 
-import { getCards } from '../api/pairs'
 
 import { getBooleanGenerator
        , detectMovement
@@ -26,6 +29,7 @@ const DEAL_DELAY = 300
 
 const Activity = (props) => {
   const { taboo } = useContext(PreferencesContext)
+  const { getCards } = useContext(PairsContext)
   // Shared with all cards and the Play Phoneme buttons
   const { playClip } = useContext(AudioContext)
   
@@ -47,7 +51,7 @@ const Activity = (props) => {
   , word1
   , word2
   , played: playedCards
-  } = getCards(!taboo) // imported from pairs.js
+  } = getCards(!taboo) // imported from PairsContext
 
   // { "phonemes": [
   //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }

@@ -44,5 +44,6 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "homepage": "https://jazyx.github.io/minimal-pairs/"
+  "homepage-deploy": "https://jazyx.github.io/minimal-pairs/",
+  "homepage": "http://localhost:3000/"
 }

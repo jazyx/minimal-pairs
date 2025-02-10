@@ -5,15 +5,16 @@
 
  
 import React, { useContext } from 'react';
-import { AudioContext } from '../contexts/AudioContext'
-import {
-  pairIndex
-, phonemePairs
-, getCurrentPair
-, setPhonemePair
-, getWordData
-, getPhonemeData
-} from '../api/pairs'
+import { AudioContext, PairsContext } from '../contexts/'
+// import {
+//   pairIndex
+// , phonemePairs
+// , getCurrentPair
+// , setPhonemePair
+// , getWordData
+// , getPhonemeData
+// } from '../api/pairs'
+
 
 import './Index.css';
 
@@ -21,11 +22,36 @@ import './Index.css';
 // Array [ "ɪi", "ɑʌ" ]
 
 
-const Index = (props) =>  {
-  const { startActivity } = props
+const Index = ({ startActivity }) =>  {
   const { playClip } = useContext(AudioContext)
+  const {
+    pairIndex
+  , phonemePairs
+  , currentPair
+  , setPhonemePair
+  , getWordData
+  , getPhonemeData
+  } = useContext(PairsContext)
 
-  const current = getCurrentPair()
+
+console.log({
+  pairIndex
+, phonemePairs
+, currentPair
+, setPhonemePair
+, getWordData
+, getPhonemeData
+});
+
+console.log(JSON.stringify({
+  pairIndex
+, phonemePairs
+, currentPair
+, setPhonemePair
+, getWordData
+, getPhonemeData
+}, null, 2))
+
 
   const itemClicked = (pair) => {
     setPhonemePair(pair)
@@ -90,7 +116,7 @@ const Index = (props) =>  {
   const pairsArray = phonemePairs.map( pair => {
     // pair = "ɪi"
     const pairData = pairIndex[pair]
-    const className = (pair === current)
+    const className = (pair === currentPair)
                     ? "current"
                     : ""
 
