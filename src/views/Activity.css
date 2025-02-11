@@ -119,6 +119,7 @@
 .card-holder {
   position: absolute;
   pointer-events: all;
+  transition: 0.25s
 }
 
  /* .space applies the same div as .card-holder, but only
@@ -389,6 +390,7 @@ button {
   cursor: pointer;
 }
 
+.spread .done,
 .review ~ .done,
 .wrong ~ .done {
   display: block;
@@ -701,6 +703,33 @@ p.rule {
     left: 0;
     top: var(--ruleTop);
     height: var(--doneSize);
+  }
+}
+
+/* SPREAD CARDS // SPREAD CARDS // SPREAD CARDS */
+
+main:has(.spread) {
+  /* Show that checkAnswer feature is disabled */
+  .rule {
+    display: none;
+  }
+
+  .pocket {
+    color: #444;
+  }
+
+  #mask {
+    /* Duplication of #mask.pocket-play */
+    pointer-events: all;
+    opacity: 0.9;
+  }
+
+  /* Reveal the card that asks others to yield */
+  li:has(.yield:not(.left)) ~ li .card-holder {
+    top: var(--yield)!important;
+  }
+  li:has(.yield.left) ~ li .card-holder {
+    left: var(--yield)!important;
   }
 }
 

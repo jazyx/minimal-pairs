@@ -26,7 +26,7 @@ label:last-child {
 label {
   display: block;
  }
- 
+
  /* Hide the checkbox itself */
  input[type=checkbox] {
    width: 0px;
@@ -36,7 +36,7 @@ label {
    margin: 0;
    border: none;
  }
- 
+
  /* The outer .slot span appears twice as wide as it is high, with
   * rounded ends. It shows a dull background and off border when
   * unchecked.
@@ -46,7 +46,7 @@ label {
    --onColor: rgb(255,255,255);
    --offColor: rgba(255,255,255,0.5);
    --dullColor: rgba(255,255,255,0.125);
- 
+
    display: inline-block;
    position: relative;
    margin: 0 0.5em;
@@ -56,7 +56,7 @@ label {
    border-radius: var(--size);
    background-color: var(--dullColor);
  }
- 
+
  /* When checked (or always, if it's the #left-handed checkbox) the outer
   * .slot span appears brighter, with a transparent background
   */
@@ -65,7 +65,7 @@ label {
    border-color: var(--onColor);
    background-color: transparent;
  }
- 
+
  /* The inner .slider span appears as a filled circle inside the .slot.
   * When it is _off_, it appears
   * • On the left
@@ -79,12 +79,12 @@ label {
    height: var(--size);
    left: 0;
    top: 0;
- 
+
    background-color: var(--offColor);
    border-radius: var(--size);
    transition: all 0.25s;
  }
- 
+
  /* For the #left-handed checkbox, the inner .slider span always appears
   * on. When it is _off_, it appears on the right.
   */
@@ -92,26 +92,39 @@ label {
    left: var(--size);
    background-color: var(--onColor);
  }
- 
+
  /* When the checkbox is _on_, the slider moves to the right... */
  input[type=checkbox]:checked ~ span  span {
    left: var(--size);
    background-color: var(--onColor);
  }
- 
+
  /* ... except for the #left-handed checkbox, which moves left.*/
  #left-handed:checked ~ span  span {
    left: 0;
  }
 
- [for=taboo]:has(:checked) {
-  color: var(--taboo);
+[for=taboo] {
+  & span.taboo {
+    border: none;
+    background-color: transparent;
+    filter: grayscale(1);
+    margin: 0;
+  }
 
-  & span {
-    border-color: var(--taboo)!important;
+  &:has(:checked) {
+    color: var(--taboo);
 
-    &.slider {
-      background-color: var(--taboo)!important;
+    & span {
+      border-color: var(--taboo)!important;
+
+      &.slider {
+        background-color: var(--taboo)!important;
+      }
+
+      &.taboo {
+        filter: none
+      }
     }
   }
 }

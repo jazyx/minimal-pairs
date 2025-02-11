@@ -192,7 +192,7 @@ export const PairsProvider = ({ children }) => {
     return data
   }
 
-
+  // eslint-disable-next-line
   useEffect(() => setPhonemePair(currentPair, true), [])
 
 

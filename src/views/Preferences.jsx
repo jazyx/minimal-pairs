@@ -91,7 +91,7 @@ const Preferences = ({ startActivity }) => {
           <span className="slot">
             <span className="slider" />
           </span>
-          Always show phonetic spelling
+          Prioritize phonetic spelling
         </label>
 
         <label htmlFor="taboo">
@@ -104,7 +104,7 @@ const Preferences = ({ startActivity }) => {
           <span className="slot">
             <span className="slider" />
           </span>
-          Allow taboo 🤬 words
+          Allow taboo <span className="taboo">🤬</span> words
         </label>
       </fieldset>
 
