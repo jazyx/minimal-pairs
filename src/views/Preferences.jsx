@@ -41,7 +41,7 @@ const Preferences = ({ startActivity }) => {
       <fieldset>
         <legend>Preferences</legend>
 
-        <label htmlFor="left-handed">
+        {/* <label htmlFor="left-handed">
           Left-handed
           <input
             id="left-handed"
@@ -53,7 +53,7 @@ const Preferences = ({ startActivity }) => {
             <span className="slider" />
           </span>
           Right-handed
-        </label>
+        </label> */}
 
         <label htmlFor="split">
           <input

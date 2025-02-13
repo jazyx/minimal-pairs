@@ -5,12 +5,173 @@
     , "ɑː": {
         "clip": [0.0, 1.0]
       }
+    , "branch": {
+        "spelling": "branch"
+      , "phonetic": "branch"
+      , "image": "img/ɑ/branch.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "arcs": {
+        "spelling": "arcs"
+      , "phonetic": "ɑːks"
+      , "image": "img/ɑ/arcs.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "aunt": {
+        "spelling": "aunt"
+      , "phonetic": "ɑːnt"
+      , "image": "img/ɑ/aunt.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "bard": {
+        "spelling": "bard"
+      , "phonetic": "bɑːd"
+      , "image": "img/ɑ/bard.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "barge": {
+        "spelling": "barge"
+      , "phonetic": "bɑːʤ"
+      , "image": "img/ɑ/barge.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "bark": {
+        "spelling": "bark"
+      , "phonetic": "bɑːk"
+      , "image": "img/ɑ/bark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
     , "barn": {
         "spelling": "barn"
       , "phonetic": "/bɑːn/"
       , "image": "img/ɑ/barn.jpg"
       , "clip": [1.10, 2.250]
       , "wiki": "https://en.wiktionary.org/wiki/barn#English"
+        }
+    , "calf": {
+        "spelling": "calf"
+      , "phonetic": "calf"
+      , "image": "img/ɑ/calf.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "carp": {
+        "spelling": "carp"
+      , "phonetic": "kɑːp"
+      , "image": "img/ɑ/carp.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cart": {
+        "spelling": "cart"
+      , "phonetic": "kɑːt"
+      , "image": "img/ɑ/cart.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "carver": {
+        "spelling": "carver"
+      , "phonetic": "carver"
+      , "image": "img/ɑ/carver.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "chart": {
+        "spelling": "chart"
+      , "phonetic": "ʧɑːt"
+      , "image": "img/ɑ/chart.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "dance": {
+        "spelling": "dance"
+      , "phonetic": "dance"
+      , "image": "img/ɑ/dance.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "dark": {
+        "spelling": "dark"
+      , "phonetic": "dark"
+      , "image": "img/ɑ/dark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "drama": {
+        "spelling": "drama"
+      , "phonetic": "drama"
+      , "image": "img/ɑ/drama.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "farce": {
+        "spelling": "farce"
+      , "phonetic": "farce"
+      , "image": "img/ɑ/farce.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "fart_": {
+        "spelling": "fart_"
+      , "phonetic": "fɑːt"
+      , "image": "img/ɑ/fart_.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "garlic": {
+        "spelling": "garlic"
+      , "phonetic": "ɡɑːlɪk"
+      , "image": "img/ɑ/garlic.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "garnet-": {
+        "spelling": "garnet-"
+      , "phonetic": "ˈɡɑːnɪt-"
+      , "image": "img/ɑ/garnet-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "garter": {
+        "spelling": "garter"
+      , "phonetic": "garter"
+      , "image": "img/ɑ/garter.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "graph": {
+        "spelling": "graph"
+      , "phonetic": "graph"
+      , "image": "img/ɑ/graph.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "half": {
+        "spelling": "half"
+      , "phonetic": "half"
+      , "image": "img/ɑ/half.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "harm": {
+        "spelling": "harm"
+      , "phonetic": "harm"
+      , "image": "img/ɑ/harm.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "harpy-": {
+        "spelling": "harpy-"
+      , "phonetic": "ˈhɑːpi-"
+      , "image": "img/ɑ/harpy-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
       }
     , "heart": {
         "spelling": "heart"
@@ -18,6 +179,48 @@
       , "image": "img/ɑ/heart.jpg"
       , "clip": [2.450, 3.550]
       , "wiki": "https://en.wiktionary.org/wiki/heart#English"
+        }
+    , "jars": {
+        "spelling": "jars"
+      , "phonetic": "ʤɑːz"
+      , "image": "img/ɑ/jars.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "lager": {
+        "spelling": "lager"
+      , "phonetic": "lager"
+      , "image": "img/ɑ/lager.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "larch-": {
+        "spelling": "larch-"
+      , "phonetic": "lɑːʧ"
+      , "image": "img/ɑ/larch-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "larder": {
+        "spelling": "larder"
+      , "phonetic": "lɑːdə"
+      , "image": "img/ɑ/larder.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "march": {
+        "spelling": "march"
+      , "phonetic": "mɑːʧ"
+      , "image": "img/ɑ/march.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "mark": {
+        "spelling": "mark"
+      , "phonetic": "mɑːk"
+      , "image": "img/ɑ/mark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
       }
     , "marsh": {
         "spelling": "marsh"
@@ -33,6 +236,62 @@
       , "clip": [5.10, 6.250]
       , "wiki": "https://en.wiktionary.org/wiki/park#English"
       }
+    , "parts": {
+        "spelling": "parts"
+      , "phonetic": "pɑːts"
+      , "image": "img/ɑ/parts.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "psalm-": {
+        "spelling": "psalm-"
+      , "phonetic": "psalm-"
+      , "image": "img/ɑ/psalm-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "psalms-": {
+        "spelling": "psalms-"
+      , "phonetic": "psalms-"
+      , "image": "img/ɑ/psalms-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "quark": {
+        "spelling": "quark"
+      , "phonetic": "kwɑːk"
+      , "image": "img/ɑ/quark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "sari": {
+        "spelling": "sari"
+      , "phonetic": "sari"
+      , "image": "img/ɑ/sari.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "scarf": {
+        "spelling": "scarf"
+      , "phonetic": "scarf"
+      , "image": "img/ɑ/scarf.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "scarred": {
+        "spelling": "scarred"
+      , "phonetic": "scarred"
+      , "image": "img/ɑ/scarred.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "shark": {
+        "spelling": "shark"
+      , "phonetic": "ʃɑːk"
+      , "image": "img/ɑ/shark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
     , "staff": {
         "spelling": "staff"
       , "phonetic": "/stɑːf/"
@@ -40,6 +299,49 @@
       , "clip": [6.450, 7.70]
       , "wiki": "https://en.wiktionary.org/wiki/staff#English"
       }
+    , "stark-": {
+        "spelling": "stark-"
+      , "phonetic": "stark-"
+      , "image": "img/ɑ/stark-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "stark": {
+        "spelling": "stark"
+      , "phonetic": "stark"
+      , "image": "img/ɑ/stark.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "starred": {
+        "spelling": "starred"
+      , "phonetic": "starred"
+      , "image": "img/ɑ/starred.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "starter": {
+        "spelling": "starter"
+      , "phonetic": "starter"
+      , "image": "img/ɑ/starter.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tarsal": {
+        "spelling": "tarsal"
+      , "phonetic": "tarsal"
+      , "image": "img/ɑ/tarsal.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "task": {
+        "spelling": "task"
+      , "phonetic": "task"
+      , "image": "img/ɑ/task.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+
     }
 
   , "iː": {
@@ -161,12 +463,110 @@
     , "ʌ": {
         "clip": [0.0, 0.650]
       }
+    , "huff-": {
+        "spelling": "huff-"
+      , "phonetic": "huff-"
+      , "image": "img/ʌ/huff-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "brunch": {
+        "spelling": "brunch"
+      , "phonetic": "brunch"
+      , "image": "img/ʌ/brunch.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "buck": {
+        "spelling": "buck"
+      , "phonetic": "buck"
+      , "image": "img/ʌ/buck.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
     , "bun": {
         "spelling": "bun"
       , "phonetic": "/bʌn/"
       , "image": "img/ʌ/bun.jpg"
       , "clip": [0.80, 1.85]
       , "wiki": "https://en.wiktionary.org/wiki/bun#English"
+      }
+    , "cover": {
+        "spelling": "cover"
+      , "phonetic": "cover"
+      , "image": "img/ʌ/cover.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cuff": {
+        "spelling": "cuff"
+      , "phonetic": "cuff"
+      , "image": "img/ʌ/cuff.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cup": {
+        "spelling": "cup"
+      , "phonetic": "cup"
+      , "image": "img/ʌ/cup.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cut": {
+        "spelling": "cut"
+      , "phonetic": "cut"
+      , "image": "img/ʌ/cut.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "drummer": {
+        "spelling": "drummer"
+      , "phonetic": "drummer"
+      , "image": "img/ʌ/drummer.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "duck": {
+        "spelling": "duck"
+      , "phonetic": "duck"
+      , "image": "img/ʌ/duck.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "dunce-": {
+        "spelling": "dunce-"
+      , "phonetic": "dunce-"
+      , "image": "img/ʌ/dunce-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "fuss": {
+        "spelling": "fuss"
+      , "phonetic": "fuss"
+      , "image": "img/ʌ/fuss.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "gruff-": {
+        "spelling": "gruff-"
+      , "phonetic": "gruff-"
+      , "image": "img/ʌ/gruff-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "gutter": {
+        "spelling": "gutter"
+      , "phonetic": "gutter"
+      , "image": "img/ʌ/gutter.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "hum": {
+        "spelling": "hum"
+      , "phonetic": "hum"
+      , "image": "img/ʌ/hum.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
       }
     , "hut": {
         "spelling": "hut"
@@ -175,12 +575,33 @@
       , "clip": [2.0, 3.050]
       , "wiki": "https://en.wiktionary.org/wiki/hut#English"
       }
+    , "lugger-": {
+        "spelling": "lugger-"
+      , "phonetic": "lugger-"
+      , "image": "img/ʌ/lugger-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "muck": {
+        "spelling": "muck"
+      , "phonetic": "muck"
+      , "image": "img/ʌ/muck.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
     , "mush": {
         "spelling": "mush"
       , "phonetic": "/mʌ∫/"
       , "image": "img/ʌ/mush.jpg"
       , "clip": [3.20, 4.10]
       , "wiki": "https://en.wiktionary.org/wiki/mush#English"
+      }
+    , "pluck": {
+        "spelling": "pluck"
+      , "phonetic": "pluck"
+      , "image": "img/ʌ/pluck.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
       }
     , "puck": {
         "spelling": "puck"
@@ -189,6 +610,41 @@
       , "clip": [4.250, 5.250]
       , "wiki": "https://en.wiktionary.org/wiki/mush#English"
       }
+    , "putts": {
+        "spelling": "putts"
+      , "phonetic": "putts"
+      , "image": "img/ʌ/putts.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "scud-": {
+        "spelling": "scud-"
+      , "phonetic": "scud-"
+      , "image": "img/ʌ/scud-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "scuff-": {
+        "spelling": "scuff-"
+      , "phonetic": "scuff-"
+      , "image": "img/ʌ/scuff-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "stuck": {
+        "spelling": "stuck"
+      , "phonetic": "stuck"
+      , "image": "img/ʌ/stuck.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "stud": {
+        "spelling": "stud"
+      , "phonetic": "stud"
+      , "image": "img/ʌ/stud.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
     , "stuff": {
         "spelling": "stuff"
       , "phonetic": "/stʌf/"
@@ -196,6 +652,777 @@
       , "clip": [5.30, 6.415]
       , "wiki": "https://en.wiktionary.org/wiki/stuff#English"
       }
+    , "stutter": {
+        "spelling": "stutter"
+      , "phonetic": "stutter"
+      , "image": "img/ʌ/stutter.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "sums": {
+        "spelling": "sums"
+      , "phonetic": "sums"
+      , "image": "img/ʌ/sums.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "Surrey-": {
+        "spelling": "Surrey-"
+      , "phonetic": "Surrey-"
+      , "image": "img/ʌ/Surrey-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tusk": {
+        "spelling": "tusk"
+      , "phonetic": "tusk"
+      , "image": "img/ʌ/tusk.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tussle-": {
+        "spelling": "tussle-"
+      , "phonetic": "tussle-"
+      , "image": "img/ʌ/tussle-.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    },
+
+    "æ": {
+      "url": "æ.mp3"
+    , "æ": {
+        "clip": [0.0, 1.0]
+      }
+    , "affluent": {
+        "spelling": "affluent"
+      , "phonetic": "æfluənt"
+      , "image": "img/æ/affluent.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "amber": {
+        "spelling": "amber"
+      , "phonetic": "æmbə"
+      , "image": "img/æ/amber.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "and": {
+        "spelling": "and"
+      , "phonetic": "ænd"
+      , "image": "img/æ/and.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ant": {
+        "spelling": "ant"
+      , "phonetic": "ænt"
+      , "image": "img/æ/ant.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "axe": {
+        "spelling": "axe"
+      , "phonetic": "æks"
+      , "image": "img/æ/axe.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "back": {
+        "spelling": "back"
+      , "phonetic": "bæk"
+      , "image": "img/æ/back.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "bad": {
+        "spelling": "bad"
+      , "phonetic": "bæd"
+      , "image": "img/æ/bad.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "badge": {
+        "spelling": "badge"
+      , "phonetic": "bæʤ"
+      , "image": "img/æ/badge.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "bag": {
+        "spelling": "bag"
+      , "phonetic": "bæɡ"
+      , "image": "img/æ/bag.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ban": {
+        "spelling": "ban"
+      , "phonetic": "bæn"
+      , "image": "img/æ/ban.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "band": {
+        "spelling": "band"
+      , "phonetic": "bænd"
+      , "image": "img/æ/band.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "bat": {
+        "spelling": "bat"
+      , "phonetic": "bæt"
+      , "image": "img/æ/bat.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "canyon": {
+        "spelling": "canyon"
+      , "phonetic": "kænjən"
+      , "image": "img/æ/canyon.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cap": {
+        "spelling": "cap"
+      , "phonetic": "ˈkæp"
+      , "image": "img/æ/cap.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "cat": {
+        "spelling": "cat"
+      , "phonetic": "kæt"
+      , "image": "img/æ/cat.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "catch": {
+        "spelling": "catch"
+      , "phonetic": "kæʧ"
+      , "image": "img/æ/catch.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "cattle": {
+        "spelling": "cattle"
+      , "phonetic": "kætᵊl"
+      , "image": "img/æ/cattle.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "chat": {
+        "spelling": "chat"
+      , "phonetic": "ʧæt"
+      , "image": "img/æ/chat.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "dad": {
+        "spelling": "dad"
+      , "phonetic": "dæd"
+      , "image": "img/æ/dad.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "fanatic": {
+        "spelling": "fanatic"
+      , "phonetic": "fənætɪk"
+      , "image": "img/æ/fanatic.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "flash": {
+        "spelling": "flash"
+      , "phonetic": "flæʃ"
+      , "image": "img/æ/flash.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "fat": {
+        "spelling": "fat"
+      , "phonetic": "fæt"
+      , "image": "img/æ/fat.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "gallic": {
+        "spelling": "gallic"
+      , "phonetic": "ɡælɪk"
+      , "image": "img/æ/gallic.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "gannet": {
+        "spelling": "gannet"
+      , "phonetic": "ɡænət"
+      , "image": "img/æ/gannet.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "gas": {
+        "spelling": "gas"
+      , "phonetic": "gæs"
+      , "image": "img/æ/gas.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "gateau": {
+        "spelling": "gateau"
+      , "phonetic": "ɡætəʊ"
+      , "image": "img/æ/gateau.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "gnat": {
+        "spelling": "gnat"
+      , "phonetic": "næt"
+      , "image": "img/æ/gnat.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ham": {
+        "spelling": "ham"
+      , "phonetic": "hæm"
+      , "image": "img/æ/ham.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "happy": {
+        "spelling": "happy"
+      , "phonetic": "hæpi"
+      , "image": "img/æ/happy.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "hat": {
+        "spelling": "hat"
+      , "phonetic": "hæt"
+      , "image": "img/æ/hat.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "jam": {
+        "spelling": "jam"
+      , "phonetic": "ʤæm"
+      , "image": "img/æ/jam.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "jazz": {
+        "spelling": "jazz"
+      , "phonetic": "ʤæz"
+      , "image": "img/æ/jazz.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "ladder": {
+        "spelling": "ladder"
+      , "phonetic": "lædə"
+      , "image": "img/æ/ladder.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "land": {
+        "spelling": "land"
+      , "phonetic": "lænd"
+      , "image": "img/æ/land.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "latch": {
+        "spelling": "latch"
+      , "phonetic": "læʧ"
+      , "image": "img/æ/latch.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "lattice": {
+        "spelling": "lattice"
+      , "phonetic": "lætɪs"
+      , "image": "img/æ/lattice.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "mac": {
+        "spelling": "mac"
+      , "phonetic": "mæk"
+      , "image": "img/æ/mac.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "man": {
+        "spelling": "man"
+      , "phonetic": "mæn"
+      , "image": "img/æ/man.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "mantel": {
+        "spelling": "mantel"
+      , "phonetic": "mæntᵊl"
+      , "image": "img/æ/mantel.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "marry": {
+        "spelling": "marry"
+      , "phonetic": "mæri"
+      , "image": "img/æ/marry.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "mash": {
+        "spelling": "mash"
+      , "phonetic": "mæʃ"
+      , "image": "img/æ/mash.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "mat": {
+        "spelling": "mat"
+      , "phonetic": "mæt"
+      , "image": "img/æ/mat.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "match": {
+        "spelling": "match"
+      , "phonetic": "mæʧ"
+      , "image": "img/æ/match.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "pack": {
+        "spelling": "pack"
+      , "phonetic": "pæck"
+      , "image": "img/æ/pack.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "paddle": {
+        "spelling": "paddle"
+      , "phonetic": "pædᵊl"
+      , "image": "img/æ/paddle.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "palettes": {
+        "spelling": "palettes"
+      , "phonetic": "pælɪts"
+      , "image": "img/æ/palettes.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pan": {
+        "spelling": "pan"
+      , "phonetic": "pæn"
+      , "image": "img/æ/pan.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pat": {
+        "spelling": "pat"
+      , "phonetic": "pæt"
+      , "image": "img/æ/pat.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "plaque": {
+        "spelling": "plaque"
+      , "phonetic": "plæk"
+      , "image": "img/æ/plaque.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "quack": {
+        "spelling": "quack"
+      , "phonetic": "kwæk"
+      , "image": "img/æ/quack.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "rack": {
+        "spelling": "rack"
+      , "phonetic": "ræk"
+      , "image": "img/æ/rack.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "radish": {
+        "spelling": "radish"
+      , "phonetic": "rædɪʃ"
+      , "image": "img/æ/radish.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "salary": {
+        "spelling": "salary"
+      , "phonetic": "sæləri"
+      , "image": "img/æ/salary.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "sand": {
+        "spelling": "sand"
+      , "phonetic": "sænd"
+      , "image": "img/æ/sand.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "shack": {
+        "spelling": "shack"
+      , "phonetic": "ʃæk"
+      , "image": "img/æ/shack.jpg"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "shackle": {
+        "spelling": "shackle"
+      , "phonetic": "ʃækᵊl"
+      , "image": "img/æ/shackle.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "slapped": {
+        "spelling": "slapped"
+      , "phonetic": "slæpt"
+      , "image": "img/æ/slapped.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tally": {
+        "spelling": "tally"
+      , "phonetic": "tæli"
+      , "image": "img/æ/tally.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tamper": {
+        "spelling": "tamper"
+      , "phonetic": "tæmpə"
+      , "image": "img/æ/tamper.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "tan": {
+        "spelling": "tan"
+      , "phonetic": "tæn"
+      , "image": "img/æ/tan.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "track": {
+        "spelling": "track"
+      , "phonetic": "træk"
+      , "image": "img/æ/track.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "vat": {
+        "spelling": "vat"
+      , "phonetic": "væt"
+      , "image": "img/æ/vat.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    },
+
+    "ɛ": {
+      "url": "æ.mp3"
+    , "æ": {
+        "clip": [0.0, 1.0]
+      }
+    , "bed": {
+        "spelling": "bed"
+      , "phonetic": "bɛd"
+      , "image": "img/ɛ/bed.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "beg": {
+        "spelling": "beg"
+      , "phonetic": "bɛg"
+      , "image": "img/ɛ/beg.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "bend": {
+        "spelling": "bend"
+      , "phonetic": "bɛnd"
+      , "image": "img/ɛ/bend.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "bet": {
+        "spelling": "bet"
+      , "phonetic": "bɛt"
+      , "image": "img/ɛ/bet.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "celery": {
+        "spelling": "celery"
+      , "phonetic": "sɛlᵊri"
+      , "image": "img/ɛ/celery.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "dead": {
+        "spelling": "dead"
+      , "phonetic": "dɛd"
+      , "image": "img/ɛ/dead.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "effluent": {
+        "spelling": "effluent"
+      , "phonetic": "ɛfluənt"
+      , "image": "img/ɛ/effluent.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ember": {
+        "spelling": "ember"
+      , "phonetic": "ɛmbə"
+      , "image": "img/ɛ/ember.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "end": {
+        "spelling": "end"
+      , "phonetic": "ɛnd"
+      , "image": "img/ɛ/end.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "flesh": {
+        "spelling": "flesh"
+      , "phonetic": "flɛʃ"
+      , "image": "img/ɛ/flesh.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "gem": {
+        "spelling": "gem"
+      , "phonetic": "ʤɛm"
+      , "image": "img/ɛ/gem.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ghetto": {
+        "spelling": "ghetto"
+      , "phonetic": "ɡɛtəʊ"
+      , "image": "img/ɛ/ghetto.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "guess": {
+        "spelling": "guess"
+      , "phonetic": "ɡɛs"
+      , "image": "img/ɛ/guess.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "hem": {
+        "spelling": "hem"
+      , "phonetic": "hɛm"
+      , "image": "img/ɛ/hem.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "Kenyan": {
+        "spelling": "Kenyan"
+      , "phonetic": "kɛnjən"
+      , "image": "img/ɛ/Kenyan.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ketch": {
+        "spelling": "ketch"
+      , "phonetic": "kɛʧ"
+      , "image": "img/ɛ/ketch.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "kettle": {
+        "spelling": "kettle"
+      , "phonetic": "kɛtᵊl"
+      , "image": "img/ɛ/kettle.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "lend": {
+        "spelling": "lend"
+      , "phonetic": "lɛnd"
+      , "image": "img/ɛ/lend.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "lettuce": {
+        "spelling": "lettuce"
+      , "phonetic": "lɛtɪs"
+      , "image": "img/ɛ/lettuce.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "men": {
+        "spelling": "men"
+      , "phonetic": "mɛn"
+      , "image": "img/ɛ/men.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "mental": {
+        "spelling": "mental"
+      , "phonetic": "mɛntᵊl"
+      , "image": "img/ɛ/mental.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "merry": {
+        "spelling": "merry"
+      , "phonetic": "mɛri"
+      , "image": "img/ɛ/merry.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "met": {
+        "spelling": "met"
+      , "phonetic": "mɛt"
+      , "image": "img/ɛ/met.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "net": {
+        "spelling": "net"
+      , "phonetic": "nɛt"
+      , "image": "img/ɛ/net.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "peck": {
+        "spelling": "peck"
+      , "phonetic": "pɛk"
+      , "image": "img/ɛ/peck.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pedal": {
+        "spelling": "pedal"
+      , "phonetic": "pɛdᵊl"
+      , "image": "img/ɛ/pedal.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pellets": {
+        "spelling": "pellets"
+      , "phonetic": "pɛlɪts"
+      , "image": "img/ɛ/pellets.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pen": {
+        "spelling": "pen"
+      , "phonetic": "pɛn"
+      , "image": "img/ɛ/pen.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "pet": {
+        "spelling": "pet"
+      , "phonetic": "pɛt"
+      , "image": "img/ɛ/pet.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "phonetic": {
+        "spelling": "phonetic"
+      , "phonetic": "fəʊnɛtɪk"
+      , "image": "img/ɛ/phonetic.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "reddish": {
+        "spelling": "reddish"
+      , "phonetic": "rɛdɪʃ"
+      , "image": "img/ɛ/reddish.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "send": {
+        "spelling": "send"
+      , "phonetic": "sɛnd"
+      , "image": "img/ɛ/send.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "shekel": {
+        "spelling": "shekel"
+      , "phonetic": "ʃɛkᵊl"
+      , "image": "img/ɛ/shekel.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "slept": {
+        "spelling": "slept"
+      , "phonetic": "slɛpt"
+      , "image": "img/ɛ/slept.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "telly": {
+        "spelling": "telly"
+      , "phonetic": "tɛli"
+      , "image": "img/ɛ/telly.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "temper": {
+        "spelling": "temper"
+      , "phonetic": "temper"
+      , "image": "img/ɛ/temper.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "ten": {
+        "spelling": "ten"
+      , "phonetic": "tɛn"
+      , "image": "img/ɛ/ten.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+    , "trek": {
+        "spelling": "trek"
+      , "phonetic": "trɛk"
+      , "image": "img/ɛ/trek.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "vet": {
+        "spelling": "vet"
+      , "phonetic": "vɛt"
+      , "image": "img/ɛ/vet.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "wreck": {
+        "spelling": "wreck"
+      , "phonetic": "rɛk"
+      , "image": "img/ɛ/wreck.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+    }
+    , "x": {
+        "spelling": "x"
+      , "phonetic": "ɛks"
+      , "image": "img/ɛ/x.webp"
+      , "clip": [0.00, 0.00]
+      , "wiki": ""
+      }
+
     }
   }
 
@@ -214,6 +1441,7 @@
       "bid": "bead",
       "bins": "beans",
       "bits": "beets",
+      "chip": "cheap",
       "dip": "deep",
       "filled": "field",
       "fit": "feet",
@@ -228,6 +1456,7 @@
       "lick": "leek",
       "lid": "lead",
       "lip": "leap",
+      "live": "leave",
       "litter": "litre",
       "liver": "lever",
       "mill": "meal",
@@ -276,6 +1505,75 @@
       "tarsal": "tussle",
       "task": "tusk"
     }
+  , "æɛX": {
+      "affluent": "effluent",
+      "amber": "ember",
+      "and": "end",
+      "axe": "X",
+      "bad": "bed",
+      "bag": "beg",
+      "band": "bend",
+      "bat": "bet",
+      "canyon": "Kenyan",
+      "catch": "ketch",
+      "cattle": "kettle",
+      "dad": "dead",
+      "fanatic": "phonetic",
+      "flash": "flesh",
+      "gas": "guess",
+      "gateau": "ghetto",
+      "gnat": "net",
+      "ham": "hem",
+      "jam": "gem",
+      "land": "lend",
+      "lattice": "lettuce",	
+      "man": "men",
+      "mantel": "mental",
+      "marry": "merry",
+      "mat": "met",
+      "pack": "peck",
+      "paddle": "pedal",
+      "palettes": "pellets",
+      "pan": "pen",
+      "pat": "pet",
+      "rack": "wreck",
+      "radish": "reddish",
+      "salary": "celery",
+      "sand": "send",
+      "shackle": "shekel",
+      "slapped": "slept",
+      "tally": "telly",
+      "tamper": "temper",
+      "tan": "ten",
+      "track": "trek",
+      "vat": "vet"
+    }
+  , "AE": {
+      "ant": "aunt",
+      "axe": "arcs",
+      "back": "bark",
+      "bad": "bard",
+      "badge": "barge",
+      "ban": "barn",
+      "cap": "carp",
+      "cat": "cart",
+      "chat": "chart",
+      "fat": "fart",
+      "Gallic": "garlic",
+      "gannet": "garnet",
+      "happy": "harpy",
+      "hat": "heart",
+      "jazz": "jars",
+      "ladder": "larder",
+      "latch": "larch",
+      "mac": "mark",
+      "mash": "marsh",
+      "match": "march",
+      "pack": "park",
+      "pat": "part",
+      "quack": "quark",
+      "shack": "shark"
+    }
   }
 
 , "index": {
@@ -286,6 +1584,10 @@
   , "ɑʌ": {
       "phonemes": ["ɑː", "ʌ"]
     , "words": ["heart", "hut"]
+    }
+  , "æɛ": {
+      "phonemes": ["æ", "ɛ"]
+    , "words": ["pan", "pen"]
     }
   }
 }
