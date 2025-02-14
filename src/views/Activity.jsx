@@ -594,6 +594,8 @@ const Activity = (props) => {
                                   : [ word1, phoneme0Ref ]
       const played = playedCards[phonemeData.phoneme]
 
+      // console.log("cardData:", cardData.spelling || "*MISSING*")
+
       if (index !== useSecondCard) {
         cueURL = cardData.url
         cueClip = cardData.clip

@@ -100,13 +100,13 @@ const Card = forwardRef((props, cardRef) => {
               <p className="spelling">{spelling}</p>
 
               {/* Protect against a missing `wiki` entry */}
-              {wiki && (<a href={wiki} target="meaning">
+              {(wiki && <a href={wiki} target="meaning">
                 <img
                   className="icon meaning"
                   src={icon}
                   alt="Meaning"
                 />
-              </a> || <div className="icon"/>)}
+              </a>) || <div className="icon"/>}
             </div>
 
             <p className="phonetic">{phonetic}</p>
