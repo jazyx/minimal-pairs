@@ -51,6 +51,14 @@ const MenuItems = ({ itemSelected }) => {
       >
         Contact us
       </li>
+
+      <li
+        className="unselectable"
+        key="review"
+        onClick={() => itemSelected("Review")}
+      >
+        Review
+      </li>
     </>
   )
 }

@@ -23,8 +23,6 @@ const phonemePairs = Object.keys(pairs.pairs)
 
 const pairIndex = pairs.index
 
-const AUDIO_DIR = "audio/"
-
 
 export const PairsContext = createContext()
 
@@ -167,7 +165,7 @@ export const PairsProvider = ({ children }) => {
   function getWordData(phoneme, word) {
     const phonemeData = pairs.words[phoneme]
     const data = {...phonemeData[word]}
-    data.url = AUDIO_DIR + phonemeData.url
+    data.url = phonemeData.url
 
     return data
   }
@@ -186,7 +184,7 @@ export const PairsProvider = ({ children }) => {
   function getPhonemeData(phoneme) {
     const phonemeData = pairs.words[phoneme]
     const data = {...phonemeData[phoneme]}
-    data.url = AUDIO_DIR + phonemeData.url
+    data.url = phonemeData.url
     data.phoneme = phoneme
 
     return data

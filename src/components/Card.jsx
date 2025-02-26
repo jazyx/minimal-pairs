@@ -33,8 +33,8 @@ const Card = forwardRef((props, cardRef) => {
   , image
   , image_
   , wiki
-  } = props.card
-
+  } = props.card;
+  
   const className = "card"
                   + ( props.role
                     ? " flipped"

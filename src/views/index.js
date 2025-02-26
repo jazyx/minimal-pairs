@@ -4,6 +4,7 @@ import Contact from './Contact'
 import Select from './Select'
 import Preferences from './Preferences'
 import Splash from './Splash'
+import Review from './Review'
 
 
 const Views = {
@@ -13,6 +14,7 @@ const Views = {
 , Select
 , Preferences
 , Splash
+, Review
 }
 
 export default Views

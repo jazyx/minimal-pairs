@@ -15,6 +15,9 @@
  */
 
 import React, { createContext } from 'react'
+const AUDIO_DIR = "audio/"
+
+
 
 export const AudioContext = createContext()
 
@@ -36,30 +39,29 @@ export const AudioProvider = ({ children }) => {
       return // Let this sound play to the end
     }
 
-    if (playing) { // Replace playing sound with the new one
-      _stopAudioPlayback()
-    }
+    // console.log("url:", url, ", clip:", clip)
 
     const [ startTime, endTime ] = clip
     const duration = (endTime - startTime) * 1000 // ms
 
     audio.src = url
-    audio.currentTime = startTime                  // s
+    audio.currentTime = startTime                 // s
+    // console.log("audio.duration:", audio.duration, ", url:", url)
     clearTimeout(timeOut)
     timeOut = setTimeout(_stopAudioPlayback, duration)
 
     audio.play()
          .then(result => {
-          playing = url
+           playing = url
          }).catch(error => {
-           console.log("Audio.play() error:)", error)
+           console.log("Audio.play() error:)", error, url)
          })
   }
 
   const playClip = (url, clip) => {
     // TODO: Fade out current audio playback before
     // starting to play new clip.
-    _startAudioPlayback(url, clip)
+    _startAudioPlayback(AUDIO_DIR + url, clip)
   }
 
   return (
