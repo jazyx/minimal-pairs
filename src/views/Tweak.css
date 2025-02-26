@@ -1,0 +1,86 @@
+#review {
+  font-size: 24px;
+
+  select {
+    font-size: inherit;
+  }
+
+  ul {
+    position: relative;
+    height: 80vh;
+    width: 15em;
+    margin: 0 auto;
+    overflow: auto;
+
+    & li {
+      margin: 0.25em;
+      padding: 0.25em;
+      border: 1px outset #888;
+      border-radius: 0.25em;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.selected,
+      &:hover:active {
+        border-style: inset;
+        background-color: #000;
+      }
+
+      & span {
+        display: inline-block;
+        width: 4em;
+        text-align: left;
+
+        &.start {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  #selected {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+
+    & .buttons {
+      display: flex;
+
+      & button {
+        position: relative;
+        height: 1.5em;
+        width: 3em;
+        font-size: inherit;
+        background-color: transparent;
+      }
+      
+      &.scroll button {
+        width: 1.5em;
+
+        &:disabled {
+          opacity: 0.25;
+        }
+
+        & img {
+          width: 90%;
+          height: 90%;
+        }
+      }
+    }
+
+    p {
+      margin: 0 0.5em;
+      width: 4em;
+    }
+
+    & input {
+      position: relative;
+      font-size: inherit;
+      width: 4em;
+      background: transparent;
+      color: var(--light);
+    }
+  }
+}

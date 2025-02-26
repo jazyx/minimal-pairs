@@ -16,18 +16,20 @@ import { PreferencesContext } from './PreferencesContext';
 import storage from '../tools/storage';
 import { shuffle, removeFrom } from '../tools/utilities'
 
-const pairs = require('../json/pairs.json')
-const phonemePairs = Object.keys(pairs.pairs)
+const json = require('../json/pairs.json')
+const phonemePairs = Object.keys(json.pairs)
 // Ignore pairs like "ɪiX" which have not been fully treated yet
 .filter( pairing => !pairing.match(/X$/))
 
-const pairIndex = pairs.index
+const pairIndex = json.index
 
 
 export const PairsContext = createContext()
 
 
 export const PairsProvider = ({ children }) => {
+  const [ pairs, setPairs ] = useState(json)
+  
   const { pair: currentPair, choosePair } = useContext(PreferencesContext)
   // "ɪi" <<< one of the entries in phonemePairs
   const [ phonemeSymbols, setPhonemeSymbols ] = useState([])
@@ -198,6 +200,7 @@ export const PairsProvider = ({ children }) => {
     <PairsContext.Provider
       value ={{
         pairs
+      , setPairs
       , pairIndex
       , phonemePairs
       , currentPair

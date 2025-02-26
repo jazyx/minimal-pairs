@@ -18,8 +18,8 @@ import React, { createContext } from 'react'
 const AUDIO_DIR = "audio/"
 
 
-
 export const AudioContext = createContext()
+
 
 export const AudioProvider = ({ children }) => {
   // eslint-disable-next-line
@@ -35,18 +35,15 @@ export const AudioProvider = ({ children }) => {
   }
 
   const _startAudioPlayback = (url, clip) => {
-    if (url === playing) {
+    if (url === playing || !clip) {
       return // Let this sound play to the end
     }
-
-    // console.log("url:", url, ", clip:", clip)
 
     const [ startTime, endTime ] = clip
     const duration = (endTime - startTime) * 1000 // ms
 
     audio.src = url
     audio.currentTime = startTime                 // s
-    // console.log("audio.duration:", audio.duration, ", url:", url)
     clearTimeout(timeOut)
     timeOut = setTimeout(_stopAudioPlayback, duration)
 

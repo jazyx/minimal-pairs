@@ -6,6 +6,7 @@
 import React, { Fragment } from 'react';
 import { FullScreenButton } from './FullScreen'
 
+
 const MenuItems = ({ itemSelected }) => {
   return (
     <>
@@ -52,13 +53,14 @@ const MenuItems = ({ itemSelected }) => {
         Contact us
       </li>
 
-      <li
+      {/* Only show Tweak view during development */}
+      {window.location.hostname === "localhost" && <li
         className="unselectable"
-        key="review"
-        onClick={() => itemSelected("Review")}
+        key="tweak"
+        onClick={() => itemSelected("Tweak")}
       >
-        Review
-      </li>
+        Tweak
+      </li>}
     </>
   )
 }

@@ -4,7 +4,7 @@ import Contact from './Contact'
 import Select from './Select'
 import Preferences from './Preferences'
 import Splash from './Splash'
-import Review from './Review'
+import Tweak from './Tweak'
 
 
 const Views = {
@@ -14,7 +14,7 @@ const Views = {
 , Select
 , Preferences
 , Splash
-, Review
+, Tweak
 }
 
 export default Views

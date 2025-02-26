@@ -30,7 +30,7 @@
         "spelling": "ankle",
         "phonetic": "/ˈæŋkᵊl/",
         "image": "img/æ/ankle.webp",
-        "clip": [119.5, 120.4],
+        "clip": [120.1, 121.3],
         "wiki": ""
       },
       "ant": {
@@ -163,7 +163,7 @@
         "spelling": "catch",
         "phonetic": "/kæʧ/",
         "image": "img/æ/catch.webp",
-        "clip": [32.9, 33.7],
+        "clip": [32.5, 33.5],
         "wiki": ""
       },
       "cattle": {
@@ -258,7 +258,7 @@
         "wiki": ""
       },
       "gallic": {
-        "spelling": "gallic",
+        "spelling": "Gallic",
         "phonetic": "/ɡælɪk/",
         "image": "img/æ/gallic.jpg",
         "clip": [46.5, 47.8],
@@ -667,7 +667,7 @@
         "spelling": "vat",
         "phonetic": "/væt/",
         "image": "img/æ/vat.webp",
-        "clip": [118.1, 119.4],
+        "clip": [118.0, 119.4],
         "wiki": ""
       }
     },
@@ -2223,7 +2223,7 @@
         "spelling": "flesh",
         "phonetic": "/flɛʃ/",
         "image": "img/ɛ/flesh.webp",
-        "clip": [20.2, 22.5],
+        "clip": [21.3, 22.4],
         "wiki": ""
       },
       "gem": {
@@ -2314,7 +2314,7 @@
         "spelling": "mesh",
         "phonetic": "/mɛʃ/",
         "image": "img/ɛ/mesh.webp",
-        "clip": [48.8, 50.1],
+        "clip": [48.8, 49.5],
         "wiki": "",
         "credit": ""
       },
@@ -2454,107 +2454,106 @@
     },
 
     "eə": {
-      "url": "beard.mp3",
-      "url_": "eə.mp3",
+      "url": "eə.mp3",
       "eə": {
-        "clip": [0.0, 1.0]
+        "clip": [0.0, 0.65]
       },
       "air": {
         "spelling": "air",
         "phonetic": "/eə/",
         "image": "img/eə/air.webp",
-        "clip": [0, 0.7],
+        "clip": [1.6, 2.5],
         "wiki": ""
       },
       "bared": {
         "spelling": "bared",
         "phonetic": "/beəd/",
         "image": "img/eə/bared.webp",
-        "clip": [0, 0],
+        "clip": [3.3, 4.5],
         "wiki": ""
       },
       "bear": {
         "spelling": "bear",
         "phonetic": "/beə/",
         "image": "img/eə/bear.webp",
-        "clip": [0, 0],
+        "clip": [5.2, 6.4],
         "wiki": ""
       },
       "chair": {
         "spelling": "chair",
         "phonetic": "/ʧeə/",
         "image": "img/eə/chair.webp",
-        "clip": [0, 0],
+        "clip": [7.2, 8.3],
         "wiki": ""
       },
       "fair": {
         "spelling": "fair",
         "phonetic": "/feə/",
         "image": "img/eə/fair.webp",
-        "clip": [0, 0],
+        "clip": [9.3, 10.5],
         "wiki": ""
       },
       "hair": {
         "spelling": "hair",
         "phonetic": "/heə/",
         "image": "img/eə/hair.webp",
-        "clip": [0, 0],
+        "clip": [11.5, 12.6],
         "wiki": ""
       },
       "pear": {
         "spelling": "pear",
         "phonetic": "/peə/",
         "image": "img/eə/pear.webp",
-        "clip": [0, 0],
+        "clip": [13.5, 14.5],
         "wiki": ""
       },
       "rare": {
         "spelling": "rare",
         "phonetic": "/reə/",
         "image": "img/eə/rare.webp",
-        "clip": [0, 0],
+        "clip": [15.6, 16.8],
         "wiki": ""
       },
       "share": {
         "spelling": "share",
         "phonetic": "/ʃeə/",
         "image": "img/eə/share.webp",
-        "clip": [0, 0],
+        "clip": [17.5, 18.9],
         "wiki": ""
       },
       "snare": {
         "spelling": "snare",
         "phonetic": "/sneə/",
         "image": "img/eə/snare.webp",
-        "clip": [0, 0],
+        "clip": [19.8, 21.2],
         "wiki": ""
       },
       "spare": {
         "spelling": "spare",
         "phonetic": "/speə/",
         "image": "img/eə/spare.webp",
-        "clip": [0, 0],
+        "clip": [22.0, 23.5],
         "wiki": ""
       },
       "stair": {
         "spelling": "stair",
         "phonetic": "/steə/",
         "image": "img/eə/stair.webp",
-        "clip": [0, 0],
+        "clip": [24.5, 25.9],
         "wiki": ""
       },
       "tear": {
         "spelling": "tear",
         "phonetic": "/teə/",
         "image": "img/eə/torn.webp",
-        "clip": [0, 0],
+        "clip": [26.9, 28.1],
         "wiki": ""
       },
       "wary": {
         "spelling": "wary",
         "phonetic": "/ˈweəri/",
         "image": "img/eə/wary.webp",
-        "clip": [0, 0],
+        "clip": [29.1, 30.3],
         "wiki": ""
       }
     },
