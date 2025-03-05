@@ -30,7 +30,7 @@ export const PairsContext = createContext()
 export const PairsProvider = ({ children }) => {
   const [ pairs, setPairs ] = useState(json)
   
-  const { pair: currentPair, choosePair } = useContext(PreferencesContext)
+  const { pair: currentPair, choosePair, friendly } = useContext(PreferencesContext)
   // "ɪi" <<< one of the entries in phonemePairs
   const [ phonemeSymbols, setPhonemeSymbols ] = useState([])
   // [ "ɪ", "iː" ]
@@ -104,6 +104,12 @@ export const PairsProvider = ({ children }) => {
         // if noTaboo, then this pair is clean
         // if !noTaboo, while loop will exit anyway
         break
+      } else if (!friendly) {
+         if (( lastWords[0].image || lastWords[0].image$)
+          && (lastWords[1].image || lastWords[1].image$)
+            ) {
+          break
+        }
       }
     } while (noTaboo)
 

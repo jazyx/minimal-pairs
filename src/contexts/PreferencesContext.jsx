@@ -14,9 +14,12 @@ const store = storage.get({
 , split: true
 , showCue: true
 , phonetic: false
+, friendly: true
 , taboo: false
 , pair: undefined // will be set by default if missing
 })
+
+// console.log("store:", store)
 
 
 export const PreferencesContext = createContext()
@@ -29,13 +32,14 @@ export const PreferencesProvider = ({ children }) => {
   const [split,      setSplit       ] = useState(store.split)
   const [showCue,    setShowCue     ] = useState(store.showCue)
   const [phonetic,   setShowPhonetic] = useState(store.phonetic)
+  const [friendly,   setFriendly    ] = useState(store.friendly)
   const [taboo,      setTaboo       ] = useState(store.taboo)
   
   const [pair,       setPair        ] = useState(store.pair)
 
   const [classes, setClasses ] = useState("")
 
-
+// console.log("CONTEXT friendly:", friendly, ", taboo:", taboo)
 
   const toggleleftHanded = () => {
     const newValue = !leftHanded
@@ -62,6 +66,17 @@ export const PreferencesProvider = ({ children }) => {
     const newValue = !phonetic
     setShowPhonetic(newValue)
     storage.setItem("phonetic", newValue)
+  }
+
+
+  const toggleFriendly = () => {
+    const newValue = !friendly
+    setFriendly(newValue)
+    if (newValue && taboo) {
+      setTaboo(false)
+      storage.setItem("taboo", false)
+    }
+    storage.setItem("friendly", newValue)
   }
 
 
@@ -98,12 +113,14 @@ export const PreferencesProvider = ({ children }) => {
         split,
         showCue,
         phonetic,
+        friendly,
         taboo,
         pair,
         toggleleftHanded,
         toggleSplit,
         toggleCue,
         togglePhonetic,
+        toggleFriendly,
         toggleTaboo,
         choosePair,
         classes

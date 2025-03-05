@@ -24,17 +24,22 @@ import './Preferences.css'
 
 const Preferences = ({ startActivity }) => {
   const {
-    leftHanded,
+    // leftHanded,
     split,
     showCue,
     phonetic,
+    friendly,
     taboo,
-    toggleleftHanded,
+    // toggleleftHanded,
     toggleSplit,
     toggleCue,
     togglePhonetic,
+    toggleFriendly,
     toggleTaboo
   } = useContext(PreferencesContext)
+
+  const tabooClass = friendly ? "disabled" : null
+  // console.log("COMPONENT taboo:", taboo, ", friendly:", friendly)
 
   return (
     <div id="preferences">
@@ -94,17 +99,33 @@ const Preferences = ({ startActivity }) => {
           Prioritize phonetic spelling
         </label>
 
-        <label htmlFor="taboo">
+        <label htmlFor="friendly">
           <input
-            id="taboo"
+            id="friendly"
             type="checkbox"
-            defaultChecked={taboo}
-            onChange={toggleTaboo}
+            defaultChecked={friendly}
+            onChange={toggleFriendly}
           />
           <span className="slot">
             <span className="slider" />
           </span>
-          Allow taboo <span className="taboo">🤬</span> words
+          Only child-friendly words <span className="family">🧒</span>
+
+          <label
+            htmlFor="taboo" 
+            className={tabooClass}
+          >
+            <input
+              id="taboo"
+              type="checkbox"
+              checked={taboo}
+              onChange={toggleTaboo}
+            />
+            <span className="slot">
+              <span className="slider" />
+            </span>
+            Allow taboo <span className="taboo">🤬</span> words
+          </label>
         </label>
       </fieldset>
 

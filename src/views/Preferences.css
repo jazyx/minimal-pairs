@@ -85,6 +85,7 @@ label {
    transition: all 0.25s;
  }
 
+
  /* For the #left-handed checkbox, the inner .slider span always appears
   * on. When it is _off_, it appears on the right.
   */
@@ -104,7 +105,30 @@ label {
    left: 0;
  }
 
+
+
+
+
+[for=friendly] {
+  & span.family{
+    margin: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  & input:not(:checked) ~ span.family {
+    filter: grayscale(1);
+  }
+}
+
+
+
 [for=taboo] {
+  &.disabled {
+    opacity: 0.25;
+    pointer-events: none
+  }
+
   & span.taboo {
     border: none;
     background-color: transparent;

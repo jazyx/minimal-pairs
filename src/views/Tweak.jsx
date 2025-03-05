@@ -34,7 +34,7 @@ const Tweak = () => {
   const lastIndex = Object.keys(wordsData[phoneme]).length - 3
   
   // Prepare options for Phonemes select element
-  const files = phonemes.map((value, index) => {
+  const files = phonemes.map( value => {
     return (
       <option
         key={value}
@@ -115,8 +115,9 @@ const Tweak = () => {
   const playWord = (data) => {
     data = data.spelling ? data : wordData
     const clip = [ data.start, data.finish ]
-    const url = phoneme + ".mp3"
-    playClip(url, clip)
+    const file = phoneme.replace("ː", "") + ".mp3"
+
+    playClip(file, clip)
   }
 
 
@@ -156,7 +157,7 @@ const Tweak = () => {
     console.log(JSON.stringify(pairs, null, '  '));
   }
 
-
+// eslint-disable-next-line
   useEffect(() => {chooseWord(0, true)}, [])
 
 

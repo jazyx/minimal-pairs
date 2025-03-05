@@ -31,6 +31,7 @@ const Card = forwardRef((props, cardRef) => {
   , clip
   , url
   , image
+  , image$
   , image_
   , wiki
   } = props.card;
@@ -47,9 +48,18 @@ const Card = forwardRef((props, cardRef) => {
                     )
 
   const { playClip } = useContext(AudioContext)
-  const { taboo } = useContext(PreferencesContext)
+  const { taboo, friendly } = useContext(PreferencesContext)
+  const notFriendly = !friendly && image$
   const isTaboo = taboo && image_
-  const src = isTaboo ? image_ : image
+  const src = isTaboo
+    ? image_
+    : notFriendly
+      ? image$
+      : image
+
+  // console.log("src:", src)
+  // console.log("friendly:", friendly, ", notFriendly:", notFriendly, ", image:", image$)
+  // console.log("isTaboo:", isTaboo, ", notFriendly:", notFriendly, ", image:", image_)
 
   const action = props.action // will be null for decoy
               || (() => playClip(url, clip)) // only for decoy
