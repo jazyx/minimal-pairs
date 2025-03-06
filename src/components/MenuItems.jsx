@@ -54,13 +54,15 @@ const MenuItems = ({ itemSelected }) => {
       </li>
 
       {/* Only show Review view during development */}
-      {window.location.hostname === "localhost" && <li
+      {/* {window.location.hostname === "localhost" && */}
+      <li
         className="unselectable"
         key="Review"
         onClick={() => itemSelected("Review")}
       >
         Review
-      </li>}
+      </li>
+      {/* } */}
     </>
   )
 }

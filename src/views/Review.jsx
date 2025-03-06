@@ -19,22 +19,24 @@ import "./Review.css";
 
 const Review = () => {
   const { taboo, friendly } = useContext(PreferencesContext)
-  
   const { playClip, loadPhoneme } = useContext(AudioContext);
-  const { pairs } = useContext(PairsContext);
+  const { pairs, phonemeSymbols } = useContext(PairsContext);
   const ulRef = useRef()
 
   const phonemes = Object.keys(pairs.words);
-  const [ phoneme, setPhoneme ] = useState(phonemes[0]); // "æ"
+  const [ phoneme, setPhoneme ] = useState(phonemeSymbols[0]);
+  // "æ"
   const [ phonemeData, setPhonemeData ] = useState([])
   const [ word, setWord ] = useState(""); // "and"
   
   // Prepare options for Phonemes select element
   const files = phonemes.map( value => {
+    const className = (value === phoneme) ? "selected" : null
     return (
       <button
         key={value}
         data-word={value}
+        className={className}
       >
         {value}
       </button>

@@ -268,6 +268,7 @@ export const PairsProvider = ({ children }) => {
       , setPhonemePair
       , getWordData
       , getPhonemeData
+      , phonemeSymbols
       , getCards
       }}
     >
