@@ -45,7 +45,6 @@ const Review = () => {
 
 
   function createPhonemeData() {
-    console.log("createPhonemeData:", phoneme)
     // Create list of words and their timing data
     const phonemeData = Object.values(pairs.words[phoneme])
       .filter( data => data.spelling ) // not "url" or <phoneme>
@@ -114,10 +113,7 @@ const Review = () => {
 
 
   const playWord = (spelling) => {
-    console.log("pairs:", pairs)
     const data = pairs.words[phoneme][spelling]
-    console.log("data:", data)
-
     playClip(data)
   }
 

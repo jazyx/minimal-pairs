@@ -9,101 +9,107 @@ ul#index {
   width: 100%;
   right: auto;
   bottom: auto;
-}
 
-ul#index li {
-  display: flex;
-  align-items: center;
-  margin: 0.5rem 0;
-  border: none;
-  padding: 0;
-}
+  & li {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    border: none;
+    padding: 0;
 
-ul#index li.current {
-  background-color: #33c;
-}
+    &.current {
+      background-color: #33c;
 
-ul#index li:hover {
-  background-color: #333
-}
+      &:hover {
+        background-color: #333
+      }
+    }
 
-#index button {
-  position: relative;
-  height: var(--btnSize);
-  border-width: var(--borderWidth);
-  border-radius: var(--corner);
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  font-size: 1em;
-}
+    & button {
+      position: relative;
+      height: var(--btnSize);
+      border-width: var(--borderWidth);
+      border-radius: var(--corner);
+      background-color: transparent;
+      padding: 0;
+      cursor: pointer;
+      font-size: 1em;
 
-#index button.phoneme {
-  display: block;
-  width: var(--phonemeWidth);
-}
+      &:disabled {
+        opacity: 0.25;
+      }
 
-#index button.word {
-  width: 5em;
-  display: flex;
-  justify-content: flex-end;
-}
+      &.phoneme {
+        display: block;
+        width: var(--phonemeWidth);
+      }
 
-#index button.word:last-child {
-  justify-content: flex-start;
-}
+      &.word {
+        width: 5em;
+        display: flex;
+        justify-content: flex-end;
 
-#index button.word span {
-  flex-grow: 1;
-  text-align: center;
-}
+        &:last-child {
+          justify-content: flex-start;
+        }
 
-#index img {
-  width: var(--size);
-}
+        & span {
+          flex-grow: 1;
+          text-align: center;
+        }
 
-#index div.progress {
-  width: 1em;
-  height: 0.5em;
-  border: 1px solid var(--progressColor);
-  margin: 0.5em;
-  flex-grow: 1;
-}
+        & img {
+          width: var(--size);
+        }
+      }
 
-#index div.progress > div {
-  height: 100%;
-  background-color: var(--progressColor);
-}
 
-#index button.select {
-  height: var(--btnSize);
-  width: var(--btnSize);
-  background-color: #666;
-  border-radius: 0.25em;
-}
+      &.select {
+        height: var(--btnSize);
+        width: var(--btnSize);
+        background-color: #666;
+        border-radius: 0.25em;
 
-#index button.select:hover {
-  background-color: var(--rightPhonemeColor);
-}
+        &:hover {
+          background-color: var(--rightPhonemeColor);
+        }
+      }
+    }
 
-#contact {
-  --min-height: 100px;
-  --height: max(var(--min-height), 50vh);
-  --vertical: calc((100vh - var(--height)) / 2);
-  margin: var(--vertical) auto;
-  position: relative;
-  height: 50vh;
-  width: 50vw;
 
-  h1 {
-    margin: 0;
+    & div.progress {
+      width: 1em;
+      height: 0.5em;
+      border: 1px solid var(--progressColor);
+      margin: 0.5em;
+      flex-grow: 1;
+
+      & > div {
+        height: 100%;
+        background-color: var(--progressColor);
+      }
+    }
   }
 
-  a {
-    color: #fec;
+  #contact {
+    --min-height: 100px;
+    --height: max(var(--min-height), 50vh);
+    --vertical: calc((100vh - var(--height)) / 2);
+    margin: var(--vertical) auto;
+    position: relative;
+    height: 50vh;
+    width: 50vw;
 
-    &:visited {
-      color: #fe9;
+    h1 {
+      margin: 0;
+    }
+
+    a {
+      color: #fec;
+
+      &:visited {
+        color: #fe9;
+      }
     }
   }
 }

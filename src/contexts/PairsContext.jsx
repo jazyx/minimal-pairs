@@ -37,6 +37,8 @@ export const PairsProvider = ({ children }) => {
 
   const [ audioFileMap, setAudioFileMap ] = useState([])
   // { <phoneme>: "./audio/<phoneme>.mp3", ... }
+  const [ phonemeKeys ] = useState(Object.keys(pairs.words))
+  // [ "ɪ", "i", ... ] <<< no "ː" characters
 
   // "ɪi" <<< one of the entries in phonemePairs
   const [ phonemeSymbols, setPhonemeSymbols ] = useState([])
@@ -260,6 +262,7 @@ export const PairsProvider = ({ children }) => {
         pairs
       , setPairs
       , audioFileMap
+      , phonemeKeys
       , audioLoaded
       , audioLoading
       , pairIndex

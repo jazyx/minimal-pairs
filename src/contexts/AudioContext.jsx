@@ -31,21 +31,13 @@ export const AudioContext = createContext()
 export const AudioProvider = ({ children }) => {
   const {
     pairs,
+    phonemeKeys,
     currentPair,
     audioFileMap,
     audioLoaded
   } = useContext(PairsContext)
 
-  // console.log("audioFileMap:", audioFileMap)
-  // { "æ": "./audio/æ.mp3",
-  //   "ɑ": "./audio/ɑ.mp3",
-  //   ...
-  // }
-
   const playClip = (wordData) => {
-
-  // console.log("wordData", JSON.stringify(wordData, null, '  '));
-
     // Create a source to play the audio in the buffer
     const source = audioContext.createBufferSource()
     source.buffer = wordData.buffer
@@ -55,14 +47,11 @@ export const AudioProvider = ({ children }) => {
 
 
   const loadAudioFile = (url, phoneme, callback) => {
-    // console.log("url:", url, ", phoneme:", phoneme)
-
     // phoneme is derived from the audio file name. For long vowels
     // the "ː" character will be missing. Update the phoneme to use
     // this character if appropriate.
     const wordsData = pairs.words[phoneme]
                    || pairs.words[phoneme = phoneme + "ː"]
-    // console.log("wordsData:", wordsData)
 
     // Create an array of word data with the structure...
     // [ { spelling, clip }, ... ]
@@ -189,18 +178,13 @@ export const AudioProvider = ({ children }) => {
         wordData.buffer = buffer
       })
 
-      // console.log("pairs", JSON.stringify(pairs, null, '  '));
-      if (callback) {
-        callback(phoneme)
-      } else {
-        audioLoaded(phoneme)
-      }
+      callback(phoneme)
     }
   }
 
 
   const loadPhoneme = (phoneme, callback) => {
-    console.log("loadPhoneme:", phoneme)
+    // Get the link to the audio file without any "ː" in the key
     const audioFile = audioFileMap[phoneme]
                    || audioFileMap[phoneme.replace("ː", "")]
 
@@ -212,6 +196,11 @@ export const AudioProvider = ({ children }) => {
       delete audioFileMap[phoneme]
 
     } else {
+      // Add an "ː", if needed, for the callback
+      if (!(phonemeKeys.indexOf(phoneme) + 1)) {
+        phoneme = phoneme + "ː"
+      }
+
       callback(phoneme)
     }
   }
@@ -221,18 +210,7 @@ export const AudioProvider = ({ children }) => {
     const phonemesToLoad = splitCurrentPair()
 
     phonemesToLoad.forEach( phoneme => {
-      const audioFile = audioFileMap[phoneme]
-
-      if (audioFile) {
-        // Load the file, split it into buffers and add these to
-        // the entries in pairs.words[phoneme]...
-        loadAudioFile(audioFile, phoneme)
-        // ... but don't do it again
-        delete audioFileMap[phoneme]
-
-      } else {
-        audioLoaded(phoneme)
-      }
+      loadPhoneme(phoneme, audioLoaded)
     })
 
     function splitCurrentPair() {

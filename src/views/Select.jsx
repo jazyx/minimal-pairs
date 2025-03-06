@@ -4,7 +4,11 @@
 
 
  
-import React, { useContext } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import {
   PairsContext,
   AudioContext
@@ -12,12 +16,9 @@ import {
 
 import './Select.css';
 
-// console.log("phonemePairs:", phonemePairs)
-// Array [ "ɪi", "ɑʌ" ]
-
 
 const Select = ({ startActivity }) =>  {
-  const { playClip } = useContext(AudioContext)
+  const { playClip, loadPhoneme } = useContext(AudioContext)
   const {
     pairIndex
   , currentPair
@@ -25,28 +26,38 @@ const Select = ({ startActivity }) =>  {
   , setPhonemePair
   , getWordData
   , getPhonemeData
+  , phonemeKeys
   } = useContext(PairsContext)
+
+  // Clone phonemeKeys, so loading can be updated separately
+  const [ loading, setLoading ] = useState([ ...phonemeKeys ])
+
 
   const itemClicked = (pair) => {
     setPhonemePair(pair)
     startActivity("Loading")
   }
 
+
   const getPhonemeButton = (phonemeData) => {
     const { phoneme } = phonemeData
+    const disabled = (loading.indexOf(phoneme) + 1)
     return (
       <button
         key={phoneme}
-        className="phoneme"
+        className={`phoneme ${phoneme}`}
         onClick={() => playClip(phonemeData)}
+        disabled={disabled}
       >
         /{phoneme}/
       </button>
     )
   }
 
-  const getWordButton = (wordData, index) => {
+
+  const getWordButton = (wordData, index, phoneme) => {
     const { spelling: word, image } = wordData
+    const disabled = (loading.indexOf(phoneme) + 1)
 
     const set = index
               ? <><img src={image} alt="{word}" /><span>{word}</span></>
@@ -55,13 +66,15 @@ const Select = ({ startActivity }) =>  {
     return (
       <button
         key={word}
-        className="word"
+        className={`word ${phoneme}`}
         onClick={() => playClip(wordData)}
+        disabled={disabled}
       >
         {set}
       </button>
     )
   }
+
 
   const getProgress = (pair) => {
     return (
@@ -76,6 +89,7 @@ const Select = ({ startActivity }) =>  {
     )
   }
 
+
   const getSelectButton = (pair) => {
     return (
       <button
@@ -87,6 +101,7 @@ const Select = ({ startActivity }) =>  {
       </button>
     )
   }
+
 
   const pairsArray = phonemePairs.map( pair => {
     // pair = "ɪi"
@@ -127,13 +142,15 @@ const Select = ({ startActivity }) =>  {
       // , "url": "audio/i/mp3"
       // }
       phonemeButtons.push(getPhonemeButton(phonemeData))
-      wordButtons.push(getWordButton(wordData, index))
+      wordButtons.push(getWordButton(wordData, index, phoneme))
       progress = getProgress(pair)
       select = getSelectButton(pair)
     })
 
+
     const entry = [...phonemeButtons, ...wordButtons, progress, select]
     
+
     return (
       <li
         key={pair}
@@ -143,7 +160,23 @@ const Select = ({ startActivity }) =>  {
       </li>
     )
   })
+
+
+  const phonemeLoaded = phoneme => {
+    const index = loading.indexOf(phoneme)
+    loading.splice(index, 1)
+    setLoading([ ...loading ])
+  }
+
+
+  const loadAllPhonemes = () => {
+    phonemeKeys.forEach( key => loadPhoneme( key, phonemeLoaded))
+  }
+
+
+  useEffect(loadAllPhonemes, [])
   
+
   return (
     <ul
       id="index"
