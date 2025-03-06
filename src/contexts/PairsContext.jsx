@@ -13,24 +13,31 @@ import React, {
   useRef
 } from 'react'
 import { PreferencesContext } from './PreferencesContext';
-import storage from '../tools/storage';
 import { shuffle, removeFrom } from '../tools/utilities'
 
 const json = require('../json/pairs.json')
 const phonemePairs = Object.keys(json.pairs)
-// Ignore pairs like "ɪiX" which have not been fully treated yet
-.filter( pairing => !pairing.match(/X$/))
 
 const pairIndex = json.index
+const AUDIO_DIR = "./audio/"
 
 
 export const PairsContext = createContext()
 
 
 export const PairsProvider = ({ children }) => {
+  const {
+    pair: currentPair,
+    choosePair,
+    friendly
+  } = useContext(PreferencesContext)
+
   const [ pairs, setPairs ] = useState(json)
-  
-  const { pair: currentPair, choosePair, friendly } = useContext(PreferencesContext)
+  const [ audioLoading, setAudioLoading ] = useState([])
+
+  const [ audioFileMap, setAudioFileMap ] = useState([])
+  // { <phoneme>: "./audio/<phoneme>.mp3", ... }
+
   // "ɪi" <<< one of the entries in phonemePairs
   const [ phonemeSymbols, setPhonemeSymbols ] = useState([])
   // [ "ɪ", "iː" ]
@@ -45,7 +52,6 @@ export const PairsProvider = ({ children }) => {
   // }
   const wordsRef = useRef([])
   const lastWords = wordsRef.current
-
 
   /** Set the array of pairs that will produce the
    *  next minimal pair of cards
@@ -68,8 +74,8 @@ export const PairsProvider = ({ children }) => {
     // Empty the pockets
     lastWords.length = 0
 
+    // Tell Preferences to set and store the new pair
     choosePair(pair)
-    storage.set({ pair })
   }
 
 
@@ -139,13 +145,22 @@ export const PairsProvider = ({ children }) => {
    * , "barn": "bun"
    * , ...
    * }
+   *
+   * * Reads the array of phoneme symbols from the pairs object
+   * * Resets `played` to empty arrays
+   * * Set audioLoading to the array of phoneme symbols. When
+   *   audioLoaded has been called twice and this array is empty
+   *   again, then setPhonemes() will be called to poplulate
+   *   phonemes with objects which contain a buffer object.
+   * * In the meantime, creates a shuffled list of minimal pairs
    */
   function _setPairListAndPhonemeSymbols(pair) {
     const phonemeSymbols = pairs.index[pair].phonemes
     setPhonemeSymbols(phonemeSymbols)
-    setPlayed({ [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] })
-
     // [<ɪ>, <æ>]
+
+    setPlayed({ [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] })
+    setAudioLoading([ ...phonemeSymbols ])
 
     const pairList = Object.entries(pairs.pairs[pair])
     // [[<this>, <that>], [<tit>, <tat>], ...]
@@ -153,8 +168,6 @@ export const PairsProvider = ({ children }) => {
     // [[<tit>, <tat>], ..., [<this>, <that>], ...]
 
     setPairList(pairList)
-
-    setPhonemes(phonemeSymbols.map(getPhonemeData))
   }
 
 
@@ -178,6 +191,7 @@ export const PairsProvider = ({ children }) => {
     return data
   }
 
+
   /**
    * Creates an object that allows the app to display the phoneme and
    * play its audio clip
@@ -198,8 +212,46 @@ export const PairsProvider = ({ children }) => {
     return data
   }
 
-  // eslint-disable-next-line
-  useEffect(() => setPhonemePair(currentPair, true), [])
+
+  function getAudioFileMap(param) {
+    const wordsData = Object.values(json.words)
+    const urls = wordsData.map( phonemeData => phonemeData.url)
+
+    const audioFileMap = urls.reduce(( names, name ) => {
+      const phoneme = name.replace(/\.mp3$/i, "")
+      names[phoneme] = AUDIO_DIR + name
+      return names
+    }, {})
+
+    setAudioFileMap(audioFileMap)
+  }
+
+
+  const audioLoaded = (phoneme) => {
+    if (audioLoading) {
+      // audioLoading is an array which contains phoneme.
+      const index = audioLoading.indexOf(phoneme)
+      audioLoading.splice(index, 1)
+
+      if (audioLoading.length) {
+        setAudioLoading([ ...audioLoading ])
+      } else {
+        setAudioLoading(false)
+        setPhonemes(phonemeSymbols.map(getPhonemeData))
+      }
+
+    } else {
+      // audioLoading is already false. This shouldn't happen.
+      console.log(`audioLoaded(${phoneme}) called when audioLoading is false`)
+    }
+  }
+
+
+  useEffect(() => {
+    getAudioFileMap()
+    setPhonemePair(currentPair, true)
+    // eslint-disable-next-line
+  }, [])
 
 
   return (
@@ -207,6 +259,9 @@ export const PairsProvider = ({ children }) => {
       value ={{
         pairs
       , setPairs
+      , audioFileMap
+      , audioLoaded
+      , audioLoading
       , pairIndex
       , phonemePairs
       , currentPair

@@ -1,20 +1,44 @@
 #review {
-  font-size: 24px;
+  font-size: 0.667em;
+  --size: 1.5em;
+  --gap: 1.5em;
+  --left: calc(var(--size) + var(--gap));
+  --space: calc(100vw - var(--left));
 
-  select {
-    font-size: inherit;
+  #files {
+    position: absolute;
+    top: 3em;
+
+    & button {
+      display: block;
+      position: relative;
+      width: var(--size);
+      height: var(--size);
+      background-color: transparent;
+      border-radius: 0.25em;
+
+      &.selected {
+        background-color: #000;
+      }
+    }
   }
 
   ul {
-    position: relative;
-    height: 80vh;
-    width: 15em;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    right: 0;
+    width: var(--space);
+    height: 100vh;
     margin: 0 auto;
     overflow: auto;
 
     & li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 7.5em;
       margin: 0.25em;
-      padding: 0.25em;
       border: 1px outset #888;
       border-radius: 0.25em;
 
@@ -28,14 +52,14 @@
         background-color: #000;
       }
 
-      & span {
-        display: inline-block;
-        width: 4em;
+      span {
+        width: 3.5em;
         text-align: left;
+      }
 
-        &.start {
-          text-align: right;
-        }
+      img {
+        width: 50%;
+        border-radius: 0;
       }
     }
   }

@@ -27,7 +27,7 @@ const DEAL_DELAY = 300
 // HARD-CODED >>>
 
 
-const Activity = (props) => {
+const Activity = () => {
   const { taboo } = useContext(PreferencesContext)
   const { getCards } = useContext(PairsContext)
   // Shared with all cards and the Play Phoneme buttons
@@ -83,12 +83,10 @@ const Activity = (props) => {
 
   let wrong = false
   let inProgress = false
-  let cueURL      // source of audio for cue card
-    , cueClip     // [<start>, <end>] of audio for cue card
+  let cue
     , cueSpace    // cueRef.current: ".cue .card-holder.space"
     , cueCard     // div holding .back and .front inside cueSpace
-    , decoyURL
-    , decoyClip
+    , decoy
     , decoySpace  // decoyRef.current: ".decoy .card-holder.space"
     , decoyCard   // div holding .back and .front inside decoySpace
     , phoneme0    // phoneme0Ref.current: <div class="phoneme-0 <role>">
@@ -108,7 +106,7 @@ const Activity = (props) => {
 
 
   const playCue = () => {
-    playClip(cueURL, cueClip)
+    playClip(cue)
   }
 
 
@@ -154,7 +152,7 @@ const Activity = (props) => {
 
 
   const playOtherCard = () => {
-    playClip(decoyURL, decoyClip)
+    playClip(decoy)
     setTimeout(hideOtherCard, PLAY_DELAY)
   }
 
@@ -187,7 +185,7 @@ const Activity = (props) => {
 
     cueSpace.classList.add("active")
 
-    playClip(cueURL, cueClip)
+    playClip(cue)
     setTimeout(moveNearToPocket, REVIEW_DELAY)
   }
 
@@ -371,6 +369,7 @@ const Activity = (props) => {
 
     // Get the text and audio data for the clicked card
     const phonemeData = playedCards[phonemes[phoneme].phoneme][index]
+    // console.log("pocketCard phonemeData:", phonemeData)
     const { url, clip, spelling } = phonemeData
 
     return {
@@ -379,17 +378,23 @@ const Activity = (props) => {
     , phoneme
     , url
     , clip
+    , phonemeData
     , spelling // not yet used
     }
   }
 
 
   const pocketAction = (event) => { //}, url, clip, word) => {
-    const { card, index, phoneme, url, clip } = pocketCard(event)
+    const {
+      card,
+      index,
+      phoneme,
+      phonemeData
+    } = pocketCard(event)
     const bit = phoneme + 1 // 1 or 2
 
     if (cardsAreSpread & bit) {
-      return requestYield(card, url, clip)
+      return requestYield(card, phonemeData)
     }
 
     detectMovement(event, 16, 500)
@@ -407,7 +412,7 @@ const Activity = (props) => {
             default: return
             case "release":
               // Simple click: show card, play audio, then hide it
-              return playFromPocket(card, url, clip)
+              return playFromPocket(card, phonemeData)
             case "timeOut":
               // Long click
               return popOutCards(index, phoneme)
@@ -431,10 +436,10 @@ const Activity = (props) => {
   }
 
 
-  const playFromPocket = (card, url, clip) => {
+  const playFromPocket = (card, phonemeData) => {
     showCardOutsidePocket(card)
 
-    playClip(url, clip)
+    playClip(phonemeData)
 
     if (isNaN(visibleCard)) {
       // The cards are not spread
@@ -540,14 +545,14 @@ const Activity = (props) => {
   }
 
 
-  const requestYield = (card, url, clip) => {
+  const requestYield = (card, phonemeData) => {
     const holders = card.closest("ul").querySelectorAll(".card-holder")
     holders.forEach ( holder => {
       const action = [ "remove", "add" ][(holder === card) + 0]
       holder.classList[action]("yield")
     })
 
-    playClip(url, clip)
+    playClip(phonemeData)
   }
 
 
@@ -597,13 +602,11 @@ const Activity = (props) => {
       // console.log("cardData:", cardData.spelling || "*MISSING*")
 
       if (index !== useSecondCard) {
-        cueURL = cardData.url
-        cueClip = cardData.clip
+        cue = cardData
         cueAction = checkForDrag
 
       } else {
-        decoyURL = cardData.url
-        decoyClip = cardData.clip
+        decoy = cardData
         cueAction = null
       }
 

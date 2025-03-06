@@ -142,11 +142,7 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
   , pocketAction //
   } = props
 
-  const {
-    phoneme
-  , url
-  , clip
-  } = phonemeData
+  const { phoneme } = phonemeData
 
   const card = (
     <Card
@@ -193,7 +189,7 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
 
         <button
           className="play-phoneme"
-          onClick={() => playClip(url, clip)}
+          onClick={() => playClip(phonemeData)}
         />
       </div>
     </div>

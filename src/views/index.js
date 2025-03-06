@@ -1,10 +1,11 @@
 import About from './About'
 import Activity from './Activity'
 import Contact from './Contact'
-import Select from './Select'
+import Loading from './Loading'
 import Preferences from './Preferences'
+import Select from './Select'
 import Splash from './Splash'
-import Tweak from './Tweak'
+import Review from './Review'
 
 
 const Views = {
@@ -14,7 +15,8 @@ const Views = {
 , Select
 , Preferences
 , Splash
-, Tweak
+, Review
+, Loading
 }
 
 export default Views

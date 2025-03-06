@@ -28,8 +28,6 @@ const Card = forwardRef((props, cardRef) => {
   const {
     spelling
   , phonetic
-  , clip
-  , url
   , image
   , image$
   , image_
@@ -62,7 +60,7 @@ const Card = forwardRef((props, cardRef) => {
   // console.log("isTaboo:", isTaboo, ", notFriendly:", notFriendly, ", image:", image_)
 
   const action = props.action // will be null for decoy
-              || (() => playClip(url, clip)) // only for decoy
+              || (() => playClip(props.card)) // only for decoy
   const icon = /wikipedia/i.test(wiki)
     ? "img/icons/wikipedia.webp"
     : "img/icons/wiktionary.svg"

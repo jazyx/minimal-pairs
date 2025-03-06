@@ -29,15 +29,16 @@ const Select = ({ startActivity }) =>  {
 
   const itemClicked = (pair) => {
     setPhonemePair(pair)
-    startActivity()
+    startActivity("Loading")
   }
 
-  const getPhonemeButton = ({ phoneme, url, clip }) => {
+  const getPhonemeButton = (phonemeData) => {
+    const { phoneme } = phonemeData
     return (
       <button
         key={phoneme}
         className="phoneme"
-        onClick={() => playClip(url, clip)}
+        onClick={() => playClip(phonemeData)}
       >
         /{phoneme}/
       </button>
@@ -45,7 +46,7 @@ const Select = ({ startActivity }) =>  {
   }
 
   const getWordButton = (wordData, index) => {
-    const { spelling: word, url, image, clip } = wordData
+    const { spelling: word, image } = wordData
 
     const set = index
               ? <><img src={image} alt="{word}" /><span>{word}</span></>
@@ -55,7 +56,7 @@ const Select = ({ startActivity }) =>  {
       <button
         key={word}
         className="word"
-        onClick={() => playClip(url, clip)}
+        onClick={() => playClip(wordData)}
       >
         {set}
       </button>
@@ -142,7 +143,6 @@ const Select = ({ startActivity }) =>  {
       </li>
     )
   })
-  
   
   return (
     <ul

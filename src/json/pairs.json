@@ -2518,7 +2518,7 @@
       "drug": {
         "spelling": "drug",
         "phonetic": "/drʌɡ/",
-        "image": "img/ʌ/drug.webp",
+        "image$": "img/ʌ/drug.webp",
         "clip": [
           32.3,
           33.3
@@ -3865,14 +3865,14 @@
       "ill": "eel",
       "kill": "keel",
       "knit": "neat",
-      "lick": "leak",
+      "lick": "leek",
       "lid": "lead",
       "lip": "leap",
       "litter": "litre",
       "live": "leave",
       "liver": "lever",
       "mill": "meal",
-      "mitt": "meet",
+      "mitt": "meat",
       "pick": "peak",
       "pillar": "peeler",
       "piss": "peace",
@@ -3883,9 +3883,7 @@
       "shit": "sheet",
       "slip": "sleep",
       "still": "steal",
-      "tick": "teak",
       "tit": "teat",
-      "trickle": "treacle",
       "whip": "weep"
     },
     "ɑʌ": {

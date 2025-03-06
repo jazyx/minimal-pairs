@@ -53,13 +53,13 @@ const MenuItems = ({ itemSelected }) => {
         Contact us
       </li>
 
-      {/* Only show Tweak view during development */}
+      {/* Only show Review view during development */}
       {window.location.hostname === "localhost" && <li
         className="unselectable"
-        key="tweak"
-        onClick={() => itemSelected("Tweak")}
+        key="Review"
+        onClick={() => itemSelected("Review")}
       >
-        Tweak
+        Review
       </li>}
     </>
   )
