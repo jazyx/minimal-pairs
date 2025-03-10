@@ -21,7 +21,7 @@ const Select = ({ startActivity }) =>  {
   const { playClip, loadPhoneme } = useContext(AudioContext)
   const {
     pairIndex
-  , currentPair
+  , pair
   , phonemePairs
   , setPhonemePair
   , getWordData
@@ -103,18 +103,17 @@ const Select = ({ startActivity }) =>  {
   }
 
 
-  const pairsArray = phonemePairs.map( pair => {
-    // pair = "ɪi"
-    const pairData = pairIndex[pair]
-    const className = (pair === currentPair)
-                    ? "current"
-                    : ""
-
+  const pairsArray = phonemePairs.map( item => {
+    // item = "ɪi"
+    const pairData = pairIndex[item]
     // { phonemes: ["ɪ", "iː"]
     // , words: ["ship", "sheep"]
     // ... }
     const phonemes = pairData.phonemes
     const words = pairData.words
+    const className = (item === pair)
+                    ? "current"
+                    : ""
     const phonemeButtons = []
     const wordButtons = []
     let progress
@@ -143,17 +142,22 @@ const Select = ({ startActivity }) =>  {
       // }
       phonemeButtons.push(getPhonemeButton(phonemeData))
       wordButtons.push(getWordButton(wordData, index, phoneme))
-      progress = getProgress(pair)
-      select = getSelectButton(pair)
+      progress = getProgress(item)
+      select = getSelectButton(item)
     })
 
 
-    const entry = [...phonemeButtons, ...wordButtons, progress, select]
+    const entry = [
+      ...phonemeButtons,
+      ...wordButtons,
+      progress,
+      select
+    ]
     
 
     return (
       <li
-        key={pair}
+        key={item}
         className={className}
       >
         {entry}
@@ -174,6 +178,7 @@ const Select = ({ startActivity }) =>  {
   }
 
 
+  // eslint-disable-next-line
   useEffect(loadAllPhonemes, [])
   
 

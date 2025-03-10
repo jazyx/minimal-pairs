@@ -15,10 +15,44 @@ import React, {
 import { PreferencesContext } from './PreferencesContext';
 import { shuffle, removeFrom } from '../tools/utilities'
 
-const json = require('../json/pairs.json')
-const phonemePairs = Object.keys(json.pairs)
 
-const pairIndex = json.index
+// Create static constants for data read in from JSON or database
+const dataMap = require('../json/pairs.json')
+const pairs = dataMap.pairs
+// { "ɪi": { "bid": "bead", "bins": "beans", ... }
+// , ...
+// }
+const phonemePairs = Object.keys(pairs)
+// [ "ɪi", "ɑʌ", "æɛ", "æɑ", "ɪə-eə", "i-ɪə", "æʌ" ]
+const wordsData = dataMap.words
+// { <phoneme>: {
+//     "url": <audio file name>,
+//     <phoneme (again)>: { "clip": [ <start>, <finish> ] },
+//     <word>: {
+//       "spelling": <case-sensitive word>,
+//       "phonetic": "/.../",
+//       "image": "img/<phoneme>/<image file name>",
+//       "clip": [ <start>, <finish> ]
+//       "wiki": <url>
+//     },
+//   ...,
+// }
+const phonemeKeys = Object.keys(wordsData)
+// [ "ɪ", "i", ... ] <<< no "ː" characters
+const pairIndex = dataMap.index
+// { <phonemePair>: {
+//     "phonemes": [
+//       <IPA symbol 1>,
+//       <IPA symbol 2>
+//     ],
+//     "words": [
+//       <illustrative word for phoneme 1>,
+//       <illustrative word for phoneme 1>
+//     ]
+//   },
+//   ...
+// }
+
 const AUDIO_DIR = "./audio/"
 
 
@@ -27,23 +61,17 @@ export const PairsContext = createContext()
 
 export const PairsProvider = ({ children }) => {
   const {
-    pair: currentPair,
+    pair,
     choosePair,
     friendly
   } = useContext(PreferencesContext)
 
-  const [ pairs, setPairs ] = useState(json)
   const [ audioLoading, setAudioLoading ] = useState([])
-
+  // Altered clone of phonemePairs, or false
   const [ audioFileMap, setAudioFileMap ] = useState([])
   // { <phoneme>: "./audio/<phoneme>.mp3", ... }
-  const [ phonemeKeys ] = useState(Object.keys(pairs.words))
-  // [ "ɪ", "i", ... ] <<< no "ː" characters
-
-  // "ɪi" <<< one of the entries in phonemePairs
   const [ phonemeSymbols, setPhonemeSymbols ] = useState([])
-  // [ "ɪ", "iː" ]
-
+  // "ɪi"<<< one of the entries in phonemePairs >>>[ "ɪ", "iː" ]
   const [ pairList, setPairList ] = useState([])
   // [ [ "bitch", "beach" ],...[ "wheel", "will" ] ]
   const [ phonemes, setPhonemes ] = useState([])
@@ -51,41 +79,53 @@ export const PairsProvider = ({ children }) => {
   const [ played, setPlayed ] = useState({})
   // { "/x/": [ <card>, ... ]
   // , "/y/": [ <card>, ... ]
-  // }
+  // }  
+
   const wordsRef = useRef([])
   const lastWords = wordsRef.current
+
 
   /** Set the array of pairs that will produce the
    *  next minimal pair of cards
    *
-   * @param {string} pair: one ef the items from phonemePairs
+   * @param {string} newPair: one ef the items from phonemePairs
    */
-  function setPhonemePair(pair, force) {
-    if (!force && pair && currentPair === pair) {
+  function setPhonemePair(newPair, force) {
+    if (!force && newPair && newPair === pair) {
       return
     }
 
     // Choose the given pair, or the first available
-    const index = phonemePairs.indexOf(pair)
+    const index = phonemePairs.indexOf(newPair)
     if (index < 0) {
-      pair = phonemePairs[0]
+      newPair = phonemePairs[0]
     }
 
-    _setPairListAndPhonemeSymbols(pair)
+    _setPairListAndPhonemeSymbols(newPair)
 
     // Empty the pockets
     lastWords.length = 0
 
     // Tell Preferences to set and store the new pair
-    choosePair(pair)
+    choosePair(newPair)
+  }
+
+
+  const getWordPair = () => {
+    return lastWords.reduce(( pair, {spelling}, index ) => {
+      pair += (index ? ":" : "") + spelling.toLowerCase()
+
+      return pair
+    }, "")
   }
 
 
   /**
    * Export a function to return all the data required to display a
-   * minimal pair of words and play their audio files
+   * minimal pair of words and play their audio files. Calling this
+   * function does not update state or cause a re-render
    *
-   * @returns
+   * @returns object 
    */
   function getCards(noTaboo) {
     const [ phoneme1, phoneme2 ] = phonemeSymbols
@@ -128,12 +168,12 @@ export const PairsProvider = ({ children }) => {
         JSON.stringify(item) === JSON.stringify(lastWords[1])
       ))
 
-
     const output = {
       phonemes
     , word1: lastWords[0]
     , word2: lastWords[1]
     , played
+    , wordPair: getWordPair()
     }
 
     return output
@@ -157,14 +197,14 @@ export const PairsProvider = ({ children }) => {
    * * In the meantime, creates a shuffled list of minimal pairs
    */
   function _setPairListAndPhonemeSymbols(pair) {
-    const phonemeSymbols = pairs.index[pair].phonemes
+    const phonemeSymbols = pairIndex[pair].phonemes
     setPhonemeSymbols(phonemeSymbols)
     // [<ɪ>, <æ>]
 
     setPlayed({ [phonemeSymbols[0]]:[], [phonemeSymbols[1]]:[] })
     setAudioLoading([ ...phonemeSymbols ])
 
-    const pairList = Object.entries(pairs.pairs[pair])
+    const pairList = Object.entries(pairs[pair])
     // [[<this>, <that>], [<tit>, <tat>], ...]
     shuffle(pairList)
     // [[<tit>, <tat>], ..., [<this>, <that>], ...]
@@ -186,7 +226,7 @@ export const PairsProvider = ({ children }) => {
    * }
    */
   function getWordData(phoneme, word) {
-    const phonemeData = pairs.words[phoneme]
+    const phonemeData = wordsData[phoneme]
     const data = {...phonemeData[word]}
     data.url = phonemeData.url
 
@@ -206,7 +246,7 @@ export const PairsProvider = ({ children }) => {
    * }
    */
   function getPhonemeData(phoneme) {
-    const phonemeData = pairs.words[phoneme]
+    const phonemeData = wordsData[phoneme]
     const data = {...phonemeData[phoneme]}
     data.url = phonemeData.url
     data.phoneme = phoneme
@@ -216,8 +256,8 @@ export const PairsProvider = ({ children }) => {
 
 
   function getAudioFileMap(param) {
-    const wordsData = Object.values(json.words)
-    const urls = wordsData.map( phonemeData => phonemeData.url)
+    const wordValues = Object.values(wordsData)
+    const urls = wordValues.map( value => value.url)
 
     const audioFileMap = urls.reduce(( names, name ) => {
       const phoneme = name.replace(/\.mp3$/i, "")
@@ -251,7 +291,7 @@ export const PairsProvider = ({ children }) => {
 
   useEffect(() => {
     getAudioFileMap()
-    setPhonemePair(currentPair, true)
+    setPhonemePair(pair, true)
     // eslint-disable-next-line
   }, [])
 
@@ -259,20 +299,21 @@ export const PairsProvider = ({ children }) => {
   return (
     <PairsContext.Provider
       value ={{
-        pairs
-      , setPairs
-      , audioFileMap
-      , phonemeKeys
-      , audioLoaded
-      , audioLoading
-      , pairIndex
-      , phonemePairs
-      , currentPair
-      , setPhonemePair
-      , getWordData
-      , getPhonemeData
-      , phonemeSymbols
-      , getCards
+        dataMap        // read from pairs.json, with buffers added
+      , wordsData      // map of words used with each phoneme pair
+      , pairs          // { "ɪi": { "bid": "bead", ... }
+      , phonemePairs   // [ "ɪi", "ɑʌ", ..., "i-ɪə" ]
+      , pair           // current phonemePair: "ɪi"
+      , phonemeSymbols // pair as [ "ɪ", "iː" ]
+      , phonemeKeys    // [ "ɪ", "i", ... ] <<< no "ː" characters
+      , audioFileMap   // { "i": "./audio/i.mp3"}
+      , audioLoaded    // function(phoneme), used by AudioContext
+      , audioLoading   // [ "ɪ", "i", ... ] or false
+      , pairIndex      // used by Select to show phoneme pairs
+      , setPhonemePair // function called by Select and UserContext
+      , getWordData    // used by Select
+      , getPhonemeData // used by Select
+      , getCards       // used by Activity (does not update state)
       }}
     >
       {children}

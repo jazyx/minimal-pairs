@@ -20,17 +20,25 @@ import "./Review.css";
 const Review = () => {
   const { taboo, friendly } = useContext(PreferencesContext)
   const { playClip, loadPhoneme } = useContext(AudioContext);
-  const { pairs, phonemeSymbols } = useContext(PairsContext);
+  const {
+    wordsData,      // { <phoneme>: { url,
+    //                     <phoneme>: { clip },
+    //                     <word>: { ... },
+    //                     ...
+    //                   },
+    //                   ...
+    //                 }
+    phonemeKeys,    // [ "ɪ", "i", ... ] <<< no "ː" characters
+    phonemeSymbols  // [ "ɪ", "iː" ] <<< current pair
+  } = useContext(PairsContext);
   const ulRef = useRef()
 
-  const phonemes = Object.keys(pairs.words);
   const [ phoneme, setPhoneme ] = useState(phonemeSymbols[0]);
-  // "æ"
-  const [ phonemeData, setPhonemeData ] = useState([])
+  const [ phonemeWords, setPhonemeWords ] = useState([])
   const [ word, setWord ] = useState(""); // "and"
   
   // Prepare options for Phonemes select element
-  const files = phonemes.map( value => {
+  const files = phonemeKeys.map( value => {
     const className = (value === phoneme) ? "selected" : null
     return (
       <button
@@ -46,7 +54,7 @@ const Review = () => {
 
   function createPhonemeData() {
     // Create list of words and their timing data
-    const phonemeData = Object.values(pairs.words[phoneme])
+    const phonemeWords = Object.values(wordsData[phoneme])
       .filter( data => data.spelling ) // not "url" or <phoneme>
       .map( data => {
         const { spelling, image, image$, image_ } = data
@@ -71,7 +79,7 @@ const Review = () => {
         )
       }).filter( item => !!item )
 
-    setPhonemeData(phonemeData)
+    setPhonemeWords(phonemeWords)
   }
 
 
@@ -113,7 +121,7 @@ const Review = () => {
 
 
   const playWord = (spelling) => {
-    const data = pairs.words[phoneme][spelling]
+    const data = wordsData[phoneme][spelling]
     playClip(data)
   }
 
@@ -139,7 +147,7 @@ const Review = () => {
         onClick={selectWord}
         ref={ulRef}
       >
-        {phonemeData}
+        {phonemeWords}
       </ul>
     </div>
   );

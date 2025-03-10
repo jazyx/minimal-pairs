@@ -23,18 +23,34 @@ const MenuItems = ({ itemSelected }) => {
 
       <li
         className="unselectable"
+        key="preferences"
+        onClick={() => itemSelected("Preferences")}
+      >
+        Preferences
+      </li>
+
+      { window.location.hostname === "localhost" && <li
+        className="unselectable"
+        key="users"
+        onClick={() => itemSelected("Users")}
+      >
+        Manage users
+      </li>}
+
+      <li
+        className="unselectable"
+        key="review"
+        onClick={() => itemSelected("Review")}
+      >
+        Review
+      </li>
+
+      <li
+        className="unselectable primary"
         key="activity"
         onClick={() => itemSelected("Activity")}
       >
         Return to activity
-      </li>
-
-      <li
-        className="unselectable"
-        key="preferencs"
-        onClick={() => itemSelected("Preferences")}
-      >
-        Preferences
       </li>
 
       <li
@@ -52,17 +68,6 @@ const MenuItems = ({ itemSelected }) => {
       >
         Contact us
       </li>
-
-      {/* Only show Review view during development */}
-      {/* {window.location.hostname === "localhost" && */}
-      <li
-        className="unselectable"
-        key="Review"
-        onClick={() => itemSelected("Review")}
-      >
-        Review
-      </li>
-      {/* } */}
     </>
   )
 }

@@ -5,7 +5,12 @@
  */
 
 
-import React, { createContext, useState, useEffect } from 'react'
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useRef
+} from 'react'
 import storage from '../tools/storage';
 
 // Read localStorage values or use default preferences on first use
@@ -17,6 +22,7 @@ const store = storage.get({
 , friendly: true
 , taboo: false
 , pair: undefined // will be set by default if missing
+, users: {}
 })
 
 // console.log("store:", store)
@@ -34,10 +40,12 @@ export const PreferencesProvider = ({ children }) => {
   const [phonetic,   setShowPhonetic] = useState(store.phonetic)
   const [friendly,   setFriendly    ] = useState(store.friendly)
   const [taboo,      setTaboo       ] = useState(store.taboo)
-  
   const [pair,       setPair        ] = useState(store.pair)
 
-  const [classes, setClasses ] = useState("")
+  const [classes,    setClasses     ] = useState("")
+
+  const usersRef = useRef(store.users)
+  const users = usersRef.current
 
 // console.log("CONTEXT friendly:", friendly, ", taboo:", taboo)
 
@@ -103,27 +111,58 @@ export const PreferencesProvider = ({ children }) => {
   }
 
 
+  const saveUsers = () => {
+    // Save all the non-guest users to local storage. The guest
+    // will have an id of 0
+    const realUsers = { ...users }
+    delete realUsers[0]
+    storage.set({ users: realUsers })
+  }
+
+
+  /**
+   * The value of `users` read in from storage is _not a clone_.
+   * The changes made by...
+   * Activity > checkAnswer
+   *  —> UserContext > setScore
+   *    —> PreferencesContext > storeScore
+   * ... have thus already updated this.settings in storage.
+   * It is therefore enough to simply save() the current value of
+   * storage.settings.
+   */
+  const storeScore = () => {
+    storage.save()
+  }
+
+
   useEffect(updateClasses)
 
 
   return (
     <PreferencesContext.Provider
       value ={{
+        // layout
         leftHanded,
         split,
         showCue,
         phonetic,
-        friendly,
-        taboo,
-        pair,
         toggleleftHanded,
         toggleSplit,
         toggleCue,
         togglePhonetic,
+        classes,
+
+        // choice of cards
+        friendly,
+        taboo,
+        pair,
         toggleFriendly,
         toggleTaboo,
         choosePair,
-        classes
+
+        users,
+        saveUsers,
+        storeScore
       }}
     >
       {children}

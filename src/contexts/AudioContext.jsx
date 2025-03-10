@@ -30,9 +30,9 @@ export const AudioContext = createContext()
 
 export const AudioProvider = ({ children }) => {
   const {
-    pairs,
+    dataMap,
     phonemeKeys,
-    currentPair,
+    pair,
     audioFileMap,
     audioLoaded
   } = useContext(PairsContext)
@@ -50,8 +50,8 @@ export const AudioProvider = ({ children }) => {
     // phoneme is derived from the audio file name. For long vowels
     // the "ː" character will be missing. Update the phoneme to use
     // this character if appropriate.
-    const wordsData = pairs.words[phoneme]
-                   || pairs.words[phoneme = phoneme + "ː"]
+    const wordsData = dataMap.words[phoneme]
+                   || dataMap.words[phoneme = phoneme + "ː"]
 
     // Create an array of word data with the structure...
     // [ { spelling, clip }, ... ]
@@ -161,7 +161,7 @@ export const AudioProvider = ({ children }) => {
         .map(getSegmentBuffer)
         .filter( buffer => !!buffer )
 
-      // wordsArray is ordered by the start time given in pairs.json.
+      // wordsArray is ordered by the start time given in dataMap
       // The phoneme sound which (usually) appears first is skipped.
       wordsArray.forEach(( { spelling }, index ) => {
         if (!spelling) {
@@ -190,7 +190,7 @@ export const AudioProvider = ({ children }) => {
 
     if (audioFile) {
       // Load the file, split it into buffers and add these to
-      // the entries in pairs.words[phoneme]...
+      // the entries in dataMap.words[phoneme]...
       loadAudioFile(audioFile, phoneme, callback)
       // ... but don't do it again
       delete audioFileMap[phoneme]
@@ -207,6 +207,8 @@ export const AudioProvider = ({ children }) => {
 
 
   const loadPhonemes = () => {
+    if (!pair) { return }
+
     const phonemesToLoad = splitCurrentPair()
 
     phonemesToLoad.forEach( phoneme => {
@@ -214,7 +216,7 @@ export const AudioProvider = ({ children }) => {
     })
 
     function splitCurrentPair() {
-      const match = PHONEME_SPLIT.exec(currentPair)
+      const match = PHONEME_SPLIT.exec(pair)
       if (match) {
         if (match[1]) {
           return [ match[2], match[3]]
@@ -226,7 +228,7 @@ export const AudioProvider = ({ children }) => {
   }
 
   // eslint-disable-next-line
-  useEffect(loadPhonemes, [audioFileMap, currentPair])
+  useEffect(loadPhonemes, [audioFileMap, pair])
 
 
   return (

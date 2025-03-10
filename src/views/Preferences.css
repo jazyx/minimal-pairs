@@ -1,5 +1,5 @@
 
-
+main:has(#users),
 main:has(#preferences) {
   display: flex;
   flex-direction: column;

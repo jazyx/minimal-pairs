@@ -20,7 +20,7 @@ class CustomStorage{
     this.storage = {}
   }
 
-  // Called by _save() in Storage instance
+  // Called by save() in Storage instance
   setItem(key, value) {
     this.storage[key] = value
   }
@@ -54,14 +54,14 @@ class Storage{
 
   setItem(key, value) {
     this.settings[key] = value
-    this._save()
+    this.save()
     return this.stored // false for a simulation
   }
 
 
   set(settings) {
     Object.assign(this.settings, settings)
-    this._save()
+    this.save()
     return this.stored // false for a simulation
   }
 
@@ -84,7 +84,7 @@ class Storage{
   }
 
 
-  _save() {
+  save() {
     const string = JSON.stringify(this.settings)
     this.storage.setItem(this.id, string)
   }

@@ -180,7 +180,8 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
         {listOfCards}
       </ul>
 
-      {card} {/* initially with z-index > 0 to appear above pocket */}
+      {card}
+      {/* initially with z-index > 0 to appear above pocket */}
 
       <div
         className="pocket unselectable"

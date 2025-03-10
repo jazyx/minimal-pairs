@@ -23,106 +23,102 @@
 
   color: white;
   text-align: left;
-}
 
-#menu svg#openMenu {
-  position: absolute;
-  width: var(--iconSize);
-  height: var(--iconSize);
-  fill: var(--fillColor);
-  stroke: var(--strokeColor);
-  opacity: var(--iconOpacity);
-  top: 0;
-  left: 0;
-  transition: left .3s linear, right .3s linear, opacity .1s;
-  transition-property: left, right, opacity;
-  transition-delay: 0s, 0s, .3s;
-  cursor: pointer;
-}
+  & svg#openMenu {
+    position: absolute;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    fill: var(--fillColor);
+    stroke: var(--strokeColor);
+    opacity: var(--iconOpacity);
+    top: 0;
+    left: 0;
+    transition: left .3s linear, right .3s linear, opacity .1s;
+    transition-property: left, right, opacity;
+    transition-delay: 0s, 0s, .3s;
+    cursor: pointer;
+  }
 
-#menu svg#openMenu:hover {
-  opacity: var(--iconHover);
-  transition: left .3s linear, right .3s linear, opacity .0s;
-  transition-property: left, right, opacity;
-  transition-delay: 0s, 0s, .0s;
-}
+  & svg#openMenu:hover {
+    opacity: var(--iconHover);
+    transition: left .3s linear, right .3s linear, opacity .0s;
+    transition-property: left, right, opacity;
+    transition-delay: 0s, 0s, .0s;
+  }
 
-#menu #items.open ~ svg#openMenu{
-  opacity: 1;
-  left: var(--openIcon);
-  transition-delay: .1s, .1s, 0s;
-}
+  & #items {
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: var(--closedMenu);
+    height: 100vh;
+    width: var(--menuSize);
+    padding: 2vmin;
+    padding-top: var(--iconSize);
+    padding-bottom: 0;
+    background-color: var(--menuColor);
+    border-right: var(--menuBorder);
 
-#menu #items {
-  position: absolute;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: space-around; */
-  /* align-items: center; */
-  box-sizing: border-box;
-  top: 0;
-  left: var(--closedMenu);
-  height: 100vh;
-  width: var(--menuSize);
-  padding: 2vmin;
-  padding-top: var(--iconSize);
-  padding-bottom: 0;
-  background-color: var(--menuColor);
-  border-right: var(--menuBorder);
+    transition: left .40s linear, right .40s linear;
 
-  transition: left .40s linear, right .40s linear;
-}
+    &.open {
+      left: 0;
+      box-shadow: 0 0 3vw 0 rgba(0,0,0,0.99);
+      box-shadow: 0 0 3vw 0 rgba(255,255,255,0.250);
 
-#menu #items.open {
-  left: 0;
-  box-shadow: 0 0 3vw 0 rgba(0,0,0,0.99);
-  box-shadow: 0 0 3vw 0 rgba(255,255,255,0.250)
-}
+      & ~ svg#openMenu{
+        opacity: 1;
+        left: var(--openIcon);
+        transition-delay: .1s, .1s, 0s;
+      }
+    }
 
+    & li {
+      border: 0.05rem outset #888;
+      border-radius: 0.2rem;
+      padding: 0.25rem 0.5rem;
+      margin: 0.75rem 0;
+      color: #888;
+      cursor: pointer;
 
-#menu #items li {
-  border: 0.05rem outset #888;
-  border-radius: 0.2rem;
-  padding: 0.25rem 0.5rem;
-  margin: 0.75rem 0;
-  color: #888;
-  cursor: pointer;
-}
+      &:hover {
+        background-color: var(--bgColor);
+        color: #fff;
 
-#menu #items li:hover {
-  background-color: var(--bgColor);
-  color: #fff;
-}
-
-#menu #items li:active {
-  border-style: inset;
+        &:active {
+          border-style: inset;
+        }
+      }
+    }
+  }
 }
 
 /* LEFT-HANDED / LEFT-HANDED / LEFT-HANDED LEFT-HANDED / LEFT-HANDED */
 
 
-main.left-handed #menu,
-main.left-handed #menu #items,
-main.left-handed #menu #items ~ svg {
-  left: auto;
-}
+main.left-handed #menu {
+  &,
+  & #items,
+  & #items ~ svg {
+    left: auto;
+  }
 
-main.left-handed #menu,
-main.left-handed #menu svg#openMenu {
-  right: 0;
-}
+  &,
+  & svg#openMenu {
+    right: 0;
+  }
 
-main.left-handed #menu #items {
-  right: var(--closedMenu);
-  border-left: var(--menuBorder);
-}
+  & #items {
+    right: var(--closedMenu);
+    border-left: var(--menuBorder);
 
+    &.open {
+      right: 0;
 
-main.left-handed #menu #items.open {
-  right: 0;
-}
-
-main.left-handed #menu #items.open ~ svg#openMenu {
-  left: auto;
-  right: var(--openIcon);
+      & ~ svg#openMenu {
+        left: auto;
+        right: var(--openIcon);
+      }
+    }
+  }
 }

@@ -1,0 +1,96 @@
+fieldset {
+  width: fit-content;
+  margin: 0 auto;
+
+  & legend {
+    font-size: 1.2em;
+  }
+
+  &#users{
+    font-size: 4vmin;
+
+    display: grid;
+    grid-template-columns: 12em 7em;
+    grid-template-rows: 1fr 2em 2em;
+    column-gap: 1em;
+    row-gap: 1em;
+    grid-template-areas:
+      "list buttons"
+      "input add"
+      ". start";
+    border: 1px solid white;
+    border-radius: 1em;
+    padding: 1em;
+
+    ul {
+      position: relative;
+      grid-area: list;
+      margin: 0 0.25em;
+      padding: 0;
+      list-style-type: none;
+      max-height: 8em;
+      height: auto;
+      width: 100%;
+      overflow-y: auto;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
+        margin: 0.25em 0;
+        border: 1px outset black;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          color: #fff;
+        }
+      
+        &.default {
+          border-width: 2px;
+        }
+        &.selected {
+          background-color: #040;
+          border-style: inset;
+        }
+      }
+    }
+    input {
+      grid-area: input;
+      font-size: inherit;
+    }
+    .add {
+      grid-area: add;
+    }
+    .buttons {
+      position: relative;
+      align-self: center;
+      grid-area: buttons;
+      display: block;
+
+      button {
+        width: 100%;
+      }
+    }
+    button[type=submit] {
+      grid-area: start;
+      background-color: green;
+    }
+
+    button {
+      background-color: transparent;
+      border: 1px outset #888;
+      border-radius: 0.25em;
+      position: relative;
+      font-size: inherit;
+      margin: 0.25em 0;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+    }
+  }
+}

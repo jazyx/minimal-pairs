@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState, useEffect } from 'react'
 import {
   PreferencesContext,
   PairsContext,
+  UserContext,
   AudioContext
 } from '../contexts'
 
@@ -30,6 +31,7 @@ const DEAL_DELAY = 300
 const Activity = () => {
   const { taboo } = useContext(PreferencesContext)
   const { getCards } = useContext(PairsContext)
+  const { setScore } = useContext(UserContext)
   // Shared with all cards and the Play Phoneme buttons
   const { playClip } = useContext(AudioContext)
 
@@ -49,6 +51,7 @@ const Activity = () => {
   , word1
   , word2
   , played: playedCards
+  , wordPair
   } = getCards(!taboo) // imported from PairsContext
 
   // { "phonemes": [
@@ -199,6 +202,7 @@ const Activity = () => {
       ||cardsAreSpread // no action when spread
     ) {
       return
+
     } else if (!isNaN(visibleCard)) {
       // A card is popped out
       return
@@ -211,6 +215,9 @@ const Activity = () => {
     cueCard.classList.remove("flipped")
 
     const correct = (phoneme.classList.contains("cue"))
+
+    setScore(wordPair, correct)
+
     if (correct) {
       playRightSequence()
     } else {
@@ -545,6 +552,17 @@ const Activity = () => {
   }
 
 
+  /**
+   * @param {*} card        div.card-holder that was clicked
+   * @param {*} phonemeData { spelling, buffer, ... }
+   *
+   * Adds the className "yield" to the card that was clicked (and
+   * removes it from all others), so that CSS will push younger
+   * sibling cards down to leave space to show the whole card.
+   *   Each div.card-holder has a --yield CSS custom property
+   * which defines how many pixels it should move down if `card`
+   * is its older sibling.
+   */
   const requestYield = (card, phonemeData) => {
     const holders = card.closest("ul").querySelectorAll(".card-holder")
     holders.forEach ( holder => {
