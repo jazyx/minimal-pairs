@@ -14,9 +14,13 @@ import React, {
 import { PreferencesContext, PairsContext } from './'
 
 
-const START_ERROR = 16
-const MAX_ERROR = START_ERROR * START_ERROR / 2 // 128
+const START_ERROR = 7
+const MAX_ERROR = (START_ERROR + 1) * 2
 
+// 8, 68, 98, 124, 126, 127, ... after each mistake
+// 8,  4,  2,   1,   0...        after each correct answer
+// Four mistakes followed by seven right answers
+// 3, 6.1, 6.95, 6.99, 7, 6, 5, 4, 3, 2, 1, 0
 
 export const UserContext = createContext()
 
@@ -35,6 +39,9 @@ export const UserProvider = ({ children }) => {
   } = useContext(PairsContext)
       
   const [ user, setUser ] = useState(0)
+  const [ mark, setMark ] = useState(7)
+  
+  const score = users[user]?.score || {}
 
 
   const setScore = (wordPair, correct) => {
@@ -44,14 +51,27 @@ export const UserProvider = ({ children }) => {
 
     console.log("setScore correct:", correct, ", pair:", pair, ", wordPair:", wordPair)
 
-    const score = users[user].score
     const mark  = score[pair][wordPair]
     const wordScore = (!correct * MAX_ERROR) + (mark >> 1)
     score[pair][wordPair] = wordScore
     // console.log("score[pair][wordPair]:", score[pair][wordPair])
-    console.log("users[user].score[pair][wordPair]:", users[user].score[pair][wordPair])
+    console.log("score[pair][wordPair]:", score[pair][wordPair])
     storeScore(user)
+
+    console.log("setScore mark:", mark)
+
+    setMark(mark)
   }
+
+
+  // const getMark = (score, wordPair) => {
+  //   if (!wordPair) {
+  //     wordPair = lastWords[0].spelling.toLowerCase()
+  //              + ":"
+  //              + lastWords[1].spelling.toLowerCase()
+  //   }
+  //   return score[wordPair]
+  // }
 
 
   const chooseUser = (userId) => {
@@ -64,7 +84,7 @@ export const UserProvider = ({ children }) => {
     saveUsers()
 
     setUser(userId)
-    const pair = users[userId].pair
+    const pair = users[userId]?.pair
     setPhonemePair(pair)
   }
 
@@ -109,7 +129,7 @@ export const UserProvider = ({ children }) => {
 
     if (!ids.length) {
       // Add an anonymous user as default, with no state change
-      users[1] = { ...userData, isDefault: false, name: "You" }
+      users[1] = { ...userData, isDefault: true, name: "You" }
     }
 
     // Add a Guest user with default user data
@@ -125,7 +145,6 @@ export const UserProvider = ({ children }) => {
 
     const id = user[0]
     chooseUser(id)
-    console.log("user:", id, users[id].name)
 
     saveUsers(users) // in PreferencesContext
   }
@@ -139,6 +158,8 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value ={{
         user,
+        score,
+        mark,
         setScore,
         setDefaultUser,
         chooseUser

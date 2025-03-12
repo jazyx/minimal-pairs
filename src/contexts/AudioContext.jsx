@@ -17,7 +17,6 @@
 import React, { createContext, useContext, useEffect } from 'react'
 import { PairsContext } from './PairsContext'
 
-const PHONEME_SPLIT = /(([^-]+)-([^-]+))|(^(.)(.)$)/
 
 // Create an AudioContext _object_ to analyse and play audio
 const audioContext = new (
@@ -34,7 +33,8 @@ export const AudioProvider = ({ children }) => {
     phonemeKeys,
     pair,
     audioFileMap,
-    audioLoaded
+    audioLoaded,
+    splitPair
   } = useContext(PairsContext)
 
   const playClip = (wordData) => {
@@ -209,22 +209,11 @@ export const AudioProvider = ({ children }) => {
   const loadPhonemes = () => {
     if (!pair) { return }
 
-    const phonemesToLoad = splitCurrentPair()
+    const phonemesToLoad = splitPair(pair)
 
     phonemesToLoad.forEach( phoneme => {
       loadPhoneme(phoneme, audioLoaded)
     })
-
-    function splitCurrentPair() {
-      const match = PHONEME_SPLIT.exec(pair)
-      if (match) {
-        if (match[1]) {
-          return [ match[2], match[3]]
-        } else if (match[4]) {
-          return [ match[5], match[6]]
-        }
-      }
-    }
   }
 
   // eslint-disable-next-line

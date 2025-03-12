@@ -10,6 +10,15 @@ ul#index {
   right: auto;
   bottom: auto;
 
+  /* While audio is loading, centre Loading... li */
+  &:has(li.loading) {
+    margin-top: 50vh;
+
+    & li {
+      justify-content: center;
+    }
+  }
+
   & li {
     display: flex;
     align-items: center;

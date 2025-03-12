@@ -129,7 +129,7 @@ import { AudioContext } from '../contexts/AudioContext'
 
 import Card from './Card'
 
-const CardAndPocket = forwardRef((props, pocketRef) => {
+export const CardAndPocket = forwardRef((props, pocketRef) => {
   const { playClip } = useContext(AudioContext)
   const {
     index        // 0 | 1
@@ -196,5 +196,3 @@ const CardAndPocket = forwardRef((props, pocketRef) => {
     </div>
    )
 })
-
-export default CardAndPocket

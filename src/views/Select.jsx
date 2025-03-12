@@ -1,5 +1,11 @@
 /**
  * /src/components/Select.jsx
+ * 
+ * This component will be rendered multiple times as `loading`
+ * is updated, enabling playClip() for specific buttons. However,
+ * the pairsArray will simply show <li>Loading...</li> until all
+ * the audio is loaded. As a result, the full layout will only
+ * be created once. 
  */
 
 
@@ -11,6 +17,7 @@ import React, {
 } from 'react';
 import {
   PairsContext,
+  UserContext,
   AudioContext
 } from '../contexts'
 
@@ -19,6 +26,7 @@ import './Select.css';
 
 const Select = ({ startActivity }) =>  {
   const { playClip, loadPhoneme } = useContext(AudioContext)
+  const { score } = useContext(UserContext)
   const {
     pairIndex
   , pair
@@ -27,10 +35,12 @@ const Select = ({ startActivity }) =>  {
   , getWordData
   , getPhonemeData
   , phonemeKeys
+  , filterScore
   } = useContext(PairsContext)
 
   // Clone phonemeKeys, so loading can be updated separately
   const [ loading, setLoading ] = useState([ ...phonemeKeys ])
+  // Initially: [ "æ", "ɑː", "iː", "ɪ", "ʌ", "ɛ", "eə", "ɪə" ]
 
 
   const itemClicked = (pair) => {
@@ -42,6 +52,7 @@ const Select = ({ startActivity }) =>  {
   const getPhonemeButton = (phonemeData) => {
     const { phoneme } = phonemeData
     const disabled = (loading.indexOf(phoneme) + 1)
+
     return (
       <button
         key={phoneme}
@@ -73,17 +84,37 @@ const Select = ({ startActivity }) =>  {
         {set}
       </button>
     )
+  } 
+
+
+  const getMark = (pair) => {
+    const filtered = filterScore(score[pair])
+
+    const marks = Object.values(filtered)
+    const total = marks.reduce(( total, mark ) => total+=mark)
+    const average = total / marks.length
+    const log = Math.log(average + 1) / Math.log(2)
+
+    console.log("pair:", pair, log, 5-log, average, total)
+
+    return 5 - log
   }
 
 
   const getProgress = (pair) => {
+    const mark = getMark(pair) // 0 - 5
+    const percent = 20 + (mark * 16) + "%"
+    const hue = 24 * mark
+    const color = `hsl(${hue}, 50%, 50%)`
+
+
     return (
       <div
         key="progress"
         className="progress"
       >
         <div
-          style={{width:"50%"}}
+          style={{width: percent, backgroundColor: color}}
         />
       </div>
     )
@@ -103,7 +134,12 @@ const Select = ({ startActivity }) =>  {
   }
 
 
-  const pairsArray = phonemePairs.map( item => {
+  const pairsArray = loading.length
+    // Show Loading... while audio is loading (the first time)
+    ? [<li className="loading" key="loading">Loading...</li>]
+
+    // Show the Select Phoneme layout once all audio is loaded
+    : phonemePairs.map( item => {
     // item = "ɪi"
     const pairData = pairIndex[item]
     // { phonemes: ["ɪ", "iː"]

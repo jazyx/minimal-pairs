@@ -2228,7 +2228,7 @@
       "piss": {
         "spelling": "piss",
         "phonetic": "/pɪs/",
-        "image_": "img/ɪ/piss_.jpg",
+        "image$": "img/ɪ/piss_.jpg",
         "clip": [
           24.0,
           24.55
@@ -3680,7 +3680,7 @@
       "cheers": {
         "spelling": "cheers",
         "phonetic": "/ʧɪəz/",
-        "image": "img/ɪə/cheers.webp",
+        "image$": "img/ɪə/cheers.webp",
         "clip": [
           7.4,
           8.6

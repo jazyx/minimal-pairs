@@ -81,6 +81,10 @@
       color: #888;
       cursor: pointer;
 
+      &.primary {
+        background-color: #060;
+      }
+
       &:hover {
         background-color: var(--bgColor);
         color: #fff;

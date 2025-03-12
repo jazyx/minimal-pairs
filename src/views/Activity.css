@@ -521,6 +521,15 @@ p.rule {
   z-index: 2;
 }
 
+#mark {
+  position: absolute;
+  margin: 0.125em;
+  top: 0;
+  right: 0;
+  width: 1.5em;
+  height: 1.5em;
+}
+
 /* LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE / LANDSCAPE */
 
 @media (min-aspect-ratio: 1/1) {
@@ -704,6 +713,13 @@ p.rule {
     top: var(--ruleTop);
     height: var(--doneSize);
   }
+
+  #mark {
+    top: auto;
+    left: 0;
+    right: auto;
+    bottom: 0;
+  }
 }
 
 /* SPREAD CARDS // SPREAD CARDS // SPREAD CARDS */
@@ -873,5 +889,13 @@ main:has(.spread) {
 
   main.split .decoy.review .space {
     display: none;
+  }
+
+  #mark {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    bottom: auto;
   }
 }

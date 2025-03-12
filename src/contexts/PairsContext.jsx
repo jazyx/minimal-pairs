@@ -53,7 +53,28 @@ const pairIndex = dataMap.index
 //   ...
 // }
 
+const suitability = ((function (){
+  return Object.values(wordsData).reduce(( list, words) => {
+    Object.values(words).forEach( wordData => {
+      const { spelling, image, image$, image_ } = wordData
+
+      if (spelling) {
+        list[spelling.toLowerCase()] = {
+          friendly: !!image,
+          adult:    !!image$,
+          taboo:    !!image_
+        }
+      }
+    })
+
+    return list
+  }, {})
+})())
+// { <word>: { friendly, adult, taboo }, ...}
+
 const AUDIO_DIR = "./audio/"
+const PHONEME_SPLIT = /(([^-]+)-([^-]+))|(^(.)(.)$)/
+const WORD_SPLIT = /(\w+):(\w+)/
 
 
 export const PairsContext = createContext()
@@ -63,7 +84,8 @@ export const PairsProvider = ({ children }) => {
   const {
     pair,
     choosePair,
-    friendly
+    friendly,
+    taboo
   } = useContext(PreferencesContext)
 
   const [ audioLoading, setAudioLoading ] = useState([])
@@ -127,7 +149,7 @@ export const PairsProvider = ({ children }) => {
    *
    * @returns object 
    */
-  function getCards(noTaboo) {
+  function getCards() {
     const [ phoneme1, phoneme2 ] = phonemeSymbols
     const [ word1, word2 ] = lastWords
 
@@ -143,6 +165,7 @@ export const PairsProvider = ({ children }) => {
     // Grab the first card and (for now) move it to the end
     do {
       const cards = pairList.shift()
+      // console.log("cards:", cards, score)
       pairList.push(cards)
 
       lastWords[0] = getWordData(phoneme1, cards[0])
@@ -152,21 +175,22 @@ export const PairsProvider = ({ children }) => {
         // if noTaboo, then this pair is clean
         // if !noTaboo, while loop will exit anyway
         break
+
       } else if (!friendly) {
          if (( lastWords[0].image || lastWords[0].image$)
-          && (lastWords[1].image || lastWords[1].image$)
+          && ( lastWords[1].image || lastWords[1].image$)
             ) {
           break
         }
       }
-    } while (noTaboo)
+    } while (!taboo)
 
-      removeFrom(played[phoneme1], item => (
-        JSON.stringify(item) === JSON.stringify(lastWords[0])
-      ))
-      removeFrom(played[phoneme2], item => (
-        JSON.stringify(item) === JSON.stringify(lastWords[1])
-      ))
+    removeFrom(played[phoneme1], item => (
+      JSON.stringify(item) === JSON.stringify(lastWords[0])
+    ))
+    removeFrom(played[phoneme2], item => (
+      JSON.stringify(item) === JSON.stringify(lastWords[1])
+    ))
 
     const output = {
       phonemes
@@ -177,6 +201,61 @@ export const PairsProvider = ({ children }) => {
     }
 
     return output
+  }
+
+  
+  function splitPair(pair) {
+    const match = PHONEME_SPLIT.exec(pair)
+    if (match) {
+      if (match[1]) {
+        return [ match[2], match[3]]
+      } else if (match[4]) {
+        return [ match[5], match[6]]
+      }
+    }
+  }
+
+
+  /**
+   * Called by getMark() in Select
+   * @param {object} score { "word1:word2": <mark>,
+   *                         "adult:taboo": <mark>,
+   *                         ...
+   *                        }
+   * @returns a modified version of score which does not include
+   *          any word pairs that are not suitable for this user.
+   *          For example: { "word1:word2": <mark>, ... } if 
+   *          `friendly` is true
+   */
+  function filterScore(score) {
+    if (taboo) {
+      // All words are allowed
+      return score
+    }
+
+    const entries = Object.entries(score)
+
+    return entries.reduce(( score, [ words, mark ]) => {
+      const match = WORD_SPLIT.exec(words)
+      const suitable = [ match[1], match[2]].every( word => {
+        const allowed = suitability[word.toLowerCase()]
+
+        if (!friendly && allowed.adult) {
+          // Allow adult-only words (which might not have a
+          // child-friendly image)
+          return true
+        }
+
+        // Allow all child-friendly words regardless of settings
+        return allowed.friendly
+      })
+
+      if (suitable) {
+        score[words] = mark
+      }
+
+      return score
+    }, {})
   }
 
 
@@ -314,6 +393,8 @@ export const PairsProvider = ({ children }) => {
       , getWordData    // used by Select
       , getPhonemeData // used by Select
       , getCards       // used by Activity (does not update state)
+      , filterScore
+      , splitPair
       }}
     >
       {children}

@@ -46,14 +46,6 @@ const MenuItems = ({ itemSelected }) => {
       </li>
 
       <li
-        className="unselectable primary"
-        key="activity"
-        onClick={() => itemSelected("Activity")}
-      >
-        Return to activity
-      </li>
-
-      <li
         className="unselectable"
         key="about"
         onClick={() => itemSelected("About")}
@@ -67,6 +59,14 @@ const MenuItems = ({ itemSelected }) => {
         onClick={() => itemSelected("Contact")}
       >
         Contact us
+      </li>
+
+      <li
+        className="unselectable primary"
+        key="activity"
+        onClick={() => itemSelected("Activity")}
+      >
+        Return to activity
       </li>
     </>
   )

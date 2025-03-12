@@ -7,7 +7,8 @@ import {
 } from '../contexts'
 
 import './Activity.css';
-import CardAndPocket from '../components/CardAndPocket'
+import { CardAndPocket } from '../components/CardAndPocket'
+import { Mark } from '../components/Mark'
 
 
 import { getBooleanGenerator
@@ -29,9 +30,8 @@ const DEAL_DELAY = 300
 
 
 const Activity = () => {
-  const { taboo } = useContext(PreferencesContext)
-  const { getCards } = useContext(PairsContext)
-  const { setScore } = useContext(UserContext)
+  const { getCards, pair } = useContext(PairsContext)
+  const { score, setScore } = useContext(UserContext)
   // Shared with all cards and the Play Phoneme buttons
   const { playClip } = useContext(AudioContext)
 
@@ -42,6 +42,7 @@ const Activity = () => {
   const phoneme0Ref = useRef()
   const phoneme1Ref = useRef()
   const maskRef = useRef()
+  const markRef = useRef()
   // Used to trigger a re-render with a new card
   const [counter, setCounter] = useState(0)
 
@@ -52,7 +53,8 @@ const Activity = () => {
   , word2
   , played: playedCards
   , wordPair
-  } = getCards(!taboo) // imported from PairsContext
+  } = getCards(score[pair]) // imported from PairsContext
+
 
   // { "phonemes": [
   //     { phoneme: "ɪ", audio: [0, 1], url: "audio/ɪ.mp3" }
@@ -216,7 +218,7 @@ const Activity = () => {
 
     const correct = (phoneme.classList.contains("cue"))
 
-    setScore(wordPair, correct)
+    setScore(wordPair, correct) // in UserContext
 
     if (correct) {
       playRightSequence()
@@ -654,6 +656,8 @@ const Activity = () => {
 
 
   useEffect(() => {
+    console.log(`useEffect in Activity called`)
+    
     // eslint-disable-next-line
     cueSpace = cueRef.current
     // eslint-disable-next-line
@@ -714,6 +718,7 @@ const Activity = () => {
       >
         ➤
       </button>
+      <Mark wordPair={wordPair}/>
     </div>
   )
 }
