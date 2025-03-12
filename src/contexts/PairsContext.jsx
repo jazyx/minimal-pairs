@@ -133,12 +133,13 @@ export const PairsProvider = ({ children }) => {
   }
 
 
-  const getWordPair = () => {
-    return lastWords.reduce(( pair, {spelling}, index ) => {
-      pair += (index ? ":" : "") + spelling.toLowerCase()
+  const getStatus = (score) => {
+    const wordPair = lastWords[0].spelling.toLowerCase()
+                   + ":"
+                   + lastWords[1].spelling.toLowerCase()
+    const mark = score[wordPair]
 
-      return pair
-    }, "")
+    return { wordPair, mark }
   }
 
 
@@ -149,7 +150,7 @@ export const PairsProvider = ({ children }) => {
    *
    * @returns object 
    */
-  function getCards() {
+  function getCards(score) {
     const [ phoneme1, phoneme2 ] = phonemeSymbols
     const [ word1, word2 ] = lastWords
 
@@ -192,12 +193,14 @@ export const PairsProvider = ({ children }) => {
       JSON.stringify(item) === JSON.stringify(lastWords[1])
     ))
 
+    const status = getStatus(score)
+
     const output = {
       phonemes
     , word1: lastWords[0]
     , word2: lastWords[1]
     , played
-    , wordPair: getWordPair()
+    , ...status // AKA wordPair, mark
     }
 
     return output

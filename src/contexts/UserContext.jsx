@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
   } = useContext(PairsContext)
       
   const [ user, setUser ] = useState(0)
-  const [ mark, setMark ] = useState(7)
+  const [ mark, setMark ] = useState(START_ERROR)
   
   const score = users[user]?.score || {}
 
@@ -48,30 +48,21 @@ export const UserProvider = ({ children }) => {
     // wordPair = "bitch:beach"
     // correct  = <boolean>
     // pair     = "ɪi" (from PairsContext)
+    // score    = current user's score:
+    //            { <phonemePair> : {
+    //                <word:pair>: <number>,
+    //                ...},
+    //            ...}
 
     console.log("setScore correct:", correct, ", pair:", pair, ", wordPair:", wordPair)
 
-    const mark  = score[pair][wordPair]
-    const wordScore = (!correct * MAX_ERROR) + (mark >> 1)
-    score[pair][wordPair] = wordScore
-    // console.log("score[pair][wordPair]:", score[pair][wordPair])
-    console.log("score[pair][wordPair]:", score[pair][wordPair])
+    const scoreNow = score[pair][wordPair]
+    const newScore = (!correct * MAX_ERROR) + (scoreNow >> 1)
+    score[pair][wordPair] = newScore
     storeScore(user)
 
-    console.log("setScore mark:", mark)
-
-    setMark(mark)
+    return newScore
   }
-
-
-  // const getMark = (score, wordPair) => {
-  //   if (!wordPair) {
-  //     wordPair = lastWords[0].spelling.toLowerCase()
-  //              + ":"
-  //              + lastWords[1].spelling.toLowerCase()
-  //   }
-  //   return score[wordPair]
-  // }
 
 
   const chooseUser = (userId) => {
