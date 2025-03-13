@@ -1,3 +1,49 @@
+/**
+ * src/views/Activity.jsx
+ * 
+ * This component generates a layout with:
+ * 
+ * + Two cards that represent words that form a minimal pair
+ * + Two pockets for the cards to be placed in
+ * + An icon on each pocket that plays the phonemes that 
+ *   differentiate the minimal pair
+ * + A circular Mark subcomponent that shows the user's current
+ *   mark for this particular word pair
+ * 
+ * The component is re-rendered only when a new word pair is
+ * adopted. This is triggered by the showNextCard() function which
+ * calls setCounter() and updates the counter state variable.
+ * 
+ * All other interaction with the user is handled without
+ * re-rendering the component. These interactions include:
+ * 
+ * + Clicking on the cue and decoy cards to hear the audio
+ *   associated with them
+ * + Selecting a pocket for the cue word
+ * + Clicking on a card in a pocket to replay its audio
+ * + Long-clicking on a card in a pocket to review the most
+ *   recent word pair
+ * + Clickng-and-dragging on a card in a pocket to review all
+ *   the words with that phoneme that have already been seen
+ * + Displaying a Mark to show how many correct answers the user
+ *   has recently given
+ * 
+ * Most interactions are handled by adding or removing classes to
+ * the cards, and using CSS transitions to move the cards depending
+ * on their classes.
+ * 
+ * HACK
+ * ----
+ * To update the Mark for the current word pair without
+ * re-rendering either the Activity component or its child Mark
+ * component, the Mark.jsx script exports _two_ functions:
+ * 
+ * + A standard one to generate the <Mark/> component
+ * + An internal function (setMarkAttributes) that will redraw
+ *   the Mark's SVG component's path
+ */
+
+
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import {
   PreferencesContext,
