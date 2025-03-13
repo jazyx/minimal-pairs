@@ -54,8 +54,6 @@ export const UserProvider = ({ children }) => {
     //                ...},
     //            ...}
 
-    console.log("setScore correct:", correct, ", pair:", pair, ", wordPair:", wordPair)
-
     const scoreNow = score[pair][wordPair]
     const newScore = (!correct * MAX_ERROR) + (scoreNow >> 1)
     score[pair][wordPair] = newScore

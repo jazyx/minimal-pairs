@@ -8,8 +8,7 @@ import {
 
 import './Activity.css';
 import { CardAndPocket } from '../components/CardAndPocket'
-import { Mark, getMarkAttributes } from '../components/Mark'
-
+import { Mark, setMarkAttributes } from '../components/Mark'
 
 import { getBooleanGenerator
        , detectMovement
@@ -42,7 +41,6 @@ const Activity = () => {
   const phoneme0Ref = useRef()
   const phoneme1Ref = useRef()
   const maskRef = useRef()
-  const pathRef = useRef()
   // Used to trigger a re-render with a new card
   const [counter, setCounter] = useState(0)
 
@@ -196,15 +194,6 @@ const Activity = () => {
   }
 
 
-  const updateMark = (mark) => {
-    console.log("new mark:", mark)
-    const { d, fill } = getMarkAttributes(mark)
-    const path = pathRef.current
-    path.setAttribute("d", d)
-    path.setAttribute("fill", fill)
-  }
-
-
   // Input from pockets and (>) button
 
   const checkAnswer = event => {
@@ -229,7 +218,7 @@ const Activity = () => {
     const correct = (phoneme.classList.contains("cue"))
 
     const mark = setScore(wordPair, correct) // in UserContext
-    updateMark(mark)
+    setMarkAttributes(mark)
 
     if (correct) {
       playRightSequence()
@@ -728,7 +717,6 @@ const Activity = () => {
         ➤
       </button>
       <Mark
-        ref={pathRef}
         mark={mark}
       />
     </div>

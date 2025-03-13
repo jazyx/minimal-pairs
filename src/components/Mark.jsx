@@ -3,19 +3,21 @@
  */
 
 
-import React, { forwardRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 const SIXTH = Math.PI / 3
 
 
-export const getMarkAttributes = (mark) => {
-  console.log("mark:", mark)
+let path
+
+
+const setMarkAttributes = (mark) => {
   // Convert error mark range 31 - 0 to arc-length range 0 - 5
   mark = 5 - (Math.log(Number(mark) + 1) / Math.log(2))
 
   const fill = (() => {
     const hue = Math.max(0, (mark - 1) * 30)
     // lightness will vary from 50 to 40 when mark between
-    // 0 and 1, then 40 for all higher values 
+    // 0 and 1, then 40 for all higher values
     const lightness = Math.max(40, (50 - 10 * mark)) + "%"
     const saturation = "50%"
     return `hsl(${hue}, ${saturation}, ${lightness})`
@@ -35,13 +37,22 @@ export const getMarkAttributes = (mark) => {
     `
   })()
 
-  return { d, fill }
+  if (path) {
+    path.setAttribute("d", d)
+    path.setAttribute("fill", fill)
+  }
+
+  return  { d, fill }
 }
 
 
-export const Mark = forwardRef((props, ref) => {
-  const { mark } = props
-  const { fill, d } = getMarkAttributes(mark)
+const Mark = ({ mark }) => {
+  const pathRef = useRef()
+  const { fill, d } = setMarkAttributes(mark)
+
+
+  useEffect(() => path = pathRef.current, [])
+
 
   return (
     <svg
@@ -49,7 +60,7 @@ export const Mark = forwardRef((props, ref) => {
       viewBox="-1 -1 2 2"
     >
       <path
-        ref={ref}
+        ref={pathRef}
         fill={fill}
         d={d}
       />
@@ -63,4 +74,10 @@ export const Mark = forwardRef((props, ref) => {
       />
     </svg>
   )
-})
+}
+
+
+export {
+  Mark,
+  setMarkAttributes
+}
