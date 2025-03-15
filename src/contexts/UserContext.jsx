@@ -17,10 +17,6 @@ import { PreferencesContext, PairsContext } from './'
 const START_ERROR = 7
 const MAX_ERROR = (START_ERROR + 1) * 2
 
-// 8, 68, 98, 124, 126, 127, ... after each mistake
-// 8,  4,  2,   1,   0...        after each correct answer
-// Four mistakes followed by seven right answers
-// 3, 6.1, 6.95, 6.99, 7, 6, 5, 4, 3, 2, 1, 0
 
 export const UserContext = createContext()
 
@@ -39,8 +35,6 @@ export const UserProvider = ({ children }) => {
   } = useContext(PairsContext)
       
   const [ user, setUser ] = useState(0)
-  const [ mark, setMark ] = useState(START_ERROR)
-  
   const score = users[user]?.score || {}
 
 
@@ -148,7 +142,6 @@ export const UserProvider = ({ children }) => {
       value ={{
         user,
         score,
-        mark,
         setScore,
         setDefaultUser,
         chooseUser

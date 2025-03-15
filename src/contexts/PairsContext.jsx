@@ -1,7 +1,31 @@
 /**
  * src/contexts/PairsContext.jsx
  *
- * description
+ * * Reads in the activity data from json/pairs.json as `dataMap`
+ *   Initially, this does not contain any audio buffer entries in
+ *   the dataMap.words block.
+ * * Creates separate constants for the three sections in dataMap:
+ *   + wordsData = dataMap.words << resources for each word
+ *   + pairs     = dataMap.pairs << for choosing minimal pair cards
+ *   + pairIndex = dataMap.index         << for Select View
+ *   + phonemePairs = Object.keys(pairs) << to select from pairs
+ *   + phonemeKeys = Object.keys(wordsData) << for audio file names
+ * 
+ * * Generates a map and array to allow AudioContext to load audio
+ *   files just in time
+ * * Tracks which pair of phonemes the user is working with. The
+ *   Select View calls `setPhonemePair()`
+ * * Tracks which words are associated with this phoneme pair, and 
+ *   in which order they should be displayed
+ * * Provides an object to Activity through getCards() which allows
+ *   the display of a minimal pair
+ * * Re-orders the word pairs depending on the score for each pair
+ * * Filters out words that do not match the `friendly` setting
+ * * Provides getWordsData() for Select View to show image and
+ *   play audio
+ * * Ditto for getPhonemeData(), for playing pure phoneme audio
+ * * Provides audioFileMap, audioLoading and audioLoaded for
+ *   AudioContext.
  */
 
 
@@ -97,10 +121,10 @@ export const PairsProvider = ({ children }) => {
   const [ pairList, setPairList ] = useState([])
   // [ [ "bitch", "beach" ],...[ "wheel", "will" ] ]
   const [ phonemes, setPhonemes ] = useState([])
-  // [ { symbol: "/ɪ/", audio: [0, 1] }, ...]
+  // [ { symbol: "/ɪ/", audio: [0, 1] }, ...] (for pocket buttons)
   const [ played, setPlayed ] = useState({})
-  // { "/x/": [ <card>, ... ]
-  // , "/y/": [ <card>, ... ]
+  // { "/a/": [ <card>, ... ]
+  // , "/e/": [ <card>, ... ]
   // }  
 
   const wordsRef = useRef([])
@@ -143,6 +167,32 @@ export const PairsProvider = ({ children }) => {
   }
 
 
+  const treatLastWords = (score, phoneme1, phoneme2) => {
+    const [ word1, word2 ] = lastWords
+
+    console.log("score:", score, ", word1:", word1, ", word2:", word2)
+
+    if (word1) {
+      // This is the second or subsequent request for a word.
+      // 1. Get the current score for the last word pair
+      const { wordPair, mark } = getStatus(score)
+      // 2. Pop the last entry from pairList and place it according
+      //   to current mark
+
+      // 
+      console.log("wordPair:", wordPair, ", mark:", mark)
+      console.log("pairList.slice(-1):", pairList.slice(-1))
+      
+      // 3. Add the words to the array of cards in each pocket
+      const spellings = played[phoneme1].map(word => word.spelling)
+      if (spellings.indexOf(word1.spelling) < 0) {
+        played[phoneme1].push(word1)
+        played[phoneme2].push(word2)
+      }
+    }
+  }
+
+
   /**
    * Export a function to return all the data required to display a
    * minimal pair of words and play their audio files. Calling this
@@ -152,20 +202,12 @@ export const PairsProvider = ({ children }) => {
    */
   function getCards(score) {
     const [ phoneme1, phoneme2 ] = phonemeSymbols
-    const [ word1, word2 ] = lastWords
-
-    if (word1) {
-      const spellings = played[phoneme1].map(word => word.spelling)
-
-      if (spellings.indexOf(word1.spelling) < 0) {
-        played[phoneme1].push(word1)
-        played[phoneme2].push(word2)
-      }
-    }
-
-    // Grab the first card and (for now) move it to the end
+    treatLastWords(score, phoneme1, phoneme2)
+    
+    // Grab first card and (for now) move it to the end of pairList
     do {
-      const cards = pairList.shift()
+      const cards = pairList.shift() // ["word_a", "word_i", mark]
+      console.log("cards:", cards, pairList)
       // console.log("cards:", cards, score)
       pairList.push(cards)
 
@@ -290,6 +332,7 @@ export const PairsProvider = ({ children }) => {
     // [[<this>, <that>], [<tit>, <tat>], ...]
     shuffle(pairList)
     // [[<tit>, <tat>], ..., [<this>, <that>], ...]
+    console.log("pairList:", pairList)
 
     setPairList(pairList)
   }
@@ -381,8 +424,7 @@ export const PairsProvider = ({ children }) => {
   return (
     <PairsContext.Provider
       value ={{
-        dataMap        // read from pairs.json, with buffers added
-      , wordsData      // map of words used with each phoneme pair
+        wordsData      // map of words used with each phoneme pair
       , pairs          // { "ɪi": { "bid": "bead", ... }
       , phonemePairs   // [ "ɪi", "ɑʌ", ..., "i-ɪə" ]
       , pair           // current phonemePair: "ɪi"

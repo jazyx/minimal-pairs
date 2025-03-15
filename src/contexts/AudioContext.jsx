@@ -29,7 +29,7 @@ export const AudioContext = createContext()
 
 export const AudioProvider = ({ children }) => {
   const {
-    dataMap,
+    wordsData,
     phonemeKeys,
     pair,
     audioFileMap,
@@ -50,15 +50,15 @@ export const AudioProvider = ({ children }) => {
     // phoneme is derived from the audio file name. For long vowels
     // the "ː" character will be missing. Update the phoneme to use
     // this character if appropriate.
-    const wordsData = dataMap.words[phoneme]
-                   || dataMap.words[phoneme = phoneme + "ː"]
+    const data = wordsData[phoneme]
+              || wordsData[phoneme = phoneme + "ː"]
 
     // Create an array of word data with the structure...
     // [ { spelling, clip }, ... ]
     // ... so clip[0] can be used to sort the array and determine
     // the order of the spellings
 
-    const entries = Object.entries(wordsData)
+    const entries = Object.entries(data)
     // eslint-disable-next-line
     const wordsArray = entries.map(([ key, value ]) => {
       // "url" returns undefined...
@@ -161,7 +161,7 @@ export const AudioProvider = ({ children }) => {
         .map(getSegmentBuffer)
         .filter( buffer => !!buffer )
 
-      // wordsArray is ordered by the start time given in dataMap
+      // wordsArray is ordered by the start time given in wordsData
       // The phoneme sound which (usually) appears first is skipped.
       wordsArray.forEach(( { spelling }, index ) => {
         if (!spelling) {
@@ -173,8 +173,8 @@ export const AudioProvider = ({ children }) => {
         // (like "e").
         const buffer = bufferArray[index] || bufferArray[0]
 
-        const wordData = wordsData[spelling] // Surrey
-                      || wordsData[spelling.toLowerCase()] //Gallic
+        const wordData = data[spelling] // Surrey
+                      || data[spelling.toLowerCase()] //Gallic
         wordData.buffer = buffer
       })
 
@@ -190,7 +190,7 @@ export const AudioProvider = ({ children }) => {
 
     if (audioFile) {
       // Load the file, split it into buffers and add these to
-      // the entries in dataMap.words[phoneme]...
+      // the entries in wordsData[phoneme]...
       loadAudioFile(audioFile, phoneme, callback)
       // ... but don't do it again
       delete audioFileMap[phoneme]
