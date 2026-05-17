@@ -4,10 +4,11 @@
   --gap: 1.5em;
   --left: calc(var(--size) + var(--gap));
   --space: calc(100vw - var(--left));
+  display: grid;
+  grid-template-columns: 3em 1fr;
 
   #files {
-    position: absolute;
-    top: 3em;
+    padding-top: 3em;
 
     & button {
       display: block;
@@ -24,14 +25,13 @@
   }
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    right: 0;
-    width: var(--space);
     height: 100vh;
     margin: 0 auto;
     overflow: auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+    width: 100%;
 
     & li {
       display: flex;
